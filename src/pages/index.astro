@@ -26,11 +26,14 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
     <div class="site-shell hero__inner">
       <Eyebrow>Issue {String(featured.data.awj_number).padStart(3, '0')} · Filed {issueDate}</Eyebrow>
       <h1 class="hero__title awj-billboard">
-        {featured.data.title.replace(/uncomfortable/i, '')}
-        {featured.data.title.toLowerCase().includes('uncomfortable') && (
-          <Hl>uncomfortable</Hl>
-        )}
-        {!featured.data.title.toLowerCase().includes('uncomfortable') && featured.data.title}
+        {(() => {
+          const t = featured.data.title;
+          const re = /(uncomfortable)/i;
+          const m = t.match(re);
+          if (!m) return t;
+          const idx = m.index!;
+          return [t.slice(0, idx), <Hl>{m[0]}</Hl>, t.slice(idx + m[0].length)];
+        })()}
       </h1>
       <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="3%" width={120} />
       <Scribble src="/assets/scribbles/underline_black.png" left="0" bottom="-10px" width={280} opacity={0.85} />
