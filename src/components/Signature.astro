@@ -1,0 +1,15 @@
+---
+interface Props { size?: number; }
+const { size = 32 } = Astro.props;
+---
+<span class="awj-signature" style={`font-size: ${size}px`}>—Andy</span>
+
+<style>
+  .awj-signature {
+    font-family: var(--font-marker);
+    color: var(--awj-black);
+    transform: rotate(-4deg);
+    display: inline-block;
+    line-height: 1;
+  }
+</style>

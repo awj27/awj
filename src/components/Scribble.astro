@@ -1,0 +1,33 @@
+---
+interface Props {
+  src: string;
+  alt?: string;
+  width?: number;
+  rotate?: number;
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  opacity?: number;
+}
+const { src, alt = '', width = 120, rotate = 0, top, right, bottom, left, opacity = 1 } = Astro.props;
+const style = [
+  `width: ${width}px`,
+  `transform: rotate(${rotate}deg)`,
+  top ? `top: ${top}` : '',
+  right ? `right: ${right}` : '',
+  bottom ? `bottom: ${bottom}` : '',
+  left ? `left: ${left}` : '',
+  `opacity: ${opacity}`,
+].filter(Boolean).join('; ');
+---
+<img class="awj-scribble" src={src} alt={alt} style={style} loading="lazy" decoding="async" />
+
+<style>
+  .awj-scribble {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    height: auto;
+  }
+</style>

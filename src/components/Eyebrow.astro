@@ -1,0 +1,7 @@
+---
+interface Props { color?: string; }
+const { color } = Astro.props;
+---
+<div class="awj-eyebrow" style={color ? `color: ${color}` : ''}>
+  <slot />
+</div>

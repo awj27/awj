@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Pillar from '../../components/Pillar.astro';
+import { getCollection } from 'astro:content';
+import { PILLAR_META, formatDate, type Pillar as PillarT } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  return (['sales', 'founder', 'human'] as PillarT[]).map(pillar => ({
+    params: { pillar },
+    props: { pillar },
+  }));
+}
+
+const { pillar } = Astro.props;
+const meta = PILLAR_META[pillar];
+const entries = (await getCollection('journal', e => !e.data.draft && e.data.pillar === pillar))
+  .sort((a, b) => b.data.awj_number - a.data.awj_number);
+---
+<Layout
+  title={`${meta.label} — AWJ`}
+  description={meta.description}
+>
+  <section class="ph-hero" style={`background: ${meta.bg}; color: ${meta.fg};`}>
+    <div class="site-shell">
+      <Eyebrow color={meta.fg === '#FFFFFF' ? '#FFCE00' : '#0A0A0A'}>{meta.tag}</Eyebrow>
+      <h1 class="ph-hero__title awj-display">{meta.label}</h1>
+      <p class="ph-hero__blurb">{meta.description}</p>
+    </div>
+  </section>
+
+  <section class="ph-list">
+    <div class="site-shell">
+      <h2 class="ph-list__head awj-display">{entries.length} {entries.length === 1 ? 'entry' : 'entries'}</h2>
+      <ol class="ph-list__items">
+        {entries.map(e => (
+          <li>
+            <a href={`/journal/${e.data.slug ?? e.id}/`} class="ph-list__row">
+              <span class="ph-list__num">AWJ #{e.data.awj_number}</span>
+              <span class="ph-list__title awj-display">{e.data.title}</span>
+              <time class="ph-list__date">{formatDate(e.data.date)}</time>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .ph-hero {
+    padding: var(--sp-9) 0;
+    background-image: url('/assets/textures/paper_white.png');
+    background-size: cover;
+    border-bottom: var(--border-hard);
+  }
+  .ph-hero__title { font-size: clamp(72px, 14vw, 200px); margin: var(--sp-3) 0; line-height: 0.85; }
+  .ph-hero__blurb { font-size: var(--fs-body-lg); margin: 0; max-width: 60ch; }
+
+  .ph-list { padding: var(--sp-8) 0 var(--sp-9); }
+  .ph-list__head { font-size: clamp(28px, 3.5vw, 44px); margin: 0 0 var(--sp-5); }
+  .ph-list__items { list-style: none; padding: 0; margin: 0; }
+  .ph-list__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-2);
+    padding: var(--sp-5) 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--awj-black);
+    text-decoration: none;
+    transition: background var(--t-fast);
+  }
+  .ph-list__row:hover { background: rgba(255,206,0,0.12); }
+  @media (min-width: 720px) {
+    .ph-list__row { grid-template-columns: 80px 1fr 110px; align-items: center; gap: var(--sp-4); }
+  }
+  .ph-list__num { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--fg-2); }
+  .ph-list__title { font-size: clamp(22px, 3vw, 32px); line-height: 1.05; overflow-wrap: anywhere; }
+  .ph-list__date { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); }
+</style>

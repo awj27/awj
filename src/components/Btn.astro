@@ -1,0 +1,45 @@
+---
+interface Props {
+  href?: string;
+  tone?: 'dark' | 'ghost' | 'yellow' | 'blue';
+  type?: 'button' | 'submit';
+}
+const { href, tone = 'dark', type = 'button' } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+<Tag
+  class={`awj-btn awj-btn--${tone}`}
+  href={href}
+  type={!href ? type : undefined}
+>
+  <slot />
+</Tag>
+
+<style>
+  .awj-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: var(--border-hard);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background var(--t-fast), color var(--t-fast), transform var(--t-fast);
+    border-radius: 0;
+  }
+  .awj-btn:active { transform: translateY(1px); }
+  .awj-btn--dark   { background: var(--awj-black); color: var(--awj-white); }
+  .awj-btn--dark:hover   { background: var(--awj-white); color: var(--awj-black); }
+  .awj-btn--ghost  { background: transparent; color: var(--awj-black); }
+  .awj-btn--ghost:hover  { background: var(--awj-black); color: var(--awj-white); }
+  .awj-btn--yellow { background: var(--awj-yellow); color: var(--awj-black); border-color: var(--awj-black); }
+  .awj-btn--yellow:hover { background: var(--awj-black); color: var(--awj-yellow); }
+  .awj-btn--blue   { background: var(--awj-blue); color: var(--awj-white); border-color: var(--awj-black); }
+  .awj-btn--blue:hover   { background: var(--awj-white); color: var(--awj-blue); border-color: var(--awj-blue); }
+</style>

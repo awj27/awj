@@ -1,0 +1,181 @@
+@import './tokens.css';
+
+/* =====================================================================
+   RESET / BASE
+===================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body {
+  background-color: var(--bg-1);
+  background-image: url('/assets/textures/paper_white.png');
+  background-size: cover;
+  background-position: center;
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+img, svg, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+/* =====================================================================
+   TYPE
+===================================================================== */
+.awj-display, h1.awj, h2.awj, h3.awj {
+  font-family: var(--font-display);
+  font-weight: 400;             /* Anton is single-weight */
+  letter-spacing: -0.005em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--fg-1);
+  margin: 0;
+}
+.awj-billboard {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-billboard);
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.005em;
+  color: var(--fg-1);
+  margin: 0;
+}
+h1.awj { font-size: var(--fs-h1); }
+h2.awj { font-size: var(--fs-h2); }
+h3.awj { font-size: var(--fs-h3); }
+
+.awj-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.awj-body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--fg-1);
+}
+
+.awj-meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  letter-spacing: 0.02em;
+  color: var(--fg-2);
+}
+
+.awj-mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.awj-marker, .awj-hand {
+  font-family: var(--font-marker);
+  font-weight: 700;
+  letter-spacing: 0.005em;
+}
+
+/* =====================================================================
+   SIGNATURE TYPE TREATMENTS
+===================================================================== */
+.awj-hl {
+  background: var(--hl-yellow);
+  padding: 0.04em 0.18em 0.0em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.awj-hl-red {
+  background: var(--hl-red);
+  color: var(--awj-white);
+  padding: 0.04em 0.18em 0.0em;
+}
+.awj-hl-black {
+  background: var(--awj-black);
+  color: var(--awj-white);
+  padding: 0.04em 0.18em 0.0em;
+}
+
+/* =====================================================================
+   PAGE BACKGROUNDS
+===================================================================== */
+.awj-bg-paper-white  { background-color: var(--awj-paper); background-image: url('/assets/textures/paper_white.png');  background-size: cover; background-position: center; }
+.awj-bg-paper-black  { background-color: var(--awj-black); background-image: url('/assets/textures/paper_black.png');  background-size: cover; background-position: center; color: var(--fg-inverse); }
+.awj-bg-paper-blue   { background-color: var(--awj-blue);  background-image: url('/assets/textures/paper_blue.png');   background-size: cover; background-position: center; color: var(--fg-inverse); }
+.awj-bg-paper-yellow { background-color: var(--awj-yellow); background-image: url('/assets/textures/paper_yellow.png'); background-size: cover; background-position: center; }
+
+/* =====================================================================
+   LAYOUT HELPERS
+===================================================================== */
+.site-shell { max-width: var(--site-max); margin: 0 auto; padding: 0 var(--gutter); }
+.content-shell { max-width: var(--content-max); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* =====================================================================
+   FOCUS — accessible default
+===================================================================== */
+:focus-visible { outline: 2px solid var(--awj-blue); outline-offset: 2px; }
+
+/* =====================================================================
+   PROSE (long-form essay body)
+===================================================================== */
+.prose {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  line-height: 1.7;
+  color: var(--fg-1);
+}
+.prose > * + * { margin-top: var(--sp-5); }
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  margin-top: var(--sp-8);
+  margin-bottom: var(--sp-4);
+}
+.prose h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  text-transform: uppercase;
+  margin-top: var(--sp-7);
+  margin-bottom: var(--sp-3);
+}
+.prose blockquote {
+  margin: var(--sp-6) 0;
+  padding: var(--sp-5) var(--sp-5);
+  border-left: 4px solid var(--awj-blue);
+  background: rgba(31,71,255,0.06);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.prose strong { font-weight: 700; }
+.prose em { font-style: italic; }
+.prose ul, .prose ol { padding-left: 1.5em; }
+.prose li + li { margin-top: var(--sp-2); }
+.prose hr { border: none; border-top: 1px solid var(--rule); margin: var(--sp-7) 0; }
+.prose a {
+  background-image: linear-gradient(transparent 65%, var(--hl-yellow) 65%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 0 0.1em;
+}
+
+/* =====================================================================
+   RESPONSIVE
+===================================================================== */
+@media (max-width: 720px) {
+  body { font-size: 16px; }
+}

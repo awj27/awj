@@ -1,0 +1,88 @@
+---
+interface Props { tone?: 'light' | 'dark' | 'yellow'; compact?: boolean; }
+const { tone = 'light', compact = false } = Astro.props;
+---
+<form class={`awj-subscribe awj-subscribe--${tone}`} action="https://andywhyte.substack.com/api/v1/free" method="post" target="_blank">
+  <label class="awj-subscribe__label" for="awj-email">
+    {compact ? 'Subscribe' : 'Get one entry every Friday'}
+  </label>
+  <div class="awj-subscribe__row">
+    <input
+      type="email"
+      id="awj-email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="you@work.com"
+      class="awj-subscribe__input"
+    />
+    <input type="hidden" name="first_url" value="https://andywhyte.com" />
+    <input type="hidden" name="first_referrer" value="" />
+    <input type="hidden" name="current_url" value="https://andywhyte.com" />
+    <input type="hidden" name="current_referrer" value="" />
+    <input type="hidden" name="referral_code" value="" />
+    <input type="hidden" name="source" value="awj-site" />
+    <button type="submit" class="awj-subscribe__btn">Subscribe →</button>
+  </div>
+  <p class="awj-subscribe__fineprint">No spam. One email a week. Unsubscribe whenever.</p>
+</form>
+
+<style>
+  .awj-subscribe { display: block; max-width: 520px; }
+  .awj-subscribe__label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: var(--sp-3);
+  }
+  .awj-subscribe__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+  @media (min-width: 520px) {
+    .awj-subscribe__row { flex-direction: row; }
+  }
+  .awj-subscribe__input {
+    flex: 1;
+    font-family: var(--font-body);
+    font-size: 16px;
+    padding: 14px 16px;
+    background: var(--awj-white);
+    color: var(--awj-black);
+    border: var(--border-hard);
+    border-radius: 0;
+    min-width: 0;
+  }
+  .awj-subscribe__input:focus { outline: 2px solid var(--awj-yellow); outline-offset: -4px; }
+  .awj-subscribe__btn {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    background: var(--awj-black);
+    color: var(--awj-white);
+    border: var(--border-hard);
+    border-radius: 0;
+    cursor: pointer;
+    transition: background var(--t-fast), color var(--t-fast);
+  }
+  .awj-subscribe__btn:hover { background: var(--awj-yellow); color: var(--awj-black); }
+  .awj-subscribe__fineprint {
+    margin: var(--sp-3) 0 0;
+    font-size: 12px;
+    color: var(--fg-3);
+  }
+  /* dark surface variant */
+  .awj-subscribe--dark .awj-subscribe__input { background: var(--awj-white); color: var(--awj-black); border-color: var(--awj-white); }
+  .awj-subscribe--dark .awj-subscribe__btn   { background: var(--awj-yellow); color: var(--awj-black); border-color: var(--awj-yellow); }
+  .awj-subscribe--dark .awj-subscribe__btn:hover { background: var(--awj-white); color: var(--awj-black); }
+  .awj-subscribe--dark .awj-subscribe__fineprint { color: rgba(255,255,255,0.6); }
+  /* yellow surface variant */
+  .awj-subscribe--yellow .awj-subscribe__input { background: var(--awj-white); color: var(--awj-black); border-color: var(--awj-black); }
+</style>

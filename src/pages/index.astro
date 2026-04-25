@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Btn from '../components/Btn.astro';
+import Hl from '../components/Hl.astro';
+import Pillar from '../components/Pillar.astro';
+import Scribble from '../components/Scribble.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
+import { getCollection } from 'astro:content';
+import { PILLAR_META, formatIssueDate, type Pillar as PillarT } from '../lib/utils';
+
+const all = (await getCollection('journal', e => !e.data.draft))
+  .sort((a, b) => b.data.awj_number - a.data.awj_number);
+
+// Featured = highest AWJ number with the strongest case (most recent / most canonical)
+const featured = all.find(e => e.data.awj_number === 1) ?? all[0];
+const recent = all.filter(e => e.id !== featured.id).slice(0, 4);
+const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
+---
+<Layout
+  title="AWJ — Andy Whyte Journal"
+  description="A notebook page that earned the right to be on a billboard. Maxims and essays from Andy Whyte across sales, founding, and being human. One entry every Friday. No noise."
+>
+  {/* HERO — featured maxim */}
+  <section class="hero">
+    <div class="site-shell hero__inner">
+      <Eyebrow>Issue {String(featured.data.awj_number).padStart(3, '0')} · Filed {issueDate}</Eyebrow>
+      <h1 class="hero__title awj-billboard">
+        {featured.data.title.replace(/uncomfortable/i, '')}
+        {featured.data.title.toLowerCase().includes('uncomfortable') && (
+          <Hl>uncomfortable</Hl>
+        )}
+        {!featured.data.title.toLowerCase().includes('uncomfortable') && featured.data.title}
+      </h1>
+      <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="3%" width={120} />
+      <Scribble src="/assets/scribbles/underline_black.png" left="0" bottom="-10px" width={280} opacity={0.85} />
+      <div class="hero__actions">
+        <Btn href={`/journal/${featured.data.slug ?? featured.id}/`} tone="dark">Read the entry</Btn>
+        <Btn href="/journal/" tone="ghost">The archive</Btn>
+      </div>
+    </div>
+  </section>
+
+  {/* PILLARS */}
+  <section class="pillars">
+    <div class="site-shell">
+      <Eyebrow>Three pillars</Eyebrow>
+      <div class="pillars__grid">
+        {(['sales', 'founder', 'human'] as PillarT[]).map((p, i) => {
+          const meta = PILLAR_META[p];
+          return (
+            <a href={`/pillars/${p}/`} class="pillars__card" style={`background: ${meta.bg}; color: ${meta.fg}`}>
+              <span class="pillars__num">{String(i + 1).padStart(2, '0')} · {meta.tag.toUpperCase()}</span>
+              <div>
+                <h3 class="pillars__name awj-display">{meta.label}</h3>
+                <p class="pillars__blurb">{meta.description}</p>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  {/* RECENT */}
+  <section class="recent">
+    <div class="site-shell">
+      <div class="recent__head">
+        <h2 class="awj-display">Recent entries</h2>
+        <a href="/journal/" class="recent__archive-link">Full archive →</a>
+      </div>
+      <div class="recent__grid">
+        {recent.map(e => (
+          <a href={`/journal/${e.data.slug ?? e.id}/`} class="recent__card">
+            <div class="recent__row">
+              <Pillar pillar={e.data.pillar} />
+              <span class="awj-meta">AWJ #{e.data.awj_number}</span>
+            </div>
+            <h3 class="recent__title awj-display">{e.data.title}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* CTA */}
+  <section class="cta awj-bg-paper-blue">
+    <div class="site-shell cta__inner">
+      <Scribble src="/assets/scribbles/pen_star_yellow.png" rotate={14} top="30px" right="8%" width={120} />
+      <Eyebrow color="#FFCE00">The frictionless path</Eyebrow>
+      <h2 class="cta__title awj-display">
+        One entry. <Hl>Every Friday.</Hl> No noise.
+      </h2>
+      <SubscribeForm tone="dark" />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero { position: relative; border-bottom: var(--border-hard); overflow: hidden; }
+  .hero__inner {
+    padding: var(--sp-9) var(--gutter) var(--sp-8);
+    position: relative;
+  }
+  .hero__title { margin-top: var(--sp-4); margin-bottom: var(--sp-7); max-width: 95%; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+
+  .pillars {
+    padding: var(--sp-8) 0;
+    border-bottom: var(--border-hard);
+  }
+  .pillars__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border: var(--border-hard);
+    background: var(--bg-2);
+    margin-top: var(--sp-4);
+  }
+  @media (min-width: 720px) {
+    .pillars__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .pillars__card {
+    padding: var(--sp-6);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    border-bottom: var(--border-hard);
+  }
+  .pillars__card:last-child { border-bottom: none; }
+  @media (min-width: 720px) {
+    .pillars__card { border-bottom: none; border-right: var(--border-hard); }
+    .pillars__card:last-child { border-right: none; }
+  }
+  .pillars__num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    opacity: 0.8;
+  }
+  .pillars__name {
+    font-size: clamp(40px, 5vw, 88px);
+    line-height: 0.95;
+    margin: 0 0 var(--sp-3);
+    overflow-wrap: anywhere;
+  }
+  .pillars__blurb { font-size: 15px; line-height: 1.5; margin: 0; max-width: 320px; }
+
+  .recent { padding: var(--sp-8) 0; border-bottom: var(--border-hard); }
+  .recent__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-5);
+    flex-wrap: wrap;
+  }
+  .recent__head h2 { font-size: clamp(32px, 4.5vw, 56px); margin: 0; }
+  .recent__archive-link {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--awj-black);
+  }
+  .recent__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--rule);
+  }
+  @media (min-width: 720px) {
+    .recent__grid { grid-template-columns: 1fr 1fr; }
+  }
+  .recent__card {
+    padding: var(--sp-5) var(--sp-4);
+    border-bottom: 1px solid var(--rule);
+    color: var(--awj-black);
+    text-decoration: none;
+    transition: background var(--t-fast);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+  .recent__card:hover { background: rgba(255,206,0,0.18); }
+  @media (min-width: 720px) {
+    .recent__card:nth-child(odd) { border-right: 1px solid var(--rule); }
+  }
+  .recent__row { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
+  .recent__title { font-size: clamp(24px, 3.4vw, 40px); line-height: 1; margin: 0; overflow-wrap: anywhere; }
+
+  .cta { position: relative; overflow: hidden; }
+  .cta__inner { padding: var(--sp-9) var(--gutter); position: relative; }
+  .cta__title {
+    font-size: clamp(40px, 7vw, 96px);
+    line-height: 1;
+    margin: var(--sp-3) 0 var(--sp-6);
+    max-width: 18ch;
+    color: var(--awj-white);
+  }
+  .cta .awj-eyebrow { color: var(--awj-yellow); }
+</style>

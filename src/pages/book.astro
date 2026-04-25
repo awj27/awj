@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Btn from '../components/Btn.astro';
+import Hl from '../components/Hl.astro';
+---
+<Layout
+  title="MEDDICC — the book — AWJ"
+  description="The ultimate guide to staying in complex sales. By Andy Whyte."
+>
+  <section class="bk-hero">
+    <div class="site-shell bk-hero__inner">
+      <div class="bk-hero__copy">
+        <Eyebrow>Best-seller</Eyebrow>
+        <h1 class="bk-hero__title awj-display">
+          MEDDICC.
+        </h1>
+        <p class="bk-hero__sub">
+          The ultimate guide to <Hl>staying in complex sales</Hl>.
+        </p>
+        <p class="bk-hero__body">A field-tested playbook for the qualifying methodology used by the world's best-performing enterprise sales teams. Five hundred pages of MEDDICC, in your hands or in your ears.</p>
+        <div class="bk-hero__actions">
+          <Btn href="https://www.amazon.com/dp/B08VRPK87T" tone="yellow">Buy on Amazon →</Btn>
+          <Btn href="https://meddicc.com/book" tone="ghost">More info</Btn>
+        </div>
+      </div>
+      <div class="bk-hero__cover">
+        <div class="bk-hero__cover-frame">
+          <span class="bk-hero__cover-placeholder awj-display">MEDDICC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .bk-hero { padding: var(--sp-9) 0; border-bottom: var(--border-hard); }
+  .bk-hero__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-7);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .bk-hero__inner { grid-template-columns: 1.4fr 1fr; }
+  }
+  .bk-hero__title { font-size: clamp(80px, 12vw, 200px); margin: var(--sp-3) 0; line-height: 0.85; }
+  .bk-hero__sub {
+    font-family: var(--font-body);
+    font-size: var(--fs-h3);
+    line-height: 1.15;
+    margin: 0 0 var(--sp-5);
+    max-width: 28ch;
+  }
+  .bk-hero__body { font-size: var(--fs-body-lg); margin: 0 0 var(--sp-6); max-width: 50ch; color: var(--fg-2); }
+  .bk-hero__actions { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+  .bk-hero__cover-frame {
+    aspect-ratio: 2 / 3;
+    background: var(--awj-blue);
+    background-image: url('/assets/textures/paper_blue.png');
+    background-size: cover;
+    border: var(--border-hard);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--awj-yellow);
+  }
+  .bk-hero__cover-placeholder { font-size: clamp(40px, 5vw, 64px); transform: rotate(-3deg); }
+</style>

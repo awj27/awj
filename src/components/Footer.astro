@@ -1,0 +1,115 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="awj-footer">
+  <div class="site-shell awj-footer__inner">
+    <div class="awj-footer__col">
+      <div class="awj-footer__brand">
+        <img src="/assets/logos/awj_submark_yellow.png" alt="AWJ" width="56" height="56" />
+        <p class="awj-footer__tagline">A notebook page that earned the right to be on a billboard.</p>
+      </div>
+    </div>
+    <div class="awj-footer__col">
+      <h4>Read</h4>
+      <ul>
+        <li><a href="/journal/">Journal</a></li>
+        <li><a href="/maxims/">Maxims</a></li>
+        <li><a href="/pillars/sales/">Sales</a></li>
+        <li><a href="/pillars/founder/">Founder</a></li>
+        <li><a href="/pillars/human/">Human</a></li>
+      </ul>
+    </div>
+    <div class="awj-footer__col">
+      <h4>Andy</h4>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/speaking/">Speaking</a></li>
+        <li><a href="/book/">Book</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+    <div class="awj-footer__col">
+      <h4>Subscribe</h4>
+      <p class="awj-footer__sub-pitch">One entry. Every Friday. No noise.</p>
+      <a href="/subscribe/" class="awj-footer__cta">Subscribe →</a>
+    </div>
+  </div>
+  <div class="awj-footer__base">
+    <div class="site-shell awj-footer__legal">
+      <span>© {year} Andy Whyte. All rights reserved.</span>
+      <span><a href="https://www.linkedin.com/in/andywhyte/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/@andywhyte" target="_blank" rel="noopener">YouTube</a> · <a href="https://substack.com/@andywhyte" target="_blank" rel="noopener">Substack</a></span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .awj-footer {
+    margin-top: var(--sp-10);
+    background: var(--bg-dark);
+    background-image: url('/assets/textures/paper_black.png');
+    background-size: cover;
+    color: var(--fg-inverse);
+  }
+  .awj-footer__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-7);
+    padding: var(--sp-9) var(--gutter) var(--sp-7);
+  }
+  @media (min-width: 720px) {
+    .awj-footer__inner { grid-template-columns: 2fr 1fr 1fr 1fr; }
+  }
+  .awj-footer__brand img { margin-bottom: var(--sp-4); }
+  .awj-footer__tagline {
+    font-family: var(--font-marker);
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0;
+    max-width: 32ch;
+  }
+  .awj-footer h4 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--awj-yellow);
+    margin: 0 0 var(--sp-3);
+  }
+  .awj-footer ul { list-style: none; padding: 0; margin: 0; }
+  .awj-footer li + li { margin-top: var(--sp-2); }
+  .awj-footer a { color: var(--fg-inverse); text-decoration: none; }
+  .awj-footer a:hover { color: var(--awj-yellow); }
+  .awj-footer__sub-pitch {
+    font-size: 14px;
+    color: var(--awj-grey-300);
+    margin: 0 0 var(--sp-4);
+    max-width: 22ch;
+  }
+  .awj-footer__cta {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: var(--sp-3) var(--sp-4);
+    background: var(--awj-yellow);
+    color: var(--awj-black) !important;
+    border: 2px solid var(--awj-yellow);
+    transition: background var(--t-fast);
+  }
+  .awj-footer__cta:hover { background: transparent; color: var(--awj-yellow) !important; }
+  .awj-footer__base {
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding: var(--sp-5) 0;
+  }
+  .awj-footer__legal {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    font-size: 12px;
+    color: var(--awj-grey-300);
+  }
+</style>

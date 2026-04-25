@@ -1,0 +1,153 @@
+---
+const path = Astro.url.pathname;
+const isActive = (p: string) => path === p || (p !== '/' && path.startsWith(p));
+
+const nav = [
+  { href: '/journal/', label: 'Journal' },
+  { href: '/maxims/',  label: 'Maxims' },
+  { href: '/about/',   label: 'About' },
+  { href: '/speaking/', label: 'Speaking' },
+  { href: '/book/',    label: 'Book' },
+];
+---
+<header class="awj-header">
+  <div class="site-shell awj-header__inner">
+    <a href="/" class="awj-header__brand" aria-label="AWJ home">
+      <img src="/assets/logos/awj_submark_black.png" alt="" width="44" height="44" />
+      <span class="awj-header__wordmark">Andy Whyte Journal</span>
+    </a>
+    <nav class="awj-header__nav" aria-label="Primary">
+      {nav.map(item => (
+        <a href={item.href} class:list={['awj-header__link', { 'is-active': isActive(item.href) }]}>{item.label}</a>
+      ))}
+    </nav>
+    <a href="/subscribe/" class="awj-header__cta">Subscribe →</a>
+    <button class="awj-header__menu" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .awj-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg-1);
+    background-image: url('/assets/textures/paper_white.png');
+    background-size: cover;
+    border-bottom: var(--border-hard);
+  }
+  .awj-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-5);
+    padding: var(--sp-3) var(--gutter);
+    min-height: 64px;
+  }
+  .awj-header__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    font-family: var(--font-marker);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--awj-black);
+  }
+  .awj-header__brand img {
+    width: 36px;
+    height: 36px;
+  }
+  .awj-header__wordmark {
+    display: none;
+  }
+  @media (min-width: 720px) {
+    .awj-header__wordmark {
+      display: inline;
+    }
+  }
+  .awj-header__nav {
+    display: none;
+    flex: 1;
+    gap: var(--sp-5);
+    margin-left: var(--sp-5);
+  }
+  @media (min-width: 900px) {
+    .awj-header__nav {
+      display: flex;
+    }
+  }
+  .awj-header__link {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--awj-black);
+    padding: var(--sp-2) 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color var(--t-fast);
+  }
+  .awj-header__link:hover { border-bottom-color: var(--awj-yellow); }
+  .awj-header__link.is-active { border-bottom-color: var(--awj-black); }
+
+  .awj-header__cta {
+    display: none;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: var(--sp-3) var(--sp-4);
+    background: var(--awj-black);
+    color: var(--awj-white);
+    border: var(--border-hard);
+    transition: background var(--t-fast), color var(--t-fast);
+  }
+  .awj-header__cta:hover { background: var(--awj-white); color: var(--awj-black); }
+  @media (min-width: 720px) {
+    .awj-header__cta { display: inline-block; margin-left: auto; }
+  }
+
+  /* Mobile menu button */
+  .awj-header__menu {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 22px;
+    margin-left: auto;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .awj-header__menu span {
+    display: block;
+    height: 3px;
+    background: var(--awj-black);
+    border-radius: 0;
+  }
+  @media (min-width: 900px) {
+    .awj-header__menu { display: none; }
+  }
+</style>
+
+<script>
+  // Mobile nav toggle
+  const btn = document.getElementById('menu-toggle');
+  const nav = document.querySelector('.awj-header__nav') as HTMLElement | null;
+  btn?.addEventListener('click', () => {
+    if (!nav) return;
+    const open = nav.style.display === 'flex';
+    nav.style.display = open ? 'none' : 'flex';
+    nav.style.flexDirection = 'column';
+    nav.style.position = 'absolute';
+    nav.style.top = '64px';
+    nav.style.left = '0';
+    nav.style.right = '0';
+    nav.style.background = 'var(--awj-paper)';
+    nav.style.padding = 'var(--sp-5)';
+    nav.style.borderBottom = 'var(--border-hard)';
+    btn.setAttribute('aria-expanded', String(!open));
+  });
+</script>

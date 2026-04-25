@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Hl from '../components/Hl.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
+import Scribble from '../components/Scribble.astro';
+---
+<Layout
+  title="Subscribe — AWJ"
+  description="One entry. Every Friday. No noise."
+>
+  <section class="sub-hero awj-bg-paper-yellow">
+    <div class="site-shell sub-hero__inner">
+      <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="6%" width={140} />
+      <Eyebrow>The journal</Eyebrow>
+      <h1 class="sub-hero__title awj-display">
+        One entry. <Hl tone="black">Every Friday.</Hl> No noise.
+      </h1>
+      <p class="sub-hero__sub">A single Maxim, essay, or model in your inbox at the end of every working week. Unsubscribe whenever. Hosted on Substack — your address goes to Substack, not to me.</p>
+      <SubscribeForm tone="yellow" />
+    </div>
+  </section>
+
+  <section class="sub-promise content-shell">
+    <div class="prose">
+      <h2>The promise.</h2>
+      <p>One Friday. One entry. Forever.</p>
+      <p>Each entry is roughly 200–800 words. Most carry a video. All carry a principle. None are recycled hype.</p>
+
+      <h2>What you get.</h2>
+      <p><strong>Sales.</strong> MEDDICC, deal inspection, sales as a thinking discipline.</p>
+      <p><strong>Founder.</strong> Bootstrap SaaS, trade-offs under uncertainty.</p>
+      <p><strong>Human.</strong> Controlled lessons from failure.</p>
+
+      <h2>What you don't.</h2>
+      <p>No drip campaigns. No upsells. No "what I learned by reading 100 books this year." If I don't have something worth saying, I don't send.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .sub-hero { position: relative; overflow: hidden; border-bottom: var(--border-hard); }
+  .sub-hero__inner { padding: var(--sp-9) var(--gutter); position: relative; max-width: var(--site-max); margin: 0 auto; }
+  .sub-hero__title { font-size: clamp(40px, 7vw, 112px); margin: var(--sp-3) 0 var(--sp-5); }
+  .sub-hero__sub { font-size: var(--fs-body-lg); margin: 0 0 var(--sp-6); max-width: 56ch; color: var(--fg-1); }
+  .sub-promise { padding: var(--sp-8) var(--gutter) var(--sp-9); }
+</style>

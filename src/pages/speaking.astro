@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Btn from '../components/Btn.astro';
+import Hl from '../components/Hl.astro';
+---
+<Layout
+  title="Speaking — AWJ"
+  description="Keynotes and SKO sessions on sales, MEDDICC, and operator-grade decision-making."
+>
+  <section class="sp-hero">
+    <div class="site-shell">
+      <Eyebrow>Keynotes & SKO</Eyebrow>
+      <h1 class="sp-hero__title awj-display">
+        Keynotes that <Hl>change the deal,</Hl> not the slide.
+      </h1>
+      <p class="sp-hero__sub">In-person and virtual sessions on MEDDICC, deal inspection, and the sales discipline that compounds.</p>
+      <div class="sp-hero__actions">
+        <Btn href="/contact/?topic=speaking" tone="dark">Enquire about speaking</Btn>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-pillars content-shell">
+    <div class="prose">
+      <h2>What I speak about.</h2>
+      <p><strong>The MEDDICC keynote.</strong> The framework, the failure modes, the pattern that separates A-players from theatre. Best for SKOs, sales leadership offsites, and revenue ops summits.</p>
+      <p><strong>Deal inspection as a thinking discipline.</strong> How to inspect <em>the deal, not the rep</em>. Built for sales managers who want their team to find the truth in a pipeline.</p>
+      <p><strong>The operator-and-theorist.</strong> Cross-pillar talk on bootstrapped SaaS, decision-making under uncertainty, and the maxims that show up in both founder and sales work.</p>
+
+      <h2>Past audiences.</h2>
+      <p>Sales kick-offs (SKO) for global revenue teams. Industry summits. Internal leadership offsites. Audiences from 30 to 3,000.</p>
+
+      <h2>Format.</h2>
+      <p>30 / 45 / 60-minute keynote. Optional 30-minute Q&amp;A. Travels. Virtual when virtual makes sense.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .sp-hero { padding: var(--sp-9) 0; border-bottom: var(--border-hard); }
+  .sp-hero__title { font-size: clamp(40px, 7vw, 112px); margin: var(--sp-3) 0 var(--sp-5); }
+  .sp-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0 0 var(--sp-6); max-width: 60ch; }
+  .sp-hero__actions { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+  .sp-pillars { padding: var(--sp-8) var(--gutter); }
+</style>

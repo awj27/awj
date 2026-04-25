@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+---
+<Layout
+  title="Contact — AWJ"
+  description="Speaking, advisory, press, or just a hello."
+>
+  <section class="ct-hero">
+    <div class="site-shell">
+      <Eyebrow>Get in touch</Eyebrow>
+      <h1 class="ct-hero__title awj-display">Say hello.</h1>
+      <p class="ct-hero__sub">Speaking, advisory, press, or just a hello. I read everything.</p>
+    </div>
+  </section>
+
+  <section class="ct-form content-shell">
+    <form class="ct-form__inner" method="POST" data-static="cloudflare-form" name="contact">
+      <input type="hidden" name="form-name" value="contact" />
+      <label class="ct-field">
+        <span>Your name</span>
+        <input type="text" name="name" required autocomplete="name" />
+      </label>
+      <label class="ct-field">
+        <span>Email</span>
+        <input type="email" name="email" required autocomplete="email" />
+      </label>
+      <label class="ct-field">
+        <span>Topic</span>
+        <select name="topic">
+          <option>General</option>
+          <option>Speaking / SKO</option>
+          <option>Advisory</option>
+          <option>Press</option>
+          <option>Book</option>
+        </select>
+      </label>
+      <label class="ct-field">
+        <span>Message</span>
+        <textarea name="message" rows="6" required></textarea>
+      </label>
+      <button class="ct-form__btn" type="submit">Send →</button>
+      <p class="ct-form__fineprint">Or email <a href="mailto:hello@andywhyte.com">hello@andywhyte.com</a> directly.</p>
+    </form>
+  </section>
+</Layout>
+
+<style>
+  .ct-hero { padding: var(--sp-9) 0 var(--sp-5); border-bottom: 1px solid var(--rule); }
+  .ct-hero__title { font-size: clamp(56px, 9vw, 144px); margin: var(--sp-3) 0; }
+  .ct-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0; }
+
+  .ct-form { padding: var(--sp-8) var(--gutter) var(--sp-9); }
+  .ct-form__inner { display: grid; gap: var(--sp-5); max-width: 600px; }
+  .ct-field { display: flex; flex-direction: column; gap: var(--sp-2); }
+  .ct-field span {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .ct-field input, .ct-field select, .ct-field textarea {
+    font-family: var(--font-body);
+    font-size: 16px;
+    padding: 12px 14px;
+    background: var(--awj-white);
+    color: var(--awj-black);
+    border: var(--border-hard);
+    border-radius: 0;
+  }
+  .ct-field textarea { resize: vertical; }
+  .ct-form__btn {
+    justify-self: start;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    background: var(--awj-black);
+    color: var(--awj-white);
+    border: var(--border-hard);
+    cursor: pointer;
+  }
+  .ct-form__btn:hover { background: var(--awj-yellow); color: var(--awj-black); }
+  .ct-form__fineprint { font-size: 14px; color: var(--fg-2); margin: 0; }
+</style>

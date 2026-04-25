@@ -1,0 +1,16 @@
+---
+interface Props { tone?: 'yellow' | 'red' | 'black'; }
+const { tone = 'yellow' } = Astro.props;
+---
+<span class={`awj-hl awj-hl--${tone}`}><slot /></span>
+
+<style>
+  .awj-hl {
+    padding: 0.04em 0.18em 0.0em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .awj-hl--yellow { background: var(--awj-yellow); color: var(--awj-black); }
+  .awj-hl--red    { background: var(--awj-red);    color: var(--awj-white); }
+  .awj-hl--black  { background: var(--awj-black);  color: var(--awj-white); }
+</style>

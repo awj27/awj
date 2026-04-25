@@ -1,0 +1,166 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Btn from '../../components/Btn.astro';
+import Pillar from '../../components/Pillar.astro';
+import Scribble from '../../components/Scribble.astro';
+import Signature from '../../components/Signature.astro';
+import SubscribeForm from '../../components/SubscribeForm.astro';
+import { getCollection, render } from 'astro:content';
+import { formatIssueDate, readingTime } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('journal', e => !e.data.draft);
+  return entries.map(entry => ({
+    params: { slug: entry.data.slug ?? entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const issue = formatIssueDate(entry.data.modified ?? entry.data.date);
+const rt = readingTime(entry.body ?? '');
+---
+<Layout
+  title={`${entry.data.title} — AWJ #${entry.data.awj_number}`}
+  description={entry.body?.slice(0, 160) ?? entry.data.title}
+  ogImage={`/media/awj${entry.data.awj_number}.webp`}
+>
+  <article>
+    {/* Header band */}
+    <section class="entry__band">
+      <div class="site-shell entry__band-inner">
+        <a href="/journal/" class="entry__back">← Journal</a>
+        <div class="entry__meta">
+          <Pillar pillar={entry.data.pillar} />
+          <span class="awj-meta">Issue {String(entry.data.awj_number).padStart(3, '0')} · {rt} · {issue}</span>
+        </div>
+      </div>
+    </section>
+
+    {/* Headline */}
+    <section class="entry__hero">
+      <div class="site-shell entry__hero-inner">
+        <h1 class="entry__title awj-billboard">{entry.data.title}</h1>
+        <Scribble src="/assets/scribbles/scribble_fire_2.png" rotate={8} top="40px" right="4%" width={140} />
+      </div>
+    </section>
+
+    {/* Video */}
+    {entry.data.video_id && (
+      <section class="entry__video">
+        <div class="content-shell">
+          <div class="entry__video-frame">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${entry.data.video_id}`}
+              title={`${entry.data.title} — video`}
+              loading="lazy"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+    )}
+
+    {/* Body */}
+    <section class="entry__body">
+      <div class="content-shell prose">
+        <Content />
+      </div>
+    </section>
+
+    {/* Sign-off + CTA */}
+    <section class="entry__signoff">
+      <div class="content-shell entry__signoff-inner">
+        <Signature size={48} />
+        <Btn href="/subscribe/" tone="dark">Subscribe to the journal →</Btn>
+      </div>
+    </section>
+
+    {/* Subscribe block */}
+    <section class="entry__sub awj-bg-paper-blue">
+      <div class="site-shell entry__sub-inner">
+        <Eyebrow color="#FFCE00">Keep reading</Eyebrow>
+        <h2 class="entry__sub-title awj-display">One entry. Every Friday.</h2>
+        <SubscribeForm tone="dark" />
+      </div>
+    </section>
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: entry.data.title,
+    datePublished: entry.data.date.toISOString?.() ?? String(entry.data.date),
+    dateModified: (entry.data.modified ?? entry.data.date).toISOString?.() ?? String(entry.data.modified ?? entry.data.date),
+    author: { '@type': 'Person', name: 'Andy Whyte', url: 'https://www.andywhyte.com/about/' },
+    publisher: { '@type': 'Organization', name: 'Andy Whyte Journal', logo: { '@type': 'ImageObject', url: 'https://www.andywhyte.com/assets/logos/awj_main_logo_yellow.png' } },
+    mainEntityOfPage: Astro.url.toString(),
+    image: `https://www.andywhyte.com/media/awj${entry.data.awj_number}.webp`,
+    ...(entry.data.video_id && {
+      video: {
+        '@type': 'VideoObject',
+        name: entry.data.title,
+        thumbnailUrl: `https://i.ytimg.com/vi/${entry.data.video_id}/maxresdefault.jpg`,
+        embedUrl: `https://www.youtube-nocookie.com/embed/${entry.data.video_id}`,
+        uploadDate: entry.data.date.toISOString?.() ?? String(entry.data.date),
+      },
+    }),
+  })} />
+</Layout>
+
+<style>
+  .entry__band {
+    padding: var(--sp-7) 0 var(--sp-4);
+    border-bottom: 1px solid var(--rule);
+  }
+  .entry__band-inner { display: flex; flex-direction: column; gap: var(--sp-4); }
+  .entry__back {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--awj-black);
+  }
+  .entry__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3); }
+
+  .entry__hero { padding: var(--sp-7) 0 var(--sp-5); position: relative; overflow: hidden; }
+  .entry__hero-inner { position: relative; }
+  .entry__title { max-width: 1100px; }
+
+  .entry__video { padding: var(--sp-5) 0 var(--sp-7); }
+  .entry__video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--awj-black);
+    border: var(--border-hard);
+    overflow: hidden;
+  }
+  .entry__video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  .entry__body { padding: var(--sp-4) 0 var(--sp-9); }
+  .entry__signoff {
+    padding: var(--sp-5) 0;
+    border-top: var(--border-hard);
+  }
+  .entry__signoff-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+  }
+  .entry__sub-inner { padding: var(--sp-9) 0; position: relative; }
+  .entry__sub-title {
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: 1;
+    margin: var(--sp-3) 0 var(--sp-6);
+    color: var(--awj-white);
+  }
+</style>

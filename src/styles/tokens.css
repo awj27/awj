@@ -1,0 +1,104 @@
+/* =====================================================================
+   AWJ — Andy Whyte Journal · Design Tokens
+   ---------------------------------------------------------------------
+   "A notebook page that earned the right to be on a billboard."
+   Display: Anton (free Google Font, condensed billboard caps)
+   Body:    Inter (free Google Font, modern grotesk)
+   Marker:  Caveat (free Google Font, hand-written)
+   Mono:    JetBrains Mono (metadata)
+===================================================================== */
+
+:root {
+  /* ---------- BRAND COLORS ---------- */
+  --awj-black:       #0A0A0A;
+  --awj-ink:         #111111;
+  --awj-white:       #FFFFFF;
+  --awj-paper:       #F4F1EA;   /* warm off-white when no texture */
+  --awj-blue:        #1F47FF;
+  --awj-blue-deep:   #1233CC;
+  --awj-yellow:      #FFCE00;
+  --awj-yellow-warm: #F2B800;
+  --awj-red:         #E5251D;
+
+  /* ---------- NEUTRAL SCALE ---------- */
+  --awj-grey-100: #F2F1ED;
+  --awj-grey-200: #E4E2DC;
+  --awj-grey-300: #C8C5BC;
+  --awj-grey-500: #8B8780;
+  --awj-grey-700: #4A4842;
+  --awj-grey-900: #1C1B19;
+
+  /* ---------- SEMANTIC ---------- */
+  --fg-1: var(--awj-ink);
+  --fg-2: var(--awj-grey-700);
+  --fg-3: var(--awj-grey-500);
+  --fg-inverse: var(--awj-white);
+  --bg-1: var(--awj-paper);
+  --bg-2: var(--awj-white);
+  --bg-dark: var(--awj-black);
+  --bg-blue: var(--awj-blue);
+  --bg-yellow: var(--awj-yellow);
+  --hl-yellow: var(--awj-yellow);
+  --hl-red: var(--awj-red);
+  --hl-black: var(--awj-black);
+  --rule: rgba(17,17,17,0.12);
+  --rule-strong: rgba(17,17,17,0.85);
+
+  /* ---------- TYPE FAMILIES ---------- */
+  --font-display: 'Anton', 'Bebas Neue', 'Impact', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, sans-serif;
+  --font-marker:  'Caveat', 'Permanent Marker', cursive;
+  --font-hand:    'Caveat', cursive;
+  --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---------- TYPE SCALE ---------- */
+  --fs-billboard: clamp(56px, 11vw, 180px);
+  --fs-h1:        clamp(40px, 6.5vw, 96px);
+  --fs-h2:        clamp(32px, 4.5vw, 64px);
+  --fs-h3:        clamp(24px, 3vw, 40px);
+  --fs-h4:        20px;
+  --fs-eyebrow:   13px;
+  --fs-body:      17px;
+  --fs-body-lg:   20px;
+  --fs-small:     14px;
+  --fs-caption:   12px;
+
+  /* ---------- SPACING ---------- */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  /* ---------- RADII ---------- */
+  --radius-0: 0px;
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --radius-pill: 999px;
+
+  /* ---------- SHADOWS ---------- */
+  --shadow-paper: 0 1px 0 rgba(0,0,0,0.04), 0 12px 28px -16px rgba(0,0,0,0.25);
+  --shadow-tape:  0 6px 14px -8px rgba(0,0,0,0.35);
+
+  /* ---------- BORDERS ---------- */
+  --border-hard:  2px solid var(--awj-black);
+  --border-thicc: 4px solid var(--awj-black);
+  --border-thin:  1px solid var(--rule);
+
+  /* ---------- TRANSITIONS ---------- */
+  --ease-out:  cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-snap: cubic-bezier(0.4, 0, 0.1, 1);
+  --t-fast: 120ms;
+  --t-base: 200ms;
+  --t-slow: 400ms;
+
+  /* ---------- LAYOUT ---------- */
+  --content-max: 760px;
+  --site-max:    1280px;
+  --gutter:      clamp(20px, 5vw, 56px);
+}
