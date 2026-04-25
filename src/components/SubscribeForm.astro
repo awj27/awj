@@ -1,30 +1,26 @@
 ---
 interface Props { tone?: 'light' | 'dark' | 'yellow'; compact?: boolean; }
 const { tone = 'light', compact = false } = Astro.props;
+const formId = `awj-subscribe-${Math.random().toString(36).slice(2, 9)}`;
 ---
-<form class={`awj-subscribe awj-subscribe--${tone}`} action="https://andywhyte.substack.com/api/v1/free" method="post" target="_blank">
-  <label class="awj-subscribe__label" for="awj-email">
+<form class={`awj-subscribe awj-subscribe--${tone}`} id={formId} novalidate>
+  <label class="awj-subscribe__label" for={`${formId}-email`}>
     {compact ? 'Subscribe' : 'Get one entry every Friday'}
   </label>
   <div class="awj-subscribe__row">
     <input
       type="email"
-      id="awj-email"
+      id={`${formId}-email`}
       name="email"
       required
       autocomplete="email"
       placeholder="you@work.com"
       class="awj-subscribe__input"
+      aria-describedby={`${formId}-msg`}
     />
-    <input type="hidden" name="first_url" value="https://andywhyte.com" />
-    <input type="hidden" name="first_referrer" value="" />
-    <input type="hidden" name="current_url" value="https://andywhyte.com" />
-    <input type="hidden" name="current_referrer" value="" />
-    <input type="hidden" name="referral_code" value="" />
-    <input type="hidden" name="source" value="awj-site" />
     <button type="submit" class="awj-subscribe__btn">Subscribe →</button>
   </div>
-  <p class="awj-subscribe__fineprint">No spam. One email a week. Unsubscribe whenever.</p>
+  <p class="awj-subscribe__fineprint" id={`${formId}-msg`} aria-live="polite">No spam. One email a week. Unsubscribe whenever.</p>
 </form>
 
 <style>
@@ -38,14 +34,8 @@ const { tone = 'light', compact = false } = Astro.props;
     text-transform: uppercase;
     margin-bottom: var(--sp-3);
   }
-  .awj-subscribe__row {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-  }
-  @media (min-width: 520px) {
-    .awj-subscribe__row { flex-direction: row; }
-  }
+  .awj-subscribe__row { display: flex; flex-direction: column; gap: var(--sp-2); }
+  @media (min-width: 520px) { .awj-subscribe__row { flex-direction: row; } }
   .awj-subscribe__input {
     flex: 1;
     font-family: var(--font-body);
@@ -73,16 +63,62 @@ const { tone = 'light', compact = false } = Astro.props;
     transition: background var(--t-fast), color var(--t-fast);
   }
   .awj-subscribe__btn:hover { background: var(--awj-yellow); color: var(--awj-black); }
-  .awj-subscribe__fineprint {
-    margin: var(--sp-3) 0 0;
-    font-size: 12px;
-    color: var(--fg-3);
-  }
-  /* dark surface variant */
+  .awj-subscribe__btn:disabled { opacity: 0.6; cursor: wait; }
+  .awj-subscribe__fineprint { margin: var(--sp-3) 0 0; font-size: 12px; color: var(--fg-3); }
+  .awj-subscribe[data-state='success'] .awj-subscribe__fineprint { color: var(--awj-blue); font-weight: 700; }
+  .awj-subscribe[data-state='error']   .awj-subscribe__fineprint { color: var(--awj-red);  font-weight: 700; }
+
   .awj-subscribe--dark .awj-subscribe__input { background: var(--awj-white); color: var(--awj-black); border-color: var(--awj-white); }
   .awj-subscribe--dark .awj-subscribe__btn   { background: var(--awj-yellow); color: var(--awj-black); border-color: var(--awj-yellow); }
   .awj-subscribe--dark .awj-subscribe__btn:hover { background: var(--awj-white); color: var(--awj-black); }
-  .awj-subscribe--dark .awj-subscribe__fineprint { color: rgba(255,255,255,0.6); }
-  /* yellow surface variant */
+  .awj-subscribe--dark .awj-subscribe__fineprint { color: rgba(255,255,255,0.7); }
   .awj-subscribe--yellow .awj-subscribe__input { background: var(--awj-white); color: var(--awj-black); border-color: var(--awj-black); }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.awj-subscribe').forEach(form => {
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const input = form.querySelector<HTMLInputElement>('input[name="email"]')!;
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      const msg = form.querySelector<HTMLElement>('.awj-subscribe__fineprint')!;
+      const email = input.value.trim();
+      if (!email || !email.includes('@')) {
+        form.dataset.state = 'error';
+        msg.textContent = 'Please enter a valid email address.';
+        input.focus();
+        return;
+      }
+      btn.disabled = true;
+      const originalBtn = btn.textContent;
+      btn.textContent = 'Subscribing…';
+      msg.textContent = '';
+      form.dataset.state = '';
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json() as { ok: boolean; message?: string; error?: string };
+        if (data.ok) {
+          form.dataset.state = 'success';
+          msg.textContent = data.message ?? "You're in. Check your inbox to confirm.";
+          input.value = '';
+          btn.textContent = 'Subscribed ✓';
+        } else {
+          form.dataset.state = 'error';
+          msg.textContent = data.error ?? 'Subscribe failed. Please try again.';
+          btn.disabled = false;
+          btn.textContent = originalBtn;
+        }
+      } catch {
+        form.dataset.state = 'error';
+        msg.textContent = 'Network error. Please try again.';
+        btn.disabled = false;
+        btn.textContent = originalBtn;
+      }
+    });
+  });
+</script>

@@ -2,88 +2,277 @@
 import Layout from '../../layouts/Layout.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import Pillar from '../../components/Pillar.astro';
+import Scribble from '../../components/Scribble.astro';
 import { getCollection } from 'astro:content';
 
 const all = (await getCollection('journal', e => !e.data.draft))
   .sort((a, b) => b.data.awj_number - a.data.awj_number);
+
+// Map each Maxim to a card "treatment" — paper colour, scribble accent, tilt.
+// Repeats on a 6-card cycle so the grid feels intentional rather than random.
+const treatments = [
+  { paper: 'white',  fg: '#0A0A0A', tilt: -1.2, scribble: 'scribbles/scribble_fire_1.png',  scribblePos: { right: '-18px', top: '-12px' } },
+  { paper: 'yellow', fg: '#0A0A0A', tilt:  0.8, scribble: 'scribbles/pen_star_black.png',   scribblePos: { right: '-14px', bottom: '-14px' } },
+  { paper: 'blue',   fg: '#FFFFFF', tilt: -0.6, scribble: 'scribbles/underline_yellow.png', scribblePos: { left: '20px',  bottom: '24px' } },
+  { paper: 'white',  fg: '#0A0A0A', tilt:  1.4, scribble: 'scribbles/scribble_fire_2.png',  scribblePos: { left: '-14px', top: '-14px' } },
+  { paper: 'black',  fg: '#FFFFFF', tilt: -0.8, scribble: 'scribbles/pen_star_yellow.png',  scribblePos: { right: '-12px', top: '-12px' } },
+  { paper: 'yellow', fg: '#0A0A0A', tilt:  0.6, scribble: 'scribbles/scribble_fire_1.png',  scribblePos: { left: '-16px', bottom: '-12px' } },
+];
+
+// Pick the most recent maxim as the "featured" billboard
+const featured = all[0];
+const rest = all.slice(1);
+
+function highlightLastWord(t: string) {
+  // Apply yellow highlighter to the last word for visual rhythm
+  const parts = t.split(' ');
+  if (parts.length < 2) return [t];
+  const last = parts.pop()!;
+  return [parts.join(' ') + ' ', last];
+}
 ---
 <Layout
   title="Maxims — AWJ"
-  description="The wall of Maxims. The lines. Built for sharing."
+  description="Every Maxim from the journal. Single-line principles you can keep in your pocket. Click any one to read the essay."
 >
+  {/* HERO billboard */}
   <section class="mx-hero">
-    <div class="site-shell">
+    <div class="site-shell mx-hero__inner">
       <Eyebrow>The wall</Eyebrow>
-      <h1 class="mx-hero__title awj-display">Maxims.</h1>
-      <p class="mx-hero__sub">{all.length} principles. Click any line to read the entry.</p>
+      <h1 class="mx-hero__title">Maxims.</h1>
+      <p class="mx-hero__sub">{all.length} principles. One a Friday. The line is the index — click to read the essay behind it.</p>
     </div>
   </section>
 
-  <section class="mx-grid">
+  {/* FEATURED MAXIM — full-bleed quote treatment */}
+  <section class="mx-featured awj-bg-paper-yellow">
+    <div class="site-shell mx-featured__inner">
+      <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={14} top="40px" right="6%" width={120} />
+      <Scribble src="/assets/scribbles/underline_black.png" rotate={-2} bottom="40px" left="6%" width={300} opacity={0.85} />
+      <a href={`/journal/${featured.data.slug ?? featured.id}/`} class="mx-featured__link">
+        <span class="mx-featured__meta">AWJ #{featured.data.awj_number} · {featured.data.pillar.toUpperCase()}</span>
+        <p class="mx-featured__line">{featured.data.title}</p>
+        <span class="mx-featured__read">Read the entry →</span>
+      </a>
+    </div>
+  </section>
+
+  {/* THE WALL */}
+  <section class="mx-wall">
     <div class="site-shell">
-      <div class="mx-grid__cards">
-        {all.map((e, i) => {
-          const tones = ['white', 'yellow', 'blue', 'black'];
-          const tone = tones[i % tones.length];
+      <div class="mx-wall__head">
+        <Eyebrow>The library</Eyebrow>
+        <h2 class="mx-wall__h">All {all.length} Maxims</h2>
+      </div>
+      <ul class="mx-wall__grid">
+        {rest.map((e, i) => {
+          const t = treatments[i % treatments.length];
+          const [head, lastWord] = highlightLastWord(e.data.title);
           return (
-            <a href={`/journal/${e.data.slug ?? e.id}/`} class={`mx-card mx-card--${tone}`}>
-              <span class="mx-card__num">AWJ #{e.data.awj_number}</span>
-              <p class="mx-card__line awj-display">{e.data.title}</p>
-              <span class="mx-card__pillar"><Pillar pillar={e.data.pillar} /></span>
-            </a>
+            <li class={`mx-tile mx-tile--${t.paper}`} style={`--tilt: ${t.tilt}deg; color: ${t.fg};`}>
+              <a href={`/journal/${e.data.slug ?? e.id}/`} class="mx-tile__link">
+                <span class="mx-tile__num">AWJ #{String(e.data.awj_number).padStart(2, '0')}</span>
+                <p class="mx-tile__line">
+                  {head}
+                  {lastWord && (
+                    <span class="mx-tile__last">{lastWord}</span>
+                  )}
+                </p>
+                <div class="mx-tile__foot">
+                  <span class="mx-tile__pillar mx-tile__pillar--{e.data.pillar}">{e.data.pillar}</span>
+                  <span class="mx-tile__cta">Read →</span>
+                </div>
+                <Scribble
+                  src={`/assets/${t.scribble}`}
+                  rotate={t.tilt > 0 ? -8 : 12}
+                  width={70}
+                  {...(t.scribblePos as any)}
+                  opacity={0.9}
+                />
+              </a>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   </section>
 </Layout>
 
 <style>
-  .mx-hero { padding: var(--sp-9) 0 var(--sp-5); border-bottom: var(--border-hard); }
-  .mx-hero__title { font-size: clamp(56px, 9vw, 144px); margin: var(--sp-3) 0; }
-  .mx-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0; }
+  .mx-hero {
+    padding: var(--sp-9) 0 var(--sp-7);
+    border-bottom: var(--border-hard);
+    background-image: url('/assets/textures/paper_white.png');
+    background-size: cover;
+  }
+  .mx-hero__inner { padding: 0 var(--gutter); }
+  .mx-hero__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(72px, 14vw, 220px);
+    margin: var(--sp-3) 0;
+    line-height: 0.85;
+    letter-spacing: -0.01em;
+  }
+  .mx-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0; max-width: 60ch; }
 
-  .mx-grid { padding: var(--sp-7) 0 var(--sp-9); }
-  .mx-grid__cards {
+  /* FEATURED */
+  .mx-featured {
+    border-bottom: var(--border-hard);
+    position: relative;
+    overflow: hidden;
+  }
+  .mx-featured__inner {
+    padding: var(--sp-10) var(--gutter);
+    position: relative;
+  }
+  .mx-featured__link {
+    display: block;
+    color: var(--awj-black);
+    text-decoration: none;
+    max-width: 1100px;
+  }
+  .mx-featured__meta {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    color: rgba(10,10,10,0.65);
+  }
+  .mx-featured__line {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(48px, 9vw, 168px);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    margin: var(--sp-5) 0 var(--sp-6);
+    overflow-wrap: anywhere;
+  }
+  .mx-featured__read {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 12px 18px;
+    background: var(--awj-black);
+    color: var(--awj-white);
+    border: var(--border-hard);
+    transition: background var(--t-fast), color var(--t-fast);
+  }
+  .mx-featured__link:hover .mx-featured__read { background: var(--awj-white); color: var(--awj-black); }
+
+  /* WALL */
+  .mx-wall { padding: var(--sp-9) 0 var(--sp-10); }
+  .mx-wall__head { margin-bottom: var(--sp-7); padding: 0 var(--gutter); }
+  .mx-wall__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(28px, 3.5vw, 44px);
+    margin: var(--sp-3) 0 0;
+    line-height: 1;
+    letter-spacing: -0.005em;
+  }
+  .mx-wall__grid {
+    list-style: none;
+    padding: var(--sp-5) var(--gutter);
+    margin: 0;
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-5);
+    gap: var(--sp-6);
   }
-  @media (min-width: 720px) {
-    .mx-grid__cards { grid-template-columns: 1fr 1fr; }
-  }
-  @media (min-width: 1100px) {
-    .mx-grid__cards { grid-template-columns: 1fr 1fr 1fr; }
-  }
-  .mx-card {
-    padding: var(--sp-6);
-    border: var(--border-hard);
-    text-decoration: none;
-    color: var(--awj-black);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-4);
-    min-height: 280px;
-    transition: transform var(--t-fast);
+  @media (min-width: 720px) { .mx-wall__grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1100px) { .mx-wall__grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .mx-tile {
+    --tilt: 0deg;
+    transform: rotate(var(--tilt));
+    transition: transform var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out);
     background-size: cover;
     background-position: center;
+    border: var(--border-hard);
+    min-height: 360px;
+    display: flex;
+    position: relative;
+    box-shadow: 4px 4px 0 var(--awj-black);
   }
-  .mx-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--awj-black); }
-  .mx-card--white  { background-color: var(--awj-white); background-image: url('/assets/textures/paper_white.png'); }
-  .mx-card--yellow { background-color: var(--awj-yellow); background-image: url('/assets/textures/paper_yellow.png'); }
-  .mx-card--blue   { background-color: var(--awj-blue); background-image: url('/assets/textures/paper_blue.png'); color: var(--awj-white); }
-  .mx-card--black  { background-color: var(--awj-black); background-image: url('/assets/textures/paper_black.png'); color: var(--awj-white); }
-  .mx-card__num {
+  .mx-tile:hover {
+    transform: rotate(0deg) translate(-2px, -2px);
+    box-shadow: 8px 8px 0 var(--awj-black);
+  }
+  .mx-tile--white  { background-color: var(--awj-paper);  background-image: url('/assets/textures/paper_white.png'); }
+  .mx-tile--yellow { background-color: var(--awj-yellow); background-image: url('/assets/textures/paper_yellow.png'); }
+  .mx-tile--blue   { background-color: var(--awj-blue);   background-image: url('/assets/textures/paper_blue.png'); }
+  .mx-tile--black  { background-color: var(--awj-black);  background-image: url('/assets/textures/paper_black.png'); }
+
+  .mx-tile__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding: var(--sp-6);
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: visible;
+  }
+  .mx-tile__num {
     font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    letter-spacing: 0.18em;
     opacity: 0.7;
   }
-  .mx-card__line {
-    font-size: clamp(28px, 3.4vw, 44px);
+  .mx-tile__line {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(28px, 3.2vw, 44px);
     line-height: 0.95;
-    margin: 0;
-    flex: 1;
+    letter-spacing: -0.005em;
+    margin: var(--sp-4) 0;
     overflow-wrap: anywhere;
+  }
+  .mx-tile__last {
+    background-image: linear-gradient(to bottom, transparent 28%, var(--awj-yellow) 28%, var(--awj-yellow) 92%, transparent 92%);
+    padding: 0 0.05em;
+    color: var(--awj-black);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .mx-tile--yellow .mx-tile__last {
+    background-image: linear-gradient(to bottom, transparent 28%, var(--awj-black) 28%, var(--awj-black) 92%, transparent 92%);
+    color: var(--awj-white);
+  }
+  .mx-tile--blue .mx-tile__last,
+  .mx-tile--black .mx-tile__last {
+    background-image: linear-gradient(to bottom, transparent 28%, var(--awj-yellow) 28%, var(--awj-yellow) 92%, transparent 92%);
+    color: var(--awj-black);
+  }
+  .mx-tile__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    margin-top: auto;
+  }
+  .mx-tile__pillar {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 10px 3px;
+    border: 1.5px solid currentColor;
+    border-radius: var(--radius-pill);
+  }
+  .mx-tile__cta {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
 </style>

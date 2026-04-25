@@ -3,11 +3,11 @@ const path = Astro.url.pathname;
 const isActive = (p: string) => path === p || (p !== '/' && path.startsWith(p));
 
 const nav = [
-  { href: '/journal/', label: 'Journal' },
-  { href: '/maxims/',  label: 'Maxims' },
-  { href: '/about/',   label: 'About' },
+  { href: '/about/',    label: 'About' },
+  { href: '/journal/',  label: 'Journal' },
+  { href: '/maxims/',   label: 'Maxims' },
   { href: '/speaking/', label: 'Speaking' },
-  { href: '/book/',    label: 'Book' },
+  { href: '/book/',     label: 'Book' },
 ];
 ---
 <header class="awj-header">
@@ -54,29 +54,16 @@ const nav = [
     font-size: 22px;
     color: var(--awj-black);
   }
-  .awj-header__brand img {
-    width: 36px;
-    height: 36px;
-  }
-  .awj-header__wordmark {
-    display: none;
-  }
-  @media (min-width: 720px) {
-    .awj-header__wordmark {
-      display: inline;
-    }
-  }
+  .awj-header__brand img { width: 36px; height: 36px; }
+  .awj-header__wordmark { display: none; }
+  @media (min-width: 720px) { .awj-header__wordmark { display: inline; } }
   .awj-header__nav {
     display: none;
     flex: 1;
     gap: var(--sp-5);
     margin-left: var(--sp-5);
   }
-  @media (min-width: 900px) {
-    .awj-header__nav {
-      display: flex;
-    }
-  }
+  @media (min-width: 900px) { .awj-header__nav { display: flex; } }
   .awj-header__link {
     font-family: var(--font-body);
     font-weight: 700;
@@ -90,7 +77,6 @@ const nav = [
   }
   .awj-header__link:hover { border-bottom-color: var(--awj-yellow); }
   .awj-header__link.is-active { border-bottom-color: var(--awj-black); }
-
   .awj-header__cta {
     display: none;
     font-family: var(--font-body);
@@ -108,8 +94,6 @@ const nav = [
   @media (min-width: 720px) {
     .awj-header__cta { display: inline-block; margin-left: auto; }
   }
-
-  /* Mobile menu button */
   .awj-header__menu {
     display: inline-flex;
     flex-direction: column;
@@ -121,19 +105,11 @@ const nav = [
     border: none;
     padding: 0;
   }
-  .awj-header__menu span {
-    display: block;
-    height: 3px;
-    background: var(--awj-black);
-    border-radius: 0;
-  }
-  @media (min-width: 900px) {
-    .awj-header__menu { display: none; }
-  }
+  .awj-header__menu span { display: block; height: 3px; background: var(--awj-black); }
+  @media (min-width: 900px) { .awj-header__menu { display: none; } }
 </style>
 
 <script>
-  // Mobile nav toggle
   const btn = document.getElementById('menu-toggle');
   const nav = document.querySelector('.awj-header__nav') as HTMLElement | null;
   btn?.addEventListener('click', () => {

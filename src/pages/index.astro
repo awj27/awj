@@ -12,7 +12,6 @@ import { PILLAR_META, formatIssueDate, type Pillar as PillarT } from '../lib/uti
 const all = (await getCollection('journal', e => !e.data.draft))
   .sort((a, b) => b.data.awj_number - a.data.awj_number);
 
-// Featured = highest AWJ number with the strongest case (most recent / most canonical)
 const featured = all.find(e => e.data.awj_number === 1) ?? all[0];
 const recent = all.filter(e => e.id !== featured.id).slice(0, 4);
 const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
@@ -21,15 +20,14 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
   title="AWJ — Andy Whyte Journal"
   description="A notebook page that earned the right to be on a billboard. Maxims and essays from Andy Whyte across sales, founding, and being human. One entry every Friday. No noise."
 >
-  {/* HERO — featured maxim */}
+  {/* HERO */}
   <section class="hero">
     <div class="site-shell hero__inner">
       <Eyebrow>Issue {String(featured.data.awj_number).padStart(3, '0')} · Filed {issueDate}</Eyebrow>
       <h1 class="hero__title awj-billboard">
         {(() => {
           const t = featured.data.title;
-          const re = /(uncomfortable)/i;
-          const m = t.match(re);
+          const m = t.match(/(uncomfortable)/i);
           if (!m) return t;
           const idx = m.index!;
           return [t.slice(0, idx), <Hl>{m[0]}</Hl>, t.slice(idx + m[0].length)];
@@ -52,10 +50,10 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
         {(['sales', 'founder', 'human'] as PillarT[]).map((p, i) => {
           const meta = PILLAR_META[p];
           return (
-            <a href={`/pillars/${p}/`} class="pillars__card" style={`background: ${meta.bg}; color: ${meta.fg}`}>
+            <a href={`/pillars/${p}/`} class={`pillars__card pillars__card--${p}`} style={`background-color: ${meta.bg}; color: ${meta.fg}`}>
               <span class="pillars__num">{String(i + 1).padStart(2, '0')} · {meta.tag.toUpperCase()}</span>
               <div>
-                <h3 class="pillars__name awj-display">{meta.label}</h3>
+                <h3 class="pillars__name">{meta.label}</h3>
                 <p class="pillars__blurb">{meta.description}</p>
               </div>
             </a>
@@ -69,18 +67,20 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
   <section class="recent">
     <div class="site-shell">
       <div class="recent__head">
-        <h2 class="awj-display">Recent entries</h2>
+        <h2 class="recent__h">Recent entries</h2>
         <a href="/journal/" class="recent__archive-link">Full archive →</a>
       </div>
       <div class="recent__grid">
         {recent.map(e => (
-          <a href={`/journal/${e.data.slug ?? e.id}/`} class="recent__card">
+          <article class="recent__card">
             <div class="recent__row">
               <Pillar pillar={e.data.pillar} />
               <span class="awj-meta">AWJ #{e.data.awj_number}</span>
             </div>
-            <h3 class="recent__title awj-display">{e.data.title}</h3>
-          </a>
+            <h3 class="recent__title">
+              <a href={`/journal/${e.data.slug ?? e.id}/`}>{e.data.title}</a>
+            </h3>
+          </article>
         ))}
       </div>
     </div>
@@ -91,7 +91,7 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
     <div class="site-shell cta__inner">
       <Scribble src="/assets/scribbles/pen_star_yellow.png" rotate={14} top="30px" right="8%" width={120} />
       <Eyebrow color="#FFCE00">The frictionless path</Eyebrow>
-      <h2 class="cta__title awj-display">
+      <h2 class="cta__title">
         One entry. <Hl>Every Friday.</Hl> No noise.
       </h2>
       <SubscribeForm tone="dark" />
@@ -101,10 +101,7 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
 
 <style>
   .hero { position: relative; border-bottom: var(--border-hard); overflow: hidden; }
-  .hero__inner {
-    padding: var(--sp-9) var(--gutter) var(--sp-8);
-    position: relative;
-  }
+  .hero__inner { padding: var(--sp-9) var(--gutter) var(--sp-8); position: relative; }
   .hero__title { margin-top: var(--sp-4); margin-bottom: var(--sp-7); max-width: 95%; }
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
 
@@ -120,18 +117,22 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
     background: var(--bg-2);
     margin-top: var(--sp-4);
   }
-  @media (min-width: 720px) {
-    .pillars__grid { grid-template-columns: repeat(3, 1fr); }
-  }
+  @media (min-width: 720px) { .pillars__grid { grid-template-columns: repeat(3, 1fr); } }
   .pillars__card {
     padding: var(--sp-6);
-    min-height: 220px;
+    min-height: 240px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     text-decoration: none;
     border-bottom: var(--border-hard);
+    background-size: cover; background-position: center;
+    transition: transform var(--t-fast);
   }
+  .pillars__card--sales   { background-image: url('/assets/textures/paper_yellow.png'); }
+  .pillars__card--founder { background-image: url('/assets/textures/paper_blue.png');   }
+  .pillars__card--human   { background-image: url('/assets/textures/paper_black.png');  }
+  .pillars__card:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--awj-black); }
   .pillars__card:last-child { border-bottom: none; }
   @media (min-width: 720px) {
     .pillars__card { border-bottom: none; border-right: var(--border-hard); }
@@ -141,15 +142,21 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
     font-family: var(--font-mono);
     font-size: 12px;
     letter-spacing: 0.12em;
-    opacity: 0.8;
+    opacity: 0.85;
+    color: inherit;
   }
   .pillars__name {
-    font-size: clamp(40px, 5vw, 88px);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(48px, 5vw, 88px);
     line-height: 0.95;
     margin: 0 0 var(--sp-3);
     overflow-wrap: anywhere;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    color: inherit;
   }
-  .pillars__blurb { font-size: 15px; line-height: 1.5; margin: 0; max-width: 320px; }
+  .pillars__blurb { font-size: 15px; line-height: 1.5; margin: 0; max-width: 320px; color: inherit; opacity: 0.92; }
 
   .recent { padding: var(--sp-8) 0; border-bottom: var(--border-hard); }
   .recent__head {
@@ -160,7 +167,15 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
     margin-bottom: var(--sp-5);
     flex-wrap: wrap;
   }
-  .recent__head h2 { font-size: clamp(32px, 4.5vw, 56px); margin: 0; }
+  .recent__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    font-size: clamp(32px, 4.5vw, 56px);
+    margin: 0;
+    line-height: 1;
+  }
   .recent__archive-link {
     font-family: var(--font-body);
     font-weight: 800;
@@ -174,29 +189,46 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
     grid-template-columns: 1fr;
     border-top: 1px solid var(--rule);
   }
-  @media (min-width: 720px) {
-    .recent__grid { grid-template-columns: 1fr 1fr; }
-  }
+  @media (min-width: 720px) { .recent__grid { grid-template-columns: 1fr 1fr; } }
   .recent__card {
     padding: var(--sp-5) var(--sp-4);
     border-bottom: 1px solid var(--rule);
     color: var(--awj-black);
-    text-decoration: none;
     transition: background var(--t-fast);
     display: flex;
     flex-direction: column;
     gap: var(--sp-3);
   }
-  .recent__card:hover { background: rgba(255,206,0,0.18); }
-  @media (min-width: 720px) {
-    .recent__card:nth-child(odd) { border-right: 1px solid var(--rule); }
+  .recent__card:hover { background: rgba(255,206,0,0.12); }
+  @media (min-width: 720px) { .recent__card:nth-child(odd) { border-right: 1px solid var(--rule); } }
+  .recent__row { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; }
+  .recent__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(24px, 3.4vw, 40px);
+    line-height: 1.02;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    overflow-wrap: anywhere;
   }
-  .recent__row { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
-  .recent__title { font-size: clamp(24px, 3.4vw, 40px); line-height: 1; margin: 0; overflow-wrap: anywhere; }
+  .recent__title a {
+    color: inherit;
+    text-decoration: none;
+    background-image: linear-gradient(to bottom, transparent 88%, var(--awj-black) 88%, var(--awj-black) 95%, transparent 95%);
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    transition: background-size var(--t-base) var(--ease-out);
+  }
+  .recent__title a:hover { background-size: 100% 100%; }
 
   .cta { position: relative; overflow: hidden; }
   .cta__inner { padding: var(--sp-9) var(--gutter); position: relative; }
   .cta__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
     font-size: clamp(40px, 7vw, 96px);
     line-height: 1;
     margin: var(--sp-3) 0 var(--sp-6);

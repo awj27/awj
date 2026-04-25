@@ -3,93 +3,167 @@ import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Hl from '../components/Hl.astro';
 import Btn from '../components/Btn.astro';
+import Gallery from '../components/Gallery.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
+
+const galleryImages = [
+  { src: '/media/gallery/DSC03093-scaled.webp',   alt: 'Andy Whyte, CEO and Founder of MEDDICC' },
+  { src: '/media/gallery/DSC03017-2.webp',        alt: 'Andy Whyte portrait' },
+  { src: '/media/gallery/DSC03060-scaled.jpg',    alt: 'Andy Whyte speaking on stage' },
+  { src: '/media/gallery/DSC02799-2-scaled.webp', alt: 'Andy Whyte at a keynote' },
+  { src: '/media/gallery/DSC03231.webp',          alt: 'Andy Whyte candid' },
+  { src: '/media/gallery/DSC02731-2-scaled.webp', alt: 'Andy Whyte off-stage' },
+  { src: '/media/gallery/DSC02886-scaled.webp',   alt: 'Andy Whyte portrait' },
+];
 ---
 <Layout
   title="About — AWJ"
-  description="Andy Whyte. Founder/CEO, best-selling author, dad, human. Outcome-oriented, results-driven. MEDDIC superfan."
+  description="Andy Whyte. Founder/CEO of MEDDICC, best-selling author, MEDDPICC superfan. Why AWJ exists."
 >
-  <section class="about-hero">
-    <div class="site-shell about-hero__inner">
-      <div class="about-hero__copy">
+  {/* HERO */}
+  <section class="ab-hero">
+    <div class="site-shell ab-hero__inner">
+      <div class="ab-hero__copy">
         <Eyebrow>Who is this?</Eyebrow>
-        <h1 class="about-hero__title awj-display">
+        <h1 class="ab-hero__title">
           Andy Whyte. <Hl>Founder/CEO</Hl>, best-selling author, dad, human.
         </h1>
-        <p class="about-hero__lead">Outcome-oriented, results-driven. MEDDIC superfan.</p>
+        <p class="ab-hero__lead">Outcome-oriented, results-driven. MEDDIC superfan.</p>
       </div>
-      <div class="about-hero__photo">
-        <img src="/assets/images/andy_headshot_cutout.png" alt="Andy Whyte" loading="eager" />
+      <div class="ab-hero__photo">
+        <img src="/media/gallery/DSC03093-scaled.webp" alt="Andy Whyte" loading="eager" decoding="async" />
       </div>
     </div>
   </section>
 
-  <section class="manifesto content-shell">
-    <div class="prose">
-      <h2>Why this exists.</h2>
-      <p>AWJ — the Andy Whyte Journal — is a personal intellectual operating system, expressed publicly. It's closer to a Munger notebook than a creator brand. The product is the thinking, not the personality.</p>
+  {/* BIO — real text, in Andy's voice */}
+  <section class="ab-bio">
+    <div class="content-shell prose">
+      <h2>From B-player to founder.</h2>
+      <p>I'm the founder and CEO of MEDDICC, but before that, I spent 17 years as an individual contributor and sales leader.</p>
+      <p>There was a time early in my career when I felt like no matter how much work I put in, I was playing sales on hard mode while everyone around me was playing it on easy mode.</p>
+      <p>That was when I discovered MEDDIC and unlocked my full potential as a salesperson. It was like I went from a B-player version of myself to the A-player version.</p>
+      <p>I realised that while the best organisations I knew all used MEDDIC, nobody was talking about it. I started to write about it, and quickly found a keen audience.</p>
+      <p>Blog posts turned into a book, and the book turned into a bestseller.</p>
+      <p>Today, MEDDICC has helped over <strong>100,000 people</strong> level up using MEDDPICC.</p>
+    </div>
+  </section>
 
-      <h2>Three pillars.</h2>
+  {/* GALLERY */}
+  <section class="ab-gallery">
+    <div class="site-shell">
+      <Eyebrow>In the wild</Eyebrow>
+      <h2 class="ab-gallery__h">Photos.</h2>
+    </div>
+    <div class="ab-gallery__grid">
+      <Gallery images={galleryImages} />
+    </div>
+  </section>
+
+  {/* THREE PILLARS — the WHY for AWJ */}
+  <section class="ab-pillars">
+    <div class="content-shell prose">
+      <h2>Why AWJ exists.</h2>
+      <p>AWJ is a notebook page that earned the right to be on a billboard. It's the public form of the journal I've kept in private — applied thinking from someone who's done both the work and the worrying.</p>
+      <p>Three pillars:</p>
       <p><strong>Sales — authority.</strong> MEDDICC, deal inspection, sales as a thinking discipline.</p>
       <p><strong>Founder — operator.</strong> Bootstrap SaaS, trade-offs under uncertainty, no theatre.</p>
       <p><strong>Human — truth.</strong> Controlled lessons from failure. The quality of your thinking determines the quality of your life.</p>
-
-      <h2>What this isn't.</h2>
-      <p>Not hustle culture. Not build-in-public noise. Not performative vulnerability. Not generic corporate polish. Not safe.</p>
-
-      <hr />
-
       <p>If that resonates, the journal arrives Fridays.</p>
     </div>
-    <div class="manifesto__cta">
-      <Btn href="/subscribe/" tone="dark">Subscribe to the journal</Btn>
-      <Btn href="/journal/" tone="ghost">Read the archive</Btn>
+    <div class="ab-pillars__cta">
+      <Btn href="/journal/" tone="dark">Read the archive</Btn>
+      <Btn href="/subscribe/" tone="ghost">Subscribe</Btn>
+    </div>
+  </section>
+
+  {/* SUBSCRIBE STRIP */}
+  <section class="ab-sub awj-bg-paper-blue">
+    <div class="site-shell ab-sub__inner">
+      <Eyebrow color="#FFCE00">Frictionless</Eyebrow>
+      <h2 class="ab-sub__h">One entry. <Hl>Every Friday.</Hl> No noise.</h2>
+      <SubscribeForm tone="dark" />
     </div>
   </section>
 </Layout>
 
 <style>
-  .about-hero { padding: var(--sp-9) 0 var(--sp-7); border-bottom: var(--border-hard); }
-  .about-hero__inner {
+  .ab-hero { padding: var(--sp-9) 0 var(--sp-7); border-bottom: var(--border-hard); }
+  .ab-hero__inner {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-7);
     align-items: center;
+    padding: 0 var(--gutter);
   }
-  @media (min-width: 900px) {
-    .about-hero__inner { grid-template-columns: 1.5fr 1fr; }
-  }
-  .about-hero__title {
+  @media (min-width: 900px) { .ab-hero__inner { grid-template-columns: 1.4fr 1fr; } }
+  .ab-hero__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    line-height: 0.95;
     font-size: clamp(40px, 6.5vw, 96px);
     margin: var(--sp-3) 0 var(--sp-5);
-    line-height: 0.95;
   }
-  .about-hero__lead {
+  .ab-hero__lead {
     font-family: var(--font-body);
     font-size: var(--fs-body-lg);
     margin: 0;
     color: var(--fg-2);
   }
-  .about-hero__photo {
+  .ab-hero__photo {
+    border: var(--border-hard);
     background: var(--awj-yellow);
     background-image: url('/assets/textures/paper_yellow.png');
     background-size: cover;
-    border: var(--border-hard);
     aspect-ratio: 1;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
     overflow: hidden;
   }
-  .about-hero__photo img {
-    width: 90%;
-    height: auto;
+  .ab-hero__photo img {
+    width: 100%; height: 100%; object-fit: cover;
     filter: grayscale(1) contrast(1.05);
   }
-  .manifesto { padding: var(--sp-8) var(--gutter) var(--sp-9); }
-  .manifesto__cta {
+
+  .ab-bio { padding: var(--sp-8) 0 var(--sp-7); }
+  .ab-bio .prose { padding: 0 var(--gutter); }
+
+  .ab-gallery { padding: var(--sp-7) 0 var(--sp-9); }
+  .ab-gallery .site-shell { padding-bottom: var(--sp-5); }
+  .ab-gallery__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 5vw, 80px);
+    margin: var(--sp-2) 0 0;
+    line-height: 0.95;
+    letter-spacing: -0.005em;
+  }
+  .ab-gallery__grid { padding: 0 var(--gutter); }
+
+  .ab-pillars { padding: var(--sp-8) 0 var(--sp-9); border-top: var(--border-hard); }
+  .ab-pillars .prose { padding: 0 var(--gutter); }
+  .ab-pillars__cta {
     margin-top: var(--sp-7);
     display: flex;
     gap: var(--sp-3);
     flex-wrap: wrap;
+    padding: 0 var(--gutter);
+    max-width: var(--content-max);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ab-sub { position: relative; overflow: hidden; }
+  .ab-sub__inner { padding: var(--sp-9) var(--gutter); position: relative; max-width: var(--site-max); margin: 0 auto; }
+  .ab-sub__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 7vw, 96px);
+    line-height: 1;
+    margin: var(--sp-3) 0 var(--sp-6);
+    color: var(--awj-white);
+    max-width: 18ch;
   }
 </style>

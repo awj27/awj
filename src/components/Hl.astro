@@ -5,12 +5,45 @@ const { tone = 'yellow' } = Astro.props;
 <span class={`awj-hl awj-hl--${tone}`}><slot /></span>
 
 <style>
+  /* Real-highlighter behaviour: a horizontal stripe of colour BEHIND the text,
+     constrained to the cap-height zone so it never bleeds into adjacent lines.
+     Using a linear-gradient (not background-color) lets us control vertical
+     positioning precisely regardless of line-height. */
   .awj-hl {
-    padding: 0.04em 0.18em 0.0em;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    padding: 0 0.05em;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
   }
-  .awj-hl--yellow { background: var(--awj-yellow); color: var(--awj-black); }
-  .awj-hl--red    { background: var(--awj-red);    color: var(--awj-white); }
-  .awj-hl--black  { background: var(--awj-black);  color: var(--awj-white); }
+  .awj-hl--yellow {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 28%,
+      var(--awj-yellow) 28%,
+      var(--awj-yellow) 92%,
+      transparent 92%
+    );
+    color: var(--awj-black);
+  }
+  .awj-hl--red {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 28%,
+      var(--awj-red) 28%,
+      var(--awj-red) 92%,
+      transparent 92%
+    );
+    color: var(--awj-white);
+  }
+  .awj-hl--black {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 28%,
+      var(--awj-black) 28%,
+      var(--awj-black) 92%,
+      transparent 92%
+    );
+    color: var(--awj-white);
+  }
 </style>

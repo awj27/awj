@@ -1,0 +1,51 @@
+---
+interface Props { images: { src: string; alt: string }[]; }
+const { images } = Astro.props;
+---
+<div class="awj-gallery">
+  {images.map((img, i) => {
+    // Vary tile height by index for a magazine-style asymmetric grid
+    const big = (i % 7 === 0 || i % 7 === 4);
+    const tall = (i % 5 === 1);
+    return (
+      <figure class={`awj-gallery__tile ${big ? 'is-big' : ''} ${tall ? 'is-tall' : ''}`}>
+        <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
+      </figure>
+    );
+  })}
+</div>
+
+<style>
+  .awj-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+  }
+  @media (min-width: 600px) {
+    .awj-gallery { grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+  }
+  @media (min-width: 1000px) {
+    .awj-gallery {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 240px;
+      gap: var(--sp-4);
+    }
+    .awj-gallery__tile.is-big { grid-column: span 2; grid-row: span 2; }
+    .awj-gallery__tile.is-tall { grid-row: span 2; }
+  }
+  .awj-gallery__tile {
+    margin: 0;
+    overflow: hidden;
+    border: var(--border-hard);
+    background: var(--awj-paper);
+    aspect-ratio: 4 / 3;
+  }
+  @media (min-width: 1000px) {
+    .awj-gallery__tile { aspect-ratio: auto; height: 100%; }
+  }
+  .awj-gallery__tile img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform var(--t-base) var(--ease-out);
+  }
+  .awj-gallery__tile:hover img { transform: scale(1.04); }
+</style>

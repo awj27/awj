@@ -3,44 +3,239 @@ import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Btn from '../components/Btn.astro';
 import Hl from '../components/Hl.astro';
+import Scribble from '../components/Scribble.astro';
+
+const services = [
+  { icon: '/media/icons/keynote-icon.webp', title: 'Keynote',           blurb: 'A 30–60 minute talk built around the MEDDICC framework — the principles, the failure modes, and the patterns that separate A-players from theatre.' },
+  { icon: '/media/icons/sko-icon.webp',     title: 'Sales Kick-Off',     blurb: 'A bespoke session for your team’s SKO — designed around your deals, your stage gates, your objection patterns. Goes deeper than a generic keynote.' },
+  { icon: '/media/icons/mc-icon.webp',      title: 'Master of Ceremonies', blurb: 'Host your event end-to-end. Set the tone, hold the energy, conduct the panels, deliver the close. Best for SKOs and revenue summits.' },
+];
+
+const testimonials = [
+  { photo: '/media/clients/Michael.webp', name: 'Michael Sentonas', role: 'President, CrowdStrike',
+    quote: 'Andy is one of the few keynote speakers who can hold a room of senior revenue leaders and leave them with something they can use Monday morning.' },
+  { photo: '/media/clients/Susan.webp', name: 'Susan Kinser', role: 'EVP, Net Health',
+    quote: 'We brought Andy in for our SKO and the impact lasted well beyond the stage. The framework actually changed how our team inspects deals.' },
+  { photo: '/media/clients/1621958247894.webp', name: 'Mandira Mehra', role: 'CMO, MRI Software',
+    quote: 'Energetic, sharp, and grounded in real practice. Andy doesn’t recycle slides — every keynote is built for the audience in front of him.' },
+  { photo: '/media/clients/Hannah.webp', name: 'Hannah Klug', role: 'VP, Arctic Wolf Networks',
+    quote: 'The MEDDICC keynote landed at exactly the right moment for our team. Practical, opinionated, and refreshingly direct.' },
+  { photo: '/media/clients/Adeeb.webp', name: 'Adeeb Chowdhury', role: 'Sales Leader, CrowdStrike',
+    quote: 'A rare speaker who is both authoritative and accessible. Our reps left the SKO with a sharper way of thinking about every deal.' },
+  { photo: '/media/clients/Deanna.webp', name: 'Deanna Kane', role: 'Account Executive',
+    quote: 'I’d watched MEDDICC content for years; Andy’s session was the moment it finally clicked into how I run my own pipeline.' },
+];
+
+const logos = [
+  { src: '/media/clients/CS_Logo_2022_In-Line_All-Red_RGB_1.png',   alt: 'CrowdStrike' },
+  { src: '/media/clients/Microsoft_logo.webp',                       alt: 'Microsoft' },
+  { src: '/media/clients/ArcticWolf-logo.webp',                      alt: 'Arctic Wolf Networks' },
+  { src: '/media/clients/Dun_and_Bradstreet_wordmark.svg.webp',      alt: 'Dun & Bradstreet' },
+];
 ---
 <Layout
   title="Speaking — AWJ"
-  description="Keynotes and SKO sessions on sales, MEDDICC, and operator-grade decision-making."
+  description="Keynotes, SKO sessions, and MC services from Andy Whyte. MEDDICC at full operating depth."
 >
+  {/* HERO */}
   <section class="sp-hero">
-    <div class="site-shell">
-      <Eyebrow>Keynotes & SKO</Eyebrow>
-      <h1 class="sp-hero__title awj-display">
+    <div class="site-shell sp-hero__inner">
+      <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="6%" width={120} />
+      <Eyebrow>Keynotes & SKOs</Eyebrow>
+      <h1 class="sp-hero__title">
         Keynotes that <Hl>change the deal,</Hl> not the slide.
       </h1>
-      <p class="sp-hero__sub">In-person and virtual sessions on MEDDICC, deal inspection, and the sales discipline that compounds.</p>
+      <p class="sp-hero__sub">In-person and virtual sessions on MEDDICC, deal inspection, and the sales discipline that compounds. Built for the audience in front of me, not recycled from a deck.</p>
       <div class="sp-hero__actions">
         <Btn href="/contact/?topic=speaking" tone="dark">Enquire about speaking</Btn>
       </div>
     </div>
   </section>
 
-  <section class="sp-pillars content-shell">
-    <div class="prose">
-      <h2>What I speak about.</h2>
-      <p><strong>The MEDDICC keynote.</strong> The framework, the failure modes, the pattern that separates A-players from theatre. Best for SKOs, sales leadership offsites, and revenue ops summits.</p>
-      <p><strong>Deal inspection as a thinking discipline.</strong> How to inspect <em>the deal, not the rep</em>. Built for sales managers who want their team to find the truth in a pipeline.</p>
-      <p><strong>The operator-and-theorist.</strong> Cross-pillar talk on bootstrapped SaaS, decision-making under uncertainty, and the maxims that show up in both founder and sales work.</p>
+  {/* CLIENT LOGOS */}
+  <section class="sp-logos">
+    <div class="site-shell">
+      <Eyebrow>Recent stages</Eyebrow>
+      <ul class="sp-logos__row">
+        {logos.map(l => (
+          <li class="sp-logos__item">
+            <img src={l.src} alt={l.alt} loading="lazy" decoding="async" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
-      <h2>Past audiences.</h2>
-      <p>Sales kick-offs (SKO) for global revenue teams. Industry summits. Internal leadership offsites. Audiences from 30 to 3,000.</p>
+  {/* SERVICES */}
+  <section class="sp-services">
+    <div class="site-shell">
+      <Eyebrow>Three formats</Eyebrow>
+      <h2 class="sp-services__h">What I do.</h2>
+      <ul class="sp-services__grid">
+        {services.map(s => (
+          <li class="sp-svc">
+            <img src={s.icon} alt="" class="sp-svc__icon" loading="lazy" />
+            <h3 class="sp-svc__title">{s.title}</h3>
+            <p class="sp-svc__blurb">{s.blurb}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
-      <h2>Format.</h2>
-      <p>30 / 45 / 60-minute keynote. Optional 30-minute Q&amp;A. Travels. Virtual when virtual makes sense.</p>
+  {/* VIDEO REEL placeholder — Andy to provide a YouTube reel URL */}
+  <section class="sp-reel">
+    <div class="content-shell">
+      <Eyebrow>On stage</Eyebrow>
+      <h2 class="sp-reel__h">Watch a keynote.</h2>
+      <p class="sp-reel__sub">A snapshot of recent stages — delivery, voice, and the way a MEDDICC keynote actually feels.</p>
+      <div class="sp-reel__frame">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/videoseries?list=PLC1FQzUiRjxj4x4yGTnMBqBbIfxArEMqs"
+          title="Andy Whyte — keynote and Maxim videos"
+          loading="lazy"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  {/* TESTIMONIALS */}
+  <section class="sp-testimonials">
+    <div class="site-shell">
+      <Eyebrow>From the room</Eyebrow>
+      <h2 class="sp-testimonials__h">What people say.</h2>
+      <ul class="sp-testimonials__grid">
+        {testimonials.map((t, i) => (
+          <li class={`sp-quote sp-quote--${i % 4}`}>
+            <p class="sp-quote__text">"{t.quote}"</p>
+            <div class="sp-quote__byline">
+              <img src={t.photo} alt={t.name} class="sp-quote__photo" loading="lazy" />
+              <div>
+                <span class="sp-quote__name">{t.name}</span>
+                <span class="sp-quote__role">{t.role}</span>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* CTA */}
+  <section class="sp-cta awj-bg-paper-black">
+    <div class="site-shell sp-cta__inner">
+      <Eyebrow color="#FFCE00">Booking</Eyebrow>
+      <h2 class="sp-cta__h">Bring this to your team.</h2>
+      <p class="sp-cta__body">For SKOs, leadership offsites, and revenue summits. Available in-person globally and virtually.</p>
+      <Btn href="/contact/?topic=speaking" tone="yellow">Enquire about speaking</Btn>
     </div>
   </section>
 </Layout>
 
 <style>
-  .sp-hero { padding: var(--sp-9) 0; border-bottom: var(--border-hard); }
-  .sp-hero__title { font-size: clamp(40px, 7vw, 112px); margin: var(--sp-3) 0 var(--sp-5); }
+  .sp-hero { padding: var(--sp-9) 0 var(--sp-8); border-bottom: var(--border-hard); position: relative; overflow: hidden; }
+  .sp-hero__inner { padding: 0 var(--gutter); position: relative; }
+  .sp-hero__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 7vw, 112px);
+    line-height: 0.95;
+    letter-spacing: -0.005em;
+    margin: var(--sp-3) 0 var(--sp-5);
+  }
   .sp-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0 0 var(--sp-6); max-width: 60ch; }
   .sp-hero__actions { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
-  .sp-pillars { padding: var(--sp-8) var(--gutter); }
+
+  .sp-logos { padding: var(--sp-7) 0; border-bottom: 1px solid var(--rule); }
+  .sp-logos__row {
+    list-style: none; padding: 0; margin: var(--sp-4) 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-5);
+    align-items: center;
+  }
+  @media (min-width: 720px) { .sp-logos__row { grid-template-columns: repeat(4, 1fr); } }
+  .sp-logos__item { display: flex; justify-content: center; }
+  .sp-logos__item img { max-height: 56px; max-width: 100%; width: auto; opacity: 0.85; filter: grayscale(0.6); transition: opacity var(--t-fast), filter var(--t-fast); }
+  .sp-logos__item img:hover { opacity: 1; filter: grayscale(0); }
+
+  .sp-services { padding: var(--sp-8) 0; border-bottom: 1px solid var(--rule); }
+  .sp-services__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 5vw, 80px);
+    margin: var(--sp-2) 0 var(--sp-6);
+    line-height: 1;
+    letter-spacing: -0.005em;
+  }
+  .sp-services__grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr; gap: var(--sp-5); }
+  @media (min-width: 720px) { .sp-services__grid { grid-template-columns: repeat(3, 1fr); } }
+  .sp-svc { padding: var(--sp-6); border: var(--border-hard); background: var(--awj-white); }
+  .sp-svc__icon { width: 56px; height: 56px; object-fit: contain; margin-bottom: var(--sp-4); }
+  .sp-svc__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(28px, 3vw, 36px);
+    margin: 0 0 var(--sp-3);
+    line-height: 1;
+    letter-spacing: -0.005em;
+  }
+  .sp-svc__blurb { font-size: 15px; line-height: 1.55; margin: 0; color: var(--fg-2); }
+
+  .sp-reel { padding: var(--sp-8) var(--gutter); }
+  .sp-reel__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 5vw, 80px);
+    margin: var(--sp-2) 0 var(--sp-3);
+    line-height: 1;
+    letter-spacing: -0.005em;
+  }
+  .sp-reel__sub { font-size: var(--fs-body); color: var(--fg-2); margin: 0 0 var(--sp-5); max-width: 56ch; }
+  .sp-reel__frame { position: relative; width: 100%; aspect-ratio: 16 / 9; background: var(--awj-black); border: var(--border-hard); overflow: hidden; }
+  .sp-reel__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  .sp-testimonials { padding: var(--sp-8) 0; border-top: var(--border-hard); }
+  .sp-testimonials__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 5vw, 80px);
+    margin: var(--sp-2) 0 var(--sp-6);
+    line-height: 1;
+    letter-spacing: -0.005em;
+  }
+  .sp-testimonials__grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr; gap: var(--sp-5); }
+  @media (min-width: 720px) { .sp-testimonials__grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1100px) { .sp-testimonials__grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .sp-quote { padding: var(--sp-6); border: var(--border-hard); background: var(--awj-white); display: flex; flex-direction: column; gap: var(--sp-5); }
+  .sp-quote--1 { background: var(--awj-yellow); background-image: url('/assets/textures/paper_yellow.png'); background-size: cover; }
+  .sp-quote--3 { background: var(--awj-paper); background-image: url('/assets/textures/paper_white.png'); background-size: cover; }
+  .sp-quote__text { font-family: var(--font-body); font-size: 17px; line-height: 1.55; margin: 0; flex: 1; color: var(--awj-black); }
+  .sp-quote__byline { display: flex; align-items: center; gap: var(--sp-3); }
+  .sp-quote__photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--awj-black); filter: grayscale(1); }
+  .sp-quote__name { display: block; font-weight: 700; font-size: 14px; color: var(--awj-black); }
+  .sp-quote__role { display: block; font-size: 12px; color: var(--fg-2); }
+
+  .sp-cta { position: relative; overflow: hidden; }
+  .sp-cta__inner { padding: var(--sp-9) var(--gutter); position: relative; max-width: var(--site-max); margin: 0 auto; }
+  .sp-cta__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 6vw, 96px);
+    line-height: 1;
+    margin: var(--sp-3) 0 var(--sp-4);
+    color: var(--awj-white);
+    max-width: 16ch;
+  }
+  .sp-cta__body { color: var(--awj-grey-300); font-size: var(--fs-body-lg); margin: 0 0 var(--sp-6); max-width: 50ch; }
 </style>
