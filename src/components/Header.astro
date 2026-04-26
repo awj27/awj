@@ -15,7 +15,8 @@ const nav = [
 <header class="awj-header">
   <div class="site-shell awj-header__inner">
     <a href="/" class="awj-header__brand" aria-label="Andy Whyte Journal — home">
-      <img src="/assets/logos/awj_alt_logo_blue.png" alt="AWJ — Andy Whyte Journal" />
+      <img src="/assets/logos/awj_submark_black.png" alt="AWJ" class="awj-header__mark" width="56" height="56" />
+      <span class="awj-header__wordmark">Andy Whyte Journal</span>
     </a>
 
     <nav class="awj-header__nav" aria-label="Primary">
@@ -57,15 +58,29 @@ const nav = [
   .awj-header__brand {
     display: flex;
     align-items: center;
+    gap: var(--sp-3);
     flex-shrink: 0;
+    text-decoration: none;
+    color: var(--awj-black);
   }
-  .awj-header__brand img {
-    height: 56px;
-    width: auto;
+  .awj-header__mark {
+    width: 48px;
+    height: 48px;
     display: block;
   }
   @media (min-width: 720px) {
-    .awj-header__brand img { height: 64px; }
+    .awj-header__mark { width: 56px; height: 56px; }
+  }
+  .awj-header__wordmark {
+    display: none;
+    font-family: var(--font-marker);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--awj-black);
+  }
+  @media (min-width: 720px) {
+    .awj-header__wordmark { display: inline; font-size: 24px; }
   }
 
   .awj-header__nav {

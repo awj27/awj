@@ -138,33 +138,38 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
     height: 100%;
     width: 100%;
     object-fit: cover;
-    object-position: 70% 18%;     /* shows Andy's face/upper body */
-    filter: grayscale(1) contrast(1.05) brightness(0.95);
-    /* Soft mask so the photo's left edge fades into the paper */
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 18%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.95) 70%, black 100%);
-            mask-image: linear-gradient(to right, transparent 0%, transparent 18%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.95) 70%, black 100%);
+    object-position: 70% 18%;
+    filter: grayscale(1) contrast(1.04) brightness(0.95);
+    /* `screen` blend lifts only the brighter parts of the photo over the
+       paper, so the paper crinkles/texture remain visible everywhere
+       and Andy's face emerges from within the paper. */
+    mix-blend-mode: screen;
+    /* Mask so the photo only contributes on the right side, not full-bleed */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 22%, rgba(0,0,0,0.4) 42%, rgba(0,0,0,0.85) 65%, black 90%);
+            mask-image: linear-gradient(to right, transparent 0%, transparent 22%, rgba(0,0,0,0.4) 42%, rgba(0,0,0,0.85) 65%, black 90%);
   }
-  /* Extra darken on the left so text always wins for legibility */
+  /* Very light vignette on the left only — preserves paper texture, just
+     ensures the Maxim text wins. Much subtler than before. */
   .hero__bg-fade {
     position: absolute;
     inset: 0;
     background:
       linear-gradient(to right,
-        rgba(10,10,10,0.96) 0%,
-        rgba(10,10,10,0.85) 30%,
-        rgba(10,10,10,0.45) 55%,
+        rgba(10,10,10,0.55) 0%,
+        rgba(10,10,10,0.30) 25%,
+        rgba(10,10,10,0.05) 55%,
         rgba(10,10,10,0.0)  80%);
   }
 
-  /* Mobile: photo is much less prominent; let text dominate */
+  /* Mobile: photo even more subtle, paper dominates */
   @media (max-width: 720px) {
-    .hero__bg-portrait { object-position: 65% 12%; opacity: 0.55; }
+    .hero__bg-portrait { object-position: 65% 12%; opacity: 0.7; }
     .hero__bg-fade {
       background:
         linear-gradient(to bottom,
-          rgba(10,10,10,0.55) 0%,
-          rgba(10,10,10,0.85) 60%,
-          rgba(10,10,10,0.96) 100%);
+          rgba(10,10,10,0.0)  0%,
+          rgba(10,10,10,0.2)  60%,
+          rgba(10,10,10,0.45) 100%);
     }
   }
 
