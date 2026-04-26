@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Hl from '../components/Hl.astro';
+import Btn from '../components/Btn.astro';
+import Scribble from '../components/Scribble.astro';
+---
+<Layout
+  title="Not found — AWJ"
+  description="The page you wanted is not here."
+  noIndex={true}
+>
+  <section class="nf">
+    <div class="site-shell nf__inner">
+      <Scribble src="/assets/scribbles/scribble_red.png" rotate={-8} top="40px" right="6%" width={140} />
+      <Eyebrow>404</Eyebrow>
+      <h1 class="nf__title">
+        Not every URL earns the right to <Hl tone="red">stay</Hl>.
+      </h1>
+      <p class="nf__sub">This one moved, was retired, or was never written. Try one of these instead.</p>
+
+      <div class="nf__actions">
+        <Btn href="/maxims/" tone="dark">The archive</Btn>
+        <Btn href="/journal/nobody-regrets-qualifying-out/" tone="yellow">Latest entry</Btn>
+        <Btn href="/" tone="ghost">Home</Btn>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .nf {
+    padding: var(--sp-9) 0 var(--sp-9);
+    border-bottom: var(--border-hard);
+    position: relative;
+    overflow: hidden;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+  .nf__inner { padding: 0 var(--gutter); position: relative; max-width: 900px; }
+  .nf__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    font-size: clamp(48px, 7vw, 112px);
+    margin: var(--sp-3) 0 var(--sp-5);
+    line-height: 0.95;
+  }
+  .nf__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0 0 var(--sp-7); max-width: 60ch; }
+  .nf__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+</style>
