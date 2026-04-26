@@ -5,8 +5,6 @@ slug: authenticity-is-felt-not-found
 pillar: human
 date: 2025-11-29
 modified: 2025-11-29
-video_id: N_HmHeTpm7Q
-video_url: https://www.youtube.com/watch?v=N_HmHeTpm7Q
 original_wp_url: https://andywhyte.com/portfolios/awj-9-authenticity-is-felt-not-found/
 original_wp_id: 15401
 ---
