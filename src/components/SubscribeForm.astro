@@ -1,34 +1,31 @@
 ---
-// Substack iframe embed — the only sanctioned way to subscribe from another
-// domain. Substack's API blocks server-to-server POSTs (returns 403 via
-// their Cloudflare bot management). The iframe loads on substack.com so
-// their CF challenge passes naturally and the form works for end users.
+// Substack has blocked every cross-domain pattern: API POST (403),
+// iframe embed (X-Frame-Options), URL email prefill (ignored), and they
+// deprecated their official widget. The only honest UX is to link out.
 //
-// We can't style the form INSIDE the iframe (cross-origin), but the AWJ
-// frame around it is fully customised.
+// This component is a beautiful AWJ-styled CTA that takes the reader
+// directly to Substack to subscribe. No fake form, no false promise.
+//
+// If we switch newsletter providers (Buttondown, Beehiiv, Kit), this
+// component becomes a real inline form with no other changes needed
+// elsewhere on the site.
 
 interface Props { tone?: 'light' | 'dark' | 'yellow'; compact?: boolean; }
 const { tone = 'light', compact = false } = Astro.props;
+const SUBSCRIBE_URL = 'https://andywhyte.substack.com/subscribe';
 ---
 <div class={`awj-subscribe awj-subscribe--${tone}`}>
   {!compact && (
     <p class="awj-subscribe__pitch">
       <strong>One entry. Every Friday. No noise.</strong>
-      <span> Join the journal — your email goes straight to Substack.</span>
+      <span> The journal arrives by email — hosted on Substack, no spam.</span>
     </p>
   )}
-  <div class="awj-subscribe__frame">
-    <iframe
-      src="https://andywhyte.substack.com/embed"
-      title="Subscribe to Andy Whyte Journal"
-      loading="lazy"
-      frameborder="0"
-      scrolling="no"
-      width="100%"
-      height="150"
-    ></iframe>
-  </div>
-  <p class="awj-subscribe__fineprint">No spam. One email a week. Unsubscribe whenever.</p>
+  <a href={SUBSCRIBE_URL} class="awj-subscribe__btn" rel="noopener">
+    Subscribe on Substack
+    <span aria-hidden="true">→</span>
+  </a>
+  <p class="awj-subscribe__fineprint">Free, weekly, unsubscribe anytime.</p>
 </div>
 
 <style>
@@ -37,7 +34,7 @@ const { tone = 'light', compact = false } = Astro.props;
     font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.5;
-    margin: 0 0 var(--sp-3);
+    margin: 0 0 var(--sp-4);
     color: inherit;
   }
   .awj-subscribe__pitch strong {
@@ -48,23 +45,32 @@ const { tone = 'light', compact = false } = Astro.props;
     display: block;
     margin-bottom: 4px;
   }
-  .awj-subscribe__frame {
+  .awj-subscribe__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    background: var(--awj-black);
+    color: var(--awj-white);
     border: var(--border-hard);
-    background: var(--awj-white);
-    overflow: hidden;
+    text-decoration: none;
+    transition: background var(--t-fast), color var(--t-fast), transform var(--t-fast);
   }
-  .awj-subscribe__frame iframe {
-    display: block;
-    width: 100%;
-    border: 0;
-  }
-  .awj-subscribe__fineprint { margin: var(--sp-3) 0 0; font-size: 12px; color: var(--fg-3); opacity: 0.85; }
+  .awj-subscribe__btn:hover { background: var(--awj-yellow); color: var(--awj-black); }
+  .awj-subscribe__btn:active { transform: translateY(1px); }
+  .awj-subscribe__fineprint { margin: var(--sp-3) 0 0; font-size: 12px; color: var(--fg-3); }
 
-  /* Surface variants — these adjust the wrapper context, not the iframe itself */
+  /* Surface variants */
   .awj-subscribe--dark .awj-subscribe__pitch { color: var(--awj-white); }
   .awj-subscribe--dark .awj-subscribe__pitch strong { color: var(--awj-yellow); }
   .awj-subscribe--dark .awj-subscribe__fineprint { color: rgba(255,255,255,0.7); }
-  .awj-subscribe--dark .awj-subscribe__frame { border-color: var(--awj-yellow); }
+  .awj-subscribe--dark .awj-subscribe__btn { background: var(--awj-yellow); color: var(--awj-black); border-color: var(--awj-yellow); }
+  .awj-subscribe--dark .awj-subscribe__btn:hover { background: var(--awj-white); color: var(--awj-black); border-color: var(--awj-white); }
 
-  .awj-subscribe--yellow .awj-subscribe__frame { border-color: var(--awj-black); }
+  .awj-subscribe--yellow .awj-subscribe__btn { background: var(--awj-black); color: var(--awj-white); }
 </style>
