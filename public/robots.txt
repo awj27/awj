@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.andywhyte.com/sitemap-index.xml
+Sitemap: https://andywhyte.com/sitemap-index.xml

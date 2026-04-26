@@ -184,14 +184,9 @@ const initialTopic = topics.find(t => t.toLowerCase().includes(topic.toLowerCase
 </style>
 
 <script>
-  // The form posts to Web3Forms — a free, unlimited, no-account-needed form
-  // backend. Andy needs to plug in his access key. Until then, the form
-  // gracefully falls back to opening the user's mail client (mailto:).
-  //
-  // To activate Web3Forms: sign up at https://web3forms.com (30 sec, just
-  // verifies an email), copy your access key, replace WEB3FORMS_KEY below.
-  const WEB3FORMS_KEY = ''; // <-- Andy: paste your Web3Forms access key here
-
+  // Form posts to /api/contact — a Cloudflare Pages Function that emails
+  // hello@andywhyte.com via Resend. See functions/api/contact.ts for the
+  // server logic and required env vars.
   const form = document.getElementById('ct-form') as HTMLFormElement | null;
   const msg = document.getElementById('ct-msg') as HTMLElement | null;
   const btn = document.getElementById('ct-submit') as HTMLButtonElement | null;
@@ -201,7 +196,8 @@ const initialTopic = topics.find(t => t.toLowerCase().includes(topic.toLowerCase
     if (!form || !msg || !btn) return;
 
     const fd = new FormData(form);
-    // Honeypot: if "website" filled, reject silently (looks like success to bot)
+
+    // Honeypot — server also enforces, but short-circuit here too
     if (fd.get('website')) {
       msg.dataset.state = 'success';
       msg.textContent = 'Thanks — your message is on its way.';
@@ -209,12 +205,14 @@ const initialTopic = topics.find(t => t.toLowerCase().includes(topic.toLowerCase
       return;
     }
 
-    const name    = String(fd.get('name')    ?? '').trim();
-    const email   = String(fd.get('email')   ?? '').trim();
-    const topicV  = String(fd.get('topic')   ?? 'General').trim();
-    const message = String(fd.get('message') ?? '').trim();
+    const payload = {
+      name:    String(fd.get('name')    ?? '').trim(),
+      email:   String(fd.get('email')   ?? '').trim(),
+      topic:   String(fd.get('topic')   ?? 'General').trim(),
+      message: String(fd.get('message') ?? '').trim(),
+    };
 
-    if (!name || !email.includes('@') || message.length < 10) {
+    if (!payload.name || !payload.email.includes('@') || payload.message.length < 10) {
       msg.dataset.state = 'error';
       msg.textContent = 'Please fill all fields and write at least 10 characters.';
       return;
@@ -224,44 +222,29 @@ const initialTopic = topics.find(t => t.toLowerCase().includes(topic.toLowerCase
     const original = btn.textContent;
     btn.textContent = 'Sending…';
 
-    if (WEB3FORMS_KEY) {
-      // Web3Forms path — proper backend, no leaving the page
-      try {
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_KEY,
-            subject: `[AWJ contact] ${topicV} — from ${name}`,
-            from_name: 'AWJ Contact Form',
-            name, email, topic: topicV, message,
-          }),
-        });
-        const data = await res.json();
-        if (data.success) {
-          msg.dataset.state = 'success';
-          msg.textContent = "Thanks — your message is on its way. I'll reply soon.";
-          form.reset();
-          btn.textContent = 'Sent ✓';
-          return;
-        }
-        throw new Error(data.message || 'Submission failed');
-      } catch (err) {
-        msg.dataset.state = 'error';
-        msg.textContent = 'Send failed. Try emailing hello@andywhyte.com directly.';
-        btn.disabled = false;
-        btn.textContent = original ?? 'Send →';
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        msg.dataset.state = 'success';
+        msg.textContent = data.message ?? "Thanks — your message is on its way.";
+        form.reset();
+        btn.textContent = 'Sent ✓';
         return;
       }
+      msg.dataset.state = 'error';
+      msg.textContent = data.error ?? 'Send failed. Try emailing hello@andywhyte.com directly.';
+      btn.disabled = false;
+      btn.textContent = original ?? 'Send →';
+    } catch {
+      msg.dataset.state = 'error';
+      msg.textContent = 'Network error. Try again or email hello@andywhyte.com.';
+      btn.disabled = false;
+      btn.textContent = original ?? 'Send →';
     }
-
-    // Mailto fallback — opens user's mail client with prefilled draft
-    const subject = encodeURIComponent(`[AWJ contact] ${topicV} — from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nTopic: ${topicV}\n\n${message}`);
-    window.location.href = `mailto:hello@andywhyte.com?subject=${subject}&body=${body}`;
-    msg.dataset.state = 'success';
-    msg.textContent = 'Opening your mail client — hit Send to deliver your message.';
-    btn.disabled = false;
-    btn.textContent = original ?? 'Send →';
   });
 </script>
