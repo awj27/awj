@@ -35,6 +35,9 @@
 /keynotes      /speaking/   301
 /keynotes/*    /speaking/   301
 /sko-speaker   /speaking/   301
-/journal-old/* /journal/    301
 /let-s-talk    /contact/    301
 /lets-talk     /contact/    301
+
+# Journal index now lives inside /maxims (entries stay at /journal/[slug])
+/journal       /maxims/     301
+/journal/      /maxims/     301

@@ -4,6 +4,8 @@ import Eyebrow from '../../components/Eyebrow.astro';
 import Pillar from '../../components/Pillar.astro';
 import Scribble from '../../components/Scribble.astro';
 import { getCollection } from 'astro:content';
+import { formatDate, PILLAR_META, type Pillar as PillarT } from '../../lib/utils';
+import Pillar from '../../components/Pillar.astro';
 
 const all = (await getCollection('journal', e => !e.data.draft))
   .sort((a, b) => b.data.awj_number - a.data.awj_number);
@@ -94,6 +96,35 @@ function highlightLastWord(t: string) {
           );
         })}
       </ul>
+    </div>
+  </section>
+
+  {/* ARCHIVE — list view (was /journal). Same content, different scan mode. */}
+  <section class="mx-archive">
+    <div class="site-shell">
+      <div class="mx-archive__head">
+        <Eyebrow>The archive</Eyebrow>
+        <h2 class="mx-archive__h">All {all.length} entries.</h2>
+        <p class="mx-archive__sub">A list view for skimming chronologically. Filter by pillar.</p>
+      </div>
+      <nav class="mx-archive__filters" aria-label="Filter by pillar">
+        <button type="button" class="mx-archive__filter is-active" data-filter="all">All</button>
+        {(['sales', 'founder', 'human'] as PillarT[]).map(p => (
+          <button type="button" class="mx-archive__filter" data-filter={p}>{PILLAR_META[p].label}</button>
+        ))}
+      </nav>
+      <ol class="mx-archive__list">
+        {all.map(e => (
+          <li class="mx-archive__item" data-pillar={e.data.pillar}>
+            <a href={`/journal/${e.data.slug ?? e.id}/`} class="mx-archive__row">
+              <span class="mx-archive__num">AWJ #{e.data.awj_number}</span>
+              <span class="mx-archive__title">{e.data.title}</span>
+              <span class="mx-archive__pillar"><Pillar pillar={e.data.pillar} /></span>
+              <time class="mx-archive__date" datetime={e.data.date.toISOString()}>{formatDate(e.data.date)}</time>
+            </a>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 </Layout>
@@ -275,4 +306,93 @@ function highlightLastWord(t: string) {
     letter-spacing: 0.18em;
     text-transform: uppercase;
   }
+
+  /* ARCHIVE (list view) */
+  .mx-archive { padding: var(--sp-9) 0 var(--sp-10); border-top: var(--border-hard); background: var(--bg-1); background-image: url('/assets/textures/paper_white.png'); background-size: cover; }
+  .mx-archive__head { padding: 0 var(--gutter); margin-bottom: var(--sp-6); }
+  .mx-archive__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 6vw, 96px);
+    margin: var(--sp-3) 0 var(--sp-3);
+    line-height: 0.95;
+    letter-spacing: -0.005em;
+  }
+  .mx-archive__sub { font-size: var(--fs-body); color: var(--fg-2); margin: 0; max-width: 56ch; }
+  .mx-archive__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    padding: 0 var(--gutter);
+    margin-bottom: var(--sp-5);
+  }
+  .mx-archive__filter {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border: var(--border-hard);
+    background: var(--awj-white);
+    color: var(--awj-black);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: background var(--t-fast), color var(--t-fast);
+  }
+  .mx-archive__filter:hover { background: var(--awj-yellow); }
+  .mx-archive__filter.is-active { background: var(--awj-black); color: var(--awj-white); }
+
+  .mx-archive__list { list-style: none; padding: 0 var(--gutter); margin: 0; }
+  .mx-archive__item[hidden] { display: none; }
+  .mx-archive__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-2);
+    padding: var(--sp-5) 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--awj-black);
+    text-decoration: none;
+    transition: background var(--t-fast);
+  }
+  @media (min-width: 720px) {
+    .mx-archive__row {
+      grid-template-columns: 80px 1fr 110px 110px;
+      align-items: center;
+      gap: var(--sp-4);
+    }
+  }
+  .mx-archive__row:hover { background: rgba(255,206,0,0.12); }
+  .mx-archive__num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--fg-2);
+  }
+  .mx-archive__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(22px, 3vw, 32px);
+    line-height: 1.05;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    overflow-wrap: anywhere;
+  }
+  .mx-archive__date { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); }
 </style>
+
+<script>
+  // Pillar filter for the archive list
+  const filters = document.querySelectorAll<HTMLButtonElement>('.mx-archive__filter');
+  const items = document.querySelectorAll<HTMLLIElement>('.mx-archive__item');
+  filters.forEach(b => b.addEventListener('click', () => {
+    const f = b.dataset.filter!;
+    filters.forEach(x => x.classList.remove('is-active'));
+    b.classList.add('is-active');
+    items.forEach(item => {
+      if (f === 'all' || item.dataset.pillar === f) item.removeAttribute('hidden');
+      else item.setAttribute('hidden', '');
+    });
+  }));
+</script>
