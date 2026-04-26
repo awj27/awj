@@ -20,43 +20,36 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
   title="AWJ — Andy Whyte Journal"
   description="A notebook page that earned the right to be on a billboard. Maxims and essays from Andy Whyte across sales, founding, and being human. One entry every Friday. No noise."
 >
-  {/* HERO — split: Maxim billboard left, Andy portrait right */}
+  {/* HERO — black paper, portrait blends in from the right */}
   <section class="hero">
-    <div class="site-shell hero__inner">
-      <div class="hero__copy">
-        <Eyebrow>Issue {String(featured.data.awj_number).padStart(3, '0')} · Filed {issueDate}</Eyebrow>
-        <h1 class="hero__title awj-billboard">
-          {(() => {
-            const t = featured.data.title;
-            const m = t.match(/(uncomfortable)/i);
-            if (!m) return t;
-            const idx = m.index!;
-            return [t.slice(0, idx), <Hl>{m[0]}</Hl>, t.slice(idx + m[0].length)];
-          })()}
-        </h1>
-        <Scribble src="/assets/scribbles/underline_black.png" left="0" bottom="-10px" width={280} opacity={0.85} />
-        <div class="hero__actions">
-          <Btn href={`/journal/${featured.data.slug ?? featured.id}/`} tone="dark">Read the entry</Btn>
-          <Btn href="/journal/" tone="ghost">The archive</Btn>
-        </div>
-      </div>
+    {/* Background layers: paper texture + portrait + dark gradient blend */}
+    <div class="hero__bg" aria-hidden="true">
+      <img
+        src="/media/portrait/andy-portrait.jpg"
+        srcset="/media/portrait/andy-portrait-mobile.jpg 800w, /media/portrait/andy-portrait.jpg 1600w"
+        sizes="100vw"
+        alt=""
+        class="hero__bg-portrait"
+      />
+      <div class="hero__bg-fade"></div>
+    </div>
 
-      <aside class="hero__portrait">
-        <div class="hero__portrait-frame">
-          <div class="hero__portrait-yellow" aria-hidden="true"></div>
-          <img
-            src="/media/portrait/andy-portrait.jpg"
-            srcset="/media/portrait/andy-portrait-mobile.jpg 800w, /media/portrait/andy-portrait.jpg 1600w"
-            sizes="(max-width: 720px) 90vw, 40vw"
-            alt="Andy Whyte"
-            loading="eager"
-            decoding="async"
-          />
-          <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={14} top="-30px" right="-20px" width={110} />
-          <Scribble src="/assets/scribbles/pen_star_yellow.png" rotate={-8} bottom="-20px" left="-30px" width={80} />
-        </div>
-        <p class="hero__portrait-caption awj-marker">— Andy</p>
-      </aside>
+    <div class="site-shell hero__inner">
+      <Eyebrow color="#FFCE00">Issue {String(featured.data.awj_number).padStart(3, '0')} · Filed {issueDate}</Eyebrow>
+      <h1 class="hero__title awj-billboard">
+        {(() => {
+          const t = featured.data.title;
+          const m = t.match(/(uncomfortable)/i);
+          if (!m) return t;
+          const idx = m.index!;
+          return [t.slice(0, idx), <Hl>{m[0]}</Hl>, t.slice(idx + m[0].length)];
+        })()}
+      </h1>
+      <Scribble src="/assets/scribbles/underline_yellow.png" left="0" bottom="-10px" width={280} opacity={0.9} />
+      <div class="hero__actions">
+        <Btn href={`/journal/${featured.data.slug ?? featured.id}/`} tone="yellow">Read the entry</Btn>
+        <Btn href="/journal/" tone="ghost">The archive</Btn>
+      </div>
     </div>
   </section>
 
@@ -118,74 +111,81 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
 </Layout>
 
 <style>
-  /* HERO */
-  .hero { position: relative; border-bottom: var(--border-hard); overflow: hidden; }
-  .hero__inner {
-    padding: var(--sp-9) var(--gutter) var(--sp-8);
+  /* HERO — black paper with portrait bleeding in from the right */
+  .hero {
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-8);
-    align-items: center;
-  }
-  @media (min-width: 900px) {
-    .hero__inner { grid-template-columns: 1.5fr 1fr; gap: var(--sp-7); }
-  }
-  .hero__copy { position: relative; min-width: 0; }
-  .hero__title { margin-top: var(--sp-4); margin-bottom: var(--sp-7); }
-  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
-
-  /* PORTRAIT (mobile-first, then refines) */
-  .hero__portrait {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    order: -1;
-  }
-  @media (min-width: 900px) {
-    .hero__portrait { order: 0; }
-  }
-  .hero__portrait-frame {
-    position: relative;
-    width: 100%;
-    max-width: 360px;
-    aspect-ratio: 3 / 4;
-    transform: rotate(-2deg);
-    transition: transform var(--t-base) var(--ease-out);
-  }
-  .hero__portrait-frame:hover { transform: rotate(0deg) translate(-2px, -2px); }
-  @media (min-width: 900px) {
-    .hero__portrait-frame { max-width: 100%; }
-  }
-  .hero__portrait-yellow {
-    position: absolute;
-    inset: 6% 8% 18% 8%;
-    background: var(--awj-yellow);
-    background-image: url('/assets/textures/paper_yellow.png');
+    background-color: var(--awj-black);
+    background-image: url('/assets/textures/paper_black.png');
     background-size: cover;
-    border-radius: 50%;
-    z-index: 0;
+    background-position: center;
+    color: var(--awj-white);
+    border-bottom: var(--border-hard);
+    overflow: hidden;
+    min-height: 580px;
   }
-  .hero__portrait-frame img {
+
+  /* Background composition: portrait + dark gradient that blends it into the paper */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero__bg-portrait {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 70% 18%;     /* shows Andy's face/upper body */
+    filter: grayscale(1) contrast(1.05) brightness(0.95);
+    /* Soft mask so the photo's left edge fades into the paper */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 18%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.95) 70%, black 100%);
+            mask-image: linear-gradient(to right, transparent 0%, transparent 18%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.95) 70%, black 100%);
+  }
+  /* Extra darken on the left so text always wins for legibility */
+  .hero__bg-fade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right,
+        rgba(10,10,10,0.96) 0%,
+        rgba(10,10,10,0.85) 30%,
+        rgba(10,10,10,0.45) 55%,
+        rgba(10,10,10,0.0)  80%);
+  }
+
+  /* Mobile: photo is much less prominent; let text dominate */
+  @media (max-width: 720px) {
+    .hero__bg-portrait { object-position: 65% 12%; opacity: 0.55; }
+    .hero__bg-fade {
+      background:
+        linear-gradient(to bottom,
+          rgba(10,10,10,0.55) 0%,
+          rgba(10,10,10,0.85) 60%,
+          rgba(10,10,10,0.96) 100%);
+    }
+  }
+
+  .hero__inner {
     position: relative;
     z-index: 1;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    filter: grayscale(1) contrast(1.06);
-    border: var(--border-hard);
-    background: var(--awj-paper);
+    padding: var(--sp-9) var(--gutter) var(--sp-8);
+    max-width: var(--site-max);
+    margin: 0 auto;
   }
-  .hero__portrait-caption {
-    margin-top: var(--sp-3);
-    font-size: 28px;
-    color: var(--awj-blue);
-    transform: rotate(-3deg);
-    align-self: flex-end;
-    margin-right: 8%;
+  .hero__title {
+    margin-top: var(--sp-4);
+    margin-bottom: var(--sp-7);
+    color: var(--awj-white);
+    /* Constrain text width on wide screens so the portrait gets room to breathe */
+    max-width: 90%;
   }
+  @media (min-width: 1100px) {
+    .hero__title { max-width: 64%; }
+  }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
 
   /* PILLARS */
   .pillars { padding: var(--sp-8) 0; border-bottom: var(--border-hard); }
