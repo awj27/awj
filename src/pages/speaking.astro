@@ -150,8 +150,52 @@ const logos = [
 </Layout>
 
 <style>
-  .sp-hero { padding: var(--sp-9) 0 var(--sp-8); border-bottom: var(--border-hard); position: relative; overflow: hidden; }
-  .sp-hero__inner { padding: 0 var(--gutter); position: relative; }
+  .sp-hero {
+    position: relative;
+    overflow: hidden;
+    border-bottom: var(--border-hard);
+    background-color: var(--awj-black);
+    background-image: url('/assets/textures/paper_black.png');
+    background-size: cover;
+    color: var(--awj-white);
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+  }
+  .sp-hero__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    filter: contrast(1.04) saturate(0.85);
+  }
+  /* Two-axis overlay: darken the left for headline legibility, soft fade
+     at the bottom so buttons don't sit on the hottest part of the video. */
+  .sp-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(to right,
+        rgba(10,10,10,0.85) 0%,
+        rgba(10,10,10,0.65) 35%,
+        rgba(10,10,10,0.30) 65%,
+        rgba(10,10,10,0.10) 100%),
+      linear-gradient(to bottom,
+        rgba(10,10,10,0.0) 60%,
+        rgba(10,10,10,0.45) 100%);
+  }
+  .sp-hero__inner {
+    position: relative;
+    z-index: 2;
+    padding: var(--sp-9) var(--gutter);
+    width: 100%;
+    max-width: var(--site-max);
+    margin: 0 auto;
+  }
   .sp-hero__title {
     font-family: var(--font-display);
     font-weight: 400;
@@ -160,9 +204,32 @@ const logos = [
     line-height: 0.95;
     letter-spacing: -0.005em;
     margin: var(--sp-3) 0 var(--sp-5);
+    color: var(--awj-white);
+    max-width: 18ch;
   }
-  .sp-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0 0 var(--sp-6); max-width: 60ch; }
+  .sp-hero__sub {
+    font-size: var(--fs-body-lg);
+    color: var(--awj-grey-200);
+    margin: 0 0 var(--sp-6);
+    max-width: 60ch;
+    line-height: 1.5;
+  }
   .sp-hero__actions { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+
+  /* Mobile: stronger overlay so the headline + sub dominate */
+  @media (max-width: 720px) {
+    .sp-hero__overlay {
+      background:
+        linear-gradient(to bottom,
+          rgba(10,10,10,0.55) 0%,
+          rgba(10,10,10,0.7)  60%,
+          rgba(10,10,10,0.85) 100%);
+    }
+  }
+  /* Honour reduced-motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .sp-hero__video { display: none; }
+  }
 
   .sp-logos { padding: var(--sp-7) 0; border-bottom: 1px solid var(--rule); }
   .sp-logos__row {
