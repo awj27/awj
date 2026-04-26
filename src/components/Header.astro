@@ -1,4 +1,6 @@
 ---
+import SocialIcons from './SocialIcons.astro';
+
 const path = Astro.url.pathname;
 const isActive = (p: string) => path === p || (p !== '/' && path.startsWith(p));
 
@@ -12,16 +14,23 @@ const nav = [
 ---
 <header class="awj-header">
   <div class="site-shell awj-header__inner">
-    <a href="/" class="awj-header__brand" aria-label="AWJ home">
-      <img src="/assets/logos/awj_submark_black.png" alt="" width="44" height="44" />
-      <span class="awj-header__wordmark">Andy Whyte Journal</span>
+    <a href="/" class="awj-header__brand" aria-label="Andy Whyte Journal — home">
+      <img src="/assets/logos/awj_alt_logo_blue.png" alt="AWJ — Andy Whyte Journal" />
     </a>
+
     <nav class="awj-header__nav" aria-label="Primary">
       {nav.map(item => (
         <a href={item.href} class:list={['awj-header__link', { 'is-active': isActive(item.href) }]}>{item.label}</a>
       ))}
     </nav>
-    <a href="/subscribe/" class="awj-header__cta">Subscribe →</a>
+
+    <div class="awj-header__right">
+      <div class="awj-header__socials">
+        <SocialIcons tone="dark" size={18} />
+      </div>
+      <a href="/subscribe/" class="awj-header__cta">Subscribe →</a>
+    </div>
+
     <button class="awj-header__menu" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -43,27 +52,29 @@ const nav = [
     align-items: center;
     gap: var(--sp-5);
     padding: var(--sp-3) var(--gutter);
-    min-height: 64px;
+    min-height: 80px;
   }
   .awj-header__brand {
     display: flex;
     align-items: center;
-    gap: var(--sp-3);
-    font-family: var(--font-marker);
-    font-weight: 700;
-    font-size: 22px;
-    color: var(--awj-black);
+    flex-shrink: 0;
   }
-  .awj-header__brand img { width: 36px; height: 36px; }
-  .awj-header__wordmark { display: none; }
-  @media (min-width: 720px) { .awj-header__wordmark { display: inline; } }
+  .awj-header__brand img {
+    height: 56px;
+    width: auto;
+    display: block;
+  }
+  @media (min-width: 720px) {
+    .awj-header__brand img { height: 64px; }
+  }
+
   .awj-header__nav {
     display: none;
     flex: 1;
     gap: var(--sp-5);
     margin-left: var(--sp-5);
   }
-  @media (min-width: 900px) { .awj-header__nav { display: flex; } }
+  @media (min-width: 1000px) { .awj-header__nav { display: flex; } }
   .awj-header__link {
     font-family: var(--font-body);
     font-weight: 700;
@@ -74,11 +85,22 @@ const nav = [
     padding: var(--sp-2) 0;
     border-bottom: 2px solid transparent;
     transition: border-color var(--t-fast);
+    text-decoration: none;
   }
   .awj-header__link:hover { border-bottom-color: var(--awj-yellow); }
   .awj-header__link.is-active { border-bottom-color: var(--awj-black); }
-  .awj-header__cta {
+
+  .awj-header__right {
     display: none;
+    align-items: center;
+    gap: var(--sp-5);
+    margin-left: auto;
+  }
+  @media (min-width: 720px) { .awj-header__right { display: flex; } }
+  .awj-header__socials { display: none; }
+  @media (min-width: 1100px) { .awj-header__socials { display: block; } }
+
+  .awj-header__cta {
     font-family: var(--font-body);
     font-weight: 800;
     font-size: 13px;
@@ -89,11 +111,11 @@ const nav = [
     color: var(--awj-white);
     border: var(--border-hard);
     transition: background var(--t-fast), color var(--t-fast);
+    text-decoration: none;
+    flex-shrink: 0;
   }
-  .awj-header__cta:hover { background: var(--awj-white); color: var(--awj-black); }
-  @media (min-width: 720px) {
-    .awj-header__cta { display: inline-block; margin-left: auto; }
-  }
+  .awj-header__cta:hover { background: var(--awj-yellow); color: var(--awj-black); }
+
   .awj-header__menu {
     display: inline-flex;
     flex-direction: column;
@@ -106,7 +128,7 @@ const nav = [
     padding: 0;
   }
   .awj-header__menu span { display: block; height: 3px; background: var(--awj-black); }
-  @media (min-width: 900px) { .awj-header__menu { display: none; } }
+  @media (min-width: 1000px) { .awj-header__menu { display: none; } }
 </style>
 
 <script>
@@ -118,7 +140,7 @@ const nav = [
     nav.style.display = open ? 'none' : 'flex';
     nav.style.flexDirection = 'column';
     nav.style.position = 'absolute';
-    nav.style.top = '64px';
+    nav.style.top = '80px';
     nav.style.left = '0';
     nav.style.right = '0';
     nav.style.background = 'var(--awj-paper)';

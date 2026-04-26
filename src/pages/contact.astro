@@ -1,57 +1,124 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
+import Hl from '../components/Hl.astro';
+import SocialIcons from '../components/SocialIcons.astro';
+import Scribble from '../components/Scribble.astro';
+
+// Topic prefilled from query string (e.g., /contact/?topic=speaking)
+const topic = Astro.url.searchParams.get('topic') ?? '';
+const topics = ['General', 'Speaking / SKO', 'Advisory', 'Press', 'Book', 'Other'];
+const initialTopic = topics.find(t => t.toLowerCase().includes(topic.toLowerCase())) ?? 'General';
 ---
 <Layout
   title="Contact — AWJ"
-  description="Speaking, advisory, press, or just a hello."
+  description="Speaking, advisory, press, or just a hello. Get in touch with Andy Whyte."
 >
+  {/* HERO */}
   <section class="ct-hero">
-    <div class="site-shell">
+    <div class="site-shell ct-hero__inner">
+      <Scribble src="/assets/scribbles/pen_star_yellow.png" rotate={14} top="40px" right="6%" width={120} />
       <Eyebrow>Get in touch</Eyebrow>
-      <h1 class="ct-hero__title awj-display">Say hello.</h1>
-      <p class="ct-hero__sub">Speaking, advisory, press, or just a hello. I read everything.</p>
+      <h1 class="ct-hero__title">
+        Say <Hl>hello</Hl>.
+      </h1>
+      <p class="ct-hero__sub">Speaking, advisory, press, or just a hello. I read everything that comes through this form.</p>
     </div>
   </section>
 
-  <section class="ct-form content-shell">
-    <form class="ct-form__inner" method="POST" data-static="cloudflare-form" name="contact">
-      <input type="hidden" name="form-name" value="contact" />
-      <label class="ct-field">
-        <span>Your name</span>
-        <input type="text" name="name" required autocomplete="name" />
-      </label>
-      <label class="ct-field">
-        <span>Email</span>
-        <input type="email" name="email" required autocomplete="email" />
-      </label>
-      <label class="ct-field">
-        <span>Topic</span>
-        <select name="topic">
-          <option>General</option>
-          <option>Speaking / SKO</option>
-          <option>Advisory</option>
-          <option>Press</option>
-          <option>Book</option>
-        </select>
-      </label>
-      <label class="ct-field">
-        <span>Message</span>
-        <textarea name="message" rows="6" required></textarea>
-      </label>
-      <button class="ct-form__btn" type="submit">Send →</button>
-      <p class="ct-form__fineprint">Or email <a href="mailto:hello@andywhyte.com">hello@andywhyte.com</a> directly.</p>
-    </form>
+  {/* MAIN GRID — form + social */}
+  <section class="ct-main">
+    <div class="site-shell ct-main__inner">
+      {/* FORM */}
+      <form class="ct-form" id="ct-form" novalidate>
+        {/* Honeypot — hidden from users; bots auto-fill it and we reject */}
+        <div aria-hidden="true" style="position:absolute; left:-9999px; opacity:0; pointer-events:none; height:0; overflow:hidden;">
+          <label>Don't fill this in if you're human: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <label class="ct-field">
+          <span>Your name</span>
+          <input type="text" name="name" required autocomplete="name" />
+        </label>
+
+        <label class="ct-field">
+          <span>Email</span>
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+
+        <label class="ct-field">
+          <span>Topic</span>
+          <select name="topic">
+            {topics.map(t => (
+              <option value={t} selected={t === initialTopic}>{t}</option>
+            ))}
+          </select>
+        </label>
+
+        <label class="ct-field">
+          <span>Message</span>
+          <textarea name="message" rows="6" required minlength="10"></textarea>
+        </label>
+
+        <button class="ct-form__btn" type="submit" id="ct-submit">Send →</button>
+        <p class="ct-form__msg" id="ct-msg" aria-live="polite"></p>
+      </form>
+
+      {/* SOCIAL + DIRECT */}
+      <aside class="ct-side">
+        <div class="ct-side__block">
+          <Eyebrow>Or find me on</Eyebrow>
+          <div class="ct-side__socials">
+            <SocialIcons tone="dark" size={28} />
+          </div>
+        </div>
+
+        <div class="ct-side__block">
+          <Eyebrow>Direct</Eyebrow>
+          <p class="ct-side__direct">
+            Email <a href="mailto:hello@andywhyte.com">hello@andywhyte.com</a> if you'd rather skip the form.
+          </p>
+        </div>
+
+        <div class="ct-side__block ct-side__note">
+          <p><strong>For speaking enquiries:</strong> include the event date, location, audience size, and budget if you have one. Saves a round of email tag.</p>
+        </div>
+      </aside>
+    </div>
   </section>
 </Layout>
 
 <style>
-  .ct-hero { padding: var(--sp-9) 0 var(--sp-5); border-bottom: 1px solid var(--rule); }
-  .ct-hero__title { font-size: clamp(56px, 9vw, 144px); margin: var(--sp-3) 0; }
-  .ct-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0; }
+  .ct-hero {
+    padding: var(--sp-9) 0 var(--sp-7);
+    border-bottom: var(--border-hard);
+    position: relative;
+    overflow: hidden;
+  }
+  .ct-hero__inner { padding: 0 var(--gutter); position: relative; }
+  .ct-hero__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    font-size: clamp(56px, 9vw, 144px);
+    margin: var(--sp-3) 0;
+    line-height: 0.95;
+  }
+  .ct-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0; max-width: 60ch; }
 
-  .ct-form { padding: var(--sp-8) var(--gutter) var(--sp-9); }
-  .ct-form__inner { display: grid; gap: var(--sp-5); max-width: 600px; }
+  .ct-main { padding: var(--sp-8) 0 var(--sp-9); }
+  .ct-main__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-7);
+    padding: 0 var(--gutter);
+  }
+  @media (min-width: 900px) {
+    .ct-main__inner { grid-template-columns: 1.6fr 1fr; gap: var(--sp-8); }
+  }
+
+  .ct-form { display: grid; gap: var(--sp-5); position: relative; }
   .ct-field { display: flex; flex-direction: column; gap: var(--sp-2); }
   .ct-field span {
     font-family: var(--font-body);
@@ -63,13 +130,18 @@ import Eyebrow from '../components/Eyebrow.astro';
   .ct-field input, .ct-field select, .ct-field textarea {
     font-family: var(--font-body);
     font-size: 16px;
-    padding: 12px 14px;
+    padding: 14px 16px;
     background: var(--awj-white);
     color: var(--awj-black);
     border: var(--border-hard);
     border-radius: 0;
   }
-  .ct-field textarea { resize: vertical; }
+  .ct-field textarea { resize: vertical; min-height: 140px; }
+  .ct-field input:focus, .ct-field select:focus, .ct-field textarea:focus {
+    outline: 2px solid var(--awj-yellow);
+    outline-offset: -4px;
+  }
+
   .ct-form__btn {
     justify-self: start;
     font-family: var(--font-body);
@@ -77,12 +149,119 @@ import Eyebrow from '../components/Eyebrow.astro';
     font-size: 13px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    padding: 14px 22px;
+    padding: 16px 28px;
     background: var(--awj-black);
     color: var(--awj-white);
     border: var(--border-hard);
     cursor: pointer;
+    transition: background var(--t-fast), color var(--t-fast);
   }
   .ct-form__btn:hover { background: var(--awj-yellow); color: var(--awj-black); }
-  .ct-form__fineprint { font-size: 14px; color: var(--fg-2); margin: 0; }
+  .ct-form__btn:disabled { opacity: 0.6; cursor: wait; }
+  .ct-form__msg { font-size: 14px; margin: 0; min-height: 1.4em; }
+  .ct-form__msg[data-state='success'] { color: var(--awj-blue); font-weight: 700; }
+  .ct-form__msg[data-state='error']   { color: var(--awj-red); font-weight: 700; }
+
+  .ct-side { display: flex; flex-direction: column; gap: var(--sp-7); }
+  .ct-side__block .awj-eyebrow { margin-bottom: var(--sp-3); }
+  .ct-side__socials { margin-top: var(--sp-2); }
+  .ct-side__direct { font-size: var(--fs-body); margin: 0; }
+  .ct-side__direct a {
+    background-image: linear-gradient(transparent 80%, var(--awj-yellow) 80%, var(--awj-yellow) 95%, transparent 95%);
+    background-repeat: no-repeat;
+    color: var(--awj-black);
+  }
+  .ct-side__note {
+    background: var(--awj-yellow);
+    background-image: url('/assets/textures/paper_yellow.png');
+    background-size: cover;
+    padding: var(--sp-5);
+    border: var(--border-hard);
+    transform: rotate(-1deg);
+  }
+  .ct-side__note p { margin: 0; font-size: 14px; line-height: 1.55; }
+  .ct-side__note strong { font-weight: 800; }
 </style>
+
+<script>
+  // The form posts to Web3Forms — a free, unlimited, no-account-needed form
+  // backend. Andy needs to plug in his access key. Until then, the form
+  // gracefully falls back to opening the user's mail client (mailto:).
+  //
+  // To activate Web3Forms: sign up at https://web3forms.com (30 sec, just
+  // verifies an email), copy your access key, replace WEB3FORMS_KEY below.
+  const WEB3FORMS_KEY = ''; // <-- Andy: paste your Web3Forms access key here
+
+  const form = document.getElementById('ct-form') as HTMLFormElement | null;
+  const msg = document.getElementById('ct-msg') as HTMLElement | null;
+  const btn = document.getElementById('ct-submit') as HTMLButtonElement | null;
+
+  form?.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!form || !msg || !btn) return;
+
+    const fd = new FormData(form);
+    // Honeypot: if "website" filled, reject silently (looks like success to bot)
+    if (fd.get('website')) {
+      msg.dataset.state = 'success';
+      msg.textContent = 'Thanks — your message is on its way.';
+      form.reset();
+      return;
+    }
+
+    const name    = String(fd.get('name')    ?? '').trim();
+    const email   = String(fd.get('email')   ?? '').trim();
+    const topicV  = String(fd.get('topic')   ?? 'General').trim();
+    const message = String(fd.get('message') ?? '').trim();
+
+    if (!name || !email.includes('@') || message.length < 10) {
+      msg.dataset.state = 'error';
+      msg.textContent = 'Please fill all fields and write at least 10 characters.';
+      return;
+    }
+
+    btn.disabled = true;
+    const original = btn.textContent;
+    btn.textContent = 'Sending…';
+
+    if (WEB3FORMS_KEY) {
+      // Web3Forms path — proper backend, no leaving the page
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: `[AWJ contact] ${topicV} — from ${name}`,
+            from_name: 'AWJ Contact Form',
+            name, email, topic: topicV, message,
+          }),
+        });
+        const data = await res.json();
+        if (data.success) {
+          msg.dataset.state = 'success';
+          msg.textContent = "Thanks — your message is on its way. I'll reply soon.";
+          form.reset();
+          btn.textContent = 'Sent ✓';
+          return;
+        }
+        throw new Error(data.message || 'Submission failed');
+      } catch (err) {
+        msg.dataset.state = 'error';
+        msg.textContent = 'Send failed. Try emailing hello@andywhyte.com directly.';
+        btn.disabled = false;
+        btn.textContent = original ?? 'Send →';
+        return;
+      }
+    }
+
+    // Mailto fallback — opens user's mail client with prefilled draft
+    const subject = encodeURIComponent(`[AWJ contact] ${topicV} — from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nTopic: ${topicV}\n\n${message}`);
+    window.location.href = `mailto:hello@andywhyte.com?subject=${subject}&body=${body}`;
+    msg.dataset.state = 'success';
+    msg.textContent = 'Opening your mail client — hit Send to deliver your message.';
+    btn.disabled = false;
+    btn.textContent = original ?? 'Send →';
+  });
+</script>

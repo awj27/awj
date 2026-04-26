@@ -20,25 +20,43 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
   title="AWJ — Andy Whyte Journal"
   description="A notebook page that earned the right to be on a billboard. Maxims and essays from Andy Whyte across sales, founding, and being human. One entry every Friday. No noise."
 >
-  {/* HERO */}
+  {/* HERO — split: Maxim billboard left, Andy portrait right */}
   <section class="hero">
     <div class="site-shell hero__inner">
-      <Eyebrow>Issue {String(featured.data.awj_number).padStart(3, '0')} · Filed {issueDate}</Eyebrow>
-      <h1 class="hero__title awj-billboard">
-        {(() => {
-          const t = featured.data.title;
-          const m = t.match(/(uncomfortable)/i);
-          if (!m) return t;
-          const idx = m.index!;
-          return [t.slice(0, idx), <Hl>{m[0]}</Hl>, t.slice(idx + m[0].length)];
-        })()}
-      </h1>
-      <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="3%" width={120} />
-      <Scribble src="/assets/scribbles/underline_black.png" left="0" bottom="-10px" width={280} opacity={0.85} />
-      <div class="hero__actions">
-        <Btn href={`/journal/${featured.data.slug ?? featured.id}/`} tone="dark">Read the entry</Btn>
-        <Btn href="/journal/" tone="ghost">The archive</Btn>
+      <div class="hero__copy">
+        <Eyebrow>Issue {String(featured.data.awj_number).padStart(3, '0')} · Filed {issueDate}</Eyebrow>
+        <h1 class="hero__title awj-billboard">
+          {(() => {
+            const t = featured.data.title;
+            const m = t.match(/(uncomfortable)/i);
+            if (!m) return t;
+            const idx = m.index!;
+            return [t.slice(0, idx), <Hl>{m[0]}</Hl>, t.slice(idx + m[0].length)];
+          })()}
+        </h1>
+        <Scribble src="/assets/scribbles/underline_black.png" left="0" bottom="-10px" width={280} opacity={0.85} />
+        <div class="hero__actions">
+          <Btn href={`/journal/${featured.data.slug ?? featured.id}/`} tone="dark">Read the entry</Btn>
+          <Btn href="/journal/" tone="ghost">The archive</Btn>
+        </div>
       </div>
+
+      <aside class="hero__portrait">
+        <div class="hero__portrait-frame">
+          <div class="hero__portrait-yellow" aria-hidden="true"></div>
+          <img
+            src="/media/portrait/andy-portrait.jpg"
+            srcset="/media/portrait/andy-portrait-mobile.jpg 800w, /media/portrait/andy-portrait.jpg 1600w"
+            sizes="(max-width: 720px) 90vw, 40vw"
+            alt="Andy Whyte"
+            loading="eager"
+            decoding="async"
+          />
+          <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={14} top="-30px" right="-20px" width={110} />
+          <Scribble src="/assets/scribbles/pen_star_yellow.png" rotate={-8} bottom="-20px" left="-30px" width={80} />
+        </div>
+        <p class="hero__portrait-caption awj-marker">— Andy</p>
+      </aside>
     </div>
   </section>
 
@@ -100,15 +118,77 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
 </Layout>
 
 <style>
+  /* HERO */
   .hero { position: relative; border-bottom: var(--border-hard); overflow: hidden; }
-  .hero__inner { padding: var(--sp-9) var(--gutter) var(--sp-8); position: relative; }
-  .hero__title { margin-top: var(--sp-4); margin-bottom: var(--sp-7); max-width: 95%; }
+  .hero__inner {
+    padding: var(--sp-9) var(--gutter) var(--sp-8);
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero__inner { grid-template-columns: 1.5fr 1fr; gap: var(--sp-7); }
+  }
+  .hero__copy { position: relative; min-width: 0; }
+  .hero__title { margin-top: var(--sp-4); margin-bottom: var(--sp-7); }
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
 
-  .pillars {
-    padding: var(--sp-8) 0;
-    border-bottom: var(--border-hard);
+  /* PORTRAIT (mobile-first, then refines) */
+  .hero__portrait {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: -1;
   }
+  @media (min-width: 900px) {
+    .hero__portrait { order: 0; }
+  }
+  .hero__portrait-frame {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 3 / 4;
+    transform: rotate(-2deg);
+    transition: transform var(--t-base) var(--ease-out);
+  }
+  .hero__portrait-frame:hover { transform: rotate(0deg) translate(-2px, -2px); }
+  @media (min-width: 900px) {
+    .hero__portrait-frame { max-width: 100%; }
+  }
+  .hero__portrait-yellow {
+    position: absolute;
+    inset: 6% 8% 18% 8%;
+    background: var(--awj-yellow);
+    background-image: url('/assets/textures/paper_yellow.png');
+    background-size: cover;
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .hero__portrait-frame img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(1) contrast(1.06);
+    border: var(--border-hard);
+    background: var(--awj-paper);
+  }
+  .hero__portrait-caption {
+    margin-top: var(--sp-3);
+    font-size: 28px;
+    color: var(--awj-blue);
+    transform: rotate(-3deg);
+    align-self: flex-end;
+    margin-right: 8%;
+  }
+
+  /* PILLARS */
+  .pillars { padding: var(--sp-8) 0; border-bottom: var(--border-hard); }
   .pillars__grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -158,6 +238,7 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
   }
   .pillars__blurb { font-size: 15px; line-height: 1.5; margin: 0; max-width: 320px; color: inherit; opacity: 0.92; }
 
+  /* RECENT */
   .recent { padding: var(--sp-8) 0; border-bottom: var(--border-hard); }
   .recent__head {
     display: flex;
@@ -222,6 +303,7 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
   }
   .recent__title a:hover { background-size: 100% 100%; }
 
+  /* CTA */
   .cta { position: relative; overflow: hidden; }
   .cta__inner { padding: var(--sp-9) var(--gutter); position: relative; }
   .cta__title {

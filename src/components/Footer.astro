@@ -1,14 +1,17 @@
 ---
+import SocialIcons from './SocialIcons.astro';
 const year = new Date().getFullYear();
 ---
 <footer class="awj-footer">
   <div class="site-shell awj-footer__inner">
-    <div class="awj-footer__col">
-      <div class="awj-footer__brand">
-        <img src="/assets/logos/awj_submark_yellow.png" alt="AWJ" width="56" height="56" />
-        <p class="awj-footer__tagline">A notebook page that earned the right to be on a billboard.</p>
+    <div class="awj-footer__col awj-footer__col--brand">
+      <img src="/assets/logos/awj_main_logo_yellow.png" alt="AWJ — Andy Whyte Journal" class="awj-footer__logo" />
+      <p class="awj-footer__tagline">A notebook page that earned the right to be on a billboard.</p>
+      <div class="awj-footer__socials">
+        <SocialIcons tone="light" size={22} />
       </div>
     </div>
+
     <div class="awj-footer__col">
       <h4>Read</h4>
       <ul>
@@ -19,6 +22,7 @@ const year = new Date().getFullYear();
         <li><a href="/pillars/human/">Human</a></li>
       </ul>
     </div>
+
     <div class="awj-footer__col">
       <h4>Andy</h4>
       <ul>
@@ -28,16 +32,18 @@ const year = new Date().getFullYear();
         <li><a href="/contact/">Contact</a></li>
       </ul>
     </div>
+
     <div class="awj-footer__col">
       <h4>Subscribe</h4>
       <p class="awj-footer__sub-pitch">One entry. Every Friday. No noise.</p>
       <a href="/subscribe/" class="awj-footer__cta">Subscribe →</a>
     </div>
   </div>
+
   <div class="awj-footer__base">
     <div class="site-shell awj-footer__legal">
       <span>© {year} Andy Whyte. All rights reserved.</span>
-      <span><a href="https://www.linkedin.com/in/andywhyte/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://www.youtube.com/@andywhyte" target="_blank" rel="noopener">YouTube</a> · <a href="https://substack.com/@andywhyte" target="_blank" rel="noopener">Substack</a></span>
+      <a href="/contact/" class="awj-footer__contact-link">Get in touch →</a>
     </div>
   </div>
 </footer>
@@ -57,16 +63,19 @@ const year = new Date().getFullYear();
     padding: var(--sp-9) var(--gutter) var(--sp-7);
   }
   @media (min-width: 720px) {
-    .awj-footer__inner { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    .awj-footer__inner { grid-template-columns: 2fr 1fr 1fr 1.2fr; }
   }
-  .awj-footer__brand img { margin-bottom: var(--sp-4); }
+  .awj-footer__logo { height: 64px; width: auto; margin-bottom: var(--sp-4); display: block; }
   .awj-footer__tagline {
     font-family: var(--font-marker);
     font-weight: 700;
     font-size: 22px;
-    margin: 0;
+    margin: 0 0 var(--sp-5);
     max-width: 32ch;
+    color: var(--awj-yellow);
   }
+  .awj-footer__socials { margin-top: var(--sp-3); }
+
   .awj-footer h4 {
     font-family: var(--font-body);
     font-weight: 700;
@@ -80,6 +89,7 @@ const year = new Date().getFullYear();
   .awj-footer li + li { margin-top: var(--sp-2); }
   .awj-footer a { color: var(--fg-inverse); text-decoration: none; }
   .awj-footer a:hover { color: var(--awj-yellow); }
+
   .awj-footer__sub-pitch {
     font-size: 14px;
     color: var(--awj-grey-300);
@@ -100,6 +110,7 @@ const year = new Date().getFullYear();
     transition: background var(--t-fast);
   }
   .awj-footer__cta:hover { background: transparent; color: var(--awj-yellow) !important; }
+
   .awj-footer__base {
     border-top: 1px solid rgba(255,255,255,0.12);
     padding: var(--sp-5) 0;
@@ -111,5 +122,11 @@ const year = new Date().getFullYear();
     gap: var(--sp-3);
     font-size: 12px;
     color: var(--awj-grey-300);
+  }
+  .awj-footer__contact-link {
+    color: var(--awj-yellow);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 </style>
