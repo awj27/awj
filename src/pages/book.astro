@@ -36,39 +36,42 @@ const stats = [
   title="MEDDICC — the book — AWJ"
   description="The ultimate guide to staying one step ahead in the complex sale. Over 100,000 copies sold. The highest-rated MEDDIC and MEDDPICC book on Amazon. By Andy Whyte."
 >
-  {/* HERO — book bleeds into white paper, same blend treatment as the home portrait */}
+  {/* HERO — text + cover side-by-side; cover blends into paper via multiply */}
   <section class="bk-hero">
-    <div class="bk-hero__bg" aria-hidden="true">
-      <img
-        src="/media/book/meddicc-cover.jpg"
-        srcset="/media/book/meddicc-cover-mobile.jpg 800w, /media/book/meddicc-cover.jpg 1600w"
-        sizes="100vw"
-        alt=""
-        class="bk-hero__bg-cover"
-      />
-      <div class="bk-hero__bg-fade"></div>
-    </div>
-
     <div class="site-shell bk-hero__inner">
-      <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="3%" width={110} />
-      <Eyebrow>International best-seller</Eyebrow>
-      <h1 class="bk-hero__title">MEDDICC.</h1>
-      <p class="bk-hero__sub">
-        The ultimate guide to <Hl>staying one step ahead</Hl> in the complex sale.
-      </p>
+      <div class="bk-hero__copy">
+        <Eyebrow>International best-seller</Eyebrow>
+        <h1 class="bk-hero__title">MEDDICC.</h1>
+        <p class="bk-hero__sub">
+          The ultimate guide to <Hl>staying one step ahead</Hl> in the complex sale.
+        </p>
 
-      <ul class="bk-hero__stats" aria-label="The numbers">
-        {stats.map(s => (
-          <li class="bk-hero__stat">
-            <span class="bk-hero__stat-num">{s.num}</span>
-            <span class="bk-hero__stat-lbl">{s.label}</span>
-          </li>
-        ))}
-      </ul>
+        <ul class="bk-hero__stats" aria-label="The numbers">
+          {stats.map(s => (
+            <li class="bk-hero__stat">
+              <span class="bk-hero__stat-num">{s.num}</span>
+              <span class="bk-hero__stat-lbl">{s.label}</span>
+            </li>
+          ))}
+        </ul>
 
-      <div class="bk-hero__actions">
-        <Btn href={AMAZON_URL} tone="dark">Buy on Amazon (UK)</Btn>
-        <Btn href={AMAZON_US_URL} tone="ghost">Buy on Amazon (US)</Btn>
+        <div class="bk-hero__actions">
+          <Btn href={AMAZON_URL} tone="dark">Buy on Amazon (UK)</Btn>
+          <Btn href={AMAZON_US_URL} tone="ghost">Buy on Amazon (US)</Btn>
+        </div>
+      </div>
+
+      <div class="bk-hero__cover">
+        <img
+          src="/media/book/meddicc-cover.jpg"
+          srcset="/media/book/meddicc-cover-mobile.jpg 800w, /media/book/meddicc-cover.jpg 1600w"
+          sizes="(max-width: 900px) 80vw, 460px"
+          alt="MEDDICC by Andy Whyte — the book"
+          class="bk-hero__cover-img"
+          loading="eager"
+          decoding="async"
+        />
+        <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={14} top="-20px" right="-20px" width={110} />
       </div>
     </div>
   </section>
@@ -128,7 +131,7 @@ const stats = [
 </Layout>
 
 <style>
-  /* HERO — same paper-blend pattern as homepage portrait, white paper this time */
+  /* HERO — text left, cover right; cover blends into paper via multiply */
   .bk-hero {
     position: relative;
     background-color: var(--awj-paper);
@@ -138,53 +141,43 @@ const stats = [
     color: var(--awj-black);
     border-bottom: var(--border-hard);
     overflow: hidden;
-    min-height: 640px;
   }
-  .bk-hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-  .bk-hero__bg-cover {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: 80% center;
-    /* Multiply blend lets the paper texture show through the cream desk
-       background of the book image — a seamless blend rather than the
-       photo sitting on top of the paper. */
-    mix-blend-mode: multiply;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 22%, rgba(0,0,0,0.4) 42%, rgba(0,0,0,0.95) 70%, black 100%);
-            mask-image: linear-gradient(to right, transparent 0%, transparent 22%, rgba(0,0,0,0.4) 42%, rgba(0,0,0,0.95) 70%, black 100%);
-  }
-  /* Soft white vignette on the left so the headline always wins */
-  .bk-hero__bg-fade {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(to right,
-        rgba(244,241,234,0.85) 0%,
-        rgba(244,241,234,0.65) 30%,
-        rgba(244,241,234,0.20) 60%,
-        rgba(244,241,234,0.0)  85%);
-  }
-  /* Mobile: photo even more subtle */
-  @media (max-width: 720px) {
-    .bk-hero__bg-cover { opacity: 0.5; }
-    .bk-hero__bg-fade {
-      background:
-        linear-gradient(to bottom,
-          rgba(244,241,234,0.0)  0%,
-          rgba(244,241,234,0.45) 60%,
-          rgba(244,241,234,0.85) 100%);
-    }
-  }
-
   .bk-hero__inner {
-    position: relative;
-    z-index: 1;
     padding: var(--sp-9) var(--gutter);
     max-width: var(--site-max);
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-7);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .bk-hero__inner { grid-template-columns: 1.5fr 1fr; gap: var(--sp-8); }
+  }
+  .bk-hero__copy { min-width: 0; }
+
+  .bk-hero__cover {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: -1;            /* photo above text on mobile */
+  }
+  @media (min-width: 900px) {
+    .bk-hero__cover { order: 0; }
+  }
+  .bk-hero__cover-img {
+    width: 100%;
+    max-width: 460px;
+    height: auto;          /* preserve natural aspect ratio — no distortion */
+    display: block;
+    /* Multiply blend lets the paper crinkles show through the cream
+       background of the photo so it feels printed on the paper rather
+       than placed on top of it. */
+    mix-blend-mode: multiply;
+    /* Subtle radial feather so the rectangle edges don't look harsh */
+    -webkit-mask-image: radial-gradient(ellipse 110% 110% at center, black 78%, rgba(0,0,0,0.4) 92%, transparent 100%);
+            mask-image: radial-gradient(ellipse 110% 110% at center, black 78%, rgba(0,0,0,0.4) 92%, transparent 100%);
   }
   .bk-hero__title {
     font-family: var(--font-display);
