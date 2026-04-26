@@ -1,40 +1,48 @@
 ---
-// Substack has blocked every cross-domain pattern: API POST (403),
-// iframe embed (X-Frame-Options), URL email prefill (ignored), and they
-// deprecated their official widget. The only honest UX is to link out.
+// Beehiiv subscribe — iframe of the publication URL.
 //
-// This component is a beautiful AWJ-styled CTA that takes the reader
-// directly to Substack to subscribe. No fake form, no false promise.
+// Why iframe and not a native form: Beehiiv (like Substack) blocks
+// cross-origin POSTs to their /create endpoint with bot management.
+// BUT unlike Substack, Beehiiv allows iframe embedding, so we frame
+// awj.beehiiv.com and the form inside it submits as same-origin.
 //
-// If we switch newsletter providers (Buttondown, Beehiiv, Kit), this
-// component becomes a real inline form with no other changes needed
-// elsewhere on the site.
+// When Andy creates a custom inline embed in Beehiiv's "Subscribe Forms"
+// UI, we swap this iframe URL for the embed-id URL. The wrapper styling
+// stays the same.
 
 interface Props { tone?: 'light' | 'dark' | 'yellow'; compact?: boolean; }
 const { tone = 'light', compact = false } = Astro.props;
-const SUBSCRIBE_URL = 'https://andywhyte.substack.com/subscribe';
+const PUBLICATION = 'https://awj.beehiiv.com/';
 ---
 <div class={`awj-subscribe awj-subscribe--${tone}`}>
   {!compact && (
     <p class="awj-subscribe__pitch">
       <strong>One entry. Every Friday. No noise.</strong>
-      <span> The journal arrives by email — hosted on Substack, no spam.</span>
+      <span> Join the journal. Hosted on Beehiiv — your email goes straight to the list.</span>
     </p>
   )}
-  <a href={SUBSCRIBE_URL} class="awj-subscribe__btn" rel="noopener">
-    Subscribe on Substack
-    <span aria-hidden="true">→</span>
-  </a>
-  <p class="awj-subscribe__fineprint">Free, weekly, unsubscribe anytime.</p>
+  <div class="awj-subscribe__frame">
+    <iframe
+      src={PUBLICATION}
+      title="Subscribe to Andy Whyte Journal"
+      loading="lazy"
+      frameborder="0"
+      scrolling="no"
+      width="100%"
+      height="540"
+      style="background: white;"
+    ></iframe>
+  </div>
+  <p class="awj-subscribe__fineprint">No spam. One email a week. Unsubscribe whenever.</p>
 </div>
 
 <style>
-  .awj-subscribe { display: block; max-width: 540px; }
+  .awj-subscribe { display: block; max-width: 640px; }
   .awj-subscribe__pitch {
     font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.5;
-    margin: 0 0 var(--sp-4);
+    margin: 0 0 var(--sp-3);
     color: inherit;
   }
   .awj-subscribe__pitch strong {
@@ -45,32 +53,22 @@ const SUBSCRIBE_URL = 'https://andywhyte.substack.com/subscribe';
     display: block;
     margin-bottom: 4px;
   }
-  .awj-subscribe__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 16px 28px;
-    background: var(--awj-black);
-    color: var(--awj-white);
+  .awj-subscribe__frame {
     border: var(--border-hard);
-    text-decoration: none;
-    transition: background var(--t-fast), color var(--t-fast), transform var(--t-fast);
+    background: var(--awj-white);
+    overflow: hidden;
   }
-  .awj-subscribe__btn:hover { background: var(--awj-yellow); color: var(--awj-black); }
-  .awj-subscribe__btn:active { transform: translateY(1px); }
-  .awj-subscribe__fineprint { margin: var(--sp-3) 0 0; font-size: 12px; color: var(--fg-3); }
+  .awj-subscribe__frame iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+  }
+  .awj-subscribe__fineprint { margin: var(--sp-3) 0 0; font-size: 12px; color: var(--fg-3); opacity: 0.85; }
 
-  /* Surface variants */
   .awj-subscribe--dark .awj-subscribe__pitch { color: var(--awj-white); }
   .awj-subscribe--dark .awj-subscribe__pitch strong { color: var(--awj-yellow); }
   .awj-subscribe--dark .awj-subscribe__fineprint { color: rgba(255,255,255,0.7); }
-  .awj-subscribe--dark .awj-subscribe__btn { background: var(--awj-yellow); color: var(--awj-black); border-color: var(--awj-yellow); }
-  .awj-subscribe--dark .awj-subscribe__btn:hover { background: var(--awj-white); color: var(--awj-black); border-color: var(--awj-white); }
+  .awj-subscribe--dark .awj-subscribe__frame { border-color: var(--awj-yellow); }
 
-  .awj-subscribe--yellow .awj-subscribe__btn { background: var(--awj-black); color: var(--awj-white); }
+  .awj-subscribe--yellow .awj-subscribe__frame { border-color: var(--awj-black); }
 </style>
