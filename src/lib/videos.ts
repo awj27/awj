@@ -7,15 +7,22 @@ export interface Video {
   pillar: Pillar;
   type: VideoType;
   description?: string;
-  publishedAt?: string;   // ISO date if known
-  awjNumber?: number;     // when this video corresponds to a Maxim entry
+  publishedAt?: string;
+  awjNumber?: number;
 }
 
-// Order within each list is newest-first (matches the YouTube channel order).
-// To add a video: append to the right list with an inferred pillar.
+// Order within each list is newest-first (matches YouTube channel order).
+//
+// Excluded from this list (per Andy's curation, 2026-04-26):
+//   - The Month End Show (TMES) — all 5 episodes
+//   - LinkedIn Gurus EXPOSED!
+//   - EXPOSING LinkedIn Humble Brags
+//   - The YEAR End Show
+//   - Q&A With A Sales CEO — Episode 1
+//   - All Ask AW episodes (3)
 
 export const VIDEOS: Video[] = [
-  // ── LONG-FORM ──────────────────────────────────────────────────────────
+  // ── LONG-FORM (32 — curated; back-catalogue via yt-dlp) ───────────────
   { id: 's8cH0ddsMKc', type: 'longform', pillar: 'human',   awjNumber: 9, title: 'Your Brain Is Lying To You About Authenticity' },
   { id: '-ez46w1rEyI', type: 'longform', pillar: 'founder',                title: 'Why Getting This Hire Right Really Matters' },
   { id: 'arBlDylbMUM', type: 'longform', pillar: 'human',                  title: "My Brother's 50th Birthday Surprise — A Norwich City VIP Experience!" },
@@ -35,19 +42,21 @@ export const VIDEOS: Video[] = [
   { id: '2FqGdsGmzCA', type: 'longform', pillar: 'founder',                title: "Behind The Scenes Of MEDDICC's BIGGEST Week EVER" },
   { id: 'pFgVsCFOAWs', type: 'longform', pillar: 'sales',                  title: "Sales CEO: The GTM Mistake Everyone Makes — Here's the Fix" },
   { id: '2R7vC0B7dr4', type: 'longform', pillar: 'sales',                  title: 'Sales Leaders — The TRUTH About Deal Reviews You NEED to Hear' },
-  { id: 'ErrJ6VUBB80', type: 'longform', pillar: 'sales',                  title: 'Ask AW — Life-changing sales advice I wish I knew sooner' },
-  { id: '2e9K7pZsx_k', type: 'longform', pillar: 'founder',                title: 'Ask AW — How I Became A CEO And Founder, And How YOU Can Too!' },
-  { id: 'rCvEp8_zTx8', type: 'longform', pillar: 'sales',                  title: 'Ask AW — My Funniest Sales Mistake, DealSTORMING and more!' },
   { id: 'BBO6714wJkE', type: 'longform', pillar: 'human',                  title: 'My Story With Imposter Syndrome' },
   { id: '3iTHDwsgwkE', type: 'longform', pillar: 'sales',                  title: 'Creativity in Keynotes: Secrets to Engaging the Audience at SKOs | KeyGOAT Returns' },
-  { id: 'L7t9Toa4dk0', type: 'longform', pillar: 'sales',                  title: 'Q&A With A Sales CEO — Episode 1!' },
   { id: 'QPykjqreaww', type: 'longform', pillar: 'founder',                title: 'Ultimate Office Setup Tour!' },
   { id: 'I3zXHAE6Ze8', type: 'longform', pillar: 'human',                  title: 'Behind The Scenes: The Ultimate Blooper Reel' },
-  { id: 'zKBalykvVtk', type: 'longform', pillar: 'founder',                title: 'The Month End Show — Andy gatecrashes his team!' },
   { id: 'wvTDS0dMgNE', type: 'longform', pillar: 'founder',                title: "Getting S*** Done — But Where's My Invite?" },
-  { id: 'md8igwLvg-c', type: 'longform', pillar: 'founder',                title: 'The Month End Show | Takeovers! New Podcasts! ANNOUNCEMENTS!' },
+  { id: 'E0-6CwN7Z88', type: 'longform', pillar: 'human',                  title: 'Surprising Andy on His Birthday!' },
+  { id: 'ofF4c4HNj1o', type: 'longform', pillar: 'human',                  title: '24 hours of SPA: Roadtrip Across Europe' },
+  { id: 'CAknpob0aVc', type: 'longform', pillar: 'sales',                  title: 'The ONE Book That Will Make You Rich' },
+  { id: 'w0REVA0cg-M', type: 'longform', pillar: 'founder',                title: 'The GREAT YouTube HEIST: Media Team Takeover' },
+  { id: 'LPhWYdv2ZGE', type: 'longform', pillar: 'sales',                  title: 'Meeting The ULTIMATE Sales Scientist' },
+  { id: 'FbQu0xlKS8E', type: 'longform', pillar: 'founder',                title: 'I Secretly Recorded This EPIC Promotion' },
+  { id: 'aZ7o3wR5CUU', type: 'longform', pillar: 'human',                  title: 'PROM RESCUE! — "Can I ride in your Porsche?"' },
+  { id: '4hATA2kXYeQ', type: 'longform', pillar: 'sales',                  title: 'The Biggest Presentation Of My LIFE | KeyGoat' },
 
-  // ── SHORTS ─────────────────────────────────────────────────────────────
+  // ── SHORTS (48) ────────────────────────────────────────────────────────
   { id: 'q6_uOclANHw', type: 'short', pillar: 'human',                  title: 'My 10 Year Old Directed This Video' },
   { id: 'F3r-A60dJDU', type: 'short', pillar: 'sales',                  title: "Be Careful — The Best Product Doesn't Always Win The Deal" },
   { id: 'HppLrg8gOug', type: 'short', pillar: 'sales',                  title: 'Win The Deal Before It Closes' },
