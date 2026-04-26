@@ -3,17 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Gallery from '../components/Gallery.astro';
 import Scribble from '../components/Scribble.astro';
-import { VIDEOS, CATEGORY_META, type VideoCategory } from '../lib/videos';
+import { VIDEOS, PILLAR_VIDEO_META, type Pillar } from '../lib/videos';
 
-// Separate long-form vs Shorts. Different aspect ratios → different layouts.
-const longform = VIDEOS.filter(v => v.category !== 'short');
-const shorts   = VIDEOS.filter(v => v.category === 'short');
+const longform = VIDEOS.filter(v => v.type === 'longform');
+const shorts   = VIDEOS.filter(v => v.type === 'short');
 
-const featured = longform[0] ?? VIDEOS[0];
-const featuredShort = shorts[0];
+const featured       = longform[0] ?? VIDEOS[0];
+const featuredShort  = shorts[0];
 
-const longformCategories: VideoCategory[] = ['maxim', 'keynote', 'interview'];
-const visibleLongformCats = longformCategories.filter(c => longform.some(v => v.category === c));
+const pillars: Pillar[] = ['sales', 'founder', 'human'];
 
 const galleryImages = [
   { src: '/media/gallery/DSC03093-scaled.webp',   alt: 'Andy Whyte, CEO and Founder of MEDDICC' },
@@ -24,10 +22,30 @@ const galleryImages = [
   { src: '/media/gallery/DSC02731-2-scaled.webp', alt: 'Andy Whyte off-stage' },
   { src: '/media/gallery/DSC02886-scaled.webp',   alt: 'Andy Whyte portrait' },
 ];
+
+const candidImages = [
+  { src: '/media/candids/img_4156.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/img_4234.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/img_4233_2.jpg',                                alt: 'Candid' },
+  { src: '/media/candids/img_4212.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/img_4211.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/img_4122.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/img_4276.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/img_4288.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/img_4967.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/img_5122.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/2917b53f-0436-4802-98e7-091521d23217.jpg',      alt: 'Candid' },
+  { src: '/media/candids/img_5283.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/img_5316.jpg',                                  alt: 'Candid' },
+  { src: '/media/candids/432bffbc-5983-493b-b79c-3ccc938350e3.jpg',      alt: 'Candid' },
+  { src: '/media/candids/7de8a61e-c393-4d1c-92db-1e9bfd96bb6f.jpg',      alt: 'Candid' },
+  { src: '/media/candids/d078843e-d199-4126-9223-904d32d6f884.jpg',      alt: 'Candid' },
+  { src: '/media/candids/img_5671.jpg',                                  alt: 'Candid' },
+];
 ---
 <Layout
   title="Media — AWJ"
-  description="Videos and photos from Andy Whyte. Maxim explainers, keynote clips, Shorts, and behind-the-scenes."
+  description="Videos and photos from Andy Whyte. Long-form essays, vertical Shorts, and behind-the-scenes."
 >
   {/* HERO */}
   <section class="md-hero">
@@ -35,7 +53,7 @@ const galleryImages = [
       <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="6%" width={120} />
       <Eyebrow>Watch & see</Eyebrow>
       <h1 class="md-hero__title">Media.</h1>
-      <p class="md-hero__sub">Long-form essays, vertical Shorts, and a place to look around. Pick a tile to watch.</p>
+      <p class="md-hero__sub">Long-form essays, vertical Shorts, and a place to look around. Filter by pillar — Sales, Founder, Human — or browse the lot.</p>
     </div>
   </section>
 
@@ -62,22 +80,20 @@ const galleryImages = [
             ></iframe>
           </div>
           <div class="cinema__caption">
-            <span class="cinema__cat" id="cinema-cat">{CATEGORY_META[featured.category].label}{featured.awjNumber ? ` · AWJ #${featured.awjNumber}` : ''}</span>
+            <span class="cinema__pill" id="cinema-pillar" data-pillar={featured.pillar}>{PILLAR_VIDEO_META[featured.pillar].label}</span>
             <h3 class="cinema__title" id="cinema-title">{featured.title}</h3>
-            <p class="cinema__desc" id="cinema-desc">{featured.description}</p>
             <a id="cinema-yt-link" href={`https://www.youtube.com/watch?v=${featured.id}`} target="_blank" rel="noopener" class="cinema__yt-link">Open on YouTube →</a>
           </div>
         </div>
 
-        {visibleLongformCats.length > 1 && (
-          <div class="cinema__filters">
-            <button type="button" class="cinema__filter is-active" data-filter="all">All ({longform.length})</button>
-            {visibleLongformCats.map(c => {
-              const count = longform.filter(v => v.category === c).length;
-              return <button type="button" class="cinema__filter" data-filter={c}>{CATEGORY_META[c].label}s ({count})</button>;
-            })}
-          </div>
-        )}
+        <div class="cinema__filters" role="tablist" aria-label="Filter long-form videos by pillar">
+          <button type="button" class="cinema__filter is-active" data-filter="all">All ({longform.length})</button>
+          {pillars.map(p => {
+            const count = longform.filter(v => v.pillar === p).length;
+            if (count === 0) return null;
+            return <button type="button" class={`cinema__filter cinema__filter--${p}`} data-filter={p}>{PILLAR_VIDEO_META[p].label} ({count})</button>;
+          })}
+        </div>
 
         <ul class="cinema__thumbs" role="list">
           {longform.map((v, i) => (
@@ -85,9 +101,8 @@ const galleryImages = [
               class:list={['cinema__thumb', { 'is-active': i === 0 }]}
               data-video-id={v.id}
               data-title={v.title}
-              data-desc={v.description}
-              data-cat={`${CATEGORY_META[v.category].label}${v.awjNumber ? ` · AWJ #${v.awjNumber}` : ''}`}
-              data-category={v.category}
+              data-pillar={v.pillar}
+              data-pillar-label={PILLAR_VIDEO_META[v.pillar].label}
             >
               <button type="button" class="cinema__thumb-btn" aria-label={`Play: ${v.title}`}>
                 <span class="cinema__thumb-frame">
@@ -100,9 +115,9 @@ const galleryImages = [
                     decoding="async"
                   />
                   <span class="cinema__thumb-play" aria-hidden="true">▶</span>
+                  <span class={`cinema__thumb-pill cinema__thumb-pill--${v.pillar}`}>{PILLAR_VIDEO_META[v.pillar].label}</span>
                 </span>
                 <span class="cinema__thumb-meta">
-                  <span class="cinema__thumb-cat">{CATEGORY_META[v.category].label}{v.awjNumber ? ` · AWJ #${v.awjNumber}` : ''}</span>
                   <span class="cinema__thumb-title">{v.title}</span>
                 </span>
               </button>
@@ -138,52 +153,66 @@ const galleryImages = [
           </div>
 
           <div class="shorts__caption">
-            <span class="shorts__cat" id="shorts-cat">Short{featuredShort?.awjNumber ? ` · AWJ #${featuredShort.awjNumber}` : ''}</span>
+            <span class="shorts__pill" id="shorts-pillar" data-pillar={featuredShort?.pillar}>{featuredShort && PILLAR_VIDEO_META[featuredShort.pillar].label}</span>
             <h3 class="shorts__title" id="shorts-title">{featuredShort?.title}</h3>
-            <p class="shorts__desc" id="shorts-desc">{featuredShort?.description}</p>
             <a id="shorts-yt-link" href={`https://www.youtube.com/shorts/${featuredShort?.id}`} target="_blank" rel="noopener" class="shorts__yt-link">Open on YouTube →</a>
           </div>
         </div>
 
-        {shorts.length > 1 && (
-          <ul class="shorts__rail" role="list">
-            {shorts.map((v, i) => (
-              <li
-                class:list={['shorts__thumb', { 'is-active': i === 0 }]}
-                data-video-id={v.id}
-                data-title={v.title}
-                data-desc={v.description}
-                data-cat={`Short${v.awjNumber ? ` · AWJ #${v.awjNumber}` : ''}`}
-              >
-                <button type="button" class="shorts__thumb-btn" aria-label={`Play: ${v.title}`}>
-                  <span class="shorts__thumb-frame">
-                    <img
-                      src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`}
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span class="shorts__thumb-play" aria-hidden="true">▶</span>
-                  </span>
-                  <span class="shorts__thumb-title">{v.title}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
+        <div class="shorts__filters" role="tablist" aria-label="Filter Shorts by pillar">
+          <button type="button" class="shorts__filter is-active" data-filter="all">All ({shorts.length})</button>
+          {pillars.map(p => {
+            const count = shorts.filter(v => v.pillar === p).length;
+            if (count === 0) return null;
+            return <button type="button" class={`shorts__filter shorts__filter--${p}`} data-filter={p}>{PILLAR_VIDEO_META[p].label} ({count})</button>;
+          })}
+        </div>
+
+        <ul class="shorts__rail" role="list">
+          {shorts.map((v, i) => (
+            <li
+              class:list={['shorts__thumb', { 'is-active': i === 0 }]}
+              data-video-id={v.id}
+              data-title={v.title}
+              data-pillar={v.pillar}
+              data-pillar-label={PILLAR_VIDEO_META[v.pillar].label}
+            >
+              <button type="button" class="shorts__thumb-btn" aria-label={`Play: ${v.title}`}>
+                <span class="shorts__thumb-frame">
+                  <img src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`} alt="" loading="lazy" decoding="async" />
+                  <span class="shorts__thumb-play" aria-hidden="true">▶</span>
+                  <span class={`shorts__thumb-pill shorts__thumb-pill--${v.pillar}`}>{PILLAR_VIDEO_META[v.pillar].label}</span>
+                </span>
+                <span class="shorts__thumb-title">{v.title}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )}
 
-  {/* GALLERY */}
+  {/* HEADSHOTS GALLERY */}
   <section class="md-gallery">
     <div class="site-shell md-gallery__head">
       <Eyebrow>Look around</Eyebrow>
-      <h2 class="md-gallery__h">Photos.</h2>
-      <p class="md-gallery__sub">Headshots, stage shots, and the occasional candid. More to come.</p>
+      <h2 class="md-gallery__h">Headshots.</h2>
+      <p class="md-gallery__sub">Studio shots and portraits.</p>
     </div>
     <div class="md-gallery__grid">
       <Gallery images={galleryImages} />
+    </div>
+  </section>
+
+  {/* CANDIDS */}
+  <section class="md-candids">
+    <div class="site-shell md-candids__head">
+      <Eyebrow>Off the record</Eyebrow>
+      <h2 class="md-candids__h">Candids.</h2>
+      <p class="md-candids__sub">Behind-the-scenes, on-stage, mid-laugh, and the occasional bad idea caught on camera.</p>
+    </div>
+    <div class="md-candids__grid">
+      <Gallery images={candidImages} />
     </div>
   </section>
 </Layout>
@@ -202,6 +231,25 @@ const galleryImages = [
     letter-spacing: -0.01em;
   }
   .md-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0; max-width: 60ch; }
+
+  /* PILL UTILITY (re-used by both cinema + shorts) */
+  .cinema__pill, .shorts__pill, .cinema__thumb-pill, .shorts__thumb-pill {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 4px 10px 3px;
+    border-radius: var(--radius-pill);
+  }
+  .cinema__pill[data-pillar='sales'],
+  .shorts__pill[data-pillar='sales']     { background: var(--awj-yellow); color: var(--awj-black); }
+  .cinema__pill[data-pillar='founder'],
+  .shorts__pill[data-pillar='founder']   { background: var(--awj-blue);   color: var(--awj-white); }
+  .cinema__pill[data-pillar='human'],
+  .shorts__pill[data-pillar='human']     { background: var(--awj-white);  color: var(--awj-black); border: 1.5px solid var(--awj-black); }
 
   /* CINEMA (long-form) */
   .cinema { color: var(--awj-white); border-bottom: var(--border-hard); }
@@ -228,7 +276,6 @@ const galleryImages = [
   @media (min-width: 1100px) {
     .cinema__stage { grid-template-columns: 2fr 1fr; gap: var(--sp-7); align-items: end; }
   }
-
   .cinema__player {
     position: relative;
     aspect-ratio: 16 / 9;
@@ -238,15 +285,7 @@ const galleryImages = [
     overflow: hidden;
   }
   .cinema__player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-
   .cinema__caption { padding: 0; }
-  .cinema__cat {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--awj-yellow);
-  }
   .cinema__title {
     font-family: var(--font-display);
     font-weight: 400;
@@ -257,7 +296,6 @@ const galleryImages = [
     letter-spacing: -0.005em;
     color: var(--awj-white);
   }
-  .cinema__desc { font-size: 16px; line-height: 1.55; margin: 0 0 var(--sp-4); color: var(--awj-grey-300); }
   .cinema__yt-link {
     font-family: var(--font-body);
     font-weight: 800;
@@ -271,6 +309,7 @@ const galleryImages = [
   }
   .cinema__yt-link:hover { color: var(--awj-white); border-color: var(--awj-white); }
 
+  /* PILLAR FILTERS */
   .cinema__filters {
     display: flex;
     gap: var(--sp-2);
@@ -332,6 +371,16 @@ const galleryImages = [
     width: 100%; height: 100%; object-fit: cover; display: block;
     transition: transform var(--t-base) var(--ease-out);
   }
+  .cinema__thumb-pill {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 2;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  }
+  .cinema__thumb-pill--sales   { background: var(--awj-yellow); color: var(--awj-black); }
+  .cinema__thumb-pill--founder { background: var(--awj-blue);   color: var(--awj-white); }
+  .cinema__thumb-pill--human   { background: var(--awj-white);  color: var(--awj-black); }
   .cinema__thumb-play {
     position: absolute;
     top: 50%; left: 50%;
@@ -353,14 +402,6 @@ const galleryImages = [
   .cinema__thumb.is-active .cinema__thumb-play { opacity: 1; background: var(--awj-yellow); color: var(--awj-black); }
 
   .cinema__thumb-meta { display: flex; flex-direction: column; gap: 4px; padding: var(--sp-3) 0 0; }
-  .cinema__thumb-cat {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--awj-yellow);
-    opacity: 0.85;
-  }
   .cinema__thumb-title {
     font-family: var(--font-body);
     font-weight: 600;
@@ -370,7 +411,7 @@ const galleryImages = [
   }
   .cinema__thumb[hidden] { display: none; }
 
-  /* SHORTS — vertical 9:16 */
+  /* SHORTS */
   .shorts { color: var(--awj-black); border-bottom: var(--border-hard); }
   .shorts__inner { padding: var(--sp-9) var(--gutter); max-width: var(--site-max); margin: 0 auto; }
   .shorts__head { margin-bottom: var(--sp-6); }
@@ -391,12 +432,11 @@ const galleryImages = [
     grid-template-columns: 1fr;
     gap: var(--sp-6);
     align-items: start;
-    margin-bottom: var(--sp-7);
+    margin-bottom: var(--sp-6);
   }
   @media (min-width: 720px) {
     .shorts__stage { grid-template-columns: minmax(280px, 360px) 1fr; gap: var(--sp-7); align-items: center; }
   }
-
   .shorts__player {
     position: relative;
     aspect-ratio: 9 / 16;
@@ -409,16 +449,7 @@ const galleryImages = [
     margin: 0 auto;
   }
   .shorts__player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-
   .shorts__caption { padding: 0; }
-  .shorts__cat {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--awj-black);
-    opacity: 0.7;
-  }
   .shorts__title {
     font-family: var(--font-display);
     font-weight: 400;
@@ -428,7 +459,6 @@ const galleryImages = [
     margin: var(--sp-3) 0;
     letter-spacing: -0.005em;
   }
-  .shorts__desc { font-size: 16px; line-height: 1.55; margin: 0 0 var(--sp-4); }
   .shorts__yt-link {
     font-family: var(--font-body);
     font-weight: 800;
@@ -442,7 +472,30 @@ const galleryImages = [
   }
   .shorts__yt-link:hover { color: var(--awj-blue); border-color: var(--awj-blue); }
 
-  /* Horizontal scrolling rail of vertical shorts thumbnails */
+  .shorts__filters {
+    display: flex;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--sp-5);
+    padding-top: var(--sp-5);
+    border-top: 1.5px solid rgba(0,0,0,0.18);
+  }
+  .shorts__filter {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    background: transparent;
+    color: var(--awj-black);
+    border: 1.5px solid var(--awj-black);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+  }
+  .shorts__filter:hover { background: var(--awj-black); color: var(--awj-yellow); }
+  .shorts__filter.is-active { background: var(--awj-black); color: var(--awj-white); }
+
   .shorts__rail {
     list-style: none;
     padding: 0;
@@ -455,6 +508,7 @@ const galleryImages = [
     padding-bottom: var(--sp-3);
   }
   .shorts__thumb { flex: 0 0 auto; scroll-snap-align: start; }
+  .shorts__thumb[hidden] { display: none; }
   .shorts__thumb-btn {
     display: flex;
     flex-direction: column;
@@ -479,6 +533,17 @@ const galleryImages = [
     width: 100%; height: 100%; object-fit: cover; display: block;
     transition: transform var(--t-base) var(--ease-out);
   }
+  .shorts__thumb-pill {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 2;
+    font-size: 9px;
+    padding: 3px 7px 2px;
+  }
+  .shorts__thumb-pill--sales   { background: var(--awj-yellow); color: var(--awj-black); }
+  .shorts__thumb-pill--founder { background: var(--awj-blue);   color: var(--awj-white); }
+  .shorts__thumb-pill--human   { background: var(--awj-white);  color: var(--awj-black); }
   .shorts__thumb-play {
     position: absolute;
     top: 50%; left: 50%;
@@ -504,8 +569,8 @@ const galleryImages = [
     line-height: 1.35;
   }
 
-  /* GALLERY */
-  .md-gallery { padding: var(--sp-9) 0 var(--sp-10); }
+  /* HEADSHOTS GALLERY */
+  .md-gallery { padding: var(--sp-9) 0 var(--sp-8); }
   .md-gallery__head { padding: 0 var(--gutter); margin-bottom: var(--sp-6); }
   .md-gallery__h {
     font-family: var(--font-display);
@@ -518,15 +583,29 @@ const galleryImages = [
   }
   .md-gallery__sub { font-size: var(--fs-body); color: var(--fg-2); margin: 0; max-width: 56ch; }
   .md-gallery__grid { padding: 0 var(--gutter); }
+
+  /* CANDIDS — same layout, different intro */
+  .md-candids { padding: var(--sp-7) 0 var(--sp-10); border-top: 1px solid var(--rule); }
+  .md-candids__head { padding: 0 var(--gutter); margin-bottom: var(--sp-6); }
+  .md-candids__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(56px, 9vw, 144px);
+    margin: var(--sp-3) 0;
+    line-height: 0.9;
+    letter-spacing: -0.005em;
+  }
+  .md-candids__sub { font-size: var(--fs-body); color: var(--fg-2); margin: 0; max-width: 56ch; }
+  .md-candids__grid { padding: 0 var(--gutter); }
 </style>
 
 <script>
-  // Long-form cinema player
+  // Long-form cinema player + pillar filter
   (() => {
     const iframe = document.getElementById('cinema-iframe') as HTMLIFrameElement | null;
     const titleEl = document.getElementById('cinema-title');
-    const descEl = document.getElementById('cinema-desc');
-    const catEl = document.getElementById('cinema-cat');
+    const pillarEl = document.getElementById('cinema-pillar');
     const ytLink = document.getElementById('cinema-yt-link') as HTMLAnchorElement | null;
     const thumbs = document.querySelectorAll<HTMLLIElement>('.cinema__thumb');
     const filters = document.querySelectorAll<HTMLButtonElement>('.cinema__filter');
@@ -537,8 +616,10 @@ const galleryImages = [
         const id = thumb.dataset.videoId!;
         if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1`;
         if (titleEl) titleEl.textContent = thumb.dataset.title ?? '';
-        if (descEl)  descEl.textContent  = thumb.dataset.desc ?? '';
-        if (catEl)   catEl.textContent   = thumb.dataset.cat ?? '';
+        if (pillarEl) {
+          pillarEl.textContent = thumb.dataset.pillarLabel ?? '';
+          pillarEl.dataset.pillar = thumb.dataset.pillar ?? '';
+        }
         if (ytLink)  ytLink.href = `https://www.youtube.com/watch?v=${id}`;
         thumbs.forEach(t => t.classList.remove('is-active'));
         thumb.classList.add('is-active');
@@ -552,21 +633,21 @@ const galleryImages = [
         filters.forEach(x => x.classList.remove('is-active'));
         filter.classList.add('is-active');
         thumbs.forEach(thumb => {
-          if (f === 'all' || thumb.dataset.category === f) thumb.removeAttribute('hidden');
+          if (f === 'all' || thumb.dataset.pillar === f) thumb.removeAttribute('hidden');
           else thumb.setAttribute('hidden', '');
         });
       });
     });
   })();
 
-  // Shorts player
+  // Shorts player + pillar filter
   (() => {
     const iframe = document.getElementById('shorts-iframe') as HTMLIFrameElement | null;
     const titleEl = document.getElementById('shorts-title');
-    const descEl = document.getElementById('shorts-desc');
-    const catEl = document.getElementById('shorts-cat');
+    const pillarEl = document.getElementById('shorts-pillar');
     const ytLink = document.getElementById('shorts-yt-link') as HTMLAnchorElement | null;
     const thumbs = document.querySelectorAll<HTMLLIElement>('.shorts__thumb');
+    const filters = document.querySelectorAll<HTMLButtonElement>('.shorts__filter');
 
     thumbs.forEach(thumb => {
       const btn = thumb.querySelector<HTMLButtonElement>('.shorts__thumb-btn');
@@ -574,12 +655,26 @@ const galleryImages = [
         const id = thumb.dataset.videoId!;
         if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1`;
         if (titleEl) titleEl.textContent = thumb.dataset.title ?? '';
-        if (descEl)  descEl.textContent  = thumb.dataset.desc ?? '';
-        if (catEl)   catEl.textContent   = thumb.dataset.cat ?? '';
+        if (pillarEl) {
+          pillarEl.textContent = thumb.dataset.pillarLabel ?? '';
+          pillarEl.dataset.pillar = thumb.dataset.pillar ?? '';
+        }
         if (ytLink)  ytLink.href = `https://www.youtube.com/shorts/${id}`;
         thumbs.forEach(t => t.classList.remove('is-active'));
         thumb.classList.add('is-active');
         document.querySelector('.shorts__player')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    filters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        const f = filter.dataset.filter!;
+        filters.forEach(x => x.classList.remove('is-active'));
+        filter.classList.add('is-active');
+        thumbs.forEach(thumb => {
+          if (f === 'all' || thumb.dataset.pillar === f) thumb.removeAttribute('hidden');
+          else thumb.setAttribute('hidden', '');
+        });
       });
     });
   })();
