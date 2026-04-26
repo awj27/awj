@@ -1,12 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
-import Hl from '../components/Hl.astro';
 import Gallery from '../components/Gallery.astro';
 import Scribble from '../components/Scribble.astro';
 import { VIDEOS, CATEGORY_META, type VideoCategory } from '../lib/videos';
 
-const featured = VIDEOS[0]; // newest first
+// Separate long-form vs Shorts. Different aspect ratios → different layouts.
+const longform = VIDEOS.filter(v => v.category !== 'short');
+const shorts   = VIDEOS.filter(v => v.category === 'short');
+
+const featured = longform[0] ?? VIDEOS[0];
+const featuredShort = shorts[0];
+
+const longformCategories: VideoCategory[] = ['maxim', 'keynote', 'interview'];
+const visibleLongformCats = longformCategories.filter(c => longform.some(v => v.category === c));
 
 const galleryImages = [
   { src: '/media/gallery/DSC03093-scaled.webp',   alt: 'Andy Whyte, CEO and Founder of MEDDICC' },
@@ -17,13 +24,10 @@ const galleryImages = [
   { src: '/media/gallery/DSC02731-2-scaled.webp', alt: 'Andy Whyte off-stage' },
   { src: '/media/gallery/DSC02886-scaled.webp',   alt: 'Andy Whyte portrait' },
 ];
-
-const categories: VideoCategory[] = ['maxim', 'keynote', 'interview', 'short'];
-const visibleCategories = categories.filter(c => VIDEOS.some(v => v.category === c));
 ---
 <Layout
   title="Media — AWJ"
-  description="Videos and photos from Andy Whyte. Maxim explainers, keynote clips, and behind-the-scenes."
+  description="Videos and photos from Andy Whyte. Maxim explainers, keynote clips, Shorts, and behind-the-scenes."
 >
   {/* HERO */}
   <section class="md-hero">
@@ -31,81 +35,145 @@ const visibleCategories = categories.filter(c => VIDEOS.some(v => v.category ===
       <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="6%" width={120} />
       <Eyebrow>Watch & see</Eyebrow>
       <h1 class="md-hero__title">Media.</h1>
-      <p class="md-hero__sub">Maxim videos, keynote clips, and a place to look around. Pick a tile to watch — or scroll for the photo gallery.</p>
+      <p class="md-hero__sub">Long-form essays, vertical Shorts, and a place to look around. Pick a tile to watch.</p>
     </div>
   </section>
 
-  {/* CINEMA — featured player + thumbnail grid */}
-  <section class="cinema awj-bg-paper-black">
-    <div class="site-shell cinema__inner">
-      <div class="cinema__head">
-        <Eyebrow color="#FFCE00">The screening room</Eyebrow>
-        <h2 class="cinema__h">{VIDEOS.length} videos.</h2>
-      </div>
-
-      {/* PLAYER */}
-      <div class="cinema__stage">
-        <div class="cinema__player">
-          <iframe
-            id="cinema-iframe"
-            src={`https://www.youtube-nocookie.com/embed/${featured.id}?rel=0&modestbranding=1`}
-            title="Andy Whyte video"
-            loading="lazy"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
+  {/* CINEMA — long-form 16:9 */}
+  {longform.length > 0 && (
+    <section class="cinema awj-bg-paper-black">
+      <div class="site-shell cinema__inner">
+        <div class="cinema__head">
+          <Eyebrow color="#FFCE00">The screening room</Eyebrow>
+          <h2 class="cinema__h">Long-form. <span class="cinema__count">({longform.length})</span></h2>
         </div>
-        <div class="cinema__caption">
-          <span class="cinema__cat" id="cinema-cat">{CATEGORY_META[featured.category].label}{featured.awjNumber ? ` · AWJ #${featured.awjNumber}` : ''}</span>
-          <h3 class="cinema__title" id="cinema-title">{featured.title}</h3>
-          <p class="cinema__desc" id="cinema-desc">{featured.description}</p>
-          <a id="cinema-yt-link" href={`https://www.youtube.com/watch?v=${featured.id}`} target="_blank" rel="noopener" class="cinema__yt-link">Open on YouTube →</a>
+
+        <div class="cinema__stage">
+          <div class="cinema__player">
+            <iframe
+              id="cinema-iframe"
+              src={`https://www.youtube-nocookie.com/embed/${featured.id}?rel=0&modestbranding=1`}
+              title="Andy Whyte video"
+              loading="lazy"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="cinema__caption">
+            <span class="cinema__cat" id="cinema-cat">{CATEGORY_META[featured.category].label}{featured.awjNumber ? ` · AWJ #${featured.awjNumber}` : ''}</span>
+            <h3 class="cinema__title" id="cinema-title">{featured.title}</h3>
+            <p class="cinema__desc" id="cinema-desc">{featured.description}</p>
+            <a id="cinema-yt-link" href={`https://www.youtube.com/watch?v=${featured.id}`} target="_blank" rel="noopener" class="cinema__yt-link">Open on YouTube →</a>
+          </div>
         </div>
-      </div>
 
-      {/* FILTER + THUMBNAIL GRID */}
-      <div class="cinema__filters">
-        <button type="button" class="cinema__filter is-active" data-filter="all">All ({VIDEOS.length})</button>
-        {visibleCategories.map(c => {
-          const count = VIDEOS.filter(v => v.category === c).length;
-          return <button type="button" class="cinema__filter" data-filter={c}>{CATEGORY_META[c].label}s ({count})</button>;
-        })}
-      </div>
+        {visibleLongformCats.length > 1 && (
+          <div class="cinema__filters">
+            <button type="button" class="cinema__filter is-active" data-filter="all">All ({longform.length})</button>
+            {visibleLongformCats.map(c => {
+              const count = longform.filter(v => v.category === c).length;
+              return <button type="button" class="cinema__filter" data-filter={c}>{CATEGORY_META[c].label}s ({count})</button>;
+            })}
+          </div>
+        )}
 
-      <ul class="cinema__thumbs" role="list">
-        {VIDEOS.map((v, i) => (
-          <li
-            class:list={['cinema__thumb', { 'is-active': i === 0 }]}
-            data-video-id={v.id}
-            data-title={v.title}
-            data-desc={v.description}
-            data-cat={`${CATEGORY_META[v.category].label}${v.awjNumber ? ` · AWJ #${v.awjNumber}` : ''}`}
-            data-category={v.category}
-          >
-            <button type="button" class="cinema__thumb-btn" aria-label={`Play: ${v.title}`}>
-              <span class="cinema__thumb-frame">
-                <img
-                  src={`https://i.ytimg.com/vi/${v.id}/mqdefault.jpg`}
-                  srcset={`https://i.ytimg.com/vi/${v.id}/mqdefault.jpg 320w, https://i.ytimg.com/vi/${v.id}/hqdefault.jpg 480w, https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg 1280w`}
-                  sizes="(max-width: 720px) 90vw, 24vw"
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span class="cinema__thumb-play" aria-hidden="true">▶</span>
-              </span>
-              <span class="cinema__thumb-meta">
-                <span class="cinema__thumb-cat">{CATEGORY_META[v.category].label}{v.awjNumber ? ` · AWJ #${v.awjNumber}` : ''}</span>
-                <span class="cinema__thumb-title">{v.title}</span>
-              </span>
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+        <ul class="cinema__thumbs" role="list">
+          {longform.map((v, i) => (
+            <li
+              class:list={['cinema__thumb', { 'is-active': i === 0 }]}
+              data-video-id={v.id}
+              data-title={v.title}
+              data-desc={v.description}
+              data-cat={`${CATEGORY_META[v.category].label}${v.awjNumber ? ` · AWJ #${v.awjNumber}` : ''}`}
+              data-category={v.category}
+            >
+              <button type="button" class="cinema__thumb-btn" aria-label={`Play: ${v.title}`}>
+                <span class="cinema__thumb-frame">
+                  <img
+                    src={`https://i.ytimg.com/vi/${v.id}/mqdefault.jpg`}
+                    srcset={`https://i.ytimg.com/vi/${v.id}/mqdefault.jpg 320w, https://i.ytimg.com/vi/${v.id}/hqdefault.jpg 480w, https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg 1280w`}
+                    sizes="(max-width: 720px) 90vw, 24vw"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="cinema__thumb-play" aria-hidden="true">▶</span>
+                </span>
+                <span class="cinema__thumb-meta">
+                  <span class="cinema__thumb-cat">{CATEGORY_META[v.category].label}{v.awjNumber ? ` · AWJ #${v.awjNumber}` : ''}</span>
+                  <span class="cinema__thumb-title">{v.title}</span>
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {/* SHORTS — vertical 9:16 */}
+  {shorts.length > 0 && (
+    <section class="shorts awj-bg-paper-yellow">
+      <div class="site-shell shorts__inner">
+        <div class="shorts__head">
+          <Eyebrow>Quick takes</Eyebrow>
+          <h2 class="shorts__h">Shorts. <span class="shorts__count">({shorts.length})</span></h2>
+          <p class="shorts__sub">Vertical, snackable, made for the feed.</p>
+        </div>
+
+        <div class="shorts__stage">
+          <div class="shorts__player">
+            <iframe
+              id="shorts-iframe"
+              src={`https://www.youtube-nocookie.com/embed/${featuredShort?.id}?rel=0&modestbranding=1`}
+              title="Andy Whyte short"
+              loading="lazy"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="shorts__caption">
+            <span class="shorts__cat" id="shorts-cat">Short{featuredShort?.awjNumber ? ` · AWJ #${featuredShort.awjNumber}` : ''}</span>
+            <h3 class="shorts__title" id="shorts-title">{featuredShort?.title}</h3>
+            <p class="shorts__desc" id="shorts-desc">{featuredShort?.description}</p>
+            <a id="shorts-yt-link" href={`https://www.youtube.com/shorts/${featuredShort?.id}`} target="_blank" rel="noopener" class="shorts__yt-link">Open on YouTube →</a>
+          </div>
+        </div>
+
+        {shorts.length > 1 && (
+          <ul class="shorts__rail" role="list">
+            {shorts.map((v, i) => (
+              <li
+                class:list={['shorts__thumb', { 'is-active': i === 0 }]}
+                data-video-id={v.id}
+                data-title={v.title}
+                data-desc={v.description}
+                data-cat={`Short${v.awjNumber ? ` · AWJ #${v.awjNumber}` : ''}`}
+              >
+                <button type="button" class="shorts__thumb-btn" aria-label={`Play: ${v.title}`}>
+                  <span class="shorts__thumb-frame">
+                    <img
+                      src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span class="shorts__thumb-play" aria-hidden="true">▶</span>
+                  </span>
+                  <span class="shorts__thumb-title">{v.title}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  )}
 
   {/* GALLERY */}
   <section class="md-gallery">
@@ -135,7 +203,7 @@ const visibleCategories = categories.filter(c => VIDEOS.some(v => v.category ===
   }
   .md-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0; max-width: 60ch; }
 
-  /* CINEMA */
+  /* CINEMA (long-form) */
   .cinema { color: var(--awj-white); border-bottom: var(--border-hard); }
   .cinema__inner { padding: var(--sp-9) var(--gutter); max-width: var(--site-max); margin: 0 auto; }
   .cinema__head { margin-bottom: var(--sp-7); }
@@ -149,6 +217,7 @@ const visibleCategories = categories.filter(c => VIDEOS.some(v => v.category ===
     letter-spacing: -0.005em;
     color: var(--awj-white);
   }
+  .cinema__count { font-family: var(--font-mono); font-size: 0.4em; color: var(--awj-yellow); letter-spacing: 0.1em; vertical-align: middle; }
 
   .cinema__stage {
     display: grid;
@@ -202,7 +271,6 @@ const visibleCategories = categories.filter(c => VIDEOS.some(v => v.category ===
   }
   .cinema__yt-link:hover { color: var(--awj-white); border-color: var(--awj-white); }
 
-  /* FILTER PILLS */
   .cinema__filters {
     display: flex;
     gap: var(--sp-2);
@@ -228,7 +296,6 @@ const visibleCategories = categories.filter(c => VIDEOS.some(v => v.category ===
   .cinema__filter:hover { border-color: var(--awj-yellow); color: var(--awj-yellow); }
   .cinema__filter.is-active { background: var(--awj-yellow); color: var(--awj-black); border-color: var(--awj-yellow); }
 
-  /* THUMBNAIL GRID */
   .cinema__thumbs {
     list-style: none;
     padding: 0;
@@ -241,7 +308,6 @@ const visibleCategories = categories.filter(c => VIDEOS.some(v => v.category ===
   @media (min-width: 1000px) { .cinema__thumbs { grid-template-columns: repeat(3, 1fr); } }
   @media (min-width: 1300px) { .cinema__thumbs { grid-template-columns: repeat(4, 1fr); } }
 
-  .cinema__thumb { transition: transform var(--t-base) var(--ease-out); }
   .cinema__thumb-btn {
     display: flex;
     flex-direction: column;
@@ -302,9 +368,141 @@ const visibleCategories = categories.filter(c => VIDEOS.some(v => v.category ===
     line-height: 1.35;
     color: var(--awj-white);
   }
-
-  /* When filtering */
   .cinema__thumb[hidden] { display: none; }
+
+  /* SHORTS — vertical 9:16 */
+  .shorts { color: var(--awj-black); border-bottom: var(--border-hard); }
+  .shorts__inner { padding: var(--sp-9) var(--gutter); max-width: var(--site-max); margin: 0 auto; }
+  .shorts__head { margin-bottom: var(--sp-6); }
+  .shorts__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 5vw, 80px);
+    margin: var(--sp-2) 0 var(--sp-3);
+    line-height: 1;
+    letter-spacing: -0.005em;
+  }
+  .shorts__count { font-family: var(--font-mono); font-size: 0.4em; color: var(--awj-blue); letter-spacing: 0.1em; vertical-align: middle; }
+  .shorts__sub { font-size: var(--fs-body); margin: 0; max-width: 56ch; }
+
+  .shorts__stage {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+    align-items: start;
+    margin-bottom: var(--sp-7);
+  }
+  @media (min-width: 720px) {
+    .shorts__stage { grid-template-columns: minmax(280px, 360px) 1fr; gap: var(--sp-7); align-items: center; }
+  }
+
+  .shorts__player {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    border: var(--border-thicc);
+    box-shadow: 8px 8px 0 var(--awj-black);
+    overflow: hidden;
+    max-width: 360px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .shorts__player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  .shorts__caption { padding: 0; }
+  .shorts__cat {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--awj-black);
+    opacity: 0.7;
+  }
+  .shorts__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(28px, 3.5vw, 48px);
+    line-height: 1.05;
+    margin: var(--sp-3) 0;
+    letter-spacing: -0.005em;
+  }
+  .shorts__desc { font-size: 16px; line-height: 1.55; margin: 0 0 var(--sp-4); }
+  .shorts__yt-link {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--awj-black);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--awj-black);
+    padding-bottom: 2px;
+  }
+  .shorts__yt-link:hover { color: var(--awj-blue); border-color: var(--awj-blue); }
+
+  /* Horizontal scrolling rail of vertical shorts thumbnails */
+  .shorts__rail {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: var(--sp-4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--sp-3);
+  }
+  .shorts__thumb { flex: 0 0 auto; scroll-snap-align: start; }
+  .shorts__thumb-btn {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: var(--awj-black);
+    width: 160px;
+    text-align: left;
+  }
+  .shorts__thumb-frame {
+    position: relative;
+    display: block;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    border: 2px solid var(--awj-black);
+    overflow: hidden;
+  }
+  .shorts__thumb-frame img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform var(--t-base) var(--ease-out);
+  }
+  .shorts__thumb-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.65);
+    color: var(--awj-yellow);
+    font-size: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--awj-yellow);
+    opacity: 0;
+    transition: opacity var(--t-fast);
+  }
+  .shorts__thumb-btn:hover .shorts__thumb-frame img { transform: scale(1.04); }
+  .shorts__thumb-btn:hover .shorts__thumb-play { opacity: 1; }
+  .shorts__thumb.is-active .shorts__thumb-frame { box-shadow: 0 0 0 4px var(--awj-yellow); }
+  .shorts__thumb.is-active .shorts__thumb-play { opacity: 1; background: var(--awj-yellow); color: var(--awj-black); }
+  .shorts__thumb-title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.35;
+  }
 
   /* GALLERY */
   .md-gallery { padding: var(--sp-9) 0 var(--sp-10); }
@@ -323,45 +521,66 @@ const visibleCategories = categories.filter(c => VIDEOS.some(v => v.category ===
 </style>
 
 <script>
-  const iframe = document.getElementById('cinema-iframe') as HTMLIFrameElement | null;
-  const titleEl = document.getElementById('cinema-title');
-  const descEl = document.getElementById('cinema-desc');
-  const catEl = document.getElementById('cinema-cat');
-  const ytLink = document.getElementById('cinema-yt-link') as HTMLAnchorElement | null;
-  const thumbs = document.querySelectorAll<HTMLLIElement>('.cinema__thumb');
-  const filters = document.querySelectorAll<HTMLButtonElement>('.cinema__filter');
+  // Long-form cinema player
+  (() => {
+    const iframe = document.getElementById('cinema-iframe') as HTMLIFrameElement | null;
+    const titleEl = document.getElementById('cinema-title');
+    const descEl = document.getElementById('cinema-desc');
+    const catEl = document.getElementById('cinema-cat');
+    const ytLink = document.getElementById('cinema-yt-link') as HTMLAnchorElement | null;
+    const thumbs = document.querySelectorAll<HTMLLIElement>('.cinema__thumb');
+    const filters = document.querySelectorAll<HTMLButtonElement>('.cinema__filter');
 
-  thumbs.forEach(thumb => {
-    const btn = thumb.querySelector<HTMLButtonElement>('.cinema__thumb-btn');
-    btn?.addEventListener('click', () => {
-      const id = thumb.dataset.videoId!;
-      const title = thumb.dataset.title ?? '';
-      const desc = thumb.dataset.desc ?? '';
-      const cat = thumb.dataset.cat ?? '';
-      if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1`;
-      if (titleEl) titleEl.textContent = title;
-      if (descEl)  descEl.textContent  = desc;
-      if (catEl)   catEl.textContent   = cat;
-      if (ytLink)  ytLink.href = `https://www.youtube.com/watch?v=${id}`;
-      thumbs.forEach(t => t.classList.remove('is-active'));
-      thumb.classList.add('is-active');
-      // Smooth scroll the player into view (helps on mobile after a tap)
-      document.querySelector('.cinema__player')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-
-  filters.forEach(filter => {
-    filter.addEventListener('click', () => {
-      const f = filter.dataset.filter!;
-      filters.forEach(x => x.classList.remove('is-active'));
-      filter.classList.add('is-active');
-      thumbs.forEach(thumb => {
-        if (f === 'all' || thumb.dataset.category === f) {
-          thumb.removeAttribute('hidden');
-        } else {
-          thumb.setAttribute('hidden', '');
-        }
+    thumbs.forEach(thumb => {
+      const btn = thumb.querySelector<HTMLButtonElement>('.cinema__thumb-btn');
+      btn?.addEventListener('click', () => {
+        const id = thumb.dataset.videoId!;
+        if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1`;
+        if (titleEl) titleEl.textContent = thumb.dataset.title ?? '';
+        if (descEl)  descEl.textContent  = thumb.dataset.desc ?? '';
+        if (catEl)   catEl.textContent   = thumb.dataset.cat ?? '';
+        if (ytLink)  ytLink.href = `https://www.youtube.com/watch?v=${id}`;
+        thumbs.forEach(t => t.classList.remove('is-active'));
+        thumb.classList.add('is-active');
+        document.querySelector('.cinema__player')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
-  });
+
+    filters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        const f = filter.dataset.filter!;
+        filters.forEach(x => x.classList.remove('is-active'));
+        filter.classList.add('is-active');
+        thumbs.forEach(thumb => {
+          if (f === 'all' || thumb.dataset.category === f) thumb.removeAttribute('hidden');
+          else thumb.setAttribute('hidden', '');
+        });
+      });
+    });
+  })();
+
+  // Shorts player
+  (() => {
+    const iframe = document.getElementById('shorts-iframe') as HTMLIFrameElement | null;
+    const titleEl = document.getElementById('shorts-title');
+    const descEl = document.getElementById('shorts-desc');
+    const catEl = document.getElementById('shorts-cat');
+    const ytLink = document.getElementById('shorts-yt-link') as HTMLAnchorElement | null;
+    const thumbs = document.querySelectorAll<HTMLLIElement>('.shorts__thumb');
+
+    thumbs.forEach(thumb => {
+      const btn = thumb.querySelector<HTMLButtonElement>('.shorts__thumb-btn');
+      btn?.addEventListener('click', () => {
+        const id = thumb.dataset.videoId!;
+        if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1`;
+        if (titleEl) titleEl.textContent = thumb.dataset.title ?? '';
+        if (descEl)  descEl.textContent  = thumb.dataset.desc ?? '';
+        if (catEl)   catEl.textContent   = thumb.dataset.cat ?? '';
+        if (ytLink)  ytLink.href = `https://www.youtube.com/shorts/${id}`;
+        thumbs.forEach(t => t.classList.remove('is-active'));
+        thumb.classList.add('is-active');
+        document.querySelector('.shorts__player')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  })();
 </script>
