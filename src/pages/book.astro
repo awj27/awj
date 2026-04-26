@@ -3,67 +3,333 @@ import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Btn from '../components/Btn.astro';
 import Hl from '../components/Hl.astro';
+import Scribble from '../components/Scribble.astro';
+
+const AMAZON_URL = 'https://www.amazon.co.uk/MEDDICC-ultimate-guide-staying-complex/dp/1838239707';
+const AMAZON_US_URL = 'https://www.amazon.com/MEDDICC-ultimate-guide-staying-complex/dp/1838239707';
+
+const reviews = [
+  {
+    body: 'This book would make a great introduction to the MEDDICC Sales process. For me personally it was a fantastic refresher and has prompted me to re-evaluate how I have used some elements of the process in previous roles. I highly recommend this book to any Sales Leader looking to drive greater predictability in their pipeline.',
+    source: 'Amazon UK reader',
+    rating: 5,
+  },
+  {
+    body: "Andy articulated everything in it so well it's easily understandable. I've learnt so much reading it and I look forward to actioning lots of his teachings to improve my performance massively.",
+    source: 'Amazon UK reader',
+    rating: 5,
+  },
+  {
+    body: "Well thought out, and goes very much in depth in the MEDDIC process. I learned a lot from this book.",
+    source: 'Amazon US reader',
+    rating: 5,
+  },
+];
+
+const stats = [
+  { num: '100k+',  label: 'Copies sold worldwide' },
+  { num: '★ 4.7', label: 'Amazon rating · 1,447+ reviews' },
+  { num: '#1',     label: 'Highest-rated MEDDIC / MEDDPICC book' },
+];
 ---
 <Layout
   title="MEDDICC — the book — AWJ"
-  description="The ultimate guide to staying in complex sales. By Andy Whyte."
+  description="The ultimate guide to staying one step ahead in the complex sale. Over 100,000 copies sold. The highest-rated MEDDIC and MEDDPICC book on Amazon. By Andy Whyte."
 >
+  {/* HERO — book bleeds into white paper, same blend treatment as the home portrait */}
   <section class="bk-hero">
+    <div class="bk-hero__bg" aria-hidden="true">
+      <img
+        src="/media/book/meddicc-cover.jpg"
+        srcset="/media/book/meddicc-cover-mobile.jpg 800w, /media/book/meddicc-cover.jpg 1600w"
+        sizes="100vw"
+        alt=""
+        class="bk-hero__bg-cover"
+      />
+      <div class="bk-hero__bg-fade"></div>
+    </div>
+
     <div class="site-shell bk-hero__inner">
-      <div class="bk-hero__copy">
-        <Eyebrow>Best-seller</Eyebrow>
-        <h1 class="bk-hero__title awj-display">
-          MEDDICC.
-        </h1>
-        <p class="bk-hero__sub">
-          The ultimate guide to <Hl>staying in complex sales</Hl>.
-        </p>
-        <p class="bk-hero__body">A field-tested playbook for the qualifying methodology used by the world's best-performing enterprise sales teams. Five hundred pages of MEDDICC, in your hands or in your ears.</p>
-        <div class="bk-hero__actions">
-          <Btn href="https://www.amazon.com/dp/B08VRPK87T" tone="yellow">Buy on Amazon →</Btn>
-          <Btn href="https://meddicc.com/book" tone="ghost">More info</Btn>
-        </div>
+      <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="3%" width={110} />
+      <Eyebrow>International best-seller</Eyebrow>
+      <h1 class="bk-hero__title">MEDDICC.</h1>
+      <p class="bk-hero__sub">
+        The ultimate guide to <Hl>staying one step ahead</Hl> in the complex sale.
+      </p>
+
+      <ul class="bk-hero__stats" aria-label="The numbers">
+        {stats.map(s => (
+          <li class="bk-hero__stat">
+            <span class="bk-hero__stat-num">{s.num}</span>
+            <span class="bk-hero__stat-lbl">{s.label}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="bk-hero__actions">
+        <Btn href={AMAZON_URL} tone="dark">Buy on Amazon (UK)</Btn>
+        <Btn href={AMAZON_US_URL} tone="ghost">Buy on Amazon (US)</Btn>
       </div>
-      <div class="bk-hero__cover">
-        <div class="bk-hero__cover-frame">
-          <span class="bk-hero__cover-placeholder awj-display">MEDDICC</span>
-        </div>
+    </div>
+  </section>
+
+  {/* ABOUT THE BOOK */}
+  <section class="bk-about">
+    <div class="content-shell prose">
+      <h2>What it is.</h2>
+      <p>The first book to put MEDDICC down in writing — co-written with foreword and commentary from MEDDIC's co-creators <strong>Dick Dunkel</strong> and <strong>Jack Napoli</strong>.</p>
+      <p>It is the field-tested playbook for the qualifying methodology used by the world's best-performing enterprise sales teams. Built for sellers who refuse to lose deals to bad qualification, and for leaders who want a forecast they can stand behind.</p>
+
+      <h2>Who it's for.</h2>
+      <p>Account executives running complex deals. Sales leaders who want their team inspecting the deal rather than reciting it. Founders selling enterprise. Anyone who has ever heard a rep say "the deal is going great" and wanted a way to test that claim.</p>
+
+      <h2>What you'll get.</h2>
+      <p><strong>The framework.</strong> Every letter of MEDDPICC explained with a depth nothing else on the market matches. Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Identify Pain, Champion, Competition.</p>
+      <p><strong>The patterns.</strong> What A-players do that B-players miss. The deal-killers. The early signals that a forecast is fiction.</p>
+      <p><strong>The plays.</strong> Real frameworks — the Champion Test, the Pain Chain, value-pyramid alignment, deal-inspection rhythm — that you can run on Monday morning.</p>
+    </div>
+  </section>
+
+  {/* READER REVIEWS */}
+  <section class="bk-reviews awj-bg-paper-yellow">
+    <div class="site-shell bk-reviews__inner">
+      <Scribble src="/assets/scribbles/pen_star_black.png" rotate={-8} top="30px" right="6%" width={100} />
+      <Eyebrow>From the readers</Eyebrow>
+      <h2 class="bk-reviews__h">★ 4.7 across <Hl tone="black">1,447+ reviews.</Hl></h2>
+      <ul class="bk-reviews__grid">
+        {reviews.map(r => (
+          <li class="bk-quote">
+            <div class="bk-quote__stars" aria-label={`${r.rating} out of 5 stars`}>
+              {Array.from({ length: r.rating }).map(() => <span aria-hidden="true">★</span>)}
+            </div>
+            <p class="bk-quote__body">"{r.body}"</p>
+            <p class="bk-quote__source">— {r.source}</p>
+          </li>
+        ))}
+      </ul>
+      <a href={AMAZON_URL} target="_blank" rel="noopener" class="bk-reviews__more">Read all 1,447+ reviews on Amazon →</a>
+    </div>
+  </section>
+
+  {/* CTA */}
+  <section class="bk-cta awj-bg-paper-black">
+    <div class="site-shell bk-cta__inner">
+      <Eyebrow color="#FFCE00">Get the book</Eyebrow>
+      <h2 class="bk-cta__h">
+        Stop losing deals to <Hl>bad qualification.</Hl>
+      </h2>
+      <p class="bk-cta__body">Available in paperback, Kindle, and audiobook. Ships globally.</p>
+      <div class="bk-cta__actions">
+        <Btn href={AMAZON_URL} tone="yellow">Buy on Amazon (UK)</Btn>
+        <Btn href={AMAZON_US_URL} tone="ghost">Buy on Amazon (US)</Btn>
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .bk-hero { padding: var(--sp-9) 0; border-bottom: var(--border-hard); }
+  /* HERO — same paper-blend pattern as homepage portrait, white paper this time */
+  .bk-hero {
+    position: relative;
+    background-color: var(--awj-paper);
+    background-image: url('/assets/textures/paper_white.png');
+    background-size: cover;
+    background-position: center;
+    color: var(--awj-black);
+    border-bottom: var(--border-hard);
+    overflow: hidden;
+    min-height: 640px;
+  }
+  .bk-hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .bk-hero__bg-cover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 80% center;
+    /* Multiply blend lets the paper texture show through the cream desk
+       background of the book image — a seamless blend rather than the
+       photo sitting on top of the paper. */
+    mix-blend-mode: multiply;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 22%, rgba(0,0,0,0.4) 42%, rgba(0,0,0,0.95) 70%, black 100%);
+            mask-image: linear-gradient(to right, transparent 0%, transparent 22%, rgba(0,0,0,0.4) 42%, rgba(0,0,0,0.95) 70%, black 100%);
+  }
+  /* Soft white vignette on the left so the headline always wins */
+  .bk-hero__bg-fade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right,
+        rgba(244,241,234,0.85) 0%,
+        rgba(244,241,234,0.65) 30%,
+        rgba(244,241,234,0.20) 60%,
+        rgba(244,241,234,0.0)  85%);
+  }
+  /* Mobile: photo even more subtle */
+  @media (max-width: 720px) {
+    .bk-hero__bg-cover { opacity: 0.5; }
+    .bk-hero__bg-fade {
+      background:
+        linear-gradient(to bottom,
+          rgba(244,241,234,0.0)  0%,
+          rgba(244,241,234,0.45) 60%,
+          rgba(244,241,234,0.85) 100%);
+    }
+  }
+
   .bk-hero__inner {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-7);
-    align-items: center;
+    position: relative;
+    z-index: 1;
+    padding: var(--sp-9) var(--gutter);
+    max-width: var(--site-max);
+    margin: 0 auto;
   }
-  @media (min-width: 900px) {
-    .bk-hero__inner { grid-template-columns: 1.4fr 1fr; }
+  .bk-hero__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(96px, 18vw, 260px);
+    margin: var(--sp-3) 0 var(--sp-3);
+    line-height: 0.85;
+    letter-spacing: -0.01em;
+    color: var(--awj-black);
   }
-  .bk-hero__title { font-size: clamp(80px, 12vw, 200px); margin: var(--sp-3) 0; line-height: 0.85; }
   .bk-hero__sub {
     font-family: var(--font-body);
-    font-size: var(--fs-h3);
-    line-height: 1.15;
-    margin: 0 0 var(--sp-5);
+    font-size: clamp(20px, 2.4vw, 32px);
+    line-height: 1.25;
+    margin: 0 0 var(--sp-6);
     max-width: 28ch;
+    color: var(--awj-ink);
+    font-weight: 500;
   }
-  .bk-hero__body { font-size: var(--fs-body-lg); margin: 0 0 var(--sp-6); max-width: 50ch; color: var(--fg-2); }
-  .bk-hero__actions { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
-  .bk-hero__cover-frame {
-    aspect-ratio: 2 / 3;
-    background: var(--awj-blue);
-    background-image: url('/assets/textures/paper_blue.png');
-    background-size: cover;
-    border: var(--border-hard);
+
+  .bk-hero__stats {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--sp-6);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+    max-width: 700px;
+  }
+  @media (min-width: 600px) { .bk-hero__stats { grid-template-columns: repeat(3, 1fr); } }
+  .bk-hero__stat {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--awj-yellow);
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--sp-3) var(--sp-4);
+    background: var(--awj-white);
+    border: var(--border-hard);
+    box-shadow: 4px 4px 0 var(--awj-black);
   }
-  .bk-hero__cover-placeholder { font-size: clamp(40px, 5vw, 64px); transform: rotate(-3deg); }
+  .bk-hero__stat-num {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    color: var(--awj-black);
+  }
+  .bk-hero__stat-lbl {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-2);
+    line-height: 1.3;
+  }
+  .bk-hero__actions { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+
+  /* ABOUT */
+  .bk-about { padding: var(--sp-9) 0 var(--sp-8); }
+  .bk-about .prose { padding: 0 var(--gutter); }
+
+  /* REVIEWS */
+  .bk-reviews { border-top: var(--border-hard); border-bottom: var(--border-hard); position: relative; overflow: hidden; }
+  .bk-reviews__inner { padding: var(--sp-9) var(--gutter); position: relative; max-width: var(--site-max); margin: 0 auto; }
+  .bk-reviews__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 5vw, 80px);
+    line-height: 1;
+    letter-spacing: -0.005em;
+    margin: var(--sp-3) 0 var(--sp-7);
+    max-width: 22ch;
+  }
+  .bk-reviews__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--sp-7);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+  }
+  @media (min-width: 720px) { .bk-reviews__grid { grid-template-columns: repeat(3, 1fr); } }
+  .bk-quote {
+    padding: var(--sp-6);
+    background: var(--awj-white);
+    border: var(--border-hard);
+    box-shadow: 6px 6px 0 var(--awj-black);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+  .bk-quote__stars {
+    color: var(--awj-yellow-warm);
+    font-size: 22px;
+    letter-spacing: 4px;
+    line-height: 1;
+    text-shadow: 0 1px 0 var(--awj-black), 1px 0 0 var(--awj-black), 0 -1px 0 var(--awj-black), -1px 0 0 var(--awj-black);
+  }
+  .bk-quote__body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0;
+    flex: 1;
+    color: var(--awj-black);
+  }
+  .bk-quote__source {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-2);
+    margin: 0;
+  }
+  .bk-reviews__more {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--awj-black);
+    text-decoration: none;
+    border-bottom: 2px solid var(--awj-black);
+    padding-bottom: 2px;
+  }
+  .bk-reviews__more:hover { color: var(--awj-blue); border-color: var(--awj-blue); }
+
+  /* CTA */
+  .bk-cta { position: relative; overflow: hidden; }
+  .bk-cta__inner { padding: var(--sp-9) var(--gutter); position: relative; max-width: var(--site-max); margin: 0 auto; }
+  .bk-cta__h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 6vw, 96px);
+    line-height: 1;
+    letter-spacing: -0.005em;
+    margin: var(--sp-3) 0 var(--sp-4);
+    color: var(--awj-white);
+    max-width: 18ch;
+  }
+  .bk-cta__body { color: var(--awj-grey-300); font-size: var(--fs-body-lg); margin: 0 0 var(--sp-6); max-width: 50ch; }
+  .bk-cta__actions { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
 </style>
