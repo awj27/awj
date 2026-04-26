@@ -74,6 +74,32 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
     </div>
   </section>
 
+  {/* FEATURED MAXIM */}
+  <section class="featured awj-bg-paper-blue">
+    <div class="site-shell featured__inner">
+      <Scribble src="/assets/scribbles/pen_star_yellow.png" rotate={-12} top="40px" right="6%" width={120} />
+      <Eyebrow color="#FFCE00">Featured Maxim</Eyebrow>
+      <h2 class="featured__title awj-billboard">Your Mental Health Is Not Linear</h2>
+      <p class="featured__lede">
+        In 2018 I beat cancer. A year later, a bad boss nearly broke me. Here's what that taught me about the lie men tell themselves about suffering.
+      </p>
+      <div class="featured__video-frame">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/YXzPAzfMoXc"
+          title="Your Mental Health Is Not Linear — video"
+          loading="lazy"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="featured__actions">
+        <Btn href="/journal/your-mental-health-is-not-linear/" tone="yellow">Read the entry</Btn>
+      </div>
+    </div>
+  </section>
+
   {/* RECENT */}
   <section class="recent">
     <div class="site-shell">
@@ -242,6 +268,48 @@ const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
     color: inherit;
   }
   .pillars__blurb { font-size: 15px; line-height: 1.5; margin: 0; max-width: 320px; color: inherit; opacity: 0.92; }
+
+  /* FEATURED MAXIM */
+  .featured {
+    position: relative;
+    overflow: hidden;
+    border-bottom: var(--border-hard);
+  }
+  .featured__inner {
+    padding: var(--sp-9) var(--gutter);
+    position: relative;
+  }
+  .featured__title {
+    margin: var(--sp-3) 0 var(--sp-4);
+    color: var(--awj-white);
+    max-width: 18ch;
+  }
+  .featured__lede {
+    font-family: var(--font-body);
+    font-size: clamp(17px, 1.6vw, 20px);
+    line-height: 1.55;
+    margin: 0 0 var(--sp-6);
+    max-width: 60ch;
+    color: var(--awj-white);
+    opacity: 0.92;
+  }
+  .featured__video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--awj-black);
+    border: var(--border-hard);
+    overflow: hidden;
+    margin-bottom: var(--sp-6);
+  }
+  .featured__video-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .featured__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
 
   /* RECENT */
   .recent { padding: var(--sp-8) 0; border-bottom: var(--border-hard); }
