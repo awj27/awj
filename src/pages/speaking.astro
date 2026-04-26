@@ -29,7 +29,7 @@ const testimonials = [
 const logos = [
   { src: '/media/clients/CS_Logo_2022_In-Line_All-Red_RGB_1.png',   alt: 'CrowdStrike' },
   { src: '/media/clients/Microsoft_logo.webp',                       alt: 'Microsoft' },
-  { src: '/media/clients/ArcticWolf-logo.webp',                      alt: 'Arctic Wolf Networks' },
+  { src: '/media/clients/AWS-logo.svg',                              alt: 'Amazon Web Services' },
   { src: '/media/clients/Dun_and_Bradstreet_wordmark.svg.webp',      alt: 'Dun & Bradstreet' },
 ];
 ---
@@ -37,17 +37,30 @@ const logos = [
   title="Speaking — AWJ"
   description="Keynotes, SKO sessions, and MC services from Andy Whyte. MEDDICC at full operating depth."
 >
-  {/* HERO */}
+  {/* HERO — autoplay keynote reel as background */}
   <section class="sp-hero">
+    <video
+      class="sp-hero__video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+    >
+      <source src="/media/video/sko-keynote-reel.mp4" type="video/mp4" />
+    </video>
+    <div class="sp-hero__overlay" aria-hidden="true"></div>
+
     <div class="site-shell sp-hero__inner">
       <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="6%" width={120} />
-      <Eyebrow>Keynotes & SKOs</Eyebrow>
+      <Eyebrow color="#FFCE00">Keynotes & SKOs</Eyebrow>
       <h1 class="sp-hero__title">
         Keynotes that <Hl>change the deal,</Hl> not the slide.
       </h1>
-      <p class="sp-hero__sub">In-person and virtual sessions on MEDDICC, deal inspection, and the sales discipline that compounds. Built for the audience in front of me, not recycled from a deck.</p>
+      <p class="sp-hero__sub">Painstakingly curated, wildly creative in-person keynotes engineered to <Hl>entertain, ignite,</Hl> and send every audience member out fired up to take immediate action.</p>
       <div class="sp-hero__actions">
-        <Btn href="/contact/?topic=speaking" tone="dark">Enquire about speaking</Btn>
+        <Btn href="/contact/?topic=speaking" tone="yellow">Enquire about speaking</Btn>
       </div>
     </div>
   </section>
