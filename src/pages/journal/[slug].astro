@@ -47,10 +47,10 @@ const rt = readingTime(entry.body ?? '');
       </div>
     </section>
 
-    {/* Video */}
+    {/* Video — hero asset */}
     {entry.data.video_id && (
       <section class="entry__video">
-        <div class="content-shell">
+        <div class="site-shell">
           <div class="entry__video-frame">
             <iframe
               src={`https://www.youtube-nocookie.com/embed/${entry.data.video_id}`}
@@ -133,16 +133,20 @@ const rt = readingTime(entry.body ?? '');
   .entry__hero-inner { position: relative; }
   .entry__title { max-width: 1100px; }
 
-  .entry__video { padding: var(--sp-5) 0 var(--sp-7); }
+  .entry__video { padding: var(--sp-3) 0 var(--sp-7); }
   .entry__video-frame {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
     background: var(--awj-black);
-    border: var(--border-hard);
+    border: var(--border-thicc);
     overflow: hidden;
+    box-shadow: 12px 12px 0 var(--awj-yellow);
   }
   .entry__video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  @media (max-width: 720px) {
+    .entry__video-frame { box-shadow: 6px 6px 0 var(--awj-yellow); }
+  }
 
   .entry__body { padding: var(--sp-4) 0 var(--sp-9); }
   .entry__signoff {
