@@ -3,3 +3,4 @@ dist/
 .astro/
 .DS_Store
 *.log
+.github/scripts/__pycache__/

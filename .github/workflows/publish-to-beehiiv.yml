@@ -1,0 +1,78 @@
+name: Publish new entry to Beehiiv
+
+# Fires whenever a new Maxim/Entry is pushed to main.
+# Only sends the email if a NEW file appears under src/content/journal/.
+# Edits to existing entries are ignored (Beehiiv shouldn't re-email).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/content/journal/**.md'
+      - '.github/workflows/publish-to-beehiiv.yml'
+      - '.github/scripts/publish-to-beehiiv.py'
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Entry slug to (re-)publish, e.g. nobody-regrets-qualifying-out'
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (with previous commit for diff)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect newly added entries
+        id: new
+        run: |
+          set -e
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "${{ github.event.inputs.slug }}" ]]; then
+            FILE="src/content/journal/$(ls src/content/journal | grep -F '${{ github.event.inputs.slug }}' | head -1)"
+            echo "files=$FILE" >> $GITHUB_OUTPUT
+            echo "Manual run for: $FILE"
+          else
+            ADDED=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'src/content/journal/*.md' || true)
+            if [ -z "$ADDED" ]; then
+              echo "No new entries in this push."
+              echo "files=" >> $GITHUB_OUTPUT
+            else
+              echo "New entries:"
+              echo "$ADDED"
+              # Multi-line output via heredoc
+              {
+                echo "files<<EOF"
+                echo "$ADDED"
+                echo "EOF"
+              } >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Set up Python
+        if: steps.new.outputs.files != ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Publish each new entry to Beehiiv
+        if: steps.new.outputs.files != ''
+        env:
+          BEEHIIV_API_KEY: ${{ secrets.BEEHIIV_API_KEY }}
+          BEEHIIV_PUBLICATION_ID: ${{ secrets.BEEHIIV_PUBLICATION_ID }}
+          # status: "confirmed" = publish + email immediately. "draft" = create
+          # but don't send (Andy reviews in Beehiiv before pressing send).
+          BEEHIIV_POST_STATUS: "draft"
+        run: |
+          set -e
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            echo "::group::Publishing $f"
+            python3 .github/scripts/publish-to-beehiiv.py "$f"
+            echo "::endgroup::"
+          done <<< "${{ steps.new.outputs.files }}"
