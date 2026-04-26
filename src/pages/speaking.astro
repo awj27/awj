@@ -98,10 +98,12 @@ const logos = [
 
   {/* VIDEO REEL placeholder — Andy to provide a YouTube reel URL */}
   <section class="sp-reel">
-    <div class="content-shell">
+    <div class="site-shell sp-reel__head">
       <Eyebrow>The mindset</Eyebrow>
       <h2 class="sp-reel__h">The <Hl>KEYGOAT</Hl>.</h2>
       <p class="sp-reel__sub">A video breaking down the KEYGOAT mindset. It's not that we think we're the greatest keynote speakers of all time, it's that we treat every single keynote like it has to be the greatest of all time.</p>
+    </div>
+    <div class="site-shell sp-reel__stage">
       <div class="sp-reel__frame">
         <iframe
           src="https://www.youtube-nocookie.com/embed/4hATA2kXYeQ?rel=0&modestbranding=1"
@@ -269,19 +271,42 @@ const logos = [
   }
   .sp-svc__blurb { font-size: 15px; line-height: 1.55; margin: 0; color: var(--fg-2); }
 
-  .sp-reel { padding: var(--sp-8) var(--gutter); }
+  .sp-reel { padding: var(--sp-9) 0 var(--sp-9); }
+  .sp-reel__head { padding: 0 var(--gutter); margin-bottom: var(--sp-7); }
   .sp-reel__h {
     font-family: var(--font-display);
     font-weight: 400;
     text-transform: uppercase;
-    font-size: clamp(40px, 5vw, 80px);
-    margin: var(--sp-2) 0 var(--sp-3);
+    font-size: clamp(48px, 7vw, 112px);
+    margin: var(--sp-3) 0 var(--sp-4);
     line-height: 1;
     letter-spacing: -0.005em;
   }
-  .sp-reel__sub { font-size: var(--fs-body); color: var(--fg-2); margin: 0 0 var(--sp-5); max-width: 56ch; }
-  .sp-reel__frame { position: relative; width: 100%; aspect-ratio: 16 / 9; background: var(--awj-black); border: var(--border-hard); overflow: hidden; }
+  .sp-reel__sub {
+    font-size: var(--fs-body-lg);
+    color: var(--fg-2);
+    margin: 0;
+    max-width: 64ch;
+    line-height: 1.55;
+  }
+  .sp-reel__stage { padding: 0 var(--gutter); }
+  .sp-reel__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--awj-black);
+    border: var(--border-thicc);
+    box-shadow: 14px 14px 0 var(--awj-yellow);
+    overflow: hidden;
+    /* Cap so it doesn't get absurdly huge on ultra-wide displays */
+    max-width: 1400px;
+    margin: 0 auto;
+  }
   .sp-reel__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  /* Reduce the offset shadow on small screens so it doesn't poke off-screen */
+  @media (max-width: 720px) {
+    .sp-reel__frame { box-shadow: 8px 8px 0 var(--awj-yellow); }
+  }
 
   .sp-testimonials { padding: var(--sp-8) 0; border-top: var(--border-hard); }
   .sp-testimonials__h {
