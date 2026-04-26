@@ -28,8 +28,39 @@
 /portfolios/awj-11-urgency-is-an-emotion-not-a-message/            /journal/urgency-is-an-emotion-not-a-message/                           301
 /portfolios/awj-12-nobody-regrets-qualifying-out/                  /journal/nobody-regrets-qualifying-out/                                 301
 
+# AWJ #2 and #10 use Unicode glyphs in their actual WP URLs (Mathematical Bold Italic for #2, ≡ for #10).
+# Percent-encoded so Cloudflare matches the bytes the browser sends.
+/portfolios/awj-2-%F0%9D%99%81%F0%9D%99%9A%F0%9D%99%9A%F0%9D%99%99%F0%9D%99%97%F0%9D%99%96%F0%9D%99%98%F0%9D%99%A0-%F0%9D%99%9E%F0%9D%99%A8-%F0%9D%99%A1%F0%9D%99%9E%F0%9D%99%A0%F0%9D%99%9A-%F0%9D%99%88/  /journal/feedback-is-like-milk-it-is-best-served-fresh/  301
+/portfolios/awj-10-imposter-syndrome-%E2%89%A1-self-awareness/  /journal/imposter-syndrome-self-awareness/  301
+
 # Catch-all: anything else under /portfolios/ → /journal/ index
 /portfolios/*  /journal/  301
+
+# WP standalone post (alt URL for AWJ #10)
+/imposter-syndrome     /journal/imposter-syndrome-self-awareness/    301
+/imposter-syndrome/    /journal/imposter-syndrome-self-awareness/    301
+
+# WP About page slug
+/about-me              /about/      301
+/about-me/             /about/      301
+
+# WP portfolio category archives
+/categories/maxims     /maxims/     301
+/categories/maxims/    /maxims/     301
+/categories/*          /maxims/     301
+
+# WP post category archive (only "uncategorized" exists on the live site)
+/category/*            /            301
+
+# Mad Sparrow theme demo pages still indexed on the WP site (no AWJ equivalents)
+/team                  /            301
+/team/                 /            301
+/gallery               /            301
+/gallery/              /            301
+/showcase-portfolio    /            301
+/showcase-portfolio/   /            301
+/fullscreen-slider     /            301
+/fullscreen-slider/    /            301
 
 # Legacy section catches
 /keynotes      /speaking/   301
