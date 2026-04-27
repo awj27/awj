@@ -213,6 +213,26 @@ API connection so events keep firing for the new video.
 consent banner. Update `lastUpdated` in `src/pages/privacy.astro` if
 analytics setup changes.
 
+### ⚠️ Build-time gotcha
+Astro inlines `PUBLIC_*` env vars at **build time**, not runtime. The
+Cloudflare Pages env vars set in the dashboard are only read by Pages
+**Functions** at runtime (e.g. `GA_API_SECRET` in `/api/subscribe`).
+For the static GA tag to actually ship in the HTML, `npm run build`
+needs `PUBLIC_GA_MEASUREMENT_ID` in its environment.
+
+A local `.env` file (gitignored) at the repo root holds the production
+value so autopilot builds + deploys work transparently:
+```
+PUBLIC_GA_MEASUREMENT_ID=G-T29B6L3211
+```
+
+If a future deploy ships HTML without GA in it, this file is the first
+thing to check (`cat ~/Code/awj/.env`). If missing, recreate it.
+
+(Once the GitHub repo is connected to Cloudflare Pages for native CI,
+CF will run the build with its env vars and this becomes unnecessary —
+the local `.env` can stay as a dev convenience.)
+
 ## Common deploy failure modes I should watch for
 
 - **Wrangler upload fails on >25MB file** — Cloudflare Pages caps at 25MiB. Compress (ffmpeg for video, sips for images).
