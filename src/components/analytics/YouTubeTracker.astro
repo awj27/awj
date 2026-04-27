@@ -1,0 +1,188 @@
+---
+// Auto-discovers YouTube iframes marked with `data-yt-track` and wires
+// them to the YouTube IFrame API to fire video_play, video_progress
+// (25/50/75), and video_complete events.
+//
+// To track a YouTube embed, give the iframe:
+//   id="some-unique-id"
+//   data-yt-track
+//   data-yt-title="<video title>"   (optional)
+//   data-yt-type="longform|short"   (optional)
+//
+// The src must be on youtube.com or youtube-nocookie.com. The tracker
+// adds enablejsapi=1 + origin params automatically.
+//
+// For pages that swap the playing video (like /media), call:
+//   window.AWJYT.changeVideo(iframeId, videoId, { title, type })
+// instead of setting iframe.src directly. This preserves the player's
+// connection to the IFrame API.
+
+const measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+---
+{measurementId && (
+  <script is:inline>
+    (function () {
+      if (typeof window === 'undefined') return;
+
+      var players = {};               // iframeId -> YT.Player
+      var meta = {};                  // iframeId -> { videoId, title, type, tracked: Set }
+      var apiReadyPromise = null;
+
+      function ensureApi() {
+        if (apiReadyPromise) return apiReadyPromise;
+        apiReadyPromise = new Promise(function (resolve) {
+          if (window.YT && window.YT.Player) { resolve(); return; }
+          var prev = window.onYouTubeIframeAPIReady;
+          window.onYouTubeIframeAPIReady = function () {
+            if (typeof prev === 'function') prev();
+            resolve();
+          };
+          if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+            var s = document.createElement('script');
+            s.src = 'https://www.youtube.com/iframe_api';
+            s.async = true;
+            document.head.appendChild(s);
+          }
+        });
+        return apiReadyPromise;
+      }
+
+      function videoIdFromSrc(src) {
+        try {
+          var u = new URL(src);
+          var m = u.pathname.match(/\/embed\/([^/?]+)/);
+          return m ? m[1] : '';
+        } catch (e) { return ''; }
+      }
+
+      function fire(name, payload) {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', name, payload);
+        }
+      }
+
+      function startProgressPoll(iframeId) {
+        var state = meta[iframeId];
+        var player = players[iframeId];
+        if (!state || !player) return;
+        if (state.poll) clearInterval(state.poll);
+        state.poll = setInterval(function () {
+          try {
+            if (!player.getCurrentTime || !player.getDuration) return;
+            var cur = player.getCurrentTime();
+            var dur = player.getDuration();
+            if (!dur || dur < 1) return;
+            var pct = (cur / dur) * 100;
+            [25, 50, 75].forEach(function (m) {
+              if (pct >= m && !state.tracked.has(m)) {
+                state.tracked.add(m);
+                fire('video_progress', {
+                  video_id: state.videoId,
+                  video_title: state.title || undefined,
+                  video_type: state.type || undefined,
+                  progress: m,
+                });
+              }
+            });
+          } catch (e) { /* iframe not ready */ }
+        }, 2000);
+      }
+
+      function stopProgressPoll(iframeId) {
+        var state = meta[iframeId];
+        if (state && state.poll) { clearInterval(state.poll); state.poll = null; }
+      }
+
+      function attachPlayer(iframe) {
+        var id = iframe.id;
+        if (!id || players[id]) return;
+
+        // Ensure enablejsapi=1 so the player is controllable
+        try {
+          var u = new URL(iframe.src);
+          if (u.searchParams.get('enablejsapi') !== '1') {
+            u.searchParams.set('enablejsapi', '1');
+            u.searchParams.set('origin', window.location.origin);
+            iframe.src = u.toString();
+          }
+        } catch (e) { return; }
+
+        meta[id] = {
+          videoId: videoIdFromSrc(iframe.src),
+          title: iframe.dataset.ytTitle || '',
+          type: iframe.dataset.ytType || '',
+          tracked: new Set(),
+          poll: null,
+        };
+
+        players[id] = new window.YT.Player(iframe, {
+          events: {
+            onStateChange: function (e) {
+              var state = meta[id];
+              if (!state) return;
+              if (e.data === 1) { // PLAYING
+                if (!state.tracked.has(0)) {
+                  state.tracked.add(0);
+                  fire('video_play', {
+                    video_id: state.videoId,
+                    video_title: state.title || undefined,
+                    video_type: state.type || undefined,
+                  });
+                }
+                startProgressPoll(id);
+              } else if (e.data === 0) { // ENDED
+                stopProgressPoll(id);
+                fire('video_complete', {
+                  video_id: state.videoId,
+                  video_title: state.title || undefined,
+                  video_type: state.type || undefined,
+                });
+              } else if (e.data === 2) { // PAUSED
+                stopProgressPoll(id);
+              }
+            },
+          },
+        });
+      }
+
+      function init() {
+        var iframes = document.querySelectorAll('iframe[data-yt-track]');
+        if (!iframes.length) return;
+        ensureApi().then(function () {
+          iframes.forEach(attachPlayer);
+        });
+      }
+
+      // Public API for pages that swap the playing video (e.g. /media).
+      // Resets the tracking state for that iframe so the next play fires
+      // a fresh video_play event.
+      window.AWJYT = {
+        changeVideo: function (iframeId, videoId, info) {
+          var player = players[iframeId];
+          if (!player || !videoId) return false;
+          info = info || {};
+          meta[iframeId] = {
+            videoId: videoId,
+            title: info.title || '',
+            type: info.type || '',
+            tracked: new Set(),
+            poll: meta[iframeId] ? meta[iframeId].poll : null,
+          };
+          stopProgressPoll(iframeId);
+          if (typeof player.loadVideoById === 'function') {
+            player.loadVideoById(videoId);
+            return true;
+          }
+          return false;
+        },
+        ready: function () { return ensureApi(); },
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+)}

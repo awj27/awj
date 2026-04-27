@@ -26,6 +26,9 @@ const rt = readingTime(entry.body ?? '');
   title={`${entry.data.title} — AWJ #${entry.data.awj_number}`}
   description={entry.body?.slice(0, 160) ?? entry.data.title}
   ogImage={`/media/awj${entry.data.awj_number}.webp`}
+  pillar={entry.data.pillar}
+  awjNumber={entry.data.awj_number}
+  pageType="maxim"
 >
   <article>
     {/* Header band */}
@@ -53,6 +56,7 @@ const rt = readingTime(entry.body ?? '');
         <div class="site-shell">
           <div class="entry__video-frame">
             <iframe
+              id={`maxim-video-${entry.data.awj_number}`}
               src={`https://www.youtube-nocookie.com/embed/${entry.data.video_id}`}
               title={`${entry.data.title} — video`}
               loading="lazy"
@@ -60,6 +64,9 @@ const rt = readingTime(entry.body ?? '');
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen
+              data-yt-track
+              data-yt-title={entry.data.title}
+              data-yt-type="longform"
             ></iframe>
           </div>
         </div>

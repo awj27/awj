@@ -91,6 +91,8 @@ const formId = `awj-subscribe-${Math.random().toString(36).slice(2, 9)}`;
 </style>
 
 <script>
+  import { track } from '../lib/analytics';
+
   document.querySelectorAll<HTMLFormElement>('form.awj-subscribe').forEach(form => {
     form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -98,10 +100,13 @@ const formId = `awj-subscribe-${Math.random().toString(36).slice(2, 9)}`;
       const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
       const msg = form.querySelector<HTMLElement>('.awj-subscribe__fineprint')!;
       const email = input.value.trim();
+      const tone = form.className.match(/awj-subscribe--(\w+)/)?.[1] ?? 'light';
+
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         form.dataset.state = 'error';
         msg.textContent = 'Please enter a valid email address.';
         input.focus();
+        track('subscribe_error', { reason: 'invalid_email', source: tone });
         return;
       }
       btn.disabled = true;
@@ -109,6 +114,8 @@ const formId = `awj-subscribe-${Math.random().toString(36).slice(2, 9)}`;
       btn.textContent = 'Subscribing…';
       msg.textContent = '';
       form.dataset.state = '';
+
+      track('subscribe_submit', { source: tone });
 
       try {
         const res = await fetch('/api/subscribe', {
@@ -122,17 +129,22 @@ const formId = `awj-subscribe-${Math.random().toString(36).slice(2, 9)}`;
           msg.textContent = data.message ?? "You're in. Check your inbox to confirm.";
           input.value = '';
           btn.textContent = 'Subscribed ✓';
+          // Server fires the canonical subscribe_success via Measurement
+          // Protocol; the client mirror helps with funnels in real-time.
+          track('subscribe_success', { source: tone });
         } else {
           form.dataset.state = 'error';
           msg.textContent = data.error ?? 'Subscription failed. Please try again.';
           btn.disabled = false;
           btn.textContent = original ?? 'Subscribe →';
+          track('subscribe_error', { reason: 'server_error', source: tone, status: res.status });
         }
       } catch {
         form.dataset.state = 'error';
         msg.textContent = 'Network error. Please try again.';
         btn.disabled = false;
         btn.textContent = original ?? 'Subscribe →';
+        track('subscribe_error', { reason: 'network_error', source: tone });
       }
     });
   });

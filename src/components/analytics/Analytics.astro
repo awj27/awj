@@ -1,0 +1,69 @@
+---
+// Loads Google Analytics 4 (gtag.js) and the Cloudflare Web Analytics
+// beacon. Renders nothing if env vars aren't set, so it's safe to deploy
+// before configuring analytics in Cloudflare.
+//
+// Consent: starts denied for analytics_storage. ConsentBanner.astro
+// updates to 'granted' on user accept. While denied, GA4 still receives
+// cookieless pings (modeled traffic) — this preserves baseline reporting
+// without storing identifiers. Returning visitors who already accepted
+// have analytics_storage granted on first paint via localStorage.
+//
+// Page-scoped event params (pillar, awj_number, page_type) are attached
+// to every subsequent event via gtag('set', ...) so video_play, scroll,
+// outbound_click etc. all carry the page context.
+
+interface Props {
+  pillar?: string;
+  awjNumber?: number;
+  pageType?: string;
+}
+
+const measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const cfBeaconToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+const { pillar, awjNumber, pageType } = Astro.props;
+
+const pageParams: Record<string, string | number> = {};
+if (pillar) pageParams.pillar = pillar;
+if (typeof awjNumber === 'number') pageParams.awj_number = awjNumber;
+if (pageType) pageParams.page_type = pageType;
+---
+{measurementId && (
+  <script define:vars={{ measurementId, pageParams }}>
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() { window.dataLayer.push(arguments); };
+
+    var consent = 'denied';
+    try {
+      if (localStorage.getItem('awj-consent') === 'granted') consent = 'granted';
+    } catch (e) { /* localStorage blocked */ }
+
+    window.gtag('consent', 'default', {
+      analytics_storage: consent,
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    });
+
+    window.gtag('js', new Date());
+
+    if (Object.keys(pageParams).length > 0) {
+      window.gtag('set', pageParams);
+    }
+
+    window.gtag('config', measurementId, {
+      anonymize_ip: true,
+      send_page_view: true,
+    });
+  </script>
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`} is:inline></script>
+)}
+
+{cfBeaconToken && (
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon={`{"token": "${cfBeaconToken}"}`}
+    is:inline
+  ></script>
+)}

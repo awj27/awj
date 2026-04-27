@@ -1,0 +1,140 @@
+---
+// Minimal cookie-consent banner. Two buttons (Accept / Decline), shown
+// only on first visit. Choice persists in localStorage('awj-consent').
+//
+// Accept  → gtag('consent', 'update', { analytics_storage: 'granted' })
+// Decline → leaves analytics_storage denied (GA stays in cookieless mode)
+//
+// Renders nothing if GA isn't configured (no point asking consent for a
+// non-tracking site).
+
+const measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+---
+{measurementId && (
+  <div id="awj-consent" class="awj-consent" hidden role="region" aria-label="Cookie consent">
+    <div class="awj-consent__inner">
+      <p class="awj-consent__copy">
+        AWJ uses minimal analytics to understand which essays land. Click
+        <strong>Accept</strong> to allow analytics cookies, or
+        <strong>Decline</strong> to keep things cookieless.
+        <a href="/privacy/" class="awj-consent__link">Privacy</a>
+      </p>
+      <div class="awj-consent__actions">
+        <button type="button" class="awj-consent__btn awj-consent__btn--decline" data-awj-consent="denied">
+          Decline
+        </button>
+        <button type="button" class="awj-consent__btn awj-consent__btn--accept" data-awj-consent="granted">
+          Accept
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .awj-consent {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      z-index: 9000;
+      background: var(--awj-black);
+      color: var(--awj-white);
+      border: 2px solid var(--awj-yellow);
+      box-shadow: 6px 6px 0 var(--awj-yellow);
+      padding: 20px 22px;
+      max-width: 760px;
+      margin: 0 auto;
+      animation: awj-consent-in 280ms var(--ease-out, cubic-bezier(.2,.8,.2,1));
+    }
+    .awj-consent[hidden] { display: none; }
+    @keyframes awj-consent-in {
+      from { transform: translateY(20px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .awj-consent__inner {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    @media (min-width: 760px) {
+      .awj-consent__inner {
+        flex-direction: row;
+        align-items: center;
+        gap: 24px;
+      }
+    }
+    .awj-consent__copy {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.5;
+      flex: 1;
+      color: var(--awj-white);
+    }
+    .awj-consent__copy strong { color: var(--awj-yellow); font-weight: 700; }
+    .awj-consent__link {
+      color: var(--awj-yellow);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      margin-left: 4px;
+    }
+    .awj-consent__link:hover { color: var(--awj-white); }
+    .awj-consent__actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .awj-consent__btn {
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+    }
+    .awj-consent__btn--decline {
+      background: transparent;
+      color: var(--awj-white);
+      border: 2px solid var(--awj-white);
+    }
+    .awj-consent__btn--decline:hover {
+      background: var(--awj-white);
+      color: var(--awj-black);
+    }
+    .awj-consent__btn--accept {
+      background: var(--awj-yellow);
+      color: var(--awj-black);
+      border: 2px solid var(--awj-yellow);
+    }
+    .awj-consent__btn--accept:hover {
+      background: var(--awj-white);
+      border-color: var(--awj-white);
+    }
+  </style>
+
+  <script is:inline>
+    (function () {
+      var KEY = 'awj-consent';
+      var banner = document.getElementById('awj-consent');
+      if (!banner) return;
+      var stored = null;
+      try { stored = localStorage.getItem(KEY); } catch (e) {}
+      if (!stored) {
+        // Slight delay so the banner doesn't flash before paint
+        setTimeout(function () { banner.removeAttribute('hidden'); }, 600);
+      }
+      banner.querySelectorAll('[data-awj-consent]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var choice = btn.getAttribute('data-awj-consent') || 'denied';
+          try { localStorage.setItem(KEY, choice); } catch (e) {}
+          if (typeof window.gtag === 'function') {
+            window.gtag('consent', 'update', {
+              analytics_storage: choice === 'granted' ? 'granted' : 'denied',
+            });
+          }
+          banner.setAttribute('hidden', '');
+        });
+      });
+    })();
+  </script>
+)}

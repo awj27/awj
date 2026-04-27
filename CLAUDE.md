@@ -146,6 +146,73 @@ Then push. The GitHub Action will create a draft post in Beehiiv automatically (
 | founder | Operator  | Bootstrap SaaS, trade-offs, no theatre | `#1F47FF` (blue)   |
 | human   | Truth     | Controlled lessons from failure, mental health, growth | `#0A0A0A` (black)  |
 
+## Analytics
+
+Two layers, both privacy-respecting:
+
+- **Cloudflare Web Analytics** — auto-attached to the Pages project (no JS).
+  Optional JS beacon adds Core Web Vitals + per-path engagement; enable by
+  setting `PUBLIC_CF_ANALYTICS_TOKEN` (Cloudflare → Web Analytics → site →
+  JS snippet token).
+- **Google Analytics 4** — gated behind a minimal cookie banner. Loaded
+  via `src/components/analytics/Analytics.astro`. Defaults to consent
+  denied; users who Accept get full data; users who Decline (or ignore)
+  stay in cookieless modeled mode. Set `PUBLIC_GA_MEASUREMENT_ID` in
+  Cloudflare Pages env vars.
+
+### Custom dimensions
+Registered in GA admin and set per-page via `<Layout>` props:
+- `pillar` (sales | founder | human) — passed from journal/pillar pages
+- `awj_number` (number) — passed from `/journal/[slug]`
+- `page_type` — passed from every top-level page
+
+### Events
+- `subscribe_submit` — fired client-side from `SubscribeForm.astro` on
+  form submit. `source` param indicates form variant (light/dark/yellow).
+- `subscribe_success` — canonical record fired **server-side** from
+  `functions/api/subscribe.ts` via Measurement Protocol after Beehiiv
+  accepts. Mirrored client-side too. Mark this as a Key Event in GA.
+- `subscribe_already` — Beehiiv reports email already subscribed.
+- `subscribe_error` — client-side validation failure or fetch error.
+- `video_play` / `video_progress` (25/50/75) / `video_complete` — fired
+  from `YouTubeTracker.astro` when YouTube embeds with `data-yt-track`
+  reach state milestones.
+
+### Server-side Measurement Protocol
+`src/lib/measurement-protocol.ts` exposes `sendMeasurementEvent()` for
+Cloudflare Functions. Required env vars (encrypted in CF Pages):
+- `PUBLIC_GA_MEASUREMENT_ID` (same as client)
+- `GA_API_SECRET` — from GA → Admin → Data Streams → [stream] → MP API
+  secrets
+
+Client IDs are derived from a hash of CF-Connecting-IP + UA — non-PII,
+stable across a session.
+
+### Adding tracking to a new YouTube embed
+On any iframe pointing at youtube-nocookie.com or youtube.com, add:
+```html
+<iframe
+  id="some-unique-id"        <!-- required -->
+  data-yt-track               <!-- enables tracking -->
+  data-yt-title="..."         <!-- optional, sent on events -->
+  data-yt-type="longform|short"  <!-- optional -->
+  src="..."
+  ...
+></iframe>
+```
+For pages that swap the playing video (the /media long-form and shorts
+players do this on thumb click), call:
+```js
+window.AWJYT.changeVideo('iframe-id', 'NEW_VIDEO_ID', { title, type });
+```
+instead of setting `iframe.src` directly. This preserves the YT IFrame
+API connection so events keep firing for the new video.
+
+### Privacy page
+`/privacy` covers what's collected and how to opt out. Linked from the
+consent banner. Update `lastUpdated` in `src/pages/privacy.astro` if
+analytics setup changes.
+
 ## Common deploy failure modes I should watch for
 
 - **Wrangler upload fails on >25MB file** — Cloudflare Pages caps at 25MiB. Compress (ffmpeg for video, sips for images).

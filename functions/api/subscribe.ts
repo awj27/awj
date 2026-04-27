@@ -12,11 +12,15 @@
 //
 // Encrypt the API key (toggle "Encrypt" when adding) — never plain text.
 
+import { sendMeasurementEvent } from '../../src/lib/measurement-protocol';
+
 interface Body { email?: string; }
 
 interface Env {
   BEEHIIV_API_KEY?: string;
   BEEHIIV_PUBLICATION_ID?: string;
+  PUBLIC_GA_MEASUREMENT_ID?: string;
+  GA_API_SECRET?: string;
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
@@ -63,6 +67,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   if (res.ok || res.status === 201) {
+    // Server-side conversion event — canonical record (bypasses consent-mode
+    // limits and runs even if the client closes the page mid-redirect).
+    await sendMeasurementEvent(context.env, context.request, {
+      name: 'subscribe_success',
+      params: { source: 'pages_function', referrer: referer },
+    });
     return json({ ok: true, message: "You're in. Check your inbox to confirm." });
   }
 
@@ -71,6 +81,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   try { detail = await res.text(); } catch {}
   // Common: 422 = invalid email or already-subscribed (treat as success-ish)
   if (res.status === 422 && /already/i.test(detail)) {
+    await sendMeasurementEvent(context.env, context.request, {
+      name: 'subscribe_already',
+      params: { source: 'pages_function', referrer: referer },
+    });
     return json({ ok: true, message: 'Already subscribed — thank you.' });
   }
   return json({ ok: false, error: 'Subscription failed. Try again or email hello@andywhyte.com.', detail }, 502);

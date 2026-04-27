@@ -46,6 +46,7 @@ const candidImages = [
 <Layout
   title="Media — AWJ"
   description="Videos and photos from Andy Whyte. Long-form essays, vertical Shorts, and behind-the-scenes."
+  pageType="media"
 >
   {/* HERO */}
   <section class="md-hero">
@@ -77,6 +78,9 @@ const candidImages = [
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen
+              data-yt-track
+              data-yt-title={featured.title}
+              data-yt-type="longform"
             ></iframe>
           </div>
           <div class="cinema__caption">
@@ -149,6 +153,9 @@ const candidImages = [
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen
+              data-yt-track
+              data-yt-title={featuredShort?.title}
+              data-yt-type="short"
             ></iframe>
           </div>
 
@@ -610,12 +617,24 @@ const candidImages = [
     const thumbs = document.querySelectorAll<HTMLLIElement>('.cinema__thumb');
     const filters = document.querySelectorAll<HTMLButtonElement>('.cinema__filter');
 
+    function loadCinemaVideo(id: string, title: string) {
+      // Prefer the YouTube IFrame API path so analytics tracking persists.
+      // Falls back to direct src assignment if the tracker isn't loaded
+      // (e.g. analytics disabled or API not yet ready).
+      const awjyt = (window as any).AWJYT;
+      if (awjyt && awjyt.changeVideo && awjyt.changeVideo('cinema-iframe', id, { title, type: 'longform' })) {
+        return;
+      }
+      if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+    }
+
     thumbs.forEach(thumb => {
       const btn = thumb.querySelector<HTMLButtonElement>('.cinema__thumb-btn');
       btn?.addEventListener('click', () => {
         const id = thumb.dataset.videoId!;
-        if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1`;
-        if (titleEl) titleEl.textContent = thumb.dataset.title ?? '';
+        const title = thumb.dataset.title ?? '';
+        loadCinemaVideo(id, title);
+        if (titleEl) titleEl.textContent = title;
         if (pillarEl) {
           pillarEl.textContent = thumb.dataset.pillarLabel ?? '';
           pillarEl.dataset.pillar = thumb.dataset.pillar ?? '';
@@ -649,12 +668,21 @@ const candidImages = [
     const thumbs = document.querySelectorAll<HTMLLIElement>('.shorts__thumb');
     const filters = document.querySelectorAll<HTMLButtonElement>('.shorts__filter');
 
+    function loadShortsVideo(id: string, title: string) {
+      const awjyt = (window as any).AWJYT;
+      if (awjyt && awjyt.changeVideo && awjyt.changeVideo('shorts-iframe', id, { title, type: 'short' })) {
+        return;
+      }
+      if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1&enablejsapi=1`;
+    }
+
     thumbs.forEach(thumb => {
       const btn = thumb.querySelector<HTMLButtonElement>('.shorts__thumb-btn');
       btn?.addEventListener('click', () => {
         const id = thumb.dataset.videoId!;
-        if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1`;
-        if (titleEl) titleEl.textContent = thumb.dataset.title ?? '';
+        const title = thumb.dataset.title ?? '';
+        loadShortsVideo(id, title);
+        if (titleEl) titleEl.textContent = title;
         if (pillarEl) {
           pillarEl.textContent = thumb.dataset.pillarLabel ?? '';
           pillarEl.dataset.pillar = thumb.dataset.pillar ?? '';

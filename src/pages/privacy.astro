@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+
+const lastUpdated = '27 April 2026';
+---
+<Layout
+  title="Privacy & cookies — AWJ"
+  description="How AWJ handles your data, cookies, and analytics. Plain English, no nonsense."
+>
+  <section class="pv">
+    <div class="content-shell pv__inner">
+      <Eyebrow>Privacy</Eyebrow>
+      <h1 class="pv__title awj-display">Privacy & cookies.</h1>
+      <p class="pv__lede">
+        Plain English. The short version: AWJ collects the minimum needed to know
+        which essays land. No ads, no data sold to anyone, no creepy stuff.
+      </p>
+      <p class="pv__updated">Last updated: {lastUpdated}</p>
+
+      <div class="pv__body prose">
+        <h2>What I collect</h2>
+        <p>Two analytics tools run on this site:</p>
+        <ul>
+          <li>
+            <strong>Cloudflare Web Analytics</strong> — privacy-first, cookieless.
+            Counts pageviews and referrers in aggregate. No cookies, no fingerprinting,
+            no personal data leaves your browser.
+          </li>
+          <li>
+            <strong>Google Analytics 4</strong> — only if you click Accept on the cookie
+            banner. Used to understand which essays are read, how far through, and
+            which subscribe forms convert. Your IP is anonymised before storage.
+            If you click Decline (or ignore the banner), GA runs in cookieless mode —
+            no cookies set, only aggregate signals retained.
+          </li>
+        </ul>
+
+        <h2>Newsletter (Beehiiv)</h2>
+        <p>
+          When you subscribe to the journal, your email is sent to
+          <a href="https://www.beehiiv.com/" rel="noopener" target="_blank">Beehiiv</a>,
+          which delivers the weekly entry. You can unsubscribe with one click from
+          any email. Beehiiv handles the data per their own
+          <a href="https://www.beehiiv.com/privacy" rel="noopener" target="_blank">privacy policy</a>.
+        </p>
+
+        <h2>Contact form</h2>
+        <p>
+          Messages sent via the contact form go to my inbox via
+          <a href="https://resend.com/" rel="noopener" target="_blank">Resend</a>.
+          I'll only use what you send me to reply.
+        </p>
+
+        <h2>Cookies in detail</h2>
+        <ul>
+          <li><strong>Strictly necessary:</strong> none beyond the consent choice itself
+            (stored in browser localStorage, not a cookie).</li>
+          <li><strong>Analytics (only after Accept):</strong> Google Analytics sets
+            <code>_ga</code>, <code>_ga_*</code>. Used for visit attribution and
+            returning-user identification. Retention: 14 months.</li>
+          <li><strong>Marketing / ads:</strong> none. AWJ doesn't run ads.</li>
+        </ul>
+
+        <h2>Your choices</h2>
+        <ul>
+          <li>Click <strong>Decline</strong> on the cookie banner — no cookies set.</li>
+          <li>Use Google's
+            <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener" target="_blank">opt-out browser add-on</a>
+            for site-wide opt-out across the web.</li>
+          <li>Email <a href="mailto:hello@andywhyte.com">hello@andywhyte.com</a> to
+            request access, correction, or deletion of any personal data I hold
+            (mainly your subscriber email, if applicable).</li>
+        </ul>
+
+        <h2>UK GDPR + PECR</h2>
+        <p>
+          AWJ is operated from the United Kingdom. The lawful basis for processing
+          subscriber emails is your consent (you opted in). The lawful basis for
+          analytics with your consent is also consent; in cookieless mode, it's
+          legitimate interest (aggregate site improvement, no personal data stored).
+          You can withdraw consent at any time by clicking Decline or clearing
+          your browser's localStorage for andywhyte.com.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Andy Whyte — <a href="mailto:hello@andywhyte.com">hello@andywhyte.com</a>.
+          For any data-protection question, that's the address.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .pv { padding: var(--sp-9) 0 var(--sp-9); }
+  .pv__inner { padding: 0 var(--gutter); }
+  .pv__title { margin: var(--sp-3) 0; font-size: clamp(48px, 8vw, 128px); line-height: 0.9; }
+  .pv__lede {
+    font-family: var(--font-body);
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.5;
+    color: var(--fg-2);
+    max-width: 60ch;
+    margin: 0 0 var(--sp-3);
+  }
+  .pv__updated {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--fg-3);
+    margin: 0 0 var(--sp-7);
+    text-transform: uppercase;
+  }
+  .pv__body { max-width: 70ch; }
+  .pv__body h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(28px, 3vw, 40px);
+    margin: var(--sp-7) 0 var(--sp-3);
+    letter-spacing: -0.005em;
+  }
+  .pv__body p, .pv__body li {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--fg-1);
+  }
+  .pv__body ul { padding-left: 1.2em; }
+  .pv__body li { margin: 0.4em 0; }
+  .pv__body a { color: var(--awj-blue); text-decoration: underline; text-underline-offset: 2px; }
+  .pv__body a:hover { color: var(--awj-black); }
+  .pv__body code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--awj-grey-100);
+    padding: 1px 6px;
+    border-radius: 2px;
+  }
+</style>
