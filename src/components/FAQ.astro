@@ -1,0 +1,139 @@
+---
+// FAQ — visible Q&A block + paired FAQPage JSON-LD schema in one component.
+// The visible markup is for readers; the schema is for AEO engines (ChatGPT,
+// Claude, Perplexity, Google AI Overviews) that extract Q&A pairs to cite as
+// answers.
+//
+// Pass `items` as an array of { q, a } where `a` is plain text (no HTML).
+// Optional `eyebrow` and `heading` override the defaults.
+
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FAQItem[];
+  eyebrow?: string;
+  heading?: string;
+}
+
+const { items, eyebrow = 'FAQs', heading = 'Frequently Asked Questions' } = Astro.props;
+---
+<section class="awj-faq" aria-labelledby="awj-faq-heading">
+  <div class="content-shell">
+    <p class="awj-faq__eyebrow">{eyebrow}</p>
+    <h2 id="awj-faq-heading" class="awj-faq__heading">{heading}</h2>
+    <ul class="awj-faq__list">
+      {items.map((item) => (
+        <li class="awj-faq__item">
+          <details>
+            <summary class="awj-faq__q">{item.q}</summary>
+            <div class="awj-faq__a">
+              {item.a.split('\n\n').map((p) => <p>{p}</p>)}
+            </div>
+          </details>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+})} />
+
+<style>
+  .awj-faq {
+    padding: var(--sp-9) 0;
+    border-top: var(--border-hard);
+    background: var(--awj-paper);
+    background-image: url('/assets/textures/paper_white.png');
+    background-size: cover;
+  }
+  .awj-faq__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-2);
+    margin: 0 0 var(--sp-2);
+  }
+  .awj-faq__heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.005em;
+    margin: 0 0 var(--sp-6);
+  }
+  .awj-faq__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1.5px solid var(--awj-black);
+  }
+  .awj-faq__item {
+    border-bottom: 1.5px solid var(--awj-black);
+  }
+  .awj-faq__item details {
+    background: transparent;
+  }
+  .awj-faq__item details[open] {
+    background: rgba(255, 206, 0, 0.08);
+  }
+  .awj-faq__q {
+    cursor: pointer;
+    list-style: none;
+    padding: var(--sp-5) var(--sp-5) var(--sp-5) 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    color: var(--awj-black);
+    position: relative;
+    padding-right: var(--sp-7);
+    transition: color var(--t-fast);
+  }
+  .awj-faq__q:hover { color: var(--awj-blue); }
+  .awj-faq__q::-webkit-details-marker { display: none; }
+  .awj-faq__q::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-size: 32px;
+    line-height: 1;
+    color: var(--awj-black);
+    transition: transform var(--t-fast);
+  }
+  .awj-faq__item details[open] .awj-faq__q::after {
+    content: '−';
+  }
+  .awj-faq__a {
+    padding: 0 var(--sp-7) var(--sp-5) 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--awj-ink);
+    max-width: 70ch;
+  }
+  .awj-faq__a p {
+    margin: 0 0 var(--sp-3);
+  }
+  .awj-faq__a p:last-child { margin-bottom: 0; }
+</style>

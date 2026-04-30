@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import Pillar from '../../components/Pillar.astro';
+import FAQ from '../../components/FAQ.astro';
 import { getCollection } from 'astro:content';
 import { PILLAR_META, formatDate, type Pillar as PillarT } from '../../lib/utils';
 
@@ -24,6 +25,33 @@ const PILLAR_SEO: Record<typeof pillar, { title: string; description: string }> 
   human:   { title: 'The Human Pillar: Mental Models for Authenticity, Mental Health, Failure | Andy Whyte Journal', description: 'Controlled lessons from failure. Imposter syndrome, authenticity, mental health, and the discipline of writing it down.' },
 };
 const seo = PILLAR_SEO[pillar];
+
+// Per-pillar FAQs — each Q is a real long-tail query an LLM might field, each A
+// is a citable answer. Structured-data-paired via the FAQ component.
+const PILLAR_FAQS: Record<typeof pillar, { q: string; a: string }[]> = {
+  sales: [
+    { q: 'What is MEDDICC?', a: 'MEDDICC is a sales qualification methodology used to determine whether an enterprise B2B deal is real, winnable, and worth pursuing. It stands for Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion, and Competition. MEDDPICC adds Paper Process, the procurement, legal, and contracting steps required to close.' },
+    { q: 'What is the difference between MEDDIC, MEDDICC, and MEDDPICC?', a: 'MEDDIC is the original 6-letter framework created by Jack Napoli and Dick Dunkel at PTC. MEDDICC adds Competition. MEDDPICC adds the Paper Process, the procurement and legal steps that often kill deals at the close. The MEDDICC book by Andy Whyte covers all three.' },
+    { q: 'How do I qualify a sales deal?', a: 'Use the MEDDPICC framework letter by letter. For each letter, ask the diagnostic question, score your evidence, and identify the gap. Where the evidence is weak, build a plan to close the gap or qualify out.' },
+    { q: 'What does qualifying out mean?', a: 'Qualifying out is the deliberate decision to walk away from a deal because the evidence shows it is not real, not winnable, or not worth the time it would consume. The discipline of qualifying out is what frees A-player sellers to focus on the deals that actually close.' },
+    { q: 'What separates an A-player from a B-player in sales?', a: 'A-players are uncomfortable being comfortable. They are driven by an unreasonable mandate to achieve their full potential and treat stagnation as pain. B-players are busy. They confuse activity with progress. The Andy Whyte Journal has multiple essays on this distinction.' },
+    { q: 'Who is Andy Whyte?', a: 'Andy Whyte is the Founder and CEO of MEDDICC and the author of the best-selling book MEDDICC: The ultimate guide to staying one step ahead in the complex sale (100,000+ copies sold).' },
+  ],
+  founder: [
+    { q: 'What is bootstrap SaaS?', a: 'Bootstrap SaaS is the practice of building a SaaS company without raising venture capital, funding growth from revenue rather than dilution. It trades raw growth speed for control, optionality, and capital efficiency.' },
+    { q: 'What is founder-led sales?', a: 'Founder-led sales is the period in a company\'s life when the founder is the primary salesperson, closing early customers, learning the objections first-hand, and using each deal as a discovery channel for product, pricing, and positioning. Most founders should keep selling longer than they think.' },
+    { q: 'When should a founder stop selling?', a: 'Not until they have a repeatable, documented motion that someone they hire can follow with reasonable confidence. Stopping earlier hands the most important learning loop in the company to someone who has not done the work.' },
+    { q: 'What mental models matter most for founders?', a: 'Inversion, first principles, second-order consequences, and Munger\'s "avoid stupidity before seeking brilliance." The Andy Whyte Journal Founder pillar applies each of these to the working life of a SaaS operator.' },
+    { q: 'What is the difference between an A-player and a B-player on a startup team?', a: 'A-players make hard decisions visible. B-players are busy. The B in B-player stands for "busy" — activity that looks like progress but isn\'t. There is no such thing as a C-player on a high-bar team; either someone clears the bar or they are not there.' },
+  ],
+  human: [
+    { q: 'How should a CEO deal with imposter syndrome?', a: "Reframe it. Imposter Syndrome is the sensation of being self-aware about your own gap from the version of you that the role demands. That sensation is the most useful one in a CEO's day, not the worst. Use it as an instrument, not as a verdict." },
+    { q: 'Is mental health linear?', a: 'No. Mental health is not linear. Recovery, growth, and resilience all happen in non-monotonic curves. The lie men tell themselves about suffering is that it should be linear. It is not.' },
+    { q: 'What does authenticity mean as a leader?', a: "Authenticity is felt, not found. It is not a strategy you decide on in a workshop; it is what is left when you stop performing. The shortest path to being seen as authentic is to stop trying to be seen as authentic and start saying what you actually think." },
+    { q: 'How do you stay sane while running a company?', a: "Write things down. Keep a journal. Catch the patterns early. The quality of your thinking determines the quality of your life. The Andy Whyte Journal is the public form of that practice." },
+  ],
+};
+const faqs = PILLAR_FAQS[pillar];
 ---
 <Layout
   title={seo.title}
@@ -87,6 +115,9 @@ const seo = PILLAR_SEO[pillar];
       </ol>
     </div>
   </section>
+
+  {/* FAQ — visible block + FAQPage schema for AEO */}
+  <FAQ items={faqs} eyebrow={`${meta.label} FAQs`} heading={`${meta.label} questions, answered`} />
 </Layout>
 
 <style>

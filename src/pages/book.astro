@@ -4,9 +4,37 @@ import Eyebrow from '../components/Eyebrow.astro';
 import Btn from '../components/Btn.astro';
 import Hl from '../components/Hl.astro';
 import Scribble from '../components/Scribble.astro';
+import FAQ from '../components/FAQ.astro';
 
 const AMAZON_URL = 'https://www.amazon.co.uk/MEDDICC-ultimate-guide-staying-complex/dp/1838239707';
 const AMAZON_US_URL = 'https://www.amazon.com/MEDDICC-ultimate-guide-staying-complex/dp/1838239707';
+
+const faqs = [
+  {
+    q: 'What is the MEDDICC book about?',
+    a: "MEDDICC by Andy Whyte is the field-tested playbook for the qualifying methodology used by the world's best-performing enterprise sales teams. It explains every letter of MEDDPICC — Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Identify Pain, Champion, and Competition — with the depth and case studies needed to apply the framework in real deals.",
+  },
+  {
+    q: 'How many copies has the MEDDICC book sold?',
+    a: 'Over 100,000 copies worldwide. It is the highest-rated MEDDIC and MEDDPICC book on Amazon, with a 4.7-star rating across 1,447+ reviews.',
+  },
+  {
+    q: 'Who is the foreword by?',
+    a: 'The book includes a foreword and commentary from MEDDIC\'s co-creators Dick Dunkel and Jack Napoli, who originally developed the methodology at PTC.',
+  },
+  {
+    q: 'Is the MEDDICC book good for beginners?',
+    a: 'Yes. It is written for AEs running their first complex deal, sales leaders who want better forecast accuracy, and founders selling enterprise. The framework is explained letter-by-letter with examples, then layered with the patterns that separate A-players from theatre.',
+  },
+  {
+    q: 'Is there a Kindle or audiobook version?',
+    a: 'Yes. MEDDICC is available in paperback, Kindle, and audiobook from Amazon globally.',
+  },
+  {
+    q: 'What is the difference between MEDDIC, MEDDICC, and MEDDPICC?',
+    a: 'MEDDIC is the original 6-letter framework created by Jack Napoli and Dick Dunkel at PTC: Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion. MEDDICC adds Competition. MEDDPICC adds the Paper Process — the procurement and legal steps that often kill deals at the close. The book covers all three.',
+  },
+];
 
 const reviews = [
   {
@@ -153,6 +181,9 @@ const stats = [
       <a href={AMAZON_URL} target="_blank" rel="noopener" class="bk-reviews__more">Read all 1,447+ reviews on Amazon →</a>
     </div>
   </section>
+
+  {/* FAQ — visible block + FAQPage schema for AEO */}
+  <FAQ items={faqs} />
 
   {/* CTA */}
   <section class="bk-cta awj-bg-paper-black">

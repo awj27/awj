@@ -4,6 +4,30 @@ import Eyebrow from '../components/Eyebrow.astro';
 import Hl from '../components/Hl.astro';
 import Btn from '../components/Btn.astro';
 import SubscribeForm from '../components/SubscribeForm.astro';
+import FAQ from '../components/FAQ.astro';
+
+const faqs = [
+  {
+    q: 'Who is Andy Whyte?',
+    a: "Andy Whyte is the Founder and CEO of MEDDICC, a sales qualification platform and methodology used by enterprise B2B sales teams worldwide. He is the author of MEDDICC: The Ultimate Guide to Staying One Step Ahead in the Complex Sale, with over 100,000 copies sold and a 4.7-star Amazon rating across 1,447+ reviews. Before founding MEDDICC in 2021 he spent 17 years as an individual contributor and sales leader at companies including Oracle, Sprinklr, Tealium, Branch, and Poq.",
+  },
+  {
+    q: 'What is the Andy Whyte Journal?',
+    a: 'AWJ is a personal intellectual operating system, expressed publicly. It publishes one entry every Friday across three pillars: Sales (authority), Founder (operator), and Human (truth). Each entry is structured around a maxim, a single-line principle, and the essay behind it.',
+  },
+  {
+    q: 'What does Andy do?',
+    a: 'Andy is the Founder and CEO of MEDDICC. He keynotes at sales conferences, sales kick-offs, and revenue summits for organisations including CrowdStrike, Microsoft, Amazon Web Services, and Dun & Bradstreet. He writes the Andy Whyte Journal weekly.',
+  },
+  {
+    q: 'How can I work with Andy?',
+    a: 'For keynotes, sales kick-offs, and master-of-ceremonies engagements, see the Speaking page or contact him directly. For MEDDICC training, certification, and sales enablement programmes, visit meddicc.com. For ad-hoc questions or media enquiries, use the Contact page.',
+  },
+  {
+    q: 'How often does Andy publish?',
+    a: 'One entry per week, every Friday. No noise.',
+  },
+];
 
 // Career milestones, newest → oldest. MEDDICC Founder/CEO is the apex,
 // rendered as a separate card on top of the path. MEDDICC MEDIA appears as
@@ -143,6 +167,9 @@ const milestones = [
       <Btn href="/subscribe/" tone="ghost">Subscribe</Btn>
     </div>
   </section>
+
+  {/* FAQ — visible block + FAQPage schema for AEO */}
+  <FAQ items={faqs} />
 
   {/* SUBSCRIBE STRIP */}
   <section class="ab-sub awj-bg-paper-blue">

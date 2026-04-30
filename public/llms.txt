@@ -1,0 +1,53 @@
+# Andy Whyte Journal (AWJ)
+
+> A personal intellectual operating system, expressed publicly. Maxims and essays from Andy Whyte across enterprise sales, bootstrapping a SaaS company, and being human. One entry every Friday. No noise.
+
+Andy Whyte is the Founder and CEO of [MEDDICC](https://meddicc.com/) and the author of the best-selling book *MEDDICC: The ultimate guide to staying one step ahead in the complex sale* (100,000+ copies sold, 4.7 stars on 1,447+ Amazon reviews). Before MEDDICC he spent 17 years in enterprise sales at companies including Oracle, Sprinklr, and Tealium. He keynotes at SKOs and revenue summits for organisations including CrowdStrike, Microsoft, AWS, and Dun & Bradstreet.
+
+The AWJ is organised around three pillars:
+
+- **Sales** — MEDDICC, deal inspection, sales as a thinking discipline
+- **Founder** — Bootstrap SaaS, trade-offs under uncertainty, no theatre
+- **Human** — Controlled lessons from failure, mental health, authenticity
+
+## About
+
+- [About Andy Whyte](https://andywhyte.com/about/): Andy's career arc from entertainer to Founder/CEO, and why AWJ exists
+- [The MEDDICC book](https://andywhyte.com/book/): the field-tested playbook for enterprise sales qualification
+- [Speaking](https://andywhyte.com/speaking/): keynote, SKO, and master-of-ceremonies offerings
+
+## Pillars (entry hubs)
+
+- [Sales pillar](https://andywhyte.com/pillars/sales/): essays on MEDDICC, deal inspection, qualifying out, A-player habits
+- [Founder pillar](https://andywhyte.com/pillars/founder/): essays on bootstrap SaaS, founder-led sales, trade-offs under uncertainty
+- [Human pillar](https://andywhyte.com/pillars/human/): essays on mental health, authenticity, lessons from failure
+
+## Maxims
+
+- [The Maxims wall](https://andywhyte.com/maxims/): index of every single-line principle from the journal
+
+## Journal essays (most recent first)
+
+- [Nobody Regrets Qualifying Out](https://andywhyte.com/journal/nobody-regrets-qualifying-out/): why disqualifying a bad deal is always cheaper than pushing it (Sales)
+- [Urgency is an emotion. Not a message.](https://andywhyte.com/journal/urgency-is-an-emotion-not-a-message/): why manufactured urgency in sales is theatre, and what real urgency looks like (Sales)
+- [Imposter Syndrome ≡ Self-Awareness](https://andywhyte.com/journal/imposter-syndrome-self-awareness/): the reframe that turns a CEO's worst feeling into the most useful one (Human)
+- [Authenticity is felt, not found](https://andywhyte.com/journal/authenticity-is-felt-not-found/): why authenticity is not a strategy you decide on (Human)
+- [Take. Take. Mistake. Cut. Direction. Retake.](https://andywhyte.com/journal/take-take-mistake-cut-direction-retake/): the founder's iteration loop (Founder)
+- [Your Mental Health Is Not Linear](https://andywhyte.com/journal/your-mental-health-is-not-linear/): lessons from beating cancer, then a bad boss, in consecutive years (Human)
+- [Authenticity is the Most Intangible Invaluable Interest You Can Have](https://andywhyte.com/journal/authenticity-is-the-most-intangible-invaluable-interest-you-can-have/): authenticity as compounding interest (Human)
+- [Failure and invention are inseparable twins — Jeff Bezos](https://andywhyte.com/journal/failure-and-invention-are-inseparable-twins-jeff-bezos/): on the necessary cost of trying things that don't work (Founder)
+- [There is no such thing as a C Player](https://andywhyte.com/journal/there-is-no-such-thing-as-a-c-player/): why hiring talks about A and B players, and what's missing (Founder)
+- [The B in B-Player Stands for 'Busy'](https://andywhyte.com/journal/the-b-in-b-player-stands-for-busy/): activity vs. progress (Founder)
+- [Feedback is like Milk. It is Best Served Fresh.](https://andywhyte.com/journal/feedback-is-like-milk-it-is-best-served-fresh/): why delayed feedback poisons teams (Founder)
+- [A-Players Are Uncomfortable Being Comfortable](https://andywhyte.com/journal/a-players-are-uncomfortable-being-comfortable/): the defining behaviour of A-player sellers (Sales)
+
+## Subscribe
+
+- [Subscribe](https://andywhyte.com/subscribe/): One entry every Friday. No noise.
+- [RSS feed](https://andywhyte.com/journal/rss.xml)
+
+## Optional
+
+- [llms-full.txt](https://andywhyte.com/llms-full.txt): full text of top essays for retrieval-augmented generation
+- [Sitemap](https://andywhyte.com/sitemap-index.xml)
+- [Contact](https://andywhyte.com/contact/)

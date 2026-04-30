@@ -1,0 +1,479 @@
+# Andy Whyte Journal — Full Essay Text (llms-full.txt)
+
+> Full text of every essay published on the Andy Whyte Journal,
+> formatted for LLM retrieval-augmented generation. Each essay is
+> introduced with its AWJ number, title, pillar, publication date,
+> and canonical URL.
+
+> Andy Whyte is the Founder and CEO of MEDDICC and the author of
+> the best-selling book MEDDICC: The ultimate guide to staying one
+> step ahead in the complex sale (100,000+ copies sold).
+
+> Source of truth: https://andywhyte.com/
+> Last updated: 2025-11-29
+> Essays included: 12
+
+---
+
+## AWJ #01: A-Players Are Uncomfortable Being Comfortable
+
+- Pillar: Sales
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/a-players-are-uncomfortable-being-comfortable/
+
+A-Players are Uncomfortable Being Comfortable.
+
+They are driven by an unreasonable, unforgiving, and unrelenting mandate to achieve the best version of themselves.
+
+They are only satisfied when moving at full pace toward their own potential.
+
+Stagnation is pain.
+
+The commitment is uncomfortable.
+
+The hunger.
+
+The constant, nagging...
+
+The toll of asking: "Am I doing enough?"
+
+The Impostor Syndrome.
+
+The demand for feedback.
+
+But...
+
+Replace it with comfort, and they'll become uncomfortable.
+
+Because A-Players are Uncomfortable Being Comfortable.
+
+Does this resonate with you?
+
+---
+
+## AWJ #02: Feedback is like Milk. It is Best Served Fresh.
+
+- Pillar: Founder
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/feedback-is-like-milk-it-is-best-served-fresh/
+
+“𝙁𝙚𝙚𝙙𝙗𝙖𝙘𝙠 𝙞𝙨 𝙡𝙞𝙠𝙚 𝙈𝙞𝙡𝙠. 𝙄𝙩 𝙞𝙨 𝙗𝙚𝙨𝙩 𝙛𝙧𝙚𝙨𝙝.” – [Faith Meyer](https://www.linkedin.com/in/faith-meyer/)
+
+My biggest failure as a leader was how bad I was at giving critical feedback.
+
+It was the main reason I enlisted a coach (👋 Faith).
+
+One of my failings was that I would procrastinate about giving critical feedback.
+
+I’d tell myself I was waiting for the perfect moment.
+
+I’d tell myself that I was gathering context to give better feedback.
+
+But I wasn’t doing anyone any favors by doing that.
+
+It was in these shenanigans that led Faith to come up with the metaphor that feedback is like milk, it’s best served fresh… It only sours with time.
+
+Obviously, there is a time and a place, but if you believe (𝘢𝘴 𝘺𝘰𝘶 𝘴𝘩𝘰𝘶𝘭𝘥) that feedback is a gift, then you should prioritize finding the time and place to give feedback.
+
+Because… “𝙁𝙚𝙚𝙙𝙗𝙖𝙘𝙠 𝙞𝙨 𝙡𝙞𝙠𝙚 𝙈𝙞𝙡𝙠. 𝙄𝙩 𝙞𝙨 𝙗𝙚𝙨𝙩 𝙛𝙧𝙚𝙨𝙝.”
+
+---
+
+## AWJ #03: The B in B-Player Stands for ‘Busy.
+
+- Pillar: Founder
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/the-b-in-b-player-stands-for-busy/
+
+The B in B-Player stands for “busy.”
+
+🙋‍♂️ Whereas A-Players focus on outcomes.
+
+They want clear goals and thrive on challenge, accountability, and measurable outcomes.
+
+They measure success by impact, not appearance.
+
+🙅‍♂️ B-Players focus on optics.
+
+They avoid clarity and dodge accountability.
+
+They fear exposure, resist change, and play it safe to stay liked and in control.
+
+Their energy goes to managing perception, not creating value.
+
+Busyness used to be camouflage for B-Players, but in the age of AI, the lights are on, and the differentiator isn’t effort, it’s initiative.
+
+Gone are the days when signalling busyness is a badge of honor.
+
+Today, it’s the opposite: if you’re not automating, delegating, or eliminating tasks, you’ll look like a Luddite, not a legend.
+
+B-Players are not competing with coworkers anymore. They are competing with machines and the humans who know how to use them.
+
+It is not about how hard you work. It’s about how you measure and communicate your impact.
+
+A-Players don’t talk about how busy they are because it’s a moot point. They manage their schedules in accordance with their energy, bandwidth, and prioritize impact.
+
+A-Players don’t talk about how busy they are the same way as Jordan, Williams, Hamilton, Messi, Biles, etc don’t talk about how long they spend on the court/gym/simulator/track… They talk about the impact. The wins. The championships, titles, and medals.
+
+Am I wrong? Is there someone you class as an A-Player who talks about how busy they are?
+
+Question: If the B in B-Player stands for ‘busy’, then what does the A in A-Player stand for?
+
+---
+
+## AWJ #04: There is no such thing as a C Player.
+
+- Pillar: Founder
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/there-is-no-such-thing-as-a-c-player/
+
+There is no such thing as a C Player.
+
+Or at least, there shouldn’t be.
+
+You’re either an A Player or you are a B Player, with or without the potential to be an A Player.
+
+Professional sports teams wouldn’t have any space for C Players, so why should your GTM team?
+
+This lens does require two considerations:
+
+1️⃣ – Your A Player rating is relative to the level of your role. For example, you could have a junior and senior AE who are both A Players. The junior AE with 1 year of experience isn’t going to be as strong as the senior AE with 10+ years of experience.
+
+You rate them relative to their position.
+
+2️⃣ – Being an A Player is subject to form.  There’s literally a phrase for it: ‘Bringing your A game.’
+
+Even the greatest performers can fall out of form.
+
+This is why a critical part of creating the environment for a winning team is to create a place where A Players can thrive.
+
+Help the A and B+ Players in your team to thrive by:
+🔋 Focusing on their growth – empowering their growth mindset with a roadmap
+
+🔋 Removing barriers that slow them down (𝙐𝙣𝙥𝙤𝙥𝙪𝙡𝙖𝙧 𝙤𝙥𝙞𝙣𝙞𝙤𝙣: 𝘵𝘩𝘦 ‘𝘣𝘢𝘳𝘳𝘪𝘦𝘳𝘴’ 𝘵𝘦𝘯𝘥 𝘵𝘰 𝘣𝘦 𝘵𝘩𝘦 𝘉− 𝘗𝘭𝘢𝘺𝘦𝘳𝘴)
+
+🔋 Enthusing them with recognition and rewards (𝘯𝘰𝘵 𝘫𝘶𝘴𝘵 $$$)
+
+There is obviously a great deal of depth to each of the above, but it’s not overly complicated.
+
+Yet, one thing I don’t think we discuss enough is how disproportionately leaders focus their time on the non-A players in their team.
+
+If leaders were forced to profile their team:
+• A Player – 🥇.
+• B+ Player – Has potential to be an A, 𝗢𝗥 is out of form.
+• B− Player – Does not have the potential to be an A.
+
+How much of their time is w̶a̶s̶t̶e̶d̶ spent on the B− Players? 🤔
+
+---
+
+## AWJ #05: Failure and invention are inseparable twins – Jeff Bezos
+
+- Pillar: Founder
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/failure-and-invention-are-inseparable-twins-jeff-bezos/
+
+Failure and invention are inseparable twins – Jeff Bezos
+
+Not going to lie…
+
+This one is ironic.
+
+I love the notion of breaking a concept down into a maxim and have been capturing my favorites in a notebook.
+
+The idea was that I’d have a purpose-created small notebook to remind me of my favorite maxims.
+
+In my head, I’d have this perfect book of maxims in order… Yet I accidentally skipped a page.
+
+1, 2, 3, 5, 4 🙈
+
+I thought I could fix it with a maxim from Bezos about failure.
+
+It would be sweetly ironic.
+
+Then, when writing it out, I made a spelling mistake.
+
+Perfect 😂.
+
+---
+
+## AWJ #06: Authenticity is the Most Intangible Invaluable Interest You Can Have
+
+- Pillar: Human
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/authenticity-is-the-most-intangible-invaluable-interest-you-can-have/
+
+I just got back from a few days in the South of France, and I was struck by how little authenticity I saw.
+
+By the pool, people would show up, strip down, stage an iPhone photoshoot, and leave, without ever enjoying the sun or the water.
+
+Outside Louis Vuitton, queues formed not to shop, but to capture the perfect “walking by” shot for their followers.
+
+What shocked me most wasn’t the posing itself, but the effort to make it all look unplanned, re-shot again and again until it looked “natural.”
+
+The lack of authenticity was staggering. Who are they trying to fool?
+
+Has authenticity lost its value, or have people just stopped caring? 🤔
+
+I don’t think it’s either. Authenticity has always been the highest-value asset… It’s just intangible. And in today’s world, egos crave tangible validation: likes, views, clicks.
+
+The problem? Inauthenticity doesn’t create advocacy or loyalty. The moment the stream of ego-driven content dries up, so does the audience.
+
+On LinkedIn, the same thing happens. It’s not staged photos but the self-congratulatory headlines: “I took the company from $x to $xxx” (as one of hundreds) or claiming to be the savior of their industry.
+
+If there were a way to measure the long-term cost of inauthenticity, I bet many would stop and choose the harder, but more sustainable path: being their true selves.
+
+Yet, unfortunately, I don’t think we’ve hit peak nonsense yet. 🤦‍♂️
+
+So, instead of posting the shot of me sipping the perfect rosé in my swimming trunks that I know you all want (🤥), here’s a Maxim I think of a lot to stay aligned with genuine authenticity 🙅‍♂️📸🩲:
+
+---
+
+## AWJ #07: Your Mental Health is not Linear
+
+- Pillar: Human
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/your-mental-health-is-not-linear/
+
+Your Mental Health is not Linear.
+
+Suicide is the leading cause of death for men under 50.
+
+And several different data sources suggest that a major reason for this rate being so high in men is due to a ‘communication gap,’ with the rationale being that men are less likely to communicate their struggles.
+
+I believe a big contributing factor is the belief that mental health is tied directly to circumstances, that your emotional state should neatly match how “good” or “bad” your life looks.
+
+Society reinforces this idea, yet evidence shows otherwise: people who appear to “have it all” still suffer deeply, and sometimes tragically.
+
+The problem is that this doesn’t make sense on the surface, so people don’t talk about it. Especially men.
+
+We convince ourselves our feelings aren’t valid unless our circumstances are “bad enough.” And so we stay silent.
+
+I only realised this truth because of an extreme circumstance:
+
+In 2018, I had cancer. It sucked. But thanks to the incredible NHS, I recovered.
+
+Not long after, I got a new boss… and without going into details, they were bad, 𝗥𝗘𝗔𝗟 𝗕𝗔𝗗.
+
+Strangely, I found myself more depressed in that situation than I had been facing a potentially life-threatening disease.
+
+Which I know makes no sense.
+
+But that’s how I felt.
+
+And you can’t control how you feel.
+
+Looking back, I see it as a gift. Because it taught me this truth: your mental health is not linear.
+
+Just because your circumstances don’t “seem that bad” doesn’t mean your feelings aren’t real.
+
+And here’s the danger: when we believe they should be linear, we convince ourselves we don’t have the “right” to feel bad, and so we don’t talk.
+
+We bottle it up.
+
+And for too many men, that silence is fatal.
+
+That’s why recognising your emotions, without minimising or suppressing them, is so important.
+
+Because only then can you take the steps that help you feel better.
+
+So the next time you’re feeling low, remember: your emotions don’t need to be justified by your circumstances. They are real, valid, and deserving of your care.
+
+Sometimes all you need is four words: “Fancy a pint, mate?”
+
+Be kind to yourself, friends.
+
+🫶
+
+---
+
+## AWJ #08: Take. Take. Mistake. Cut. Direction. Retake.
+
+- Pillar: Founder
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/take-take-mistake-cut-direction-retake/
+
+𝗧𝗮𝗸𝗲. 𝗧𝗮𝗸𝗲. 𝗠𝗶𝘀𝘁𝗮𝗸𝗲. 𝗖𝘂𝘁. 𝗗𝗶𝗿𝗲𝗰𝘁𝗶𝗼𝗻. 𝗥𝗲𝘁𝗮𝗸𝗲.
+
+Life’s made of takes.
+
+A mistake isn’t failure.
+
+It’s feedback.
+
+What matters is how you respond when the scene cuts.
+
+Surround yourself with those who’ll give you direction.
+
+Be coachable enough to adopt it.
+
+So when it’s time to retake, you ace it.
+
+---
+
+## AWJ #09: Authenticity is felt, not found.
+
+- Pillar: Human
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/authenticity-is-felt-not-found/
+
+Authenticity is felt, not found.
+
+Oxford University ran an experiment.
+
+They scanned people’s brains while showing them Rembrandt paintings.
+
+But there was a trick!…
+
+Some were genuine.
+
+Some were fakes.
+
+…and the participants didn’t know which was which.
+
+When people believed they were looking at a real Rembrandt, their brains lit up 🤩.
+
+When they thought it was a fake, their brains stayed flat 😑.
+
+But as you have probably guessed, sometimes the “authentic” ones were actually fake and vice versa.
+
+The only thing that changed was the story people were told.
+
+The perception of authenticity matters more than the authenticity itself. It’s the meaning we attach that gives feeling.
+
+That’s why this maxim holds true:
+𝗔𝘂𝘁𝗵𝗲𝗻𝘁𝗶𝗰𝗶𝘁𝘆 𝗶𝘀 𝗳𝗲𝗹𝘁, 𝗻𝗼𝘁 𝗳𝗼𝘂𝗻𝗱.
+
+You can’t manufacture authenticity. Regardless of bold claims you may make or certifications you may have.
+
+It’s belief that defines authenticity and how the person inherently feels.
+
+So whether you’re building a brand, creating, or leading a team, remember:
+
+Authenticity lives in the hearts and minds of others, not just in the facts they find.
+
+---
+
+## AWJ #10: Imposter Syndrome ≡ Self-Awareness
+
+- Pillar: Human
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/imposter-syndrome-self-awareness/
+
+“Imposter Syndrome ≡ Self-Awareness”
+
+Only the self-aware suffer from imposter syndrome.
+
+Everyone I’ve spoken to about this observation agrees.
+
+But I feel like this focuses too much on the ‘syndrome’ and not the ‘imposters’ that cause it.
+
+I am 𝗡𝗢𝗧 talking about people with imposter syndrome, as the imposters…
+
+I’m talking about the 𝗔𝗖𝗧𝗨𝗔𝗟 imposters who are the reason self-aware people get imposter syndrome.
+
+Because, without 𝗔𝗖𝗧𝗨𝗔𝗟 imposters, those out there overselling themselves, claiming success they didn’t authentically achieve, and bigging themselves up beyond their worth, there would be no Imposter Syndrome.
+
+Think about it…
+
+When you feel imposter syndrome, you worry that people are judging you negatively…
+
+💁‍♂️ “𝙒𝙝𝙤 𝙙𝙤𝙚𝙨 𝙝𝙚 𝙩𝙝𝙞𝙣𝙠 𝙝𝙚 𝙞𝙨?…”
+
+💁‍♂️ “𝙃𝙚 𝙨𝙝𝙤𝙪𝙡𝙙𝙣’𝙩 𝙗𝙚 𝙞𝙣 𝙩𝙝𝙞𝙨 𝙧𝙤𝙤𝙢…”
+
+💁‍♂️ “𝘾𝙡𝙚𝙖𝙧𝙡𝙮, 𝙝𝙚’𝙨 𝙤𝙪𝙩 𝙤𝙛 𝙝𝙞𝙨 𝙙𝙚𝙥𝙩𝙝…”
+
+But you only think that because you know it’s what people think about 𝗔𝗖𝗧𝗨𝗔𝗟 imposters.
+
+Not you!
+
+By virtue of you having imposter syndrome, you are actually not an imposter. It wouldn’t be a syndrome if you were…!
+
+As a self-aware person, you only get imposter syndrome when you are growing.
+
+It’s the uncertainty of growing into uncharted territory of your potential that brings on the imposter syndrome…
+
+And that’s Okay. As long as you are kind to yourself and don’t let it hold you back.
+
+Your imposter syndrome is a skill. A strength. An indicator of your emotional intelligence.
+
+And in this ever-inauthentic world, where unearned egos go unchecked, your authenticity will become your number one intangible asset.
+
+P.S. Does anyone else’s spelling go out of the window when you are concentrating on your handwriting? 🤦‍♂️
+
+---
+
+## AWJ #11: Urgency is an emotion. Not a message.
+
+- Pillar: Sales
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/urgency-is-an-emotion-not-a-message/
+
+Urgency is an emotion. Not a message.
+
+I’ve lost count of how many times I’ve heard sales leaders lament a “lack of urgency.”
+
+But urgency is an emotion.
+
+You can’t email an emotion.
+
+You can’t tell people to be urgent.
+
+Urgency must be created.
+
+It’s built on how leaders behave.
+
+True urgency is a determination that every moment matters.
+
+It creates energy that creates focus.
+
+It forces people to shed low-priority work.
+
+It laughs in the face of complacency.
+
+It plays to the watch, not the calendar.
+
+It is not panic. It is not performative busyness. It has no time for appearances.
+
+Nobody can teach you how to be urgent.
+
+But there are requirements:
+
+There must be a genuine truth in the urgency.
+
+There must be consistency in the urgency.
+
+There must be clear communication surrounding the urgency:
+• The consequences of being ‘un-urgent’ must be clear.
+• The goal/endpoint of the urgency must be clear.
+• Everyone’s commitments must be clear. There is no room for vague expectation.
+
+And above all else, urgency must be authentic.
+
+---
+
+## AWJ #12: Nobody Regrets Qualifying Out
+
+- Pillar: Sales
+- Date: 2025-11-29
+- URL: https://andywhyte.com/journal/nobody-regrets-qualifying-out/
+
+“Nobody Regrets Qualifying Out”
+
+Initially, a phrase I coined to encourage salespeople that qualifying out was not something they’d regret doing.
+
+Either they were right, and the opportunity wasn’t worth pursuing, or qualifying out would correct the customer’s behavior and result in them treating the engagement with more respect.
+
+But as time has gone on, I’ve noticed the maxim applies to much more than just sales.
+
+I’ve not regretted qualifying out of parties I didn’t want to go to.
+
+I’ve not regretted qualifying out of ‘friendships’ I felt weren’t genuine.
+
+I’ve not regretted qualifying out of a job with a bad manager.
+
+What have you not regretted qualifying out of?
+
+---
+

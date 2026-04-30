@@ -4,6 +4,34 @@ import Eyebrow from '../components/Eyebrow.astro';
 import Btn from '../components/Btn.astro';
 import Hl from '../components/Hl.astro';
 import Scribble from '../components/Scribble.astro';
+import FAQ from '../components/FAQ.astro';
+
+const faqs = [
+  {
+    q: 'Does Andy Whyte do sales kick-off keynotes?',
+    a: 'Yes. SKO keynotes are one of three speaking formats Andy offers, alongside conference keynotes and master-of-ceremonies engagements. Recent stages include CrowdStrike, Microsoft, Amazon Web Services, and Dun & Bradstreet.',
+  },
+  {
+    q: 'Where has Andy spoken recently?',
+    a: 'Recent stages include CrowdStrike, Microsoft, Amazon Web Services, and Dun & Bradstreet. He has also delivered keynotes for Net Health, MRI Software, and Arctic Wolf Networks.',
+  },
+  {
+    q: 'Is Andy Whyte available for virtual keynotes?',
+    a: 'Yes. Andy keynotes both in-person globally and virtually for SKOs, leadership offsites, and revenue summits.',
+  },
+  {
+    q: 'What is a typical Andy Whyte SKO session?',
+    a: 'A bespoke session built around the client team\'s actual deals, stage gates, and objection patterns. Designed to go deeper than a generic keynote: the team leaves with frameworks they can apply on Monday, not motivational soundbites that fade by Tuesday.',
+  },
+  {
+    q: 'What is the KEYGOAT?',
+    a: 'The KEYGOAT mindset: it is not that we think we are the greatest keynote speakers of all time, it is that we treat every single keynote like it has to be the greatest of all time. Painstakingly curated, wildly creative, and engineered to send every audience member out fired up to take immediate action.',
+  },
+  {
+    q: 'How do I book Andy to speak?',
+    a: 'Use the Contact page with topic "Speaking" or email directly. Andy speaks on enterprise sales, MEDDICC, sales as a thinking discipline, and the patterns that separate A-players from theatre.',
+  },
+];
 
 const services = [
   { icon: '/media/icons/keynote-icon.webp', title: 'Keynote',           blurb: 'A 30–60 minute talk built around the MEDDICC framework — the principles, the failure modes, and the patterns that separate A-players from theatre.' },
@@ -164,6 +192,9 @@ const logos = [
       </ul>
     </div>
   </section>
+
+  {/* FAQ — visible block + FAQPage schema for AEO */}
+  <FAQ items={faqs} />
 
   {/* CTA */}
   <section class="sp-cta awj-bg-paper-black">
