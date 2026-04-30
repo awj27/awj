@@ -1,0 +1,116 @@
+---
+// AuthorBio — about-the-author block for the foot of journal essays.
+// Pulls double-duty: gives readers a who-am-I anchor, and sends an
+// authoritative author-link signal to search engines and LLMs.
+---
+<aside class="awj-author" aria-label="About the author">
+  <img
+    src="/media/portrait/andy-portrait.jpg"
+    alt="Andy Whyte, Founder and CEO of MEDDICC"
+    class="awj-author__photo"
+    loading="lazy"
+    decoding="async"
+    width="96"
+    height="96"
+  />
+  <div class="awj-author__body">
+    <p class="awj-author__heading">About the author</p>
+    <p class="awj-author__name">
+      <a href="/about/">Andy Whyte</a>
+    </p>
+    <p class="awj-author__bio">
+      Founder and CEO of <a href="https://meddicc.com/" rel="noopener">MEDDICC</a> and
+      author of the best-selling book <a href="/book/">MEDDICC: The ultimate guide to
+      staying one step ahead in the complex sale</a> (100,000+ copies sold, 4.7&#x2605;).
+      17 years in enterprise sales before founding MEDDICC in 2021.
+      Writes the Andy Whyte Journal weekly.
+    </p>
+    <p class="awj-author__cta">
+      <a href="/about/">Read Andy's full story</a>
+      <span aria-hidden="true">·</span>
+      <a href="/speaking/">Book Andy to speak</a>
+    </p>
+  </div>
+</aside>
+
+<style>
+  .awj-author {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: var(--sp-4);
+    align-items: start;
+    padding: var(--sp-5) var(--sp-5);
+    background: var(--awj-paper);
+    background-image: url('/assets/textures/paper_white.png');
+    background-size: cover;
+    border: var(--border-hard);
+    box-shadow: 4px 4px 0 var(--awj-black);
+    margin: var(--sp-5) 0;
+  }
+  @media (max-width: 540px) {
+    .awj-author {
+      grid-template-columns: 1fr;
+      gap: var(--sp-3);
+    }
+  }
+  .awj-author__photo {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    object-position: center top;
+    border: 2px solid var(--awj-black);
+    border-radius: 50%;
+    filter: grayscale(1) contrast(1.05);
+  }
+  .awj-author__body { min-width: 0; }
+  .awj-author__heading {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-2);
+    margin: 0 0 4px;
+  }
+  .awj-author__name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(22px, 3vw, 28px);
+    line-height: 1;
+    margin: 0 0 var(--sp-3);
+    letter-spacing: -0.005em;
+  }
+  .awj-author__name a { color: var(--awj-black); text-decoration: none; }
+  .awj-author__name a:hover { background: var(--awj-yellow); }
+  .awj-author__bio {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--awj-ink);
+    margin: 0 0 var(--sp-3);
+  }
+  .awj-author__bio a {
+    color: var(--awj-black);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 2px;
+  }
+  .awj-author__bio a:hover { background: var(--awj-yellow); }
+  .awj-author__cta {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+  .awj-author__cta a {
+    color: var(--awj-black);
+    text-decoration: none;
+    border-bottom: 2px solid var(--awj-black);
+    padding-bottom: 1px;
+  }
+  .awj-author__cta a:hover { color: var(--awj-blue); border-color: var(--awj-blue); }
+</style>

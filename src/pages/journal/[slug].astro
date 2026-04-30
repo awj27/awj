@@ -6,8 +6,9 @@ import Pillar from '../../components/Pillar.astro';
 import Scribble from '../../components/Scribble.astro';
 import Signature from '../../components/Signature.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
+import AuthorBio from '../../components/AuthorBio.astro';
 import { getCollection, render } from 'astro:content';
-import { formatIssueDate, readingTime } from '../../lib/utils';
+import { formatIssueDate, readingTime, PILLAR_META } from '../../lib/utils';
 
 export async function getStaticPaths() {
   const entries = await getCollection('journal', e => !e.data.draft);
@@ -21,9 +22,20 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const issue = formatIssueDate(entry.data.modified ?? entry.data.date);
 const rt = readingTime(entry.body ?? '');
+
+// "Read next" — pick up to 3 sibling essays from the same pillar, then top up
+// from the rest of the journal if the pillar is thin. Excludes the current
+// entry. Surfaces editorial cluster context for both readers and crawlers.
+const allEntries = (await getCollection('journal', e => !e.data.draft))
+  .filter(e => e.id !== entry.id)
+  .sort((a, b) => b.data.awj_number - a.data.awj_number);
+const samePillar = allEntries.filter(e => e.data.pillar === entry.data.pillar);
+const otherPillars = allEntries.filter(e => e.data.pillar !== entry.data.pillar);
+const readNext = [...samePillar, ...otherPillars].slice(0, 3);
+const pillarLabel = PILLAR_META[entry.data.pillar].label;
 ---
 <Layout
-  title={`${entry.data.title} — AWJ #${entry.data.awj_number}`}
+  title={`${entry.data.title}: ${pillarLabel} | Andy Whyte Journal`}
   description={entry.body?.slice(0, 160) ?? entry.data.title}
   ogImage={`/media/awj${entry.data.awj_number}.webp`}
   pillar={entry.data.pillar}
@@ -80,6 +92,37 @@ const rt = readingTime(entry.body ?? '');
       </div>
     </section>
 
+    {/* About the author — anchors authorship for readers and search/AI engines. */}
+    <section class="entry__author">
+      <div class="content-shell">
+        <AuthorBio />
+      </div>
+    </section>
+
+    {/* Read next — 3 sibling essays. Internal-link signal + reader retention. */}
+    {readNext.length > 0 && (
+      <section class="entry__readnext">
+        <div class="content-shell">
+          <Eyebrow>Read next</Eyebrow>
+          <ul class="entry__readnext-grid">
+            {readNext.map(e => (
+              <li class="entry__readnext-card">
+                <a href={`/journal/${e.data.slug ?? e.id}/`} class="entry__readnext-link">
+                  <span class="entry__readnext-meta">
+                    AWJ #{String(e.data.awj_number).padStart(2, '0')}
+                    <span aria-hidden="true"> · </span>
+                    <span class="entry__readnext-pillar">{PILLAR_META[e.data.pillar].label}</span>
+                  </span>
+                  <span class="entry__readnext-title awj-display">{e.data.title}</span>
+                  <span class="entry__readnext-cta">Read →</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )}
+
     {/* Sign-off + CTA */}
     <section class="entry__signoff">
       <div class="content-shell entry__signoff-inner">
@@ -100,23 +143,39 @@ const rt = readingTime(entry.body ?? '');
 
   <script type="application/ld+json" set:html={JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: entry.data.title,
-    datePublished: entry.data.date.toISOString?.() ?? String(entry.data.date),
-    dateModified: (entry.data.modified ?? entry.data.date).toISOString?.() ?? String(entry.data.modified ?? entry.data.date),
-    author: { '@type': 'Person', name: 'Andy Whyte', url: 'https://www.andywhyte.com/about/' },
-    publisher: { '@type': 'Organization', name: 'Andy Whyte Journal', logo: { '@type': 'ImageObject', url: 'https://www.andywhyte.com/assets/logos/awj_main_logo_yellow.png' } },
-    mainEntityOfPage: Astro.url.toString(),
-    image: `https://www.andywhyte.com/media/awj${entry.data.awj_number}.webp`,
-    ...(entry.data.video_id && {
-      video: {
-        '@type': 'VideoObject',
-        name: entry.data.title,
-        thumbnailUrl: `https://i.ytimg.com/vi/${entry.data.video_id}/maxresdefault.jpg`,
-        embedUrl: `https://www.youtube-nocookie.com/embed/${entry.data.video_id}`,
-        uploadDate: entry.data.date.toISOString?.() ?? String(entry.data.date),
+    '@graph': [
+      {
+        '@type': 'Article',
+        '@id': `${Astro.url.toString()}#article`,
+        headline: entry.data.title,
+        datePublished: entry.data.date.toISOString?.() ?? String(entry.data.date),
+        dateModified: (entry.data.modified ?? entry.data.date).toISOString?.() ?? String(entry.data.modified ?? entry.data.date),
+        author: { '@id': 'https://andywhyte.com/#andy' },
+        publisher: { '@id': 'https://andywhyte.com/#org' },
+        mainEntityOfPage: Astro.url.toString(),
+        image: `https://andywhyte.com/media/awj${entry.data.awj_number}.webp`,
+        articleSection: PILLAR_META[entry.data.pillar].label,
+        inLanguage: 'en-GB',
+        ...(entry.data.video_id && {
+          video: {
+            '@type': 'VideoObject',
+            name: entry.data.title,
+            thumbnailUrl: `https://i.ytimg.com/vi/${entry.data.video_id}/maxresdefault.jpg`,
+            embedUrl: `https://www.youtube-nocookie.com/embed/${entry.data.video_id}`,
+            uploadDate: entry.data.date.toISOString?.() ?? String(entry.data.date),
+          },
+        }),
       },
-    }),
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://andywhyte.com/' },
+          { '@type': 'ListItem', position: 2, name: 'Journal', item: 'https://andywhyte.com/journal/' },
+          { '@type': 'ListItem', position: 3, name: PILLAR_META[entry.data.pillar].label, item: `https://andywhyte.com/pillars/${entry.data.pillar}/` },
+          { '@type': 'ListItem', position: 4, name: entry.data.title, item: Astro.url.toString() },
+        ],
+      },
+    ],
   })} />
 </Layout>
 
@@ -155,7 +214,72 @@ const rt = readingTime(entry.body ?? '');
     .entry__video-frame { box-shadow: 6px 6px 0 var(--awj-yellow); }
   }
 
-  .entry__body { padding: var(--sp-4) 0 var(--sp-9); }
+  .entry__body { padding: var(--sp-4) 0 var(--sp-5); }
+  .entry__author { padding: 0 0 var(--sp-7); }
+
+  .entry__readnext {
+    padding: var(--sp-7) 0 var(--sp-8);
+    border-top: var(--border-hard);
+    background: var(--awj-paper);
+    background-image: url('/assets/textures/paper_white.png');
+    background-size: cover;
+  }
+  .entry__readnext-grid {
+    list-style: none;
+    padding: 0;
+    margin: var(--sp-4) 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+  @media (min-width: 720px) {
+    .entry__readnext-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .entry__readnext-card {
+    border: var(--border-hard);
+    background: var(--awj-white);
+    transition: transform var(--t-fast), box-shadow var(--t-fast);
+  }
+  .entry__readnext-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--awj-black);
+  }
+  .entry__readnext-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    padding: var(--sp-5);
+    text-decoration: none;
+    color: var(--awj-black);
+    height: 100%;
+  }
+  .entry__readnext-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-2);
+  }
+  .entry__readnext-pillar { color: var(--awj-blue); font-weight: 700; }
+  .entry__readnext-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.05;
+    letter-spacing: -0.005em;
+    overflow-wrap: anywhere;
+    flex: 1;
+  }
+  .entry__readnext-cta {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: auto;
+  }
+
   .entry__signoff {
     padding: var(--sp-5) 0;
     border-top: var(--border-hard);

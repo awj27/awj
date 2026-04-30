@@ -18,7 +18,7 @@ interface Props {
 }
 
 const {
-  title = 'Andy Whyte Journal — applied thinking from an enterprise SaaS operator',
+  title = 'Andy Whyte Journal: Sales, Founding, Human. One Entry Every Friday.',
   description = 'Maxims, essays, and frameworks from Andy Whyte across sales, founding, and being human. One entry every Friday. No noise.',
   ogImage = '/assets/logos/awj_main_logo_yellow.png',
   noIndex = false,
@@ -30,6 +30,50 @@ const {
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.andywhyte.com';
 const canonical = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
+
+// Site-wide JSON-LD: Person + Organization + WebSite. Pages can add their own
+// page-specific entities (Article, Book, Service, etc.) via the head slot.
+const baseGraph = [
+  {
+    '@type': 'Person',
+    '@id': 'https://andywhyte.com/#andy',
+    name: 'Andy Whyte',
+    givenName: 'Andy',
+    familyName: 'Whyte',
+    jobTitle: 'Founder & CEO',
+    worksFor: { '@type': 'Organization', '@id': 'https://meddicc.com/#org', name: 'MEDDICC', url: 'https://meddicc.com/' },
+    sameAs: [
+      'https://www.linkedin.com/in/andywhyte/',
+      'https://twitter.com/andywhyte',
+      'https://www.youtube.com/@AndyWhyte_',
+      'https://www.instagram.com/andywhyte_',
+      'https://www.tiktok.com/@andywhyte_',
+      'https://www.facebook.com/andywhyteuk/',
+    ],
+    url: 'https://andywhyte.com/about/',
+    image: 'https://andywhyte.com/media/portrait/andy-portrait.jpg',
+    description: 'Founder and CEO of MEDDICC. Best-selling author of MEDDICC. 17 years selling enterprise software at companies including Oracle, Sprinklr, and Tealium before founding MEDDICC in 2021.',
+    knowsAbout: ['MEDDICC', 'MEDDPICC', 'MEDDIC', 'Enterprise Sales', 'Sales Qualification', 'Deal Inspection', 'Sales Forecasting', 'Bootstrap SaaS', 'Founder-led Sales', 'Sales Methodology'],
+  },
+  {
+    '@type': 'Organization',
+    '@id': 'https://andywhyte.com/#org',
+    name: 'Andy Whyte Journal',
+    alternateName: 'AWJ',
+    url: 'https://andywhyte.com/',
+    logo: 'https://andywhyte.com/assets/logos/awj_main_logo_yellow.png',
+    founder: { '@id': 'https://andywhyte.com/#andy' },
+  },
+  {
+    '@type': 'WebSite',
+    '@id': 'https://andywhyte.com/#website',
+    url: 'https://andywhyte.com/',
+    name: 'Andy Whyte Journal',
+    description: 'A notebook page that earned the right to be on a billboard. Maxims and essays from Andy Whyte across sales, founding, and being human. One entry every Friday.',
+    publisher: { '@id': 'https://andywhyte.com/#org' },
+    inLanguage: 'en-GB',
+  },
+];
 ---
 <!doctype html>
 <html lang="en-GB">
@@ -48,7 +92,7 @@ const ogImageUrl = new URL(ogImage, siteUrl).toString();
   <meta property="og:description" content={description} />
   <meta property="og:image" content={ogImageUrl} />
   <meta property="og:url" content={canonical} />
-  <meta property="og:site_name" content="AWJ — Andy Whyte Journal" />
+  <meta property="og:site_name" content="Andy Whyte Journal" />
   <meta property="og:locale" content="en_GB" />
 
   <!-- Twitter -->
@@ -67,6 +111,9 @@ const ogImageUrl = new URL(ogImage, siteUrl).toString();
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="AWJ Journal" href="/journal/rss.xml" />
+
+  <!-- Site-wide JSON-LD: Person + Organization + WebSite -->
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': baseGraph })} />
 
   <!-- Analytics: GA4 + Cloudflare Web Analytics. No-op until env vars are set. -->
   <Analytics pillar={pillar} awjNumber={awjNumber} pageType={pageType} />

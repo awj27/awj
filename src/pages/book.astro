@@ -33,10 +33,49 @@ const stats = [
 ];
 ---
 <Layout
-  title="MEDDICC — the book — AWJ"
-  description="The ultimate guide to staying one step ahead in the complex sale. Over 100,000 copies sold. The highest-rated MEDDIC and MEDDPICC book on Amazon. By Andy Whyte."
+  title="MEDDICC: The #1 Best-Selling Book on Sales Qualification by Andy Whyte"
+  description="The ultimate guide to staying one step ahead in the complex sale. 100,000+ sold. 4.7 stars on 1,447+ reviews. Buy on Amazon."
   pageType="book"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Book',
+          '@id': 'https://andywhyte.com/#book-meddicc',
+          name: 'MEDDICC: The ultimate guide to staying one step ahead in the complex sale',
+          alternateName: 'MEDDICC',
+          author: { '@id': 'https://andywhyte.com/#andy' },
+          isbn: '978-1838239701',
+          bookFormat: 'https://schema.org/Paperback',
+          inLanguage: 'en',
+          url: 'https://andywhyte.com/book/',
+          image: 'https://andywhyte.com/media/book/meddicc-cover.jpg',
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '4.7',
+            ratingCount: '1447',
+            bestRating: '5',
+            worstRating: '1',
+          },
+          offers: {
+            '@type': 'Offer',
+            url: AMAZON_URL,
+            availability: 'https://schema.org/InStock',
+          },
+          about: ['MEDDICC', 'MEDDPICC', 'Sales Qualification', 'Enterprise Sales', 'Complex Sales'],
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://andywhyte.com/' },
+            { '@type': 'ListItem', position: 2, name: 'Book', item: 'https://andywhyte.com/book/' },
+          ],
+        },
+      ],
+    })} />
+  </Fragment>
   {/* HERO — text + cover side-by-side; cover blends into paper via multiply */}
   <section class="bk-hero">
     <div class="site-shell bk-hero__inner">

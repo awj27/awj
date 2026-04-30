@@ -5,7 +5,6 @@ import Pillar from '../../components/Pillar.astro';
 import Scribble from '../../components/Scribble.astro';
 import { getCollection } from 'astro:content';
 import { formatDate, PILLAR_META, type Pillar as PillarT } from '../../lib/utils';
-import Pillar from '../../components/Pillar.astro';
 
 const all = (await getCollection('journal', e => !e.data.draft))
   .sort((a, b) => b.data.awj_number - a.data.awj_number);
@@ -34,10 +33,42 @@ function highlightLastWord(t: string) {
 }
 ---
 <Layout
-  title="Maxims — AWJ"
-  description="Every Maxim from the journal. Single-line principles you can keep in your pocket. Click any one to read the essay."
+  title="The AWJ Maxims: Single-Line Principles for Sales, Founding, and Life"
+  description="Every Maxim from the Andy Whyte Journal. Single-line principles you can keep in your pocket. Click any one to read the essay."
   pageType="maxims-list"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'CollectionPage',
+          '@id': 'https://andywhyte.com/maxims/#collection',
+          name: 'The AWJ Maxims',
+          description: 'Single-line principles from the Andy Whyte Journal.',
+          url: 'https://andywhyte.com/maxims/',
+          isPartOf: { '@id': 'https://andywhyte.com/#website' },
+          mainEntity: {
+            '@type': 'ItemList',
+            numberOfItems: all.length,
+            itemListElement: all.map((e, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              url: `https://andywhyte.com/journal/${e.data.slug ?? e.id}/`,
+              name: e.data.title,
+            })),
+          },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://andywhyte.com/' },
+            { '@type': 'ListItem', position: 2, name: 'Maxims', item: 'https://andywhyte.com/maxims/' },
+          ],
+        },
+      ],
+    })} />
+  </Fragment>
   {/* HERO billboard */}
   <section class="mx-hero">
     <div class="site-shell mx-hero__inner">
@@ -82,7 +113,7 @@ function highlightLastWord(t: string) {
                   )}
                 </p>
                 <div class="mx-tile__foot">
-                  <span class="mx-tile__pillar mx-tile__pillar--{e.data.pillar}">{e.data.pillar}</span>
+                  <span class={`mx-tile__pillar mx-tile__pillar--${e.data.pillar}`}>{e.data.pillar}</span>
                   <span class="mx-tile__cta">Read →</span>
                 </div>
                 <Scribble

@@ -16,13 +16,53 @@ const { pillar } = Astro.props;
 const meta = PILLAR_META[pillar];
 const entries = (await getCollection('journal', e => !e.data.draft && e.data.pillar === pillar))
   .sort((a, b) => b.data.awj_number - a.data.awj_number);
+
+// Page-tailored title + meta per pillar (no em dashes, search-keyword-aligned).
+const PILLAR_SEO: Record<typeof pillar, { title: string; description: string }> = {
+  sales:   { title: 'Sales: MEDDICC, Deal Inspection, A-Player Habits | Andy Whyte Journal',     description: 'The AWJ Sales pillar. MEDDICC, deal inspection, qualifying out, and the patterns that separate A-players from theatre.' },
+  founder: { title: 'Founder Operating System: Bootstrap SaaS Without Theatre | Andy Whyte Journal', description: 'Bootstrap SaaS, trade-offs under uncertainty, founder-led sales, and the mental models for operators who actually ship.' },
+  human:   { title: 'The Human Pillar: Mental Models for Authenticity, Mental Health, Failure | Andy Whyte Journal', description: 'Controlled lessons from failure. Imposter syndrome, authenticity, mental health, and the discipline of writing it down.' },
+};
+const seo = PILLAR_SEO[pillar];
 ---
 <Layout
-  title={`${meta.label} — AWJ`}
-  description={meta.description}
+  title={seo.title}
+  description={seo.description}
   pillar={pillar}
   pageType="pillar"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'CollectionPage',
+          '@id': `https://andywhyte.com/pillars/${pillar}/#collection`,
+          name: `${meta.label} — Andy Whyte Journal`,
+          description: meta.description,
+          url: `https://andywhyte.com/pillars/${pillar}/`,
+          isPartOf: { '@id': 'https://andywhyte.com/#website' },
+          mainEntity: {
+            '@type': 'ItemList',
+            numberOfItems: entries.length,
+            itemListElement: entries.map((e, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              url: `https://andywhyte.com/journal/${e.data.slug ?? e.id}/`,
+              name: e.data.title,
+            })),
+          },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://andywhyte.com/' },
+            { '@type': 'ListItem', position: 2, name: meta.label, item: `https://andywhyte.com/pillars/${pillar}/` },
+          ],
+        },
+      ],
+    })} />
+  </Fragment>
   <section class="ph-hero" style={`background: ${meta.bg}; color: ${meta.fg};`}>
     <div class="site-shell">
       <Eyebrow color={meta.fg === '#FFFFFF' ? '#FFCE00' : '#0A0A0A'}>{meta.tag}</Eyebrow>
