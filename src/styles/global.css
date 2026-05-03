@@ -197,75 +197,32 @@ h3.awj { font-size: var(--fs-h3); }
 }
 
 /* ---------- Hero script block ----------
-   The original to-camera script, treated as a stacked, large-format
-   spoken-word lead. Sits above the long-form essay. */
+   The original to-camera script, presented as a clean lead block above
+   the long-form essay. Same font as the body, just one notch larger and
+   tighter. A left-rule and a subtle paper card mark it as voice-over,
+   not body copy. No font swaps, no chant treatment — clean and consistent. */
 .prose .awj-hero-script {
-  position: relative;
   margin: 0 0 var(--sp-7);
-  padding: var(--sp-7) var(--sp-6);
+  padding: var(--sp-6) var(--sp-6);
   background: var(--awj-white);
-  background-image: url('/assets/textures/paper_white.png');
-  background-size: cover;
-  border: var(--border-thicc);
-  box-shadow: 12px 12px 0 var(--awj-yellow);
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  line-height: 1;
-  letter-spacing: -0.005em;
+  border: var(--border-hard);
+  border-left: 6px solid var(--awj-blue);
+  font-family: var(--font-body);
+  font-size: clamp(20px, 2.2vw, 26px);
+  line-height: 1.45;
   color: var(--awj-black);
-}
-.prose .awj-hero-script > * + * { margin-top: var(--sp-5); }
-.prose .awj-hero-script p {
-  margin: 0;
-  font-size: clamp(28px, 4.2vw, 56px);
-}
-.prose .awj-hero-script__lead {
-  font-size: clamp(40px, 6vw, 88px) !important;
-  line-height: 0.95;
-}
-.prose .awj-hero-script__hit {
-  display: inline-block;
-  font-size: clamp(36px, 5.2vw, 72px) !important;
-  background-image: linear-gradient(to bottom, transparent 24%, var(--awj-yellow) 24%, var(--awj-yellow) 92%, transparent 92%);
-  background-repeat: no-repeat;
-  padding: 0 0.18em;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
-.prose .awj-hero-script__chant {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-3);
-  font-family: var(--font-body) !important;
-  text-transform: none !important;
-  font-size: clamp(18px, 2vw, 24px) !important;
   font-weight: 500;
-  line-height: 1.35;
-  letter-spacing: 0;
-  color: var(--fg-2);
 }
-.prose .awj-hero-script__chant span { display: block; }
-.prose .awj-hero-script__chant em {
-  font-style: italic;
+.prose .awj-hero-script p { margin: 0; }
+.prose .awj-hero-script p + p { margin-top: var(--sp-4); }
+.prose .awj-hero-script strong {
+  font-weight: 700;
   color: var(--awj-black);
-  font-weight: 600;
-}
-.prose .awj-hero-script__turn {
-  font-family: var(--font-marker) !important;
-  text-transform: none !important;
-  font-size: clamp(40px, 5vw, 64px) !important;
-  color: var(--awj-blue);
-  line-height: 0.9;
-}
-.prose .awj-hero-script__close {
-  font-size: clamp(28px, 4vw, 48px) !important;
-  border-top: var(--border-hard);
-  padding-top: var(--sp-5);
 }
 @media (max-width: 720px) {
   .prose .awj-hero-script {
     padding: var(--sp-5) var(--sp-4);
-    box-shadow: 6px 6px 0 var(--awj-yellow);
+    border-left-width: 5px;
   }
 }
 
@@ -301,7 +258,7 @@ h3.awj { font-size: var(--fs-h3); }
   font-size: 13px;
   letter-spacing: 0.02em;
   color: var(--fg-2);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 .prose .awj-photo .awj-photo__num {
   font-family: var(--font-display);
@@ -310,6 +267,24 @@ h3.awj { font-size: var(--fs-h3); }
   color: var(--awj-blue);
   flex-shrink: 0;
 }
+.prose .awj-photo .awj-photo__caption-body { display: block; }
+.prose .awj-photo .awj-photo__credit {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--fg-3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.prose .awj-photo .awj-photo__credit a {
+  background-image: none;
+  text-decoration: underline;
+  text-decoration-color: var(--awj-grey-300);
+  text-underline-offset: 2px;
+  padding: 0;
+  color: var(--fg-2);
+}
+.prose .awj-photo .awj-photo__credit a:hover { color: var(--awj-blue); }
 @media (max-width: 720px) {
   .prose .awj-photo { box-shadow: 5px 5px 0 var(--awj-blue); }
   .prose .awj-photo figcaption {

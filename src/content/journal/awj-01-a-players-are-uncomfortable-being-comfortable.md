@@ -12,28 +12,13 @@ original_wp_id: 56
 ---
 
 <div class="awj-hero-script" role="note" aria-label="Maxim script">
-  <p class="awj-hero-script__lead">A-Players are Uncomfortable Being Comfortable.</p>
-
+  <p>A-Players are Uncomfortable Being Comfortable.</p>
   <p>They are driven by an unreasonable, unforgiving, and unrelenting mandate to achieve the best version of themselves.</p>
-
   <p>They are only satisfied when moving at full pace toward their own potential.</p>
-
-  <p class="awj-hero-script__hit">Stagnation is pain.</p>
-
-  <p class="awj-hero-script__chant">
-    <span>The commitment is uncomfortable.</span>
-    <span>The hunger.</span>
-    <span>The constant, nagging&hellip;</span>
-    <span>The toll of asking: <em>"Am I doing enough?"</em></span>
-    <span>The Impostor Syndrome.</span>
-    <span>The demand for feedback.</span>
-  </p>
-
-  <p class="awj-hero-script__turn">But&hellip;</p>
-
-  <p>Replace it with comfort, and they'll become uncomfortable.</p>
-
-  <p class="awj-hero-script__close">Because A-Players are Uncomfortable Being Comfortable.</p>
+  <p><strong>Stagnation is pain.</strong></p>
+  <p>The commitment is uncomfortable. The hunger. The constant, nagging&hellip; The toll of asking: "Am I doing enough?" The Impostor Syndrome. The demand for feedback.</p>
+  <p>But replace it with comfort, and they'll become uncomfortable.</p>
+  <p><strong>Because A-Players are Uncomfortable Being Comfortable.</strong></p>
 </div>
 
 <hr class="awj-rule" />
@@ -47,14 +32,17 @@ He went on to win three more majors after the age of 35.
 <figure class="awj-photo">
   <img
     src="/media/maxims/awj1-federer-edberg.jpg"
-    alt="Roger Federer and Stefan Edberg holding ATP World Tour Finals trophies, 2014."
-    width="1200"
-    height="750"
+    alt="Roger Federer with coach Stefan Edberg at the French Open, 2015."
+    width="1208"
+    height="940"
     loading="lazy"
   />
   <figcaption>
     <span class="awj-photo__num">01</span>
-    Federer and Edberg, ATP World Tour Finals · 2014. The decision to be a beginner again at 33.
+    <span class="awj-photo__caption-body">
+      Federer and Edberg, French Open 2015. The decision to be a beginner again at 33.
+      <span class="awj-photo__credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Federer_Edberg_French_Open_2015.jpg" rel="nofollow noopener" target="_blank">Frédéric de Villamil</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/2.0" rel="nofollow noopener" target="_blank">CC BY-SA 2.0</a></span>
+    </span>
   </figcaption>
 </figure>
 
