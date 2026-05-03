@@ -12,11 +12,16 @@ original_wp_id: 15091
 ---
 
 <div class="awj-hero-script" role="note" aria-label="Maxim script">
-  <p>"Feedback is like Milk. It is Best Served Fresh." — <a href="https://www.linkedin.com/in/faith-meyer/" rel="nofollow noopener" target="_blank">Faith Meyer</a></p>
-  <p>My biggest failure as a leader was how bad I was at giving critical feedback. It was the main reason I enlisted a coach.</p>
-  <p>I would procrastinate. I told myself I was waiting for the perfect moment. I told myself I was gathering context to give better feedback.</p>
-  <p>I wasn't doing anyone any favours.</p>
-  <p><strong>Feedback is a gift. If you believe that, you find the time.</strong></p>
+  <p><strong>"Feedback is like Milk. It is Best Served Fresh."</strong> — <a href="https://www.linkedin.com/in/faith-meyer/" rel="nofollow noopener" target="_blank">Faith Meyer</a></p>
+  <p>My biggest failure as a leader was how bad I was at giving critical feedback.</p>
+  <p>It was the main reason I enlisted a coach.</p>
+  <p>One of my failings was that I would procrastinate about giving critical feedback.</p>
+  <p>I'd tell myself I was waiting for the perfect moment.</p>
+  <p>I'd tell myself that I was gathering context to give better feedback.</p>
+  <p>But I wasn't doing anyone any favours by doing that.</p>
+  <p>It was in these shenanigans that led Faith to come up with the metaphor that feedback is like milk, it's best served fresh. It only sours with time.</p>
+  <p>Obviously, there is a time and a place, but if you believe (<em>as you should</em>) that feedback is a gift, then you should prioritise finding the time and place to give feedback.</p>
+  <p>Because <strong>"Feedback is like Milk. It is Best Served Fresh."</strong></p>
 </div>
 
 <hr class="awj-rule" />

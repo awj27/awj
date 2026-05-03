@@ -13,10 +13,22 @@ original_wp_id: 15095
 
 <div class="awj-hero-script" role="note" aria-label="Maxim script">
   <p>The B in B-Player stands for "busy."</p>
-  <p>A-Players focus on outcomes. They measure success by impact, not appearance.</p>
-  <p>B-Players focus on optics. They fear exposure, resist change, and play it safe to stay liked and in control.</p>
-  <p>Busyness used to be camouflage. In the age of AI, the lights are on.</p>
+  <p>A-Players focus on outcomes.</p>
+  <p>They want clear goals and thrive on challenge, accountability, and measurable outcomes.</p>
+  <p>They measure success by impact, not appearance.</p>
+  <p>B-Players focus on optics.</p>
+  <p>They avoid clarity and dodge accountability.</p>
+  <p>They fear exposure, resist change, and play it safe to stay liked and in control.</p>
+  <p>Their energy goes to managing perception, not creating value.</p>
+  <p>Busyness used to be camouflage for B-Players, but in the age of AI, the lights are on, and the differentiator isn't effort, it's initiative.</p>
+  <p>Gone are the days when signalling busyness is a badge of honour.</p>
+  <p>Today, it's the opposite: if you're not automating, delegating, or eliminating tasks, you'll look like a Luddite, not a legend.</p>
   <p><strong>B-Players are not competing with coworkers anymore. They are competing with machines and the humans who know how to use them.</strong></p>
+  <p>It is not about how hard you work. It's about how you measure and communicate your impact.</p>
+  <p>A-Players don't talk about how busy they are because it's a moot point. They manage their schedules in accordance with their energy and bandwidth, and prioritise impact.</p>
+  <p>A-Players don't talk about how busy they are the same way Jordan, Williams, Hamilton, Messi, and Biles don't talk about how long they spend on the court, gym, simulator, or track. They talk about the impact. The wins. The championships, titles, and medals.</p>
+  <p>Am I wrong? Is there someone you class as an A-Player who talks about how busy they are?</p>
+  <p><strong>If the B in B-Player stands for "busy," then what does the A in A-Player stand for?</strong></p>
 </div>
 
 <hr class="awj-rule" />
