@@ -183,6 +183,197 @@ h3.awj { font-size: var(--fs-h3); }
 }
 
 /* =====================================================================
+   ENTRY EXTRAS — components used inside Maxim markdown bodies
+   These live in global.css because Astro's content-collection markdown
+   is rendered outside any component's scoped style sheet.
+===================================================================== */
+
+/* Hard horizontal rule used to separate hero/script from article body
+   and the body from the citations. Matches the AWJ border weight. */
+.prose .awj-rule {
+  border: 0;
+  border-top: var(--border-thicc);
+  margin: var(--sp-7) 0;
+}
+
+/* ---------- Hero script block ----------
+   The original to-camera script, treated as a stacked, large-format
+   spoken-word lead. Sits above the long-form essay. */
+.prose .awj-hero-script {
+  position: relative;
+  margin: 0 0 var(--sp-7);
+  padding: var(--sp-7) var(--sp-6);
+  background: var(--awj-white);
+  background-image: url('/assets/textures/paper_white.png');
+  background-size: cover;
+  border: var(--border-thicc);
+  box-shadow: 12px 12px 0 var(--awj-yellow);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  color: var(--awj-black);
+}
+.prose .awj-hero-script > * + * { margin-top: var(--sp-5); }
+.prose .awj-hero-script p {
+  margin: 0;
+  font-size: clamp(28px, 4.2vw, 56px);
+}
+.prose .awj-hero-script__lead {
+  font-size: clamp(40px, 6vw, 88px) !important;
+  line-height: 0.95;
+}
+.prose .awj-hero-script__hit {
+  display: inline-block;
+  font-size: clamp(36px, 5.2vw, 72px) !important;
+  background-image: linear-gradient(to bottom, transparent 24%, var(--awj-yellow) 24%, var(--awj-yellow) 92%, transparent 92%);
+  background-repeat: no-repeat;
+  padding: 0 0.18em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.prose .awj-hero-script__chant {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  font-family: var(--font-body) !important;
+  text-transform: none !important;
+  font-size: clamp(18px, 2vw, 24px) !important;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--fg-2);
+}
+.prose .awj-hero-script__chant span { display: block; }
+.prose .awj-hero-script__chant em {
+  font-style: italic;
+  color: var(--awj-black);
+  font-weight: 600;
+}
+.prose .awj-hero-script__turn {
+  font-family: var(--font-marker) !important;
+  text-transform: none !important;
+  font-size: clamp(40px, 5vw, 64px) !important;
+  color: var(--awj-blue);
+  line-height: 0.9;
+}
+.prose .awj-hero-script__close {
+  font-size: clamp(28px, 4vw, 48px) !important;
+  border-top: var(--border-hard);
+  padding-top: var(--sp-5);
+}
+@media (max-width: 720px) {
+  .prose .awj-hero-script {
+    padding: var(--sp-5) var(--sp-4);
+    box-shadow: 6px 6px 0 var(--awj-yellow);
+  }
+}
+
+/* ---------- AWJ-styled photo figure ----------
+   Hard black border, paper mat, yellow drop-shadow, mono caption.
+   Built to make any drop-in photo feel native to the journal. */
+.prose .awj-photo {
+  margin: var(--sp-7) 0;
+  padding: 0;
+  background: var(--awj-paper);
+  border: var(--border-thicc);
+  box-shadow: 10px 10px 0 var(--awj-blue);
+  position: relative;
+}
+.prose .awj-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Duotone treatment so any photo blends with the AWJ palette
+     (warm paper + black + a hint of blue). The combination of
+     grayscale + slight contrast + blue overlay via mix-blend works
+     in all evergreen browsers. */
+  filter: grayscale(0.55) contrast(1.05) brightness(0.96);
+}
+.prose .awj-photo figcaption {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  border-top: var(--border-hard);
+  background: var(--awj-white);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--fg-2);
+  line-height: 1.4;
+}
+.prose .awj-photo .awj-photo__num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1;
+  color: var(--awj-blue);
+  flex-shrink: 0;
+}
+@media (max-width: 720px) {
+  .prose .awj-photo { box-shadow: 5px 5px 0 var(--awj-blue); }
+  .prose .awj-photo figcaption {
+    flex-direction: column;
+    gap: var(--sp-1);
+    padding: var(--sp-3) var(--sp-4);
+  }
+}
+
+/* ---------- Inline citation superscripts ---------- */
+.prose sup a {
+  background: var(--awj-yellow);
+  color: var(--awj-black);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.65em;
+  padding: 1px 5px;
+  margin: 0 1px;
+  border-radius: 2px;
+  text-decoration: none;
+  background-image: none;
+}
+.prose sup a:hover { background: var(--awj-blue); color: var(--awj-white); }
+
+/* ---------- Citations block ---------- */
+.prose .awj-citations {
+  margin: var(--sp-7) 0 0;
+  padding: var(--sp-6) var(--sp-5);
+  background: var(--awj-grey-100);
+  border-top: var(--border-thicc);
+  border-bottom: var(--border-thicc);
+}
+.prose .awj-citations h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  text-transform: uppercase;
+  margin: 0 0 var(--sp-4);
+  letter-spacing: 0.02em;
+}
+.prose .awj-citations ol {
+  margin: 0;
+  padding-left: 1.4em;
+  counter-reset: citation;
+  list-style: decimal;
+}
+.prose .awj-citations li {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--fg-2);
+  margin-bottom: var(--sp-3);
+}
+.prose .awj-citations li em { font-style: italic; color: var(--awj-black); }
+.prose .awj-citations a {
+  background-image: none;
+  text-decoration: underline;
+  text-decoration-color: var(--awj-blue);
+  text-underline-offset: 2px;
+  padding: 0;
+  word-break: break-word;
+}
+.prose .awj-citations a:hover { color: var(--awj-blue); }
+
+/* =====================================================================
    RESPONSIVE
 ===================================================================== */
 @media (max-width: 720px) {
