@@ -294,6 +294,111 @@ h3.awj { font-size: var(--fs-h3); }
   }
 }
 
+/* ---------- Coach / contributor bio block ----------
+   A two-column card (photo + bio) used inside Maxim bodies when the
+   essay credits an external collaborator. The portrait sits in a
+   yellow-circle background (the AWJ accent) so any cut-out PNG with
+   a transparent ground reads as branded, not parachuted-in. */
+.prose .awj-coach {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--sp-6);
+  align-items: center;
+  margin: var(--sp-7) 0;
+  padding: var(--sp-6);
+  background: var(--awj-white);
+  border: var(--border-thicc);
+  box-shadow: 10px 10px 0 var(--awj-yellow);
+}
+.prose .awj-coach__photo {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--awj-yellow);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.prose .awj-coach__photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  margin: 0;
+}
+.prose .awj-coach__body { min-width: 0; }
+.prose .awj-coach__eyebrow {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--awj-blue);
+  margin: 0 0 var(--sp-2);
+}
+.prose .awj-coach__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  font-size: clamp(28px, 3.5vw, 40px);
+  line-height: 1;
+  margin: 0 0 var(--sp-3);
+  color: var(--awj-black);
+}
+.prose .awj-coach__bio {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--fg-1);
+  margin: 0 0 var(--sp-3);
+}
+.prose .awj-coach__bio a {
+  background-image: linear-gradient(transparent 65%, var(--hl-yellow) 65%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 0 0.1em;
+  font-weight: 600;
+}
+.prose .awj-coach__cta {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+.prose .awj-coach__cta a {
+  background-image: none;
+  text-decoration: none;
+  color: var(--awj-blue);
+  border-bottom: 2px solid var(--awj-blue);
+  padding: 0 0 2px;
+}
+.prose .awj-coach__cta a:hover {
+  color: var(--awj-black);
+  border-bottom-color: var(--awj-black);
+}
+@media (max-width: 600px) {
+  .prose .awj-coach {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+    padding: var(--sp-5);
+    box-shadow: 5px 5px 0 var(--awj-yellow);
+    text-align: center;
+  }
+  .prose .awj-coach__photo {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+  }
+  .prose .awj-coach__bio { text-align: left; }
+}
+
 /* ---------- Inline citation superscripts ---------- */
 .prose sup a {
   background: var(--awj-yellow);
