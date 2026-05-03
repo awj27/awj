@@ -11,7 +11,7 @@ original_wp_url: https://andywhyte.com/portfolios/awj-3-the-b-in-b-player-stands
 original_wp_id: 15095
 ---
 
-<div class="awj-hero-script" role="note" aria-label="Maxim script">
+<div class="awj-hero-script awj-hero-script--cols awj-hero-script--cols-3" role="note" aria-label="Maxim script">
   <p>The B in B-Player stands for "busy."</p>
   <p>A-Players focus on outcomes.</p>
   <p>They want clear goals and thrive on challenge, accountability, and measurable outcomes.</p>

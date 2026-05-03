@@ -226,6 +226,30 @@ h3.awj { font-size: var(--fs-h3); }
   }
 }
 
+/* Columns variant — apply when the original to-camera script is long
+   enough that a single column would create excessive scroll. Smaller
+   body type, multi-column layout. Reads as a transcript page rather
+   than a billboard quote. */
+.prose .awj-hero-script--cols {
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.5;
+  font-weight: 400;
+  column-count: 1;
+  column-gap: var(--sp-6);
+  column-rule: 1px solid var(--rule);
+}
+.prose .awj-hero-script--cols p { break-inside: avoid; }
+.prose .awj-hero-script--cols p + p { margin-top: var(--sp-3); }
+.prose .awj-hero-script--cols strong { font-weight: 700; }
+.prose .awj-hero-script--cols em { font-style: italic; }
+@media (min-width: 720px) {
+  .prose .awj-hero-script--cols { column-count: 2; }
+}
+@media (min-width: 1024px) {
+  /* When 3-column variant is requested explicitly */
+  .prose .awj-hero-script--cols-3 { column-count: 3; }
+}
+
 /* ---------- AWJ-styled photo figure ----------
    Hard black border, paper mat, yellow drop-shadow, mono caption.
    Built to make any drop-in photo feel native to the journal. */

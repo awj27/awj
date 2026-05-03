@@ -11,7 +11,7 @@ original_wp_url: https://andywhyte.com/portfolios/awj-2-%f0%9d%99%81%f0%9d%99%9a
 original_wp_id: 15091
 ---
 
-<div class="awj-hero-script" role="note" aria-label="Maxim script">
+<div class="awj-hero-script awj-hero-script--cols" role="note" aria-label="Maxim script">
   <p><strong>"Feedback is like Milk. It is Best Served Fresh."</strong> — <a href="https://www.linkedin.com/in/faith-meyer/" rel="nofollow noopener" target="_blank">Faith Meyer</a></p>
   <p>My biggest failure as a leader was how bad I was at giving critical feedback.</p>
   <p>It was the main reason I enlisted a coach.</p>
