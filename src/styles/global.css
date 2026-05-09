@@ -477,6 +477,43 @@ h3.awj { font-size: var(--fs-h3); }
 }
 .prose .awj-citations a:hover { color: var(--awj-blue); }
 
+/* ---------- Reader reflection block ----------
+   Sits at the foot of an essay as a direct, second-person prompt.
+   Mirrors the awj-hero-script frame at the top of the entry, but with a
+   yellow rail to mark it as a reader question rather than the maxim
+   voice-over. Body font, no caps treatment — quiet authority. */
+.prose .awj-reflect {
+  margin: var(--sp-8) 0 0;
+  padding: var(--sp-6) var(--sp-6);
+  background: var(--awj-white);
+  border: var(--border-hard);
+  border-left: 6px solid var(--awj-yellow);
+}
+.prose .awj-reflect p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(20px, 2.0vw, 24px);
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--awj-black);
+}
+.prose .awj-reflect p + p { margin-top: var(--sp-3); }
+.prose .awj-reflect .awj-reflect__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  font-weight: 600;
+  margin: 0 0 var(--sp-4);
+}
+@media (max-width: 720px) {
+  .prose .awj-reflect {
+    padding: var(--sp-5) var(--sp-4);
+    border-left-width: 5px;
+  }
+}
+
 /* =====================================================================
    RESPONSIVE
 ===================================================================== */
