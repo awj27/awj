@@ -236,8 +236,8 @@ const n = pages.length;
           const f = clamp(pv - (i + 1), 0, 1);
           const visible = pv >= i - 0.001 && pv < i + 2;
           const leaf = leaves[i];
-          // load this page and the two beneath it just before they are needed
-          if (pv >= i - 2 && !imgs[i].getAttribute('src') && imgs[i].dataset.src) { imgs[i].setAttribute('src', imgs[i].dataset.src!); }
+          // load this page and the three beneath it just before they are needed
+          if (pv >= i - 3 && !imgs[i].getAttribute('src') && imgs[i].dataset.src) { imgs[i].setAttribute('src', imgs[i].dataset.src!); }
           leaf.style.visibility = visible ? 'visible' : 'hidden';
           if (visible) {
             leaf.style.transform = `translateZ(${-2 * i}px) rotateX(${(smooth(f) * 178).toFixed(3)}deg)`;
@@ -271,6 +271,8 @@ const n = pages.length;
 
       function goTo(k: number) {
         k = clamp(k, 0, SEGMENTS);
+        // a jump needs its destination pages before the scroll lands
+        for (let i = Math.max(0, k - 2); i <= Math.min(N - 1, k + 1); i++) { if (!imgs[i].getAttribute('src') && imgs[i].dataset.src) imgs[i].setAttribute('src', imgs[i].dataset.src!); }
         const trackTop = track.getBoundingClientRect().top + scrollY;
         scrollTo({ top: trackTop - headerH + k * seg, behavior: reduce ? 'auto' : 'smooth' });
       }

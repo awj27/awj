@@ -21,18 +21,18 @@ Professional sports teams wouldn’t have any space for C Players, so why should
 
 This lens does require two considerations:
 
-1️⃣ – Your A Player rating is relative to the level of your role. For example, you could have a junior and senior AE who are both A Players. The junior AE with 1 year of experience isn’t going to be as strong as the senior AE with 10+ years of experience.
+1️⃣ Your A Player rating is relative to the level of your role. For example, you could have a junior and senior AE who are both A Players. The junior AE with 1 year of experience isn’t going to be as strong as the senior AE with 10+ years of experience.
 
 You rate them relative to their position.
 
-2️⃣ – Being an A Player is subject to form.  There’s literally a phrase for it: ‘Bringing your A game.’
+2️⃣ Being an A Player is subject to form.  There’s literally a phrase for it: ‘Bringing your A game.’
 
 Even the greatest performers can fall out of form.
 
 This is why a critical part of creating the environment for a winning team is to create a place where A Players can thrive.
 
 Help the A and B+ Players in your team to thrive by:
-🔋 Focusing on their growth – empowering their growth mindset with a roadmap
+🔋 Focusing on their growth: empowering their growth mindset with a roadmap
 
 🔋 Removing barriers that slow them down (𝙐𝙣𝙥𝙤𝙥𝙪𝙡𝙖𝙧 𝙤𝙥𝙞𝙣𝙞𝙤𝙣: 𝘵𝘩𝘦 ‘𝘣𝘢𝘳𝘳𝘪𝘦𝘳𝘴’ 𝘵𝘦𝘯𝘥 𝘵𝘰 𝘣𝘦 𝘵𝘩𝘦 𝘉− 𝘗𝘭𝘢𝘺𝘦𝘳𝘴)
 
@@ -43,8 +43,8 @@ There is obviously a great deal of depth to each of the above, but it’s not ov
 Yet, one thing I don’t think we discuss enough is how disproportionately leaders focus their time on the non-A players in their team.
 
 If leaders were forced to profile their team:
-• A Player – 🥇.
-• B+ Player – Has potential to be an A, 𝗢𝗥 is out of form.
-• B− Player – Does not have the potential to be an A.
+• A Player: 🥇.
+• B+ Player: has potential to be an A, 𝗢𝗥 is out of form.
+• B− Player: does not have the potential to be an A.
 
 How much of their time is w̶a̶s̶t̶e̶d̶ spent on the B− Players? 🤔

@@ -1,254 +1,117 @@
-# AWJ — Andy Whyte Journal
+# AWJ, the Andy Whyte Journal
 
-The codebase for **andywhyte.com** (currently live at **https://awj-ehz.pages.dev/**, will move to andywhyte.com via GoDaddy DNS at cutover).
+The codebase for **andywhyte.com**. Live via Cloudflare Pages (project `awj`), source on GitHub `awj27/awj` (Andy's GitHub user is `awj27`).
 
-> AWJ is a personal intellectual operating system, expressed publicly. *"A notebook page that earned the right to be on a billboard."*
+> A notebook of principles for sales, founding and being human. Twenty handwritten Maxims, one line each, an essay behind every one.
 
 ## Stack
 
-- **Astro 6** — static site generator, content collections for journal entries
-- **TypeScript** strict
-- **Cloudflare Pages** — hosting + CDN
-- **Cloudflare Pages Functions** — serverless endpoints (currently just `/api/subscribe`)
-- **Beehiiv** — newsletter platform; subscribe via the function above; auto-publish via GitHub Action
-- **GitHub** — `awj27/awj`. Andy's GitHub user is `awj27`.
+- **Astro 6**, static output. Content collections for the journal, hubs, glossary, frameworks, landing pages and editorial pages (`src/content.config.ts`).
+- **TypeScript** strict. **No frameworks**: the notebook hero is CSS 3D plus a few kilobytes of vanilla script.
+- **Cloudflare Pages** hosting. **Pages Functions** for `/api/contact` (Resend) and `/api/subscribe` (the Beehiiv fallback, see Newsletter).
+- **GitHub Actions**: `.github/workflows/deploy.yml` builds and deploys to Cloudflare Pages on every push to `main`.
 
 ## Operating mode
 
-**Full autopilot.** Push to `main`, deploy, walk away. Andy reviews live.
-
-The GitHub repo is **not** yet connected to Cloudflare Pages for auto-deploy. Until that's set up, deploy manually after every meaningful change:
+Work on a branch, deploy a preview, review, then merge to `main`.
 
 ```bash
 cd ~/Code/awj
+npm run dev                                   # http://localhost:4321
 npm run build
-npx wrangler pages deploy dist --project-name=awj --branch=main --commit-dirty=true
+npx wrangler pages deploy dist --project-name=awj --branch=<branch-name> --commit-dirty=true
 ```
 
-(Wrangler is already authenticated.)
+A branch deploy gets an alias at `https://<branch-name>.awj-ehz.pages.dev`, protected by Cloudflare Access (one-time code to Andy's email). Pushing to `main` deploys production through the Action; the `PUBLIC_GA_MEASUREMENT_ID` build variable lives in `deploy.yml`. Wrangler is already authenticated on Andy's Mac.
 
-After every change, also push to GitHub so the source of truth stays current:
+## Design
 
-```bash
-git add -A
-git commit -m "<conventional message>"
-git push
-```
+The design is the notebook on a white desk. Everything derives from the real pad photographed in October 2026.
 
-Both can be done in one chain.
+- Tokens in `src/styles/notebook.css`: cover blue `#3B4DB2`, ink `#224A8F`, paper `#F3F1EE`, white canvas, yellow accent `#FFCE00`, text `#1A2140`. Typeface Instrument Sans, self-hosted from `public/fonts/`.
+- The mark is Andy's handwritten "AWJ" lifted from page one: `public/notebook/mark/` (ink, blue, white; 320px versions for UI).
+- Maxim pages are photographs: `public/notebook/pages/awj-NN.webp`, cut and paper-normalised from the shoot in `Dropbox/Claude-Work/PROJECTS/AWJ/Maxim Notebook Images`. Social previews in `public/notebook/og/`.
+- No scribbles, no textures, no logos. Yellow only for highlights and calls to action.
+- The decisions behind all of this are in `docs/redesign-brief.md`. Read it before changing the design.
 
 ## Repo layout
 
 ```
-~/Code/awj/
-├── astro.config.mjs              # site URL, sitemap, redirects
-├── functions/
-│   └── api/subscribe.ts          # Cloudflare Function for Beehiiv subscribe
-├── public/
-│   ├── _redirects                # Cloudflare-native HTTP 301s (legacy WP URLs)
-│   ├── assets/                   # Brand assets from the design system
-│   │   ├── logos/                # AWJ logo set (main, alt, submark × 4 colours)
-│   │   ├── textures/             # Paper grounds (white, black, blue, yellow)
-│   │   ├── scribbles/            # 100+ hand-drawn cutouts
-│   │   ├── decor/                # Tape, paper-tear, polaroid frames
-│   │   └── images/               # Andy headshot cutout
-│   └── media/
-│       ├── awj{1..12}.webp       # Featured images for each Maxim
-│       ├── portrait/             # Andy hero portrait (homepage hero)
-│       ├── gallery/              # Headshots
-│       ├── candids/              # Behind-the-scenes photos
-│       ├── clients/              # Speaking page client logos + headshots
-│       ├── icons/                # SKO/Keynote/MC icons
-│       ├── video/                # SKO keynote reel
-│       └── book/                 # MEDDICC book cover
-├── src/
-│   ├── content.config.ts         # Astro content collection schema for journal
-│   ├── content/journal/          # Each Maxim is one .md file with frontmatter
-│   │   ├── awj-01-...md
-│   │   └── ...
-│   ├── components/
-│   │   ├── Layout.astro          # ❌ doesn't exist; layout is in src/layouts/
-│   │   ├── Header.astro          # AWJ submark + wordmark, nav, socials, Subscribe CTA
-│   │   ├── Footer.astro          # AWJ main logo, tagline, socials, nav columns
-│   │   ├── Pillar.astro          # Pillar pill (Sales/Founder/Human)
-│   │   ├── Eyebrow.astro
-│   │   ├── Btn.astro             # Primary/ghost/yellow/blue button
-│   │   ├── Hl.astro              # Yellow/red/black highlighter strap (linear-gradient)
-│   │   ├── Scribble.astro        # Absolute-positioned scribble PNG accent
-│   │   ├── Signature.astro       # "—Andy" in marker font
-│   │   ├── Gallery.astro         # CSS multi-column masonry gallery (no cropping)
-│   │   ├── SocialIcons.astro     # 6-platform inline SVGs
-│   │   └── SubscribeForm.astro   # Inline AWJ form → /api/subscribe
-│   ├── layouts/
-│   │   └── Layout.astro          # Site shell (head, header, footer, OG, schema)
-│   ├── lib/
-│   │   ├── utils.ts              # Pillar meta, formatDate, readingTime
-│   │   └── videos.ts             # All 80 YouTube videos (32 long-form + 48 shorts)
-│   ├── pages/
-│   │   ├── index.astro           # Home
-│   │   ├── about.astro
-│   │   ├── speaking.astro
-│   │   ├── book.astro
-│   │   ├── media.astro
-│   │   ├── subscribe.astro
-│   │   ├── contact.astro
-│   │   ├── maxims/index.astro    # Wall + archive list
-│   │   ├── pillars/[pillar].astro
-│   │   └── journal/
-│   │       ├── [slug].astro      # Individual entry detail
-│   │       └── rss.xml.ts        # /journal/rss.xml
-│   └── styles/
-│       ├── tokens.css            # AWJ design tokens (colours, type, spacing)
-│       └── global.css            # Base styles, paper backgrounds, prose
-├── .github/
-│   ├── workflows/publish-to-beehiiv.yml  # Auto-publish action
-│   └── scripts/publish-to-beehiiv.py     # Beehiiv API caller
-└── package.json
+src/
+├── content.config.ts         # collection schemas
+├── content/
+│   ├── journal/              # one Maxim per file: awj-NN-<slug>.md
+│   ├── hubs/                 # the four topic hubs (meddpicc, sales-leadership, keynote-speaking, imposter-syndrome)
+│   ├── glossary/             # one term per file
+│   ├── frameworks/           # one framework per file
+│   ├── landing/              # meddpicc-training, sales-keynote-speaker-uk
+│   └── pages/                # start-here
+├── data/
+│   ├── site.ts               # site constants, nav, hubs list, Person/Organization/WebSite schema
+│   └── notebook-pages.ts     # the photographed pages, pillars, helpers
+├── layouts/SiteLayout.astro  # head, structured data, analytics, header, footer, view transitions
+├── components/v2/            # SiteHeader, SiteFooter, NotebookHero, Notebook (study), SubscribeForm, FAQ
+├── components/analytics/     # GA4 loader, consent banner, YouTube tracker
+├── lib/                      # maxims.ts helpers, analytics.ts, videos.ts
+├── pages/
+│   ├── index.astro           # the notebook hero + library + hubs + about + book
+│   ├── [slug].astro          # hubs, landing pages and editorial pages at the root
+│   ├── maxims/, pillars/, journal/[slug].astro, journal/rss.xml.ts
+│   ├── glossary/, frameworks/
+│   ├── about, speaking, book, media, contact, subscribe, privacy, 404
+│   └── design/               # review-only pages from the redesign (noindex); delete once no longer useful
+public/
+├── notebook/                 # cover, pages, mark, og images
+├── fonts/                    # Instrument Sans woff2
+├── media/                    # portraits, gallery, candids, clients, icons, video, book
+├── _redirects                # legacy WordPress URLs, 301
+├── robots.txt, llms.txt, llms-full.txt
+functions/api/                # contact.ts (Resend), subscribe.ts (Beehiiv fallback)
+docs/redesign-brief.md        # the decisions
 ```
 
-## Brand voice (when writing copy)
+## Adding a Maxim
 
-- **Calm authority. Direct. Instructional. No hype.**
-- **British English** spelling/punctuation in prose
-- **Display headings ALL CAPS** (rendered via `text-transform: uppercase`; you write in normal case in markdown/JSX)
-- **Body sentence case**
-- **Short sentences. White space as punctuation.**
-- Observation → principle → model → application
-- No emoji in the design system (one exception: footer tagline "May your Champions be Strong 💪")
-- Scribble PNGs from `public/assets/scribbles/` are the emotional accent system
-
-## Adding a new Maxim entry
-
-Drop a markdown file in `src/content/journal/` named `awj-NN-<kebab-slug>.md` with frontmatter:
+1. Write the page in the pad, photograph it like the others, cut it to `public/notebook/pages/awj-NN.webp` (paper normalised to `#F3F1EE`; the cutting script lives in the redesign session's scratchpad, or redo it with sharp).
+2. Add the page to `notebookPages` in `src/data/notebook-pages.ts` (number, title, pillar, alt text) and to `library` if it fills one of the "coming" slots.
+3. Create `src/content/journal/awj-NN-<slug>.md`:
 
 ```yaml
 ---
-title: "The actual maxim line"
-awj_number: 13
-slug: the-actual-maxim-line
+title: "The Maxim line"
+awj_number: NN
+slug: the-maxim-line
 pillar: sales        # or founder | human
 date: 2026-MM-DD
 modified: 2026-MM-DD
-video_id: abcXyz123  # optional — YouTube video ID
-video_url: https://www.youtube.com/watch?v=abcXyz123  # optional
+video_id: abcXyz123  # optional
 ---
-
-The body copy in markdown.
+The essay.
 ```
 
-Then push. The GitHub Action will create a draft post in Beehiiv automatically (status currently set to `draft` — flip to `confirmed` in `.github/workflows/publish-to-beehiiv.yml` for true auto-send).
+4. Run `node scripts/og-images.mjs` to make the social preview, build, deploy.
 
-## Pillars
+Numbers 16 and 17 are reserved and still to be written. The site's numbering is the source of truth; handwritten numbers that differ get retouched.
 
-| Pillar  | Theme     | Tag       | Bg color  |
-|---------|-----------|-----------|-----------|
-| sales   | Authority | MEDDICC, deal inspection, sales as a thinking discipline | `#FFCE00` (yellow) |
-| founder | Operator  | Bootstrap SaaS, trade-offs, no theatre | `#1F47FF` (blue)   |
-| human   | Truth     | Controlled lessons from failure, mental health, growth | `#0A0A0A` (black)  |
+## Newsletter
+
+The journal is published on Substack. Set `substackUrl` in `src/data/site.ts` to the publication address and every subscribe form will hand the email to Substack's own sign-up page. Until it is set, forms post to `/api/subscribe`, the existing Beehiiv function, so no sign-up is lost. The old Beehiiv auto-publish Action has been removed.
+
+## Voice
+
+Calm authority. Direct. Instructional. British English. No em dashes, ever. Observation, principle, model, application. Capitalise defined concepts (Champion, Economic Buyer). End on a question where it fits. The `andy-whyte-writing` skill holds the full voice model; use it for any new copy.
+
+## Facts to use everywhere
+
+Twenty years in sales. Founder and CEO of MEDDICC (2021). The MEDDICC book: over 100,000 copies, 4.7 stars across 1,447+ reviews. The Masterclass: more than 35,000 graduates. Keynotes for CrowdStrike, Microsoft, Amazon Web Services, Dun and Bradstreet. Email hello@andywhyte.com.
 
 ## Analytics
 
-Two layers, both privacy-respecting:
+GA4 behind a consent banner (`src/components/analytics/`), Cloudflare Web Analytics optional via `PUBLIC_CF_ANALYTICS_TOKEN`. Page dimensions `pillar`, `awj_number`, `page_type` are passed through `SiteLayout` props. Events: `subscribe_submit`, `subscribe_success`, `subscribe_error`, `video_play`, `video_progress`, `video_complete`. YouTube embeds need `id`, `data-yt-track`, `data-yt-title` and `data-yt-type` to be tracked. The privacy page describes all of it; update its `lastUpdated` when this changes.
 
-- **Cloudflare Web Analytics** — auto-attached to the Pages project (no JS).
-  Optional JS beacon adds Core Web Vitals + per-path engagement; enable by
-  setting `PUBLIC_CF_ANALYTICS_TOKEN` (Cloudflare → Web Analytics → site →
-  JS snippet token).
-- **Google Analytics 4** — gated behind a minimal cookie banner. Loaded
-  via `src/components/analytics/Analytics.astro`. Defaults to consent
-  denied; users who Accept get full data; users who Decline (or ignore)
-  stay in cookieless modeled mode. Set `PUBLIC_GA_MEASUREMENT_ID` in
-  Cloudflare Pages env vars.
+## Things that bite
 
-### Custom dimensions
-Registered in GA admin and set per-page via `<Layout>` props:
-- `pillar` (sales | founder | human) — passed from journal/pillar pages
-- `awj_number` (number) — passed from `/journal/[slug]`
-- `page_type` — passed from every top-level page
-
-### Events
-- `subscribe_submit` — fired client-side from `SubscribeForm.astro` on
-  form submit. `source` param indicates form variant (light/dark/yellow).
-- `subscribe_success` — canonical record fired **server-side** from
-  `functions/api/subscribe.ts` via Measurement Protocol after Beehiiv
-  accepts. Mirrored client-side too. Mark this as a Key Event in GA.
-- `subscribe_already` — Beehiiv reports email already subscribed.
-- `subscribe_error` — client-side validation failure or fetch error.
-- `video_play` / `video_progress` (25/50/75) / `video_complete` — fired
-  from `YouTubeTracker.astro` when YouTube embeds with `data-yt-track`
-  reach state milestones.
-
-### Server-side Measurement Protocol
-`src/lib/measurement-protocol.ts` exposes `sendMeasurementEvent()` for
-Cloudflare Functions. Required env vars (encrypted in CF Pages):
-- `PUBLIC_GA_MEASUREMENT_ID` (same as client)
-- `GA_API_SECRET` — from GA → Admin → Data Streams → [stream] → MP API
-  secrets
-
-Client IDs are derived from a hash of CF-Connecting-IP + UA — non-PII,
-stable across a session.
-
-### Adding tracking to a new YouTube embed
-On any iframe pointing at youtube-nocookie.com or youtube.com, add:
-```html
-<iframe
-  id="some-unique-id"        <!-- required -->
-  data-yt-track               <!-- enables tracking -->
-  data-yt-title="..."         <!-- optional, sent on events -->
-  data-yt-type="longform|short"  <!-- optional -->
-  src="..."
-  ...
-></iframe>
-```
-For pages that swap the playing video (the /media long-form and shorts
-players do this on thumb click), call:
-```js
-window.AWJYT.changeVideo('iframe-id', 'NEW_VIDEO_ID', { title, type });
-```
-instead of setting `iframe.src` directly. This preserves the YT IFrame
-API connection so events keep firing for the new video.
-
-### Privacy page
-`/privacy` covers what's collected and how to opt out. Linked from the
-consent banner. Update `lastUpdated` in `src/pages/privacy.astro` if
-analytics setup changes.
-
-### ⚠️ Build-time gotcha
-Astro inlines `PUBLIC_*` env vars at **build time**, not runtime. The
-Cloudflare Pages env vars set in the dashboard are only read by Pages
-**Functions** at runtime (e.g. `GA_API_SECRET` in `/api/subscribe`).
-For the static GA tag to actually ship in the HTML, `npm run build`
-needs `PUBLIC_GA_MEASUREMENT_ID` in its environment.
-
-A local `.env` file (gitignored) at the repo root holds the production
-value so autopilot builds + deploys work transparently:
-```
-PUBLIC_GA_MEASUREMENT_ID=G-T29B6L3211
-```
-
-If a future deploy ships HTML without GA in it, this file is the first
-thing to check (`cat ~/Code/awj/.env`). If missing, recreate it.
-
-(Once the GitHub repo is connected to Cloudflare Pages for native CI,
-CF will run the build with its env vars and this becomes unnecessary —
-the local `.env` can stay as a dev convenience.)
-
-## Common deploy failure modes I should watch for
-
-- **Wrangler upload fails on >25MB file** — Cloudflare Pages caps at 25MiB. Compress (ffmpeg for video, sips for images).
-- **Beehiiv subscribe form returns 503** — env vars not set in Cloudflare Pages. Check `npx wrangler pages secret list --project-name=awj`.
-- **GitHub push rejected on `.github/workflows/`** — `gh` token needs `workflow` scope. Run `gh auth refresh -h github.com -s workflow`.
-- **Cloudflare 25MiB cap** — applies per file. The 29MB SKO video had to be transcoded to 3.4MB.
-
-## Where the design system lives
-
-`~/Library/CloudStorage/Dropbox/Andy's Vault/raw/awj-design-system/awj-design-system/project/` — the original Claude Design handoff. CSS tokens, JSX prototypes, asset library. The wiki has a source summary at `wiki/sources/awj-design-system.md`.
-
-## Andy's writing voice
-
-When generating new content (Maxims, page copy), match this:
-
-- *"Stagnation is pain."* — short, declarative, complete.
-- *"You inspect the deal, not the rep."* — you-voice for instructions, never "I think."
-- *"Nobody Regrets Qualifying Out"* — operator wisdom condensed, often paradoxical.
-- No motivational hedging ("kind of," "I think maybe"). High signal density. A 200-word post should contain three principles, not three feelings.
+- `PUBLIC_*` env vars are inlined at build time, so the GA id must be present where the build runs (it is, in `deploy.yml`).
+- Cloudflare Pages caps files at 25 MiB. Compress video with ffmpeg and images with sharp.
+- `gh` needs the `workflow` scope to push changes under `.github/workflows/`.
+- Component scripts must initialise on `astro:page-load`, because the site uses Astro's ClientRouter for view transitions.

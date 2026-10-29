@@ -1,5 +1,7 @@
 ---
 import SocialIcons from '../SocialIcons.astro';
+import SubscribeForm from './SubscribeForm.astro';
+import { HUBS } from '../../data/site';
 ---
 <footer class="nb-footer" id="subscribe">
   <div class="nb-shell">
@@ -9,28 +11,31 @@ import SocialIcons from '../SocialIcons.astro';
         <p class="nb-footer__tag">Sales, founding and being human. Written in a blue notebook, one principle at a time.</p>
         <p class="nb-footer__champ">May your Champions be Strong 💪</p>
       </div>
-      <form class="nb-sub" action="#" method="post">
-        <label class="nb-sub__label" for="sub-email">The journal, in your inbox</label>
-        <p class="nb-sub__hint">New Maxims and essays, published on Substack. No schedule promised, no spam.</p>
-        <div class="nb-sub__row">
-          <input id="sub-email" type="email" placeholder="you@company.com" autocomplete="email" />
-          <button class="btn btn--yellow" type="button">Subscribe</button>
-        </div>
-      </form>
+      <SubscribeForm tone="blue" source="footer" />
     </div>
 
     <div class="nb-footer__cols">
       <div>
         <h4>Journal</h4>
-        <a href="/design/home/#library">All Maxims</a><a href="#">Sales</a><a href="#">Founder</a><a href="#">Human</a>
+        <a href="/maxims/">All Maxims</a>
+        <a href="/pillars/sales/">Sales</a>
+        <a href="/pillars/founder/">Founder</a>
+        <a href="/pillars/human/">Human</a>
+        <a href="/start-here/">Start here</a>
       </div>
       <div>
         <h4>Topics</h4>
-        <a href="/design/hub/">MEDDPICC and MEDDICC</a><a href="#">Sales leadership</a><a href="#">Keynote speaking</a><a href="#">Imposter syndrome</a>
+        {HUBS.map((h) => <a href={`/${h.slug}/`}>{h.title}</a>)}
+        <a href="/glossary/">Glossary</a>
+        <a href="/frameworks/">Frameworks</a>
       </div>
       <div>
         <h4>Andy</h4>
-        <a href="#">About</a><a href="#">Speaking</a><a href="#">The book</a><a href="#">Media</a><a href="#">Contact</a>
+        <a href="/about/">About</a>
+        <a href="/speaking/">Speaking</a>
+        <a href="/book/">The book</a>
+        <a href="/media/">Media</a>
+        <a href="/contact/">Contact</a>
       </div>
       <div>
         <h4>Elsewhere</h4>
@@ -39,8 +44,9 @@ import SocialIcons from '../SocialIcons.astro';
     </div>
 
     <div class="nb-footer__base">
-      <span>© 2026 Andy Whyte</span>
-      <a href="#">Privacy and cookies</a>
+      <span>© {new Date().getFullYear()} Andy Whyte</span>
+      <a href="/privacy/">Privacy and cookies</a>
+      <a href="/journal/rss.xml">RSS</a>
       <span>Founder and CEO, MEDDICC</span>
     </div>
   </div>
@@ -53,12 +59,6 @@ import SocialIcons from '../SocialIcons.astro';
   .nb-footer__mark { width: 120px; height: auto; margin-bottom: 20px; }
   .nb-footer__tag { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4; max-width: 30ch; letter-spacing: -0.01em; }
   .nb-footer__champ { margin-top: 14px; font-size: 14px; opacity: .8; }
-  .nb-sub__label { display: block; font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
-  .nb-sub__hint { margin: 6px 0 16px; opacity: .82; font-size: 15px; }
-  .nb-sub__row { display: flex; gap: 10px; }
-  .nb-sub__row input { flex: 1; min-width: 0; height: 48px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.12); color: #fff; font: inherit; }
-  .nb-sub__row input::placeholder { color: rgba(255,255,255,.6); }
-  .nb-sub__row input:focus { outline: 2px solid var(--nb-yellow); outline-offset: 2px; }
   .nb-footer__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: clamp(32px, 4vw, 48px) 0; }
   .nb-footer__cols h4 { color: rgba(255,255,255,.7); margin-bottom: 14px; }
   .nb-footer__cols div { display: flex; flex-direction: column; gap: 8px; }
@@ -69,5 +69,4 @@ import SocialIcons from '../SocialIcons.astro';
     .nb-footer__top { grid-template-columns: 1fr; }
     .nb-footer__cols { grid-template-columns: repeat(2, 1fr); }
   }
-  @media (max-width: 480px) { .nb-sub__row { flex-direction: column; } }
 </style>

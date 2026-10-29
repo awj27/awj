@@ -1,0 +1,96 @@
+---
+// Newsletter sign-up. Substack when the publication address is set in src/data/site.ts;
+// until then it posts through the existing /api/subscribe function so nothing is lost.
+import { SITE } from '../../data/site';
+
+interface Props { tone?: 'light' | 'blue'; source?: string; compact?: boolean; }
+const { tone = 'light', source = 'form', compact = false } = Astro.props;
+const id = `sub-${source}`;
+const substack = SITE.substackUrl ? `${SITE.substackUrl.replace(/\/$/, '')}/subscribe` : '';
+---
+<form class={`nb-sub nb-sub--${tone}`} action={substack || '/api/subscribe'} method={substack ? 'get' : 'post'} data-subscribe data-source={source} novalidate>
+  {!compact && <label class="nb-sub__label" for={id}>The journal, in your inbox</label>}
+  {!compact && <p class="nb-sub__hint">New Maxims and essays, published on Substack. No schedule promised, no spam.</p>}
+  <div class="nb-sub__row">
+    <input id={id} type="email" name="email" placeholder="you@company.com" autocomplete="email" required aria-describedby={`${id}-msg`} />
+    <button class={`btn ${tone === 'blue' ? 'btn--yellow' : 'btn--blue'}`} type="submit">Subscribe</button>
+  </div>
+  <p class="nb-sub__msg" id={`${id}-msg`} aria-live="polite"></p>
+</form>
+
+<style>
+  .nb-sub { display: block; max-width: 560px; }
+  .nb-sub__label { display: block; font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
+  .nb-sub__hint { margin: 6px 0 16px; font-size: 15px; color: var(--nb-text-2); }
+  .nb-sub__row { display: flex; gap: 10px; }
+  .nb-sub__row input { flex: 1; min-width: 0; height: 48px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--nb-line); background: #fff; color: var(--nb-text); font: inherit; }
+  .nb-sub__row input:focus { outline: 2px solid var(--nb-cover); outline-offset: 2px; }
+  .nb-sub__msg { margin: 10px 0 0; font-size: 13px; color: var(--nb-text-3); min-height: 1.2em; }
+  .nb-sub[data-state="success"] .nb-sub__msg { color: var(--nb-ink); font-weight: 600; }
+  .nb-sub[data-state="error"] .nb-sub__msg { color: #B3261E; font-weight: 600; }
+  .nb-sub--blue .nb-sub__label { color: #fff; }
+  .nb-sub--blue .nb-sub__hint { color: rgba(255,255,255,.82); }
+  .nb-sub--blue .nb-sub__row input { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.12); color: #fff; }
+  .nb-sub--blue .nb-sub__row input::placeholder { color: rgba(255,255,255,.6); }
+  .nb-sub--blue .nb-sub__row input:focus { outline-color: var(--nb-yellow); }
+  .nb-sub--blue .nb-sub__msg { color: rgba(255,255,255,.85); }
+  .nb-sub--blue[data-state="error"] .nb-sub__msg { color: #FFD6D2; }
+  @media (max-width: 480px) { .nb-sub__row { flex-direction: column; } }
+</style>
+
+<script>
+  import { track } from '../../lib/analytics';
+
+  function wire() {
+    document.querySelectorAll<HTMLFormElement>('form[data-subscribe]').forEach((form) => {
+      if (form.dataset.ready) return;
+      form.dataset.ready = '1';
+      const toSubstack = form.getAttribute('method') === 'get';
+      form.addEventListener('submit', async (e) => {
+        const input = form.querySelector<HTMLInputElement>('input[name="email"]')!;
+        const msg = form.querySelector<HTMLElement>('.nb-sub__msg')!;
+        const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+        const email = input.value.trim();
+        const source = form.dataset.source || 'form';
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          e.preventDefault();
+          form.dataset.state = 'error';
+          msg.textContent = 'Please enter a valid email address.';
+          input.focus();
+          track('subscribe_error', { reason: 'invalid_email', source });
+          return;
+        }
+        track('subscribe_submit', { source });
+        if (toSubstack) return; // the browser carries the email to Substack's own form
+        e.preventDefault();
+        btn.disabled = true;
+        const label = btn.textContent;
+        btn.textContent = 'Subscribing';
+        msg.textContent = '';
+        form.dataset.state = '';
+        try {
+          const res = await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
+          const data = (await res.json()) as { ok: boolean; message?: string; error?: string };
+          if (data.ok) {
+            form.dataset.state = 'success';
+            msg.textContent = data.message ?? 'You are in. Check your inbox to confirm.';
+            input.value = '';
+            btn.textContent = 'Subscribed';
+            track('subscribe_success', { source });
+          } else {
+            form.dataset.state = 'error';
+            msg.textContent = data.error ?? 'That did not work. Please try again.';
+            btn.disabled = false; btn.textContent = label;
+            track('subscribe_error', { reason: 'server_error', source, status: res.status });
+          }
+        } catch {
+          form.dataset.state = 'error';
+          msg.textContent = 'Network error. Please try again.';
+          btn.disabled = false; btn.textContent = label;
+          track('subscribe_error', { reason: 'network_error', source });
+        }
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', wire);
+</script>

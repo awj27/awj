@@ -1,29 +1,26 @@
 ---
-// New-brand header: the handwritten AWJ mark, the name set in type, a quiet nav.
-const nav: [string, string][] = [
-  ['Maxims', '/design/home/#library'],
-  ['MEDDPICC', '/design/hub/'],
-  ['Speaking', '#'],
-  ['Book', '#'],
-  ['About', '#'],
-];
+// Header: the handwritten AWJ mark, the name set in type, a quiet nav.
+import { SITE } from '../../data/site';
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 <header class="nb-header" transition:name="nb-header">
   <div class="nb-shell nb-header__in">
-    <a class="nb-brand" href="/design/home/" aria-label="Andy Whyte Journal, home">
+    <a class="nb-brand" href="/" aria-label="Andy Whyte Journal, home">
       <img class="nb-brand__mark" src="/notebook/mark/awj-mark-ink-320.png" alt="" width="320" height="247" />
       <span class="nb-brand__name">Andy Whyte</span>
     </a>
     <nav class="nb-nav" aria-label="Primary">
-      {nav.map(([label, href]) => <a href={href}>{label}</a>)}
+      {SITE.nav.map(([label, href]) => <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>)}
     </nav>
     <div class="nb-header__actions">
-      <a class="btn btn--blue nb-header__cta" href="#subscribe">Subscribe</a>
+      <a class="btn btn--blue nb-header__cta" href="/subscribe/">Subscribe</a>
       <details class="nb-menu">
         <summary aria-label="Menu"><span></span><span></span></summary>
         <nav class="nb-menu__panel" aria-label="Mobile">
-          {nav.map(([label, href]) => <a href={href}>{label}</a>)}
-          <a href="#subscribe">Subscribe on Substack</a>
+          {SITE.nav.map(([label, href]) => <a href={href}>{label}</a>)}
+          <a href="/start-here/">Start here</a>
+          <a href="/subscribe/">Subscribe</a>
         </nav>
       </details>
     </div>
@@ -32,13 +29,13 @@ const nav: [string, string][] = [
 
 <style>
   .nb-header { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.88); backdrop-filter: blur(10px); }
-  .nb-header__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+  .nb-header__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--header-h); }
   .nb-brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--nb-text); }
   .nb-brand__mark { width: 46px; height: auto; }
   .nb-brand__name { font-weight: 600; letter-spacing: -0.01em; font-size: 17px; }
   .nb-nav { display: flex; gap: 2px; }
   .nb-nav a { text-decoration: none; color: var(--nb-text-2); font-weight: 500; font-size: 15px; padding: 8px 12px; border-radius: 999px; }
-  .nb-nav a:hover { color: var(--nb-text); background: var(--nb-canvas-2); }
+  .nb-nav a:hover, .nb-nav a[aria-current] { color: var(--nb-text); background: var(--nb-canvas-2); }
   .nb-header__actions { display: flex; align-items: center; gap: 10px; }
   .nb-menu { position: relative; display: none; }
   .nb-menu summary { list-style: none; width: 40px; height: 40px; display: grid; place-content: center; gap: 5px; border-radius: 999px; border: 1px solid var(--nb-line); cursor: pointer; background: #fff; }
@@ -50,7 +47,6 @@ const nav: [string, string][] = [
   @media (max-width: 860px) {
     .nb-nav { display: none; }
     .nb-menu { display: block; }
-    .nb-header__in { height: 64px; }
     .nb-brand__mark { width: 40px; }
   }
   @media (max-width: 420px) { .nb-header__cta { display: none; } }

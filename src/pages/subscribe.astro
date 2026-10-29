@@ -1,48 +1,45 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Eyebrow from '../components/Eyebrow.astro';
-import Hl from '../components/Hl.astro';
-import SubscribeForm from '../components/SubscribeForm.astro';
-import Scribble from '../components/Scribble.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import SubscribeForm from '../components/v2/SubscribeForm.astro';
+import { SITE } from '../data/site';
 ---
-<Layout
-  title="Subscribe — AWJ"
-  description="One entry. Every Friday. No noise."
+<SiteLayout
+  title="Subscribe to the Andy Whyte Journal"
+  description="New Maxims and the essays behind them, in your inbox. Published on Substack when a page is written. No schedule promised, no spam."
   pageType="subscribe"
+  breadcrumbs={[{ name: 'Subscribe', href: '/subscribe/' }]}
 >
-  <section class="sub-hero awj-bg-paper-yellow">
-    <div class="site-shell sub-hero__inner">
-      <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="6%" width={140} />
-      <Eyebrow>The journal</Eyebrow>
-      <h1 class="sub-hero__title awj-display">
-        One entry. <Hl tone="black">Every Friday.</Hl> No noise.
-      </h1>
-      <p class="sub-hero__sub">A single Maxim, essay, or model in your inbox at the end of every working week. Unsubscribe whenever. Hosted on Substack — your address goes to Substack, not to me.</p>
-      <SubscribeForm tone="yellow" />
+  <section class="nb-page-head">
+    <div class="nb-shell nb-split">
+      <div class="nb-page-head__in">
+        <p class="nb-eyebrow">The journal, in your inbox</p>
+        <h1>When a page gets written, you get the essay.</h1>
+        <p class="nb-lede">No schedule promised. No noise. One email when there is a new Maxim, with the line, the page and the thinking behind it.</p>
+        <SubscribeForm source="subscribe-page" compact />
+        <p class="nb-note">{SITE.substackUrl ? <>Published on <a href={SITE.substackUrl} target="_blank" rel="noopener">Substack</a>. </> : null}Unsubscribe with one click, any time.</p>
+      </div>
+      <div class="pad">
+        <img src="/notebook/pad-open-01.webp" alt="The AWJ notebook, open on page one" loading="eager" width="1400" height="1925" />
+      </div>
     </div>
   </section>
 
-  <section class="sub-promise content-shell">
-    <div class="prose">
-      <h2>The promise.</h2>
-      <p>One Friday. One entry. Forever.</p>
-      <p>Each entry is roughly 200–800 words. Most carry a video. All carry a principle. None are recycled hype.</p>
-
-      <h2>What you get.</h2>
-      <p><strong>Sales.</strong> MEDDICC, deal inspection, sales as a thinking discipline.</p>
-      <p><strong>Founder.</strong> Bootstrap SaaS, trade-offs under uncertainty.</p>
-      <p><strong>Human.</strong> Controlled lessons from failure.</p>
-
-      <h2>What you don't.</h2>
-      <p>No drip campaigns. No upsells. No "what I learned by reading 100 books this year." If I don't have something worth saying, I don't send.</p>
+  <section class="nb-section nb-section--tint">
+    <div class="nb-shell">
+      <div class="nb-section-head">
+        <p class="nb-eyebrow">What you get</p>
+        <h2>Three things, and nothing else.</h2>
+      </div>
+      <div class="nb-grid nb-grid--3">
+        <div class="nb-card"><h3>The Maxim</h3><p class="card-body">One line, written by hand. The kind you end up repeating in a deal review.</p></div>
+        <div class="nb-card"><h3>The essay</h3><p class="card-body">Observation, principle, model, application. Six hundred words, no filler.</p></div>
+        <div class="nb-card"><h3>The occasional note</h3><p class="card-body">A talk, a book chapter, a framework. Only when it is worth your inbox.</p></div>
+      </div>
     </div>
   </section>
-</Layout>
+</SiteLayout>
 
 <style>
-  .sub-hero { position: relative; overflow: hidden; border-bottom: var(--border-hard); }
-  .sub-hero__inner { padding: var(--sp-9) var(--gutter); position: relative; max-width: var(--site-max); margin: 0 auto; }
-  .sub-hero__title { font-size: clamp(40px, 7vw, 112px); margin: var(--sp-3) 0 var(--sp-5); }
-  .sub-hero__sub { font-size: var(--fs-body-lg); margin: 0 0 var(--sp-6); max-width: 56ch; color: var(--fg-1); }
-  .sub-promise { padding: var(--sp-8) var(--gutter) var(--sp-9); }
+  .pad img { max-width: 360px; width: 100%; margin-inline: auto; border-radius: 6px; box-shadow: var(--shadow-lift); transform: rotate(-1.5deg); }
+  .card-body { color: var(--nb-text-2); font-size: 15px; line-height: 1.5; }
 </style>

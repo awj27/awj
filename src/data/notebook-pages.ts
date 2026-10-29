@@ -51,3 +51,13 @@ export const library: { number: number; title: string; pillar?: Pillar; coming?:
 ];
 
 export const pillarLabel: Record<Pillar, string> = { sales: 'Sales', founder: 'Founder', human: 'Human' };
+
+export const pillarInfo: Record<Pillar, { label: string; tag: string; description: string; hubs: string[] }> = {
+  sales:   { label: 'Sales',   tag: 'Authority', description: 'MEDDICC, deal inspection and sales as a thinking discipline.', hubs: ['meddpicc', 'sales-leadership'] },
+  founder: { label: 'Founder', tag: 'Operator',  description: 'Bootstrapped SaaS, trade-offs under uncertainty, no theatre.', hubs: ['sales-leadership', 'keynote-speaking'] },
+  human:   { label: 'Human',   tag: 'Truth',     description: 'Controlled lessons from failure. The quality of your thinking determines the quality of your life.', hubs: ['imposter-syndrome'] },
+};
+
+export const pageFor = (n: number) => notebookPages.find((p) => p.number === n);
+export const pageImage = (n: number) => `/notebook/pages/awj-${pad2(n)}.webp`;
+export const ogImage = (n: number) => `/notebook/og/awj-${pad2(n)}.jpg`;

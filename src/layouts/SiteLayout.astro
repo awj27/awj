@@ -1,0 +1,103 @@
+---
+// The site shell: head metadata, structured data, analytics, header and footer.
+import '../styles/notebook.css';
+import { ClientRouter } from 'astro:transitions';
+import SiteHeader from '../components/v2/SiteHeader.astro';
+import SiteFooter from '../components/v2/SiteFooter.astro';
+import Analytics from '../components/analytics/Analytics.astro';
+import ConsentBanner from '../components/analytics/ConsentBanner.astro';
+import YouTubeTracker from '../components/analytics/YouTubeTracker.astro';
+import { SITE, personSchema, organizationSchema, websiteSchema } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noIndex?: boolean;
+  pillar?: 'sales' | 'founder' | 'human';
+  awjNumber?: number;
+  pageType?: string;
+  /** Home only: snap the scroll to the notebook's turns. */
+  snap?: boolean;
+  /** Page-specific JSON-LD entities added to the site graph. */
+  schema?: Record<string, unknown>[];
+  breadcrumbs?: { name: string; href: string }[];
+}
+
+const {
+  title,
+  description,
+  ogImage = '/notebook/og/default.jpg',
+  ogType = 'website',
+  noIndex = false,
+  pillar,
+  awjNumber,
+  pageType,
+  snap = false,
+  schema = [],
+  breadcrumbs = [],
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE.url).toString();
+const ogImageUrl = new URL(ogImage, SITE.url).toString();
+const crumbs = breadcrumbs.length
+  ? [{
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+        ...breadcrumbs.map((b, i) => ({ '@type': 'ListItem', position: i + 2, name: b.name, item: new URL(b.href, SITE.url).toString() })),
+      ],
+    }]
+  : [];
+const graph = [personSchema, organizationSchema, websiteSchema, ...schema, ...crumbs];
+---
+<!doctype html>
+<html lang="en-GB" data-snap={snap ? '' : undefined}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="icon" type="image/png" href="/notebook/mark/awj-mark-blue-320.png" />
+    <link rel="apple-touch-icon" href="/notebook/mark/awj-mark-blue-320.png" />
+    <link rel="preload" href="/fonts/instrument-sans-normal-400-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="alternate" type="application/rss+xml" title="Andy Whyte Journal" href="/journal/rss.xml" />
+    <meta name="theme-color" content="#3B4DB2" />
+
+    <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })} />
+
+    <Analytics pillar={pillar} awjNumber={awjNumber} pageType={pageType} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <ClientRouter />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="nb-skip" href="#main">Skip to content</a>
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+    <ConsentBanner />
+    <YouTubeTracker />
+  </body>
+</html>

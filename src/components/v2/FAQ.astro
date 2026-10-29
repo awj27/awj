@@ -1,0 +1,40 @@
+---
+// Questions answered: visible, crawlable Q and A plus the paired FAQPage schema.
+interface Item { q: string; a: string; }
+interface Props { items: Item[]; eyebrow?: string; heading?: string; id?: string; tint?: boolean; }
+const { items, eyebrow = 'Questions answered', heading = 'The things people actually ask.', id = 'faq', tint = true } = Astro.props;
+---
+<section class={`nb-section ${tint ? 'nb-section--tint' : ''}`} id={id} aria-labelledby={`${id}-heading`}>
+  <div class="nb-shell">
+    <div class="nb-section-head">
+      <p class="nb-eyebrow">{eyebrow}</p>
+      <h2 id={`${id}-heading`}>{heading}</h2>
+    </div>
+    <div class="faq">
+      {items.map((item) => (
+        <details class="faq__item">
+          <summary>{item.q}</summary>
+          <div class="faq__a">{item.a.split('\n\n').map((p) => <p>{p}</p>)}</div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
+})} />
+
+<style>
+  .faq { max-width: 78ch; }
+  .faq__item { border-top: 1px solid var(--nb-line); }
+  .faq__item:last-child { border-bottom: 1px solid var(--nb-line); }
+  .faq__item summary { cursor: pointer; padding: 18px 44px 18px 0; font-weight: 600; font-size: clamp(17px, 1.4vw, 20px); letter-spacing: -0.01em; list-style: none; position: relative; line-height: 1.3; }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary::after { content: '+'; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-size: 24px; color: var(--nb-cover); font-weight: 400; }
+  .faq__item[open] summary::after { content: '\2212'; }
+  .faq__a { padding: 0 0 20px; color: var(--nb-text-2); max-width: 68ch; }
+  .faq__a p + p { margin-top: .8em; }
+</style>

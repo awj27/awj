@@ -88,3 +88,32 @@ The live hero prototype, delivered 29 October 2026 at `/design/home/` on the pre
 - Budget: 21 KB of JavaScript in total, 7.4 KB gzipped. First paint loads the cover and two pages, about 300 KB of images.
 
 Still to settle after review: the pace of one page per scroll segment, whether eighteen pages earns its length, the pillars of the six unpublished Maxims, and the vector trace of the mark.
+
+## Checkpoint three
+
+The full build, delivered 30 October 2026 on the branch and the preview. Seventy pages.
+
+- The whole site now runs on the new shell: `SiteLayout.astro`, the notebook header and footer, self-hosted Instrument Sans, view transitions, the GA4 consent banner carried over. The old design system, its scribbles, textures and logos are deleted from the repo. The review pages under `/design/` are gone; the home page is the hero.
+- The nine existing pages are rebuilt in the brand on their original URLs: home, Maxims, the three pillars, every Maxim at `/journal/<slug>/`, About, Speaking, Book, Media, Contact, Subscribe, Privacy, plus a 404. The fifty legacy redirects are untouched.
+- New: four topic hubs at `/meddpicc/`, `/sales-leadership/`, `/keynote-speaking/`, `/imposter-syndrome/`, each an essay of 900 to 1,200 words with Andy's position and ten questions answered; a glossary of 23 terms at `/glossary/` with DefinedTerm schema; seven frameworks at `/frameworks/` with HowTo schema; `/start-here/`; and landing pages at `/meddpicc-training/` and `/sales-keynote-speaker-uk/`.
+- Six new essays for Maxims 13, 14, 15, 18, 19 and 20, drafted in Andy's voice with the writing skill. Numbers 16 and 17 remain reserved.
+- Structured data on every page: Person, Organization, WebSite, BreadcrumbList, then Article and VideoObject on Maxims, FAQPage on hubs and landing pages, CollectionPage and ItemList on the indexes, Book, Service, ProfilePage, DefinedTermSet, HowTo. Social preview images for every Maxim and a default. `llms.txt` rewritten and `llms-full.txt` generated from the content.
+- Newsletter: Substack first. The publication address goes in `substackUrl` in `src/data/site.ts`; until it is set, forms post to the existing Beehiiv function. The Beehiiv auto-publish Action is removed.
+- The handwritten numbers on pages 11 to 14 are painted out so the pages no longer contradict the site's numbering.
+- Budget: 21 KB of JavaScript in total across the site.
+
+### What Andy reviews before launch
+
+Nothing on the live site changes until this list is done and the branch is merged.
+
+1. The six new essays. Four contain light first-person details invented for rhythm (for example a line about spending a decade believing hours were the score); keep, change or cut. Two cite Robert Axelrod and Annie Duke inline.
+2. The four hubs. The imposter syndrome hub extends Maxim 10 with inferred moments (a first SKO keynote, being called CEO); Andy has not briefed his stance yet. The sales leadership hub uses the Poq "six to twenty in twelve months" figure from his Medium writing.
+3. The glossary and frameworks: the Champion criteria follow the book's three; the MEDDIC origin story (Dunkel and Napoli at PTC) is kept.
+4. The landing pages and Start Here, which assume he is UK based.
+5. The pillars assigned to the six unpublished Maxims.
+6. The Substack address, so the subscribe forms switch over.
+7. Maxims 16 and 17, written and photographed.
+
+### Launch, when he is ready
+
+Merge `redesign/notebook` into `main`. The deploy Action builds and ships it. Then: set the Substack address, submit the sitemap in Search Console, and watch the first week of analytics for the hero's turn events.

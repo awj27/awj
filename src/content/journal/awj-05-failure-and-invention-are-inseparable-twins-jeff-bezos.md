@@ -1,5 +1,5 @@
 ---
-title: "Failure and invention are inseparable twins – Jeff Bezos"
+title: "Failure and invention are inseparable twins"
 awj_number: 5
 slug: failure-and-invention-are-inseparable-twins-jeff-bezos
 pillar: founder
@@ -11,7 +11,7 @@ original_wp_url: https://andywhyte.com/portfolios/awj-5-failure-and-invention-ar
 original_wp_id: 15375
 ---
 
-Failure and invention are inseparable twins – Jeff Bezos
+Failure and invention are inseparable twins. Jeff Bezos said it first.
 
 Not going to lie…
 

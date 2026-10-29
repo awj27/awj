@@ -1,395 +1,133 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Eyebrow from '../components/Eyebrow.astro';
-import Btn from '../components/Btn.astro';
-import Hl from '../components/Hl.astro';
-import Pillar from '../components/Pillar.astro';
-import Scribble from '../components/Scribble.astro';
-import SubscribeForm from '../components/SubscribeForm.astro';
 import { getCollection } from 'astro:content';
-import { PILLAR_META, formatIssueDate, type Pillar as PillarT } from '../lib/utils';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import NotebookHero from '../components/v2/NotebookHero.astro';
+import { notebookPages, library, pillarLabel, pad2 } from '../data/notebook-pages';
+import { HUBS, SITE } from '../data/site';
+import { entryHref, byNumber } from '../lib/maxims';
 
-const all = (await getCollection('journal', e => !e.data.draft))
-  .sort((a, b) => b.data.awj_number - a.data.awj_number);
+const entries = (await getCollection('journal', (e) => !e.data.draft)).sort(byNumber);
+const hrefFor = (n: number) => { const e = entries.find((x) => x.data.awj_number === n); return e ? entryHref(e) : '/maxims/'; };
+const heroPages = notebookPages.map((p) => ({ ...p, href: hrefFor(p.number) }));
 
-const featured = all.find(e => e.data.awj_number === 1) ?? all[0];
-const recent = all.filter(e => e.id !== featured.id).slice(0, 4);
-const issueDate = formatIssueDate(featured.data.modified ?? featured.data.date);
+const itemList = {
+  '@type': 'ItemList',
+  '@id': `${SITE.url}/#maxims`,
+  name: 'The AWJ Maxims',
+  numberOfItems: heroPages.length,
+  itemListElement: heroPages.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.title, url: `${SITE.url}${p.href}` })),
+};
 ---
-<Layout
-  title="Andy Whyte Journal: Sales, Founding, Human. One Entry Every Friday."
-  description="A notebook page that earned the right to be on a billboard. Maxims and essays from Andy Whyte across sales, founding, and being human. One entry every Friday. No noise."
+<SiteLayout
+  title="Andy Whyte Journal: principles for sales, founding and being human"
+  description="A notebook of handwritten Maxims from Andy Whyte, founder and CEO of MEDDICC. Essays, frameworks and a glossary on MEDDPICC, sales leadership, keynote speaking and imposter syndrome."
   pageType="home"
+  snap
+  schema={[itemList]}
 >
-  {/* HERO — black paper, portrait blends in from the right */}
-  <section class="hero">
-    {/* Background layers: paper texture + portrait + dark gradient blend */}
-    <div class="hero__bg" aria-hidden="true">
-      <img
-        src="/media/portrait/andy-portrait.jpg"
-        srcset="/media/portrait/andy-portrait-mobile.jpg 800w, /media/portrait/andy-portrait.jpg 1600w"
-        sizes="100vw"
-        alt=""
-        class="hero__bg-portrait"
-      />
-      <div class="hero__bg-fade"></div>
-    </div>
+  <NotebookHero pages={heroPages} />
 
-    <div class="site-shell hero__inner">
-      <Eyebrow color="#FFCE00">Issue {String(featured.data.awj_number).padStart(3, '0')} · Filed {issueDate}</Eyebrow>
-      <h1 class="hero__title awj-billboard">
-        {(() => {
-          const t = featured.data.title;
-          const m = t.match(/(uncomfortable)/i);
-          if (!m) return t;
-          const idx = m.index!;
-          return [t.slice(0, idx), <Hl>{m[0]}</Hl>, t.slice(idx + m[0].length)];
-        })()}
-      </h1>
-      <Scribble src="/assets/scribbles/underline_yellow.png" left="0" bottom="-10px" width={280} opacity={0.9} />
-      <div class="hero__actions">
-        <Btn href={`/journal/${featured.data.slug ?? featured.id}/`} tone="yellow">Read the entry</Btn>
-        <Btn href="/journal/" tone="ghost">The archive</Btn>
+  <section class="nb-section" id="library">
+    <div class="nb-shell">
+      <div class="lib-head">
+        <div class="nb-section-head" style="margin-bottom:0">
+          <p class="nb-eyebrow">The library</p>
+          <h2>Twenty Maxims. Eighteen written, two on the way.</h2>
+        </div>
+        <a class="btn btn--ghost" href="/start-here/">New here? Start here</a>
       </div>
-    </div>
-  </section>
-
-  {/* PILLARS */}
-  <section class="pillars">
-    <div class="site-shell">
-      <Eyebrow>Three pillars</Eyebrow>
-      <div class="pillars__grid">
-        {(['sales', 'founder', 'human'] as PillarT[]).map((p, i) => {
-          const meta = PILLAR_META[p];
-          return (
-            <a href={`/pillars/${p}/`} class={`pillars__card pillars__card--${p}`} style={`background-color: ${meta.bg}; color: ${meta.fg}`}>
-              <span class="pillars__num">{String(i + 1).padStart(2, '0')} · {meta.tag.toUpperCase()}</span>
-              <div>
-                <h3 class="pillars__name">{meta.label}</h3>
-                <p class="pillars__blurb">{meta.description}</p>
-              </div>
-            </a>
-          );
-        })}
-      </div>
+      <ol class="lib">
+        {library.map((m) => (
+          <li class={`lib__row ${m.coming ? 'lib__row--coming' : ''}`}>
+            {m.coming ? (
+              <span>
+                <span class="lib__num">No. {pad2(m.number)}</span>
+                <span class="lib__title">{m.title}</span>
+                <span class="nb-pill">Coming</span>
+              </span>
+            ) : (
+              <a href={hrefFor(m.number)}>
+                <span class="lib__num">No. {pad2(m.number)}</span>
+                <span class="lib__title">{m.title}</span>
+                <span class={`nb-pill nb-pill--${m.pillar}`}>{pillarLabel[m.pillar!]}</span>
+              </a>
+            )}
+          </li>
+        ))}
+      </ol>
+      <p class="nb-note" style="margin-top:18px"><a href="/maxims/">Browse by pillar, with the pages &rarr;</a></p>
     </div>
   </section>
 
-  {/* FEATURED MAXIM */}
-  <section class="featured awj-bg-paper-blue">
-    <div class="site-shell featured__inner">
-      <Scribble src="/assets/scribbles/pen_star_yellow.png" rotate={-12} top="40px" right="6%" width={120} />
-      <Eyebrow color="#FFCE00">Featured Maxim</Eyebrow>
-      <h2 class="featured__title awj-billboard">Your Mental Health Is Not Linear</h2>
-      <p class="featured__lede">
-        In 2018 I beat cancer. A year later, a bad boss nearly broke me. Here's what that taught me about the lie men tell themselves about suffering.
-      </p>
-      <div class="featured__video-frame">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/YXzPAzfMoXc"
-          title="Your Mental Health Is Not Linear — video"
-          loading="lazy"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        ></iframe>
+  <section class="nb-section nb-section--tint">
+    <div class="nb-shell">
+      <div class="nb-section-head">
+        <p class="nb-eyebrow">Four things I am known for</p>
+        <h2>Go deeper on the subjects behind the Maxims.</h2>
       </div>
-      <div class="featured__actions">
-        <Btn href="/journal/your-mental-health-is-not-linear/" tone="yellow">Read the entry</Btn>
-      </div>
-    </div>
-  </section>
-
-  {/* RECENT */}
-  <section class="recent">
-    <div class="site-shell">
-      <div class="recent__head">
-        <h2 class="recent__h">Recent entries</h2>
-        <a href="/journal/" class="recent__archive-link">Full archive →</a>
-      </div>
-      <div class="recent__grid">
-        {recent.map(e => (
-          <article class="recent__card">
-            <div class="recent__row">
-              <Pillar pillar={e.data.pillar} />
-              <span class="awj-meta">AWJ #{e.data.awj_number}</span>
-            </div>
-            <h3 class="recent__title">
-              <a href={`/journal/${e.data.slug ?? e.id}/`}>{e.data.title}</a>
-            </h3>
-          </article>
+      <div class="nb-grid nb-grid--4">
+        {HUBS.map((h) => (
+          <a class="nb-card hub-card" href={`/${h.slug}/`}>
+            <h3>{h.title}</h3>
+            <p>{h.line}</p>
+            <span class="hub-card__more">Read the hub &rarr;</span>
+          </a>
         ))}
       </div>
+      <p class="nb-note" style="margin-top:22px">Also: <a href="/glossary/">the glossary</a>, every term defined plainly, and <a href="/frameworks/">the frameworks</a> behind the Maxims.</p>
     </div>
   </section>
 
-  {/* CTA */}
-  <section class="cta awj-bg-paper-blue">
-    <div class="site-shell cta__inner">
-      <Scribble src="/assets/scribbles/pen_star_yellow.png" rotate={14} top="30px" right="8%" width={120} />
-      <Eyebrow color="#FFCE00">The frictionless path</Eyebrow>
-      <h2 class="cta__title">
-        One entry. <Hl>Every Friday.</Hl> No noise.
-      </h2>
-      <SubscribeForm tone="dark" />
+  <section class="nb-section">
+    <div class="nb-shell nb-split nb-split--photo-first">
+      <div class="about__photo">
+        <img src="/media/portrait/andy-portrait.jpg" alt="Andy Whyte" loading="lazy" width="800" height="1000" />
+      </div>
+      <div class="nb-stack">
+        <p class="nb-eyebrow">About</p>
+        <h2>Twenty years in sales. One book. One company. One notebook.</h2>
+        <p class="nb-lede">I am Andy Whyte, founder and CEO of MEDDICC and the author of the book that over {SITE.facts.copies} sellers have read. This journal is where the thinking gets written down before it gets tidied up.</p>
+        <div class="nb-page-head__actions">
+          <a class="btn btn--blue" href="/about/">The full story</a>
+          <a class="btn btn--ghost" href="/speaking/">Book Andy to speak</a>
+        </div>
+      </div>
     </div>
   </section>
-</Layout>
+
+  <section class="nb-section nb-section--blue">
+    <div class="nb-shell nb-split">
+      <div class="nb-stack">
+        <p class="nb-eyebrow">The book</p>
+        <h2>MEDDICC. The number one best-selling book on sales qualification.</h2>
+        <p class="nb-lede">Over {SITE.facts.copies} copies sold and more than {SITE.facts.graduates} graduates of the Masterclass built on it. The framework, explained by someone who has run it in the room.</p>
+        <div class="nb-page-head__actions">
+          <a class="btn btn--white" href="/book/">About the book</a>
+          <a class="btn btn--ghost book__ghost" href="/meddpicc/">What is MEDDPICC?</a>
+        </div>
+      </div>
+      <div class="book__cover">
+        <img src="/media/book/meddicc-cover.jpg" alt="The MEDDICC book cover" loading="lazy" width="640" height="960" />
+      </div>
+    </div>
+  </section>
+</SiteLayout>
 
 <style>
-  /* HERO — black paper with portrait bleeding in from the right */
-  .hero {
-    position: relative;
-    background-color: var(--awj-black);
-    background-image: url('/assets/textures/paper_black.png');
-    background-size: cover;
-    background-position: center;
-    color: var(--awj-white);
-    border-bottom: var(--border-hard);
-    overflow: hidden;
-    min-height: 580px;
-  }
-
-  /* Background composition: portrait + dark gradient that blends it into the paper */
-  .hero__bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .hero__bg-portrait {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: 70% 18%;
-    filter: grayscale(1) contrast(1.04) brightness(0.95);
-    /* `screen` blend lifts only the brighter parts of the photo over the
-       paper, so the paper crinkles/texture remain visible everywhere
-       and Andy's face emerges from within the paper. */
-    mix-blend-mode: screen;
-    /* Mask so the photo only contributes on the right side, not full-bleed */
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 22%, rgba(0,0,0,0.4) 42%, rgba(0,0,0,0.85) 65%, black 90%);
-            mask-image: linear-gradient(to right, transparent 0%, transparent 22%, rgba(0,0,0,0.4) 42%, rgba(0,0,0,0.85) 65%, black 90%);
-  }
-  /* Very light vignette on the left only — preserves paper texture, just
-     ensures the Maxim text wins. Much subtler than before. */
-  .hero__bg-fade {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(to right,
-        rgba(10,10,10,0.55) 0%,
-        rgba(10,10,10,0.30) 25%,
-        rgba(10,10,10,0.05) 55%,
-        rgba(10,10,10,0.0)  80%);
-  }
-
-  /* Mobile: photo even more subtle, paper dominates */
-  @media (max-width: 720px) {
-    .hero__bg-portrait { object-position: 65% 12%; opacity: 0.7; }
-    .hero__bg-fade {
-      background:
-        linear-gradient(to bottom,
-          rgba(10,10,10,0.0)  0%,
-          rgba(10,10,10,0.2)  60%,
-          rgba(10,10,10,0.45) 100%);
-    }
-  }
-
-  .hero__inner {
-    position: relative;
-    z-index: 1;
-    padding: var(--sp-9) var(--gutter) var(--sp-8);
-    max-width: var(--site-max);
-    margin: 0 auto;
-  }
-  .hero__title {
-    margin-top: var(--sp-4);
-    margin-bottom: var(--sp-7);
-    color: var(--awj-white);
-    /* Constrain text width on wide screens so the portrait gets room to breathe */
-    max-width: 90%;
-  }
-  @media (min-width: 1100px) {
-    .hero__title { max-width: 64%; }
-  }
-  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
-
-  /* PILLARS */
-  .pillars { padding: var(--sp-8) 0; border-bottom: var(--border-hard); }
-  .pillars__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    border: var(--border-hard);
-    background: var(--bg-2);
-    margin-top: var(--sp-4);
-  }
-  @media (min-width: 720px) { .pillars__grid { grid-template-columns: repeat(3, 1fr); } }
-  .pillars__card {
-    padding: var(--sp-6);
-    min-height: 240px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-decoration: none;
-    border-bottom: var(--border-hard);
-    background-size: cover; background-position: center;
-    transition: transform var(--t-fast);
-  }
-  .pillars__card--sales   { background-image: url('/assets/textures/paper_yellow.png'); }
-  .pillars__card--founder { background-image: url('/assets/textures/paper_blue.png');   }
-  .pillars__card--human   { background-image: url('/assets/textures/paper_black.png');  }
-  .pillars__card:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--awj-black); }
-  .pillars__card:last-child { border-bottom: none; }
-  @media (min-width: 720px) {
-    .pillars__card { border-bottom: none; border-right: var(--border-hard); }
-    .pillars__card:last-child { border-right: none; }
-  }
-  .pillars__num {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    opacity: 0.85;
-    color: inherit;
-  }
-  .pillars__name {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(48px, 5vw, 88px);
-    line-height: 0.95;
-    margin: 0 0 var(--sp-3);
-    overflow-wrap: anywhere;
-    text-transform: uppercase;
-    letter-spacing: -0.005em;
-    color: inherit;
-  }
-  .pillars__blurb { font-size: 15px; line-height: 1.5; margin: 0; max-width: 320px; color: inherit; opacity: 0.92; }
-
-  /* FEATURED MAXIM */
-  .featured {
-    position: relative;
-    overflow: hidden;
-    border-bottom: var(--border-hard);
-  }
-  .featured__inner {
-    padding: var(--sp-9) var(--gutter);
-    position: relative;
-  }
-  .featured__title {
-    margin: var(--sp-3) 0 var(--sp-4);
-    color: var(--awj-white);
-    max-width: 18ch;
-  }
-  .featured__lede {
-    font-family: var(--font-body);
-    font-size: clamp(17px, 1.6vw, 20px);
-    line-height: 1.55;
-    margin: 0 0 var(--sp-6);
-    max-width: 60ch;
-    color: var(--awj-white);
-    opacity: 0.92;
-  }
-  .featured__video-frame {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: var(--awj-black);
-    border: var(--border-hard);
-    overflow: hidden;
-    margin-bottom: var(--sp-6);
-  }
-  .featured__video-frame iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-  .featured__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
-
-  /* RECENT */
-  .recent { padding: var(--sp-8) 0; border-bottom: var(--border-hard); }
-  .recent__head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--sp-4);
-    margin-bottom: var(--sp-5);
-    flex-wrap: wrap;
-  }
-  .recent__h {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: -0.005em;
-    font-size: clamp(32px, 4.5vw, 56px);
-    margin: 0;
-    line-height: 1;
-  }
-  .recent__archive-link {
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--awj-black);
-  }
-  .recent__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    border-top: 1px solid var(--rule);
-  }
-  @media (min-width: 720px) { .recent__grid { grid-template-columns: 1fr 1fr; } }
-  .recent__card {
-    padding: var(--sp-5) var(--sp-4);
-    border-bottom: 1px solid var(--rule);
-    color: var(--awj-black);
-    transition: background var(--t-fast);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-3);
-  }
-  .recent__card:hover { background: rgba(255,206,0,0.12); }
-  @media (min-width: 720px) { .recent__card:nth-child(odd) { border-right: 1px solid var(--rule); } }
-  .recent__row { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; }
-  .recent__title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(24px, 3.4vw, 40px);
-    line-height: 1.02;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: -0.005em;
-    overflow-wrap: anywhere;
-  }
-  .recent__title a {
-    color: inherit;
-    text-decoration: none;
-    background-image: linear-gradient(to bottom, transparent 88%, var(--awj-black) 88%, var(--awj-black) 95%, transparent 95%);
-    background-size: 0% 100%;
-    background-repeat: no-repeat;
-    transition: background-size var(--t-base) var(--ease-out);
-  }
-  .recent__title a:hover { background-size: 100% 100%; }
-
-  /* CTA */
-  .cta { position: relative; overflow: hidden; }
-  .cta__inner { padding: var(--sp-9) var(--gutter); position: relative; }
-  .cta__title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: -0.005em;
-    font-size: clamp(40px, 7vw, 96px);
-    line-height: 1;
-    margin: var(--sp-3) 0 var(--sp-6);
-    max-width: 18ch;
-    color: var(--awj-white);
-  }
-  .cta .awj-eyebrow { color: var(--awj-yellow); }
+  .lib-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(24px, 3vw, 40px); }
+  .lib { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--nb-line); }
+  .lib__row > a, .lib__row > span { display: grid; grid-template-columns: 90px 1fr auto; gap: 20px; align-items: center; padding: 18px 4px; border-bottom: 1px solid var(--nb-line); text-decoration: none; color: var(--nb-text); transition: background .2s; }
+  .lib__row > a:hover { background: var(--nb-canvas-2); }
+  .lib__row--coming .lib__title { color: var(--nb-text-3); font-style: italic; }
+  .lib__num { font-size: 13px; color: var(--nb-text-3); font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+  .lib__title { font-size: clamp(17px, 1.5vw, 21px); font-weight: 500; letter-spacing: -0.01em; }
+  @media (max-width: 560px) { .lib__row > a, .lib__row > span { grid-template-columns: 1fr; gap: 6px; } .lib__row .nb-pill { justify-self: start; } }
+  .hub-card { text-decoration: none; color: inherit; }
+  .hub-card p { color: var(--nb-text-2); font-size: 15px; line-height: 1.5; flex: 1; }
+  .hub-card__more { font-weight: 600; font-size: 14px; color: var(--nb-ink); }
+  .about__photo img { border-radius: var(--radius-ui); box-shadow: var(--shadow-page); aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  @media (max-width: 820px) { .about__photo { max-width: 360px; } }
+  .book__cover img { max-width: 320px; margin-inline: auto; border-radius: 6px; box-shadow: 0 30px 70px rgba(10,16,50,.45); transform: rotate(-2deg); }
+  .book__ghost { border-color: rgba(255,255,255,.4); color: #fff; background: transparent; }
+  .book__ghost:hover { border-color: #fff; }
 </style>

@@ -1,0 +1,167 @@
+---
+// Root-level editorial routes: the four topic hubs, the two landing pages and Start Here.
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import FAQ from '../components/v2/FAQ.astro';
+import { pageFor, pad2, pillarLabel } from '../data/notebook-pages';
+import { SITE } from '../data/site';
+import { entryHref, formatDate } from '../lib/maxims';
+
+export async function getStaticPaths() {
+  const [hubs, landing, pages] = await Promise.all([getCollection('hubs'), getCollection('landing'), getCollection('pages')]);
+  return [
+    ...hubs.map((entry) => ({ params: { slug: entry.id }, props: { kind: 'hub', entry } })),
+    ...landing.map((entry) => ({ params: { slug: entry.id }, props: { kind: 'landing', entry } })),
+    ...pages.map((entry) => ({ params: { slug: entry.id }, props: { kind: 'page', entry } })),
+  ];
+}
+
+const { kind, entry } = Astro.props as { kind: 'hub' | 'landing' | 'page'; entry: any };
+const { Content } = await render(entry);
+const d = entry.data;
+const path = `/${entry.id}/`;
+const url = `${SITE.url}${path}`;
+
+const journal = await getCollection('journal', (e: any) => !e.data.draft);
+const hrefFor = (n: number) => { const e = journal.find((x: any) => x.data.awj_number === n); return e ? entryHref(e) : '/maxims/'; };
+const maxims = (d.maxims ?? []).map((n: number) => ({ n, page: pageFor(n), href: hrefFor(n) })).filter((m: any) => m.page);
+
+const title = kind === 'landing' ? d.seoTitle : `${d.title} | Andy Whyte`;
+const webPage = {
+  '@type': 'WebPage',
+  '@id': `${url}#page`,
+  url,
+  name: d.title,
+  description: d.description,
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  about: { '@id': `${SITE.url}/#andy` },
+  dateModified: new Date(d.updated).toISOString(),
+  inLanguage: 'en-GB',
+};
+const service = entry.id === 'sales-keynote-speaker-uk' ? [{
+  '@type': 'Service',
+  '@id': `${url}#service`,
+  name: 'Sales keynote speaking by Andy Whyte',
+  serviceType: 'Keynote Speaking',
+  provider: { '@id': `${SITE.url}/#andy` },
+  areaServed: ['United Kingdom', 'Europe', 'Worldwide'],
+  url,
+}] : [];
+---
+<SiteLayout title={title} description={d.description} pageType={kind} schema={[webPage, ...service]} breadcrumbs={[{ name: d.title, href: path }]}>
+  <section class="nb-page-head">
+    <div class="nb-shell nb-page-head__in">
+      {d.eyebrow && <p class="nb-eyebrow">{d.eyebrow}</p>}
+      <h1>{d.title}</h1>
+      {d.standfirst && <p class="nb-lede">{d.standfirst}</p>}
+      {kind === 'landing' && (
+        <div class="nb-page-head__actions">
+          <a class="btn btn--blue" href={d.primaryCta.href} {...(d.primaryCta.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{d.primaryCta.label}</a>
+          {d.secondaryCta && <a class="btn btn--ghost" href={d.secondaryCta.href}>{d.secondaryCta.label}</a>}
+        </div>
+      )}
+      {kind === 'hub' && d.position && (
+        <div class="position">
+          <p class="nb-eyebrow">Where I stand</p>
+          <p>{d.position}</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {kind === 'landing' && (
+    <section class="nb-section nb-section--tint" style="padding-top:clamp(32px,4vw,56px)">
+      <div class="nb-shell">
+        <div class="nb-grid nb-grid--4">
+          {d.points.map((p: { title: string; body: string }) => (
+            <div class="nb-card"><h3>{p.title}</h3><p class="card-body">{p.body}</p></div>
+          ))}
+        </div>
+        {d.proof?.length > 0 && (
+          <ul class="proof">{d.proof.map((s: string) => <li>{s}</li>)}</ul>
+        )}
+      </div>
+    </section>
+  )}
+
+  <section class="nb-section" style={kind === 'landing' ? '' : 'padding-top:clamp(16px,2vw,32px)'}>
+    <div class="nb-shell body">
+      <div class="nb-prose"><Content /></div>
+      {kind === 'hub' && (
+        <aside class="body__side">
+          {d.links?.length > 0 && (
+            <div class="side-card">
+              <p class="nb-eyebrow">Go further</p>
+              {d.links.map((l: { label: string; href: string }) => (
+                <a class="side-link" href={l.href} {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{l.label} &rarr;</a>
+              ))}
+            </div>
+          )}
+          <div class="side-card">
+            <p class="nb-eyebrow">Updated</p>
+            <p class="nb-meta">{formatDate(d.updated)}. Written by <a href="/about/">Andy Whyte</a>.</p>
+          </div>
+        </aside>
+      )}
+    </div>
+  </section>
+
+  {maxims.length > 0 && (
+    <section class="nb-section nb-section--tint">
+      <div class="nb-shell">
+        <div class="nb-section-head">
+          <p class="nb-eyebrow">From the notebook</p>
+          <h2>The Maxims on this subject.</h2>
+        </div>
+        <div class="nb-grid nb-grid--3">
+          {maxims.map((m: any) => (
+            <a class="rel-card" href={m.href}>
+              <div class="nb-page"><img src={m.page.src} alt={m.page.alt} loading="lazy" width="1600" height="1096" /></div>
+              <p class="nb-meta">No. {pad2(m.n)} · {pillarLabel[m.page.pillar]}</p>
+              <h3>{m.page.title}</h3>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {d.faqs?.length > 0 && <FAQ items={d.faqs} tint={maxims.length === 0} />}
+
+  {kind === 'landing' && (
+    <section class="nb-section nb-section--blue">
+      <div class="nb-shell cta">
+        <div>
+          <p class="nb-eyebrow">Next step</p>
+          <h2>{d.title}</h2>
+        </div>
+        <div class="nb-page-head__actions">
+          <a class="btn btn--white" href={d.primaryCta.href} {...(d.primaryCta.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{d.primaryCta.label}</a>
+          {d.secondaryCta && <a class="btn btn--ghost cta__ghost" href={d.secondaryCta.href}>{d.secondaryCta.label}</a>}
+        </div>
+      </div>
+    </section>
+  )}
+</SiteLayout>
+
+<style>
+  .position { margin-top: 10px; padding: clamp(18px, 2.5vw, 28px); border-radius: var(--radius-ui); background: color-mix(in srgb, var(--nb-yellow) 18%, #fff); display: flex; flex-direction: column; gap: 8px; }
+  .position p:last-child { font-size: clamp(17px, 1.3vw, 19px); line-height: 1.55; }
+  .card-body { color: var(--nb-text-2); font-size: 15px; line-height: 1.5; }
+  .proof { margin: clamp(20px, 3vw, 32px) 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: 14px; color: var(--nb-text-2); }
+  .proof li::before { content: '\2713'; color: var(--nb-cover); font-weight: 700; margin-right: 8px; }
+  .body { display: grid; grid-template-columns: minmax(0, 68ch) 280px; gap: clamp(32px, 5vw, 80px); }
+  .body__side { display: flex; flex-direction: column; gap: 20px; }
+  .side-card { display: flex; flex-direction: column; gap: 10px; padding: 18px; border: 1px solid var(--nb-line); border-radius: var(--radius-ui); background: #fff; position: sticky; top: calc(var(--header-h) + 16px); }
+  .side-card + .side-card { position: static; }
+  .side-link { font-weight: 600; text-decoration: none; }
+  .side-link:hover { text-decoration: underline; }
+  @media (max-width: 900px) { .body { grid-template-columns: minmax(0, 1fr); } .side-card { position: static; } }
+  .rel-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px; }
+  .rel-card .nb-page img { object-fit: contain; background: var(--nb-paper); }
+  .rel-card .nb-page { transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out); }
+  .rel-card:hover .nb-page { transform: translateY(-4px) rotate(-.4deg); box-shadow: var(--shadow-lift); }
+  .rel-card h3 { font-size: 18px; }
+  .cta { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .cta__ghost { border-color: rgba(255,255,255,.4); color: #fff; background: transparent; }
+</style>

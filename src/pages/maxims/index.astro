@@ -1,430 +1,125 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Eyebrow from '../../components/Eyebrow.astro';
-import Pillar from '../../components/Pillar.astro';
-import Scribble from '../../components/Scribble.astro';
 import { getCollection } from 'astro:content';
-import { formatDate, PILLAR_META, type Pillar as PillarT } from '../../lib/utils';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { library, pillarLabel, pillarInfo, pad2, pageFor } from '../../data/notebook-pages';
+import { SITE } from '../../data/site';
+import { entryHref, byNumber } from '../../lib/maxims';
 
-const all = (await getCollection('journal', e => !e.data.draft))
-  .sort((a, b) => b.data.awj_number - a.data.awj_number);
+const entries = (await getCollection('journal', (e) => !e.data.draft)).sort(byNumber);
+const hrefFor = (n: number) => { const e = entries.find((x) => x.data.awj_number === n); return e ? entryHref(e) : undefined; };
 
-// Map each Maxim to a card "treatment" — paper colour, scribble accent, tilt.
-// Repeats on a 6-card cycle so the grid feels intentional rather than random.
-const treatments = [
-  { paper: 'white',  fg: '#0A0A0A', tilt: -1.2, scribble: 'scribbles/scribble_fire_1.png',  scribblePos: { right: '-18px', top: '-12px' } },
-  { paper: 'yellow', fg: '#0A0A0A', tilt:  0.8, scribble: 'scribbles/pen_star_black.png',   scribblePos: { right: '-14px', bottom: '-14px' } },
-  { paper: 'blue',   fg: '#FFFFFF', tilt: -0.6, scribble: 'scribbles/underline_yellow.png', scribblePos: { left: '20px',  bottom: '24px' } },
-  { paper: 'white',  fg: '#0A0A0A', tilt:  1.4, scribble: 'scribbles/scribble_fire_2.png',  scribblePos: { left: '-14px', top: '-14px' } },
-  { paper: 'black',  fg: '#FFFFFF', tilt: -0.8, scribble: 'scribbles/pen_star_yellow.png',  scribblePos: { right: '-12px', top: '-12px' } },
-  { paper: 'yellow', fg: '#0A0A0A', tilt:  0.6, scribble: 'scribbles/scribble_fire_1.png',  scribblePos: { left: '-16px', bottom: '-12px' } },
-];
-
-// Pick the most recent maxim as the "featured" billboard
-const featured = all[0];
-const rest = all.slice(1);
-
-function highlightLastWord(t: string) {
-  // Apply yellow highlighter to the last word for visual rhythm
-  const parts = t.split(' ');
-  if (parts.length < 2) return [t];
-  const last = parts.pop()!;
-  return [parts.join(' ') + ' ', last];
-}
+const collection = {
+  '@type': 'CollectionPage',
+  '@id': `${SITE.url}/maxims/#page`,
+  url: `${SITE.url}/maxims/`,
+  name: 'The AWJ Maxims',
+  description: 'Every Maxim in the notebook: single-line principles for sales, founding and being human, each with the essay behind it.',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: entries.map((e, i) => ({ '@type': 'ListItem', position: i + 1, name: e.data.title, url: `${SITE.url}${entryHref(e)}` })),
+  },
+};
 ---
-<Layout
-  title="The AWJ Maxims: Single-Line Principles for Sales, Founding, and Life"
-  description="Every Maxim from the Andy Whyte Journal. Single-line principles you can keep in your pocket. Click any one to read the essay."
+<SiteLayout
+  title="The AWJ Maxims: principles for sales, founding and being human"
+  description="Every Maxim in Andy Whyte's notebook, in order. Single-line principles on sales, founding and being human, each with the essay behind it."
   pageType="maxims-list"
+  schema={[collection]}
+  breadcrumbs={[{ name: 'Maxims', href: '/maxims/' }]}
 >
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@graph': [
-        {
-          '@type': 'CollectionPage',
-          '@id': 'https://andywhyte.com/maxims/#collection',
-          name: 'The AWJ Maxims',
-          description: 'Single-line principles from the Andy Whyte Journal.',
-          url: 'https://andywhyte.com/maxims/',
-          isPartOf: { '@id': 'https://andywhyte.com/#website' },
-          mainEntity: {
-            '@type': 'ItemList',
-            numberOfItems: all.length,
-            itemListElement: all.map((e, i) => ({
-              '@type': 'ListItem',
-              position: i + 1,
-              url: `https://andywhyte.com/journal/${e.data.slug ?? e.id}/`,
-              name: e.data.title,
-            })),
-          },
-        },
-        {
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://andywhyte.com/' },
-            { '@type': 'ListItem', position: 2, name: 'Maxims', item: 'https://andywhyte.com/maxims/' },
-          ],
-        },
-      ],
-    })} />
-  </Fragment>
-  {/* HERO billboard */}
-  <section class="mx-hero">
-    <div class="site-shell mx-hero__inner">
-      <Eyebrow>The wall</Eyebrow>
-      <h1 class="mx-hero__title">Maxims.</h1>
-      <p class="mx-hero__sub">{all.length} principles. One a Friday. The line is the index — click to read the essay behind it.</p>
-    </div>
-  </section>
-
-  {/* FEATURED MAXIM — full-bleed quote treatment */}
-  <section class="mx-featured awj-bg-paper-yellow">
-    <div class="site-shell mx-featured__inner">
-      <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={14} top="40px" right="6%" width={120} />
-      <Scribble src="/assets/scribbles/underline_black.png" rotate={-2} bottom="40px" left="6%" width={300} opacity={0.85} />
-      <a href={`/journal/${featured.data.slug ?? featured.id}/`} class="mx-featured__link">
-        <span class="mx-featured__meta">AWJ #{featured.data.awj_number} · {featured.data.pillar.toUpperCase()}</span>
-        <p class="mx-featured__line">{featured.data.title}</p>
-        <span class="mx-featured__read">Read the entry →</span>
-      </a>
-    </div>
-  </section>
-
-  {/* THE WALL */}
-  <section class="mx-wall">
-    <div class="site-shell">
-      <div class="mx-wall__head">
-        <Eyebrow>The library</Eyebrow>
-        <h2 class="mx-wall__h">All {all.length} Maxims</h2>
+  <section class="nb-page-head">
+    <div class="nb-shell nb-page-head__in">
+      <p class="nb-eyebrow">The library</p>
+      <h1>Twenty Maxims. One line each. An essay behind every one.</h1>
+      <p class="nb-lede">Written by hand in a blue notebook, photographed, and explained. Filter by pillar or read them in order.</p>
+      <div class="filters" role="group" aria-label="Filter by pillar">
+        <button type="button" class="nb-pill is-on" data-filter="all" aria-pressed="true">All</button>
+        {(['sales', 'founder', 'human'] as const).map((p) => (
+          <button type="button" class={`nb-pill nb-pill--${p}`} data-filter={p} aria-pressed="false">{pillarLabel[p]}</button>
+        ))}
       </div>
-      <ul class="mx-wall__grid">
-        {rest.map((e, i) => {
-          const t = treatments[i % treatments.length];
-          const [head, lastWord] = highlightLastWord(e.data.title);
+    </div>
+  </section>
+
+  <section class="nb-section" style="padding-top:0">
+    <div class="nb-shell">
+      <ol class="wall" data-wall>
+        {library.map((m) => {
+          const page = pageFor(m.number);
+          const href = m.coming ? undefined : hrefFor(m.number);
           return (
-            <li class={`mx-tile mx-tile--${t.paper}`} style={`--tilt: ${t.tilt}deg; color: ${t.fg};`}>
-              <a href={`/journal/${e.data.slug ?? e.id}/`} class="mx-tile__link">
-                <span class="mx-tile__num">AWJ #{String(e.data.awj_number).padStart(2, '0')}</span>
-                <p class="mx-tile__line">
-                  {head}
-                  {lastWord && (
-                    <span class="mx-tile__last">{lastWord}</span>
-                  )}
-                </p>
-                <div class="mx-tile__foot">
-                  <span class={`mx-tile__pillar mx-tile__pillar--${e.data.pillar}`}>{e.data.pillar}</span>
-                  <span class="mx-tile__cta">Read →</span>
+            <li class={`wall__item ${m.coming ? 'wall__item--coming' : ''}`} data-pillar={m.pillar ?? 'coming'}>
+              {href && page ? (
+                <a href={href} class="wall__card">
+                  <div class="nb-page"><img src={page.src} alt={page.alt} loading="lazy" width="1600" height="1096" /></div>
+                  <p class="wall__meta nb-meta"><span>No. {pad2(m.number)}</span><span class={`nb-pill nb-pill--${m.pillar}`}>{pillarLabel[m.pillar!]}</span></p>
+                  <h2 class="wall__title">{m.title}</h2>
+                </a>
+              ) : (
+                <div class="wall__card wall__card--coming">
+                  <div class="nb-page nb-page--blank"><span>No. {pad2(m.number)}</span></div>
+                  <p class="wall__meta nb-meta"><span>No. {pad2(m.number)}</span><span class="nb-pill">Coming</span></p>
+                  <h2 class="wall__title">{m.coming ? 'Being written' : m.title}</h2>
                 </div>
-                <Scribble
-                  src={`/assets/${t.scribble}`}
-                  rotate={t.tilt > 0 ? -8 : 12}
-                  width={70}
-                  {...(t.scribblePos as any)}
-                  opacity={0.9}
-                />
-              </a>
+              )}
             </li>
           );
         })}
-      </ul>
-    </div>
-  </section>
-
-  {/* ARCHIVE — list view (was /journal). Same content, different scan mode. */}
-  <section class="mx-archive">
-    <div class="site-shell">
-      <div class="mx-archive__head">
-        <Eyebrow>The archive</Eyebrow>
-        <h2 class="mx-archive__h">All {all.length} entries.</h2>
-        <p class="mx-archive__sub">A list view for skimming chronologically. Filter by pillar.</p>
-      </div>
-      <nav class="mx-archive__filters" aria-label="Filter by pillar">
-        <button type="button" class="mx-archive__filter is-active" data-filter="all">All</button>
-        {(['sales', 'founder', 'human'] as PillarT[]).map(p => (
-          <button type="button" class="mx-archive__filter" data-filter={p}>{PILLAR_META[p].label}</button>
-        ))}
-      </nav>
-      <ol class="mx-archive__list">
-        {all.map(e => (
-          <li class="mx-archive__item" data-pillar={e.data.pillar}>
-            <a href={`/journal/${e.data.slug ?? e.id}/`} class="mx-archive__row">
-              <span class="mx-archive__num">AWJ #{e.data.awj_number}</span>
-              <span class="mx-archive__title">{e.data.title}</span>
-              <span class="mx-archive__pillar"><Pillar pillar={e.data.pillar} /></span>
-              <time class="mx-archive__date" datetime={e.data.date.toISOString()}>{formatDate(e.data.date)}</time>
-            </a>
-          </li>
-        ))}
       </ol>
     </div>
   </section>
-</Layout>
 
-<style>
-  .mx-hero {
-    padding: var(--sp-9) 0 var(--sp-7);
-    border-bottom: var(--border-hard);
-    background-image: url('/assets/textures/paper_white.png');
-    background-size: cover;
-  }
-  .mx-hero__inner { padding: 0 var(--gutter); }
-  .mx-hero__title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(72px, 14vw, 220px);
-    margin: var(--sp-3) 0;
-    line-height: 0.85;
-    letter-spacing: -0.01em;
-  }
-  .mx-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0; max-width: 60ch; }
-
-  /* FEATURED */
-  .mx-featured {
-    border-bottom: var(--border-hard);
-    position: relative;
-    overflow: hidden;
-  }
-  .mx-featured__inner {
-    padding: var(--sp-10) var(--gutter);
-    position: relative;
-  }
-  .mx-featured__link {
-    display: block;
-    color: var(--awj-black);
-    text-decoration: none;
-    max-width: 1100px;
-  }
-  .mx-featured__meta {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 0.16em;
-    color: rgba(10,10,10,0.65);
-  }
-  .mx-featured__line {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(48px, 9vw, 168px);
-    line-height: 0.92;
-    letter-spacing: -0.01em;
-    margin: var(--sp-5) 0 var(--sp-6);
-    overflow-wrap: anywhere;
-  }
-  .mx-featured__read {
-    display: inline-block;
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 12px 18px;
-    background: var(--awj-black);
-    color: var(--awj-white);
-    border: var(--border-hard);
-    transition: background var(--t-fast), color var(--t-fast);
-  }
-  .mx-featured__link:hover .mx-featured__read { background: var(--awj-white); color: var(--awj-black); }
-
-  /* WALL */
-  .mx-wall { padding: var(--sp-9) 0 var(--sp-10); }
-  .mx-wall__head { margin-bottom: var(--sp-7); padding: 0 var(--gutter); }
-  .mx-wall__h {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(28px, 3.5vw, 44px);
-    margin: var(--sp-3) 0 0;
-    line-height: 1;
-    letter-spacing: -0.005em;
-  }
-  .mx-wall__grid {
-    list-style: none;
-    padding: var(--sp-5) var(--gutter);
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-6);
-  }
-  @media (min-width: 720px) { .mx-wall__grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1100px) { .mx-wall__grid { grid-template-columns: 1fr 1fr 1fr; } }
-
-  .mx-tile {
-    --tilt: 0deg;
-    transform: rotate(var(--tilt));
-    transition: transform var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out);
-    background-size: cover;
-    background-position: center;
-    border: var(--border-hard);
-    min-height: 360px;
-    display: flex;
-    position: relative;
-    box-shadow: 4px 4px 0 var(--awj-black);
-  }
-  .mx-tile:hover {
-    transform: rotate(0deg) translate(-2px, -2px);
-    box-shadow: 8px 8px 0 var(--awj-black);
-  }
-  .mx-tile--white  { background-color: var(--awj-paper);  background-image: url('/assets/textures/paper_white.png'); }
-  .mx-tile--yellow { background-color: var(--awj-yellow); background-image: url('/assets/textures/paper_yellow.png'); }
-  .mx-tile--blue   { background-color: var(--awj-blue);   background-image: url('/assets/textures/paper_blue.png'); }
-  .mx-tile--black  { background-color: var(--awj-black);  background-image: url('/assets/textures/paper_black.png'); }
-
-  .mx-tile__link {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
-    padding: var(--sp-6);
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-    overflow: visible;
-  }
-  .mx-tile__num {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    opacity: 0.7;
-  }
-  .mx-tile__line {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(28px, 3.2vw, 44px);
-    line-height: 0.95;
-    letter-spacing: -0.005em;
-    margin: var(--sp-4) 0;
-    overflow-wrap: anywhere;
-  }
-  .mx-tile__last {
-    background-image: linear-gradient(to bottom, transparent 28%, var(--awj-yellow) 28%, var(--awj-yellow) 92%, transparent 92%);
-    padding: 0 0.05em;
-    color: var(--awj-black);
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-  }
-  .mx-tile--yellow .mx-tile__last {
-    background-image: linear-gradient(to bottom, transparent 28%, var(--awj-black) 28%, var(--awj-black) 92%, transparent 92%);
-    color: var(--awj-white);
-  }
-  .mx-tile--blue .mx-tile__last,
-  .mx-tile--black .mx-tile__last {
-    background-image: linear-gradient(to bottom, transparent 28%, var(--awj-yellow) 28%, var(--awj-yellow) 92%, transparent 92%);
-    color: var(--awj-black);
-  }
-  .mx-tile__foot {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--sp-3);
-    margin-top: auto;
-  }
-  .mx-tile__pillar {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 4px 10px 3px;
-    border: 1.5px solid currentColor;
-    border-radius: var(--radius-pill);
-  }
-  .mx-tile__cta {
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  /* ARCHIVE (list view) */
-  .mx-archive { padding: var(--sp-9) 0 var(--sp-10); border-top: var(--border-hard); background: var(--bg-1); background-image: url('/assets/textures/paper_white.png'); background-size: cover; }
-  .mx-archive__head { padding: 0 var(--gutter); margin-bottom: var(--sp-6); }
-  .mx-archive__h {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(40px, 6vw, 96px);
-    margin: var(--sp-3) 0 var(--sp-3);
-    line-height: 0.95;
-    letter-spacing: -0.005em;
-  }
-  .mx-archive__sub { font-size: var(--fs-body); color: var(--fg-2); margin: 0; max-width: 56ch; }
-  .mx-archive__filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-3);
-    padding: 0 var(--gutter);
-    margin-bottom: var(--sp-5);
-  }
-  .mx-archive__filter {
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 8px 14px;
-    border: var(--border-hard);
-    background: var(--awj-white);
-    color: var(--awj-black);
-    border-radius: var(--radius-pill);
-    cursor: pointer;
-    transition: background var(--t-fast), color var(--t-fast);
-  }
-  .mx-archive__filter:hover { background: var(--awj-yellow); }
-  .mx-archive__filter.is-active { background: var(--awj-black); color: var(--awj-white); }
-
-  .mx-archive__list { list-style: none; padding: 0 var(--gutter); margin: 0; }
-  .mx-archive__item[hidden] { display: none; }
-  .mx-archive__row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-2);
-    padding: var(--sp-5) 0;
-    border-bottom: 1px solid var(--rule);
-    color: var(--awj-black);
-    text-decoration: none;
-    transition: background var(--t-fast);
-  }
-  @media (min-width: 720px) {
-    .mx-archive__row {
-      grid-template-columns: 80px 1fr 110px 110px;
-      align-items: center;
-      gap: var(--sp-4);
-    }
-  }
-  .mx-archive__row:hover { background: rgba(255,206,0,0.12); }
-  .mx-archive__num {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: var(--fg-2);
-  }
-  .mx-archive__title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(22px, 3vw, 32px);
-    line-height: 1.05;
-    text-transform: uppercase;
-    letter-spacing: -0.005em;
-    overflow-wrap: anywhere;
-  }
-  .mx-archive__date { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); }
-</style>
+  <section class="nb-section nb-section--tint">
+    <div class="nb-shell">
+      <div class="nb-section-head">
+        <p class="nb-eyebrow">Three pillars</p>
+        <h2>Every Maxim belongs to one of three.</h2>
+      </div>
+      <div class="nb-grid nb-grid--3">
+        {(['sales', 'founder', 'human'] as const).map((p) => (
+          <a class="nb-card pillar-card" href={`/pillars/${p}/`}>
+            <span class={`nb-pill nb-pill--${p}`}>{pillarInfo[p].tag}</span>
+            <h3>{pillarInfo[p].label}</h3>
+            <p>{pillarInfo[p].description}</p>
+            <span class="pillar-card__more">Read the {pillarInfo[p].label.toLowerCase()} Maxims &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</SiteLayout>
 
 <script>
-  // Pillar filter for the archive list
-  const filters = document.querySelectorAll<HTMLButtonElement>('.mx-archive__filter');
-  const items = document.querySelectorAll<HTMLLIElement>('.mx-archive__item');
-  filters.forEach(b => b.addEventListener('click', () => {
-    const f = b.dataset.filter!;
-    filters.forEach(x => x.classList.remove('is-active'));
-    b.classList.add('is-active');
-    items.forEach(item => {
-      if (f === 'all' || item.dataset.pillar === f) item.removeAttribute('hidden');
-      else item.setAttribute('hidden', '');
-    });
-  }));
+  function wire() {
+    const wall = document.querySelector<HTMLElement>('[data-wall]');
+    if (!wall || wall.dataset.ready) return;
+    wall.dataset.ready = '1';
+    const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+    buttons.forEach((b) => b.addEventListener('click', () => {
+      const f = b.dataset.filter!;
+      buttons.forEach((x) => { x.classList.toggle('is-on', x === b); x.setAttribute('aria-pressed', String(x === b)); });
+      wall.querySelectorAll<HTMLElement>('.wall__item').forEach((item) => { item.hidden = f !== 'all' && item.dataset.pillar !== f; });
+    }));
+  }
+  document.addEventListener('astro:page-load', wire);
 </script>
+
+<style>
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .filters .nb-pill { cursor: pointer; font: inherit; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .filters .nb-pill.is-on { background: var(--nb-text); color: #fff; border-color: var(--nb-text); }
+  .wall { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: clamp(20px, 3vw, 36px); }
+  .wall__item[hidden] { display: none; }
+  .wall__card { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; }
+  .wall__card .nb-page img { object-fit: contain; background: var(--nb-paper); }
+  .wall__card .nb-page { transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out); }
+  a.wall__card:hover .nb-page { transform: translateY(-4px) rotate(-.4deg); box-shadow: var(--shadow-lift); }
+  .nb-page--blank { display: grid; place-items: center; color: var(--nb-text-3); font-weight: 600; letter-spacing: .04em; box-shadow: none; border: 1px dashed var(--nb-line); background: #fff; }
+  .wall__meta { display: flex; align-items: center; gap: 10px; }
+  .wall__title { font-size: clamp(17px, 1.4vw, 20px); font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+  .wall__item--coming .wall__title { color: var(--nb-text-3); font-style: italic; font-weight: 500; }
+  .pillar-card { text-decoration: none; color: inherit; }
+  .pillar-card .nb-pill { align-self: flex-start; }
+  .pillar-card p { color: var(--nb-text-2); font-size: 15px; line-height: 1.5; flex: 1; }
+  .pillar-card__more { font-weight: 600; font-size: 14px; color: var(--nb-ink); }
+</style>

@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { SITE } from '../../data/site';
+
+const frameworks = (await getCollection('frameworks')).sort((a, b) => a.data.order - b.data.order);
+const list = {
+  '@type': 'ItemList',
+  '@id': `${SITE.url}/frameworks/#list`,
+  name: 'Frameworks by Andy Whyte',
+  itemListElement: frameworks.map((f, i) => ({ '@type': 'ListItem', position: i + 1, name: f.data.name, url: `${SITE.url}/frameworks/${f.id}/` })),
+};
+---
+<SiteLayout
+  title="Frameworks: the models behind the Maxims | Andy Whyte"
+  description="MEDDPICC, the Champion Test, qualifying out, deal inspection and the other models Andy Whyte runs. Each one explained, with the steps and where it breaks."
+  pageType="frameworks"
+  schema={[list]}
+  breadcrumbs={[{ name: 'Frameworks', href: '/frameworks/' }]}
+>
+  <section class="nb-page-head">
+    <div class="nb-shell nb-page-head__in">
+      <p class="nb-eyebrow">Frameworks</p>
+      <h1>The models behind the Maxims.</h1>
+      <p class="nb-lede">A Maxim is a line. A framework is what you do on Monday. These are the ones I actually run.</p>
+    </div>
+  </section>
+
+  <section class="nb-section" style="padding-top:0">
+    <div class="nb-shell nb-grid nb-grid--2">
+      {frameworks.map((f) => (
+        <a class="nb-card fw" href={`/frameworks/${f.id}/`}>
+          <h2 class="fw__name">{f.data.name}</h2>
+          <p class="fw__line">{f.data.oneLiner}</p>
+          <p class="nb-meta">Use it when: {f.data.useWhen}</p>
+          <span class="fw__more">Read the framework &rarr;</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .fw { text-decoration: none; color: inherit; }
+  .fw__name { font-size: clamp(22px, 2vw, 28px); }
+  .fw__line { color: var(--nb-text); font-size: 17px; line-height: 1.5; }
+  .fw__more { font-weight: 600; font-size: 14px; color: var(--nb-ink); margin-top: auto; }
+</style>

@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { SITE } from '../../data/site';
+
+const terms = (await getCollection('glossary')).sort((a, b) => a.data.order - b.data.order);
+const groups: { key: string; title: string; intro: string }[] = [
+  { key: 'meddpicc', title: 'The eight letters', intro: 'MEDDPICC, one letter at a time.' },
+  { key: 'qualification', title: 'Qualification', intro: 'The words that decide whether a deal is real.' },
+  { key: 'leadership', title: 'Leadership', intro: 'How the best sales leaders inspect, forecast and coach.' },
+  { key: 'general', title: 'General', intro: 'Everything else worth defining.' },
+];
+
+const definedTermSet = {
+  '@type': 'DefinedTermSet',
+  '@id': `${SITE.url}/glossary/#set`,
+  name: 'The MEDDICC and sales glossary by Andy Whyte',
+  url: `${SITE.url}/glossary/`,
+  hasDefinedTerm: terms.map((t) => ({
+    '@type': 'DefinedTerm',
+    '@id': `${SITE.url}/glossary/${t.id}/#term`,
+    name: t.data.term,
+    description: t.data.short,
+    url: `${SITE.url}/glossary/${t.id}/`,
+    inDefinedTermSet: `${SITE.url}/glossary/#set`,
+  })),
+};
+---
+<SiteLayout
+  title="MEDDICC and sales glossary: every term defined plainly | Andy Whyte"
+  description="Metrics, Economic Buyer, Champion, Paper Process and the rest of MEDDPICC, plus the qualification and leadership terms that decide deals. Defined plainly by the author of MEDDICC."
+  pageType="glossary"
+  schema={[definedTermSet]}
+  breadcrumbs={[{ name: 'Glossary', href: '/glossary/' }]}
+>
+  <section class="nb-page-head">
+    <div class="nb-shell nb-page-head__in">
+      <p class="nb-eyebrow">Glossary</p>
+      <h1>Every term, defined plainly.</h1>
+      <p class="nb-lede">The letters of MEDDPICC, the words of qualification and the vocabulary of sales leadership. One sentence to quote, a page to understand.</p>
+    </div>
+  </section>
+
+  {groups.map((g) => {
+    const items = terms.filter((t) => t.data.group === g.key);
+    if (!items.length) return null;
+    return (
+      <section class={`nb-section ${g.key === 'meddpicc' ? 'nb-section--tint' : ''}`} style="padding-block:clamp(32px,5vw,64px)" id={g.key}>
+        <div class="nb-shell">
+          <div class="nb-section-head" style="margin-bottom:24px">
+            <p class="nb-eyebrow">{g.title}</p>
+            <h2>{g.intro}</h2>
+          </div>
+          <dl class="terms">
+            {items.map((t) => (
+              <div class="term">
+                <dt><a href={`/glossary/${t.id}/`}>{t.data.letter && <span class="term__letter">{t.data.letter}</span>}{t.data.term}</a></dt>
+                <dd>{t.data.short}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+    );
+  })}
+</SiteLayout>
+
+<style>
+  .terms { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1px; background: var(--nb-line); border: 1px solid var(--nb-line); border-radius: var(--radius-ui); overflow: hidden; }
+  .term { background: #fff; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .term dt { font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
+  .term dt a { text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 10px; }
+  .term dt a:hover { color: var(--nb-cover); }
+  .term__letter { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--nb-cover); color: #fff; font-size: 13px; font-weight: 700; }
+  .term dd { margin: 0; color: var(--nb-text-2); font-size: 15px; line-height: 1.5; }
+</style>
