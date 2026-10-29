@@ -1,0 +1,89 @@
+---
+// Review-only shell for the redesign direction. Not indexed, not linked from the live site.
+import '../styles/notebook.css';
+
+interface Props { title: string; description?: string; draft?: boolean; }
+const {
+  title,
+  description = 'Design direction for the andywhyte.com rebuild. Review material, not for publication.',
+  draft = false,
+} = Astro.props;
+
+const fonts = 'https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap';
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const links: [string, string][] = [
+  ['/design/', 'Direction'],
+  ['/design/home/', 'Home'],
+  ['/design/maxim/', 'Maxim'],
+  ['/design/hub/', 'Hub'],
+];
+---
+<!doctype html>
+<html lang="en-GB" data-type="b">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={fonts} />
+    <link rel="icon" href="/notebook/mark/awj-mark-blue.png" type="image/png" />
+    <script is:inline>
+      try { var t = localStorage.getItem('awj-type'); if (t) document.documentElement.dataset.type = t; } catch (e) {}
+    </script>
+  </head>
+  <body>
+    {draft && <div class="nb-draft">Draft copy · layout review</div>}
+    <slot />
+
+    <aside class="dd-bar" aria-label="Design direction tools">
+      <nav class="dd-bar__links">
+        {links.map(([href, label]) => (
+          <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>
+        ))}
+      </nav>
+      <label class="dd-bar__type">
+        <span>Type</span>
+        <select id="dd-type" aria-label="Typeface option">
+          <option value="a">A · Geist</option>
+          <option value="b">B · Instrument Sans</option>
+          <option value="c">C · Hanken Grotesk</option>
+        </select>
+      </label>
+    </aside>
+
+    <script>
+      const sel = document.getElementById('dd-type') as HTMLSelectElement | null;
+      if (sel) {
+        sel.value = document.documentElement.dataset.type || 'b';
+        sel.addEventListener('change', () => {
+          document.documentElement.dataset.type = sel.value;
+          try { localStorage.setItem('awj-type', sel.value); } catch {}
+        });
+      }
+    </script>
+
+    <style>
+      .dd-bar {
+        position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 60;
+        display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 999px;
+        background: rgba(26,33,64,.92); color: #fff; box-shadow: 0 10px 30px rgba(20,28,60,.25);
+        backdrop-filter: blur(8px); font-size: 13px; font-family: var(--font-b);
+      }
+      .dd-bar__links { display: flex; gap: 2px; }
+      .dd-bar__links a { color: #fff; text-decoration: none; padding: 6px 10px; border-radius: 999px; opacity: .75; }
+      .dd-bar__links a:hover { opacity: 1; background: rgba(255,255,255,.1); }
+      .dd-bar__links a[aria-current] { opacity: 1; background: var(--nb-cover); }
+      .dd-bar__type { display: flex; align-items: center; gap: 6px; padding-left: 10px; border-left: 1px solid rgba(255,255,255,.2); opacity: .9; }
+      .dd-bar__type select { background: transparent; color: #fff; border: 0; font: inherit; cursor: pointer; }
+      .dd-bar__type select option { color: #111; }
+      @media (max-width: 640px) {
+        .dd-bar { bottom: 10px; font-size: 12px; }
+        .dd-bar__links a { padding: 6px 8px; }
+        .dd-bar__type span { display: none; }
+      }
+    </style>
+  </body>
+</html>

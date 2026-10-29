@@ -1,0 +1,142 @@
+---
+import DesignLayout from '../../layouts/DesignLayout.astro';
+import SiteHeader from '../../components/v2/SiteHeader.astro';
+import SiteFooter from '../../components/v2/SiteFooter.astro';
+import Notebook from '../../components/v2/Notebook.astro';
+import { notebookPages, library, pillarLabel, pad2 } from '../../data/notebook-pages';
+
+const hubs = [
+  { title: 'MEDDPICC and MEDDICC', line: 'The qualification framework, from the person who wrote the book on it.', href: '/design/hub/' },
+  { title: 'Sales leadership', line: 'Inspect the deal, not the rep. Forecasting, deal reviews and the thinking behind them.', href: '#' },
+  { title: 'Keynote speaking', line: 'Sales kickoffs and revenue summits. Practical, direct, no theatre.', href: '#' },
+  { title: 'Imposter syndrome', line: 'Only the self-aware suffer from it. Why that is a strength.', href: '#' },
+];
+---
+<DesignLayout title="Home · Design direction 01 · AWJ" draft>
+  <SiteHeader />
+
+  <main>
+    <section class="hero">
+      <div class="nb-shell hero__in">
+        <p class="nb-eyebrow">Andy Whyte Journal</p>
+        <h1 class="hero__title">A notebook of principles for sales, founding and being human.</h1>
+        <Notebook pages={notebookPages} startClosed={true} id="hero-notebook" />
+      </div>
+    </section>
+
+    <section class="nb-section" id="library">
+      <div class="nb-shell">
+        <div class="lib-head">
+          <div class="nb-section-head" style="margin-bottom:0">
+            <p class="nb-eyebrow">The library</p>
+            <h2>Twelve Maxims so far. Eight more are written and waiting.</h2>
+          </div>
+          <div class="lib-filters" role="group" aria-label="Filter by pillar">
+            <span class="nb-pill" aria-pressed="true">All</span>
+            <span class="nb-pill nb-pill--sales">Sales</span>
+            <span class="nb-pill nb-pill--founder">Founder</span>
+            <span class="nb-pill nb-pill--human">Human</span>
+          </div>
+        </div>
+        <ol class="lib">
+          {library.map((m) => (
+            <li class="lib__row">
+              <a href="/design/maxim/">
+                <span class="lib__num">No. {pad2(m.number)}</span>
+                <span class="lib__title">{m.title}</span>
+                <span class={`nb-pill nb-pill--${m.pillar}`}>{pillarLabel[m.pillar]}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="nb-section nb-section--tint">
+      <div class="nb-shell">
+        <div class="nb-section-head">
+          <p class="nb-eyebrow">Four things I am known for</p>
+          <h2>Go deeper on the subjects behind the Maxims.</h2>
+        </div>
+        <div class="nb-grid nb-grid--4">
+          {hubs.map((h) => (
+            <a class="nb-card hub-card" href={h.href}>
+              <h3>{h.title}</h3>
+              <p>{h.line}</p>
+              <span class="hub-card__more">Read the hub &rarr;</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="nb-section">
+      <div class="nb-shell about">
+        <div class="about__photo">
+          <img src="/media/portrait/andy-portrait.jpg" alt="Andy Whyte" loading="lazy" />
+        </div>
+        <div class="about__copy">
+          <p class="nb-eyebrow">About</p>
+          <h2>Twenty years in sales. One book. One company. One notebook.</h2>
+          <p class="nb-lede">I am Andy Whyte, founder and CEO of MEDDICC and the author of the book that over 100,000 sellers have read. This journal is where the thinking gets written down before it gets tidied up.</p>
+          <div class="about__actions">
+            <a class="btn btn--blue" href="#">The full story</a>
+            <a class="btn btn--ghost" href="#">Book Andy to speak</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="nb-section nb-section--blue">
+      <div class="nb-shell book">
+        <div class="book__copy">
+          <p class="nb-eyebrow">The book</p>
+          <h2>MEDDICC. The number one best-selling book on sales qualification.</h2>
+          <p class="nb-lede">Over 100,000 copies sold and more than 35,000 graduates of the Masterclass built on it. The framework, explained by someone who has run it in the room.</p>
+          <div class="about__actions">
+            <a class="btn btn--white" href="#">Buy on Amazon</a>
+            <a class="btn btn--ghost book__ghost" href="/design/hub/">What is MEDDPICC?</a>
+          </div>
+        </div>
+        <div class="book__cover">
+          <img src="/media/book/meddicc-cover.jpg" alt="The MEDDICC book cover" loading="lazy" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</DesignLayout>
+
+<style>
+  .hero { padding: clamp(28px, 5vw, 64px) 0 clamp(24px, 4vw, 48px); }
+  .hero__in { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+  .hero__title { font-size: clamp(24px, 2.6vw, 34px); max-width: 24ch; color: var(--nb-text-2); font-weight: 500; letter-spacing: -0.015em; }
+
+  .lib-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(24px, 3vw, 40px); }
+  .lib-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .lib-filters .nb-pill[aria-pressed="true"] { background: var(--nb-text); color: #fff; border-color: var(--nb-text); }
+  .lib { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--nb-line); }
+  .lib__row a { display: grid; grid-template-columns: 90px 1fr auto; gap: 20px; align-items: center; padding: 18px 4px; border-bottom: 1px solid var(--nb-line); text-decoration: none; color: var(--nb-text); transition: background .2s; }
+  .lib__row a:hover { background: var(--nb-canvas-2); }
+  .lib__num { font-size: 13px; color: var(--nb-text-3); font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+  .lib__title { font-size: clamp(17px, 1.5vw, 21px); font-weight: 500; letter-spacing: -0.01em; }
+  @media (max-width: 560px) { .lib__row a { grid-template-columns: 1fr; gap: 6px; } .lib__row .nb-pill { justify-self: start; } }
+
+  .hub-card { text-decoration: none; color: inherit; }
+  .hub-card p { color: var(--nb-text-2); font-size: 15px; line-height: 1.5; flex: 1; }
+  .hub-card__more { font-weight: 600; font-size: 14px; color: var(--nb-ink); }
+
+  .about { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+  .about__photo img { border-radius: var(--radius-ui); box-shadow: var(--shadow-page); aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .about__copy { display: flex; flex-direction: column; gap: 18px; }
+  .about__actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  @media (max-width: 760px) { .about { grid-template-columns: 1fr; } .about__photo { max-width: 360px; } }
+
+  .book { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+  .book__copy { display: flex; flex-direction: column; gap: 18px; }
+  .book__cover img { max-width: 320px; margin-inline: auto; border-radius: 6px; box-shadow: 0 30px 70px rgba(10,16,50,.45); transform: rotate(-2deg); }
+  .book__ghost { border-color: rgba(255,255,255,.4); color: #fff; background: transparent; }
+  .book__ghost:hover { border-color: #fff; }
+  @media (max-width: 760px) { .book { grid-template-columns: 1fr; } }
+</style>

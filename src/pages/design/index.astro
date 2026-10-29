@@ -1,0 +1,268 @@
+---
+import DesignLayout from '../../layouts/DesignLayout.astro';
+import Notebook from '../../components/v2/Notebook.astro';
+import { notebookPages } from '../../data/notebook-pages';
+
+const swatches = [
+  { name: 'Cover blue', hex: '#3B4DB2', role: 'Primary. Buttons, links, the footer, the spine. Sampled from the cover under even light.', fg: '#fff' },
+  { name: 'Cover, deep', hex: '#2E3F9E', role: 'Hover states and shadowed cover. The pad in shade.', fg: '#fff' },
+  { name: 'Ink', hex: '#224A8F', role: 'The pen. The mark, eyebrows and text links. Stroke core, measured across four pages.', fg: '#fff' },
+  { name: 'Paper', hex: '#F3F1EE', role: 'The pages themselves. Used only for the pad, never as a page background.', fg: '#1A2140' },
+  { name: 'White', hex: '#FFFFFF', role: 'The desk. Every page sits on clean white.', fg: '#1A2140', border: true },
+  { name: 'Yellow', hex: '#FFCE00', role: 'The one accent. Highlighter on key phrases, the subscribe button, nothing else.', fg: '#1A2140' },
+  { name: 'Text', hex: '#1A2140', role: 'Headings and body. A navy-black, so type and ink feel related.', fg: '#fff' },
+  { name: 'Text, quiet', hex: '#7C8399', role: 'Metadata, numbers, hints.', fg: '#fff' },
+];
+
+const typeOptions = [
+  { key: 'a', name: 'Geist', note: 'Crisp and technical. Reads as a product company. The most neutral of the three.' },
+  { key: 'b', name: 'Instrument Sans', note: 'Warm grotesk with a little personality in the letterforms. Editorial without being fussy. Recommended.' },
+  { key: 'c', name: 'Hanken Grotesk', note: 'Classic, quiet, excellent at small sizes. Could read as slightly generic next to the handwriting.' },
+];
+---
+<DesignLayout title="Design direction 01 · AWJ">
+  <main class="dd">
+    <header class="dd-head">
+      <div class="nb-shell">
+        <p class="nb-eyebrow">andywhyte.com rebuild · Checkpoint one</p>
+        <h1>Design direction 01</h1>
+        <p class="nb-lede">The notebook on a white desk. Everything here is built from the real pad: its blue, its ink, its paper and your handwriting. This page is the system and a working motion study. The three layouts linked below show it applied.</p>
+        <p class="nb-meta">29 October 2026 · Review material, not indexed · Use the bar at the bottom to switch pages and try the three typefaces</p>
+      </div>
+    </header>
+
+    <section class="dd-sec" id="object">
+      <div class="nb-shell">
+        <div class="dd-sec__head">
+          <p class="nb-eyebrow">01 · The object</p>
+          <h2>A top-bound pad. Pages lift over the top edge.</h2>
+          <p class="dd-note">Closed on load. The first turn opens the cover, each turn after that lifts a page. Hover tilts the pad toward you, the top page breathes while it waits, and the cursor becomes the instruction. Sound is off unless you turn it on. In the real hero this binds to the page scroll; here it is driven by wheel, swipe, click and arrow keys so the motion can be judged on its own.</p>
+        </div>
+        <Notebook pages={notebookPages} startClosed={true} id="study" />
+      </div>
+    </section>
+
+    <section class="dd-sec dd-sec--tint" id="colour">
+      <div class="nb-shell">
+        <div class="dd-sec__head">
+          <p class="nb-eyebrow">02 · Colour</p>
+          <h2>Two blues, paper, white and one yellow.</h2>
+          <p class="dd-note">The cover is a royal ultramarine, not the electric blue of the current site. The ink is deeper and greyer still. Everything else is white, so the pad is the only saturated object on the desk until a yellow highlight or button appears.</p>
+        </div>
+        <div class="swatches">
+          {swatches.map((s) => (
+            <div class={`swatch ${s.border ? 'swatch--border' : ''}`} style={`--c:${s.hex}; --fg:${s.fg}`}>
+              <div class="swatch__chip"><span>{s.hex}</span></div>
+              <p class="swatch__name">{s.name}</p>
+              <p class="swatch__role">{s.role}</p>
+            </div>
+          ))}
+        </div>
+        <div class="compare">
+          <div class="compare__item"><span class="compare__chip" style="background:#1F47FF"></span><span>Current site blue #1F47FF</span></div>
+          <div class="compare__item"><span class="compare__chip" style="background:#3B4DB2"></span><span>The pad's blue #3B4DB2</span></div>
+          <div class="compare__item"><span class="compare__chip" style="background:#224A8F"></span><span>The pen's ink #224A8F</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dd-sec" id="mark">
+      <div class="nb-shell">
+        <div class="dd-sec__head">
+          <p class="nb-eyebrow">03 · The mark</p>
+          <h2>Your sign-off, lifted from page one.</h2>
+          <p class="dd-note">No logo. The "AWJ" you write at the bottom of every page is the mark, with your name set in type beside it. It is already on twenty pages, every video and every photo, so the site inherits an identity people have seen before. For the build it gets traced into a vector so it is sharp at every size.</p>
+        </div>
+        <div class="marks">
+          <div class="mark-card">
+            <div class="lockup">
+              <img src="/notebook/mark/awj-mark-ink.png" alt="AWJ handwritten mark in ink blue" width="1236" height="954" />
+              <span class="lockup__name">Andy Whyte</span>
+            </div>
+            <p class="nb-meta">Header lockup, ink on white</p>
+          </div>
+          <div class="mark-card mark-card--blue">
+            <img class="mark-big" src="/notebook/mark/awj-mark-white.png" alt="AWJ handwritten mark in white on cover blue" width="1236" height="954" />
+            <p class="nb-meta">Footer and social avatars, white on cover blue</p>
+          </div>
+          <div class="mark-card">
+            <div class="favicons">
+              <span class="fav fav--blue"><img src="/notebook/mark/awj-mark-white.png" alt="" /></span>
+              <span class="fav fav--white"><img src="/notebook/mark/awj-mark-ink.png" alt="" /></span>
+              <span class="fav fav--yellow"><img src="/notebook/mark/awj-mark-ink.png" alt="" /></span>
+            </div>
+            <p class="nb-meta">Favicon and app icon, three ways</p>
+          </div>
+          <div class="mark-card">
+            <div class="nb-page"><img src="/notebook/pages/awj-01.webp" alt="Page one of the notebook, where the mark comes from" loading="lazy" /></div>
+            <p class="nb-meta">Where it comes from: page one, bottom right</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dd-sec dd-sec--tint" id="type">
+      <div class="nb-shell">
+        <div class="dd-sec__head">
+          <p class="nb-eyebrow">04 · Type</p>
+          <h2>Your handwriting does the talking. One quiet grotesk does the rest.</h2>
+          <p class="dd-note">The Maxims are never typeset, they are photographed. So the typeface only has to do headings, essays and interface, and it should not compete. Three candidates below. Pick one and the whole direction switches, including the three layouts.</p>
+        </div>
+        <div class="type-grid">
+          {typeOptions.map((t) => (
+            <div class={`type-card type-card--${t.key}`} data-type-card={t.key}>
+              <div class="type-card__head">
+                <span class="nb-pill">Option {t.key.toUpperCase()}</span>
+                <span class="type-card__font">{t.name}</span>
+              </div>
+              <p class="type-sample__h1">Nobody regrets qualifying out.</p>
+              <p class="type-sample__h2">Inspect the deal, not the rep.</p>
+              <p class="type-sample__body">Sales is a thinking discipline, not a personality trait. The quality of your thinking determines the quality of your pipeline, your forecast and your weekend.</p>
+              <p class="type-sample__meta">AWJ No. 12 · Sales · Filed 29 November 2025 · 3 min read</p>
+              <p class="type-card__note">{t.note}</p>
+              <button type="button" class="btn btn--ghost" data-pick-type={t.key}>Use {t.name}</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="dd-sec" id="layouts">
+      <div class="nb-shell">
+        <div class="dd-sec__head">
+          <p class="nb-eyebrow">05 · Layouts</p>
+          <h2>Three pages, applied.</h2>
+          <p class="dd-note">Static layouts in the new brand. Copy on the home and hub pages is draft, written for layout review. The Maxim page uses your real essay for number ten.</p>
+        </div>
+        <div class="nb-grid nb-grid--3">
+          <a class="nb-card layout-card" href="/design/home/">
+            <span class="nb-eyebrow">Home</span>
+            <h3>The notebook, then the library, then the four topics.</h3>
+            <p>Closed cover as the hero. Below it the index of Maxims, the hubs, about, the book and the Substack sign-up.</p>
+            <span class="layout-card__more">Open &rarr;</span>
+          </a>
+          <a class="nb-card layout-card" href="/design/maxim/">
+            <span class="nb-eyebrow">Maxim page</span>
+            <h3>The page on top, the essay below.</h3>
+            <p>Number ten, Imposter Syndrome. Handwriting first, clean type second, the video and the hub alongside.</p>
+            <span class="layout-card__more">Open &rarr;</span>
+          </a>
+          <a class="nb-card layout-card" href="/design/hub/">
+            <span class="nb-eyebrow">Topic hub</span>
+            <h3>MEDDPICC, defined, with questions answered.</h3>
+            <p>The template for the four authority topics: definition, glossary, related Maxims, FAQ, calls to action.</p>
+            <span class="layout-card__more">Open &rarr;</span>
+          </a>
+        </div>
+
+        <div class="phones">
+          <div class="phone">
+            <iframe src="/design/home/" title="Home layout at phone width" loading="lazy"></iframe>
+            <p class="nb-meta">Home at 390px</p>
+          </div>
+          <div class="phone">
+            <iframe src="/design/maxim/" title="Maxim page at phone width" loading="lazy"></iframe>
+            <p class="nb-meta">Maxim page at 390px</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dd-sec dd-sec--tint" id="notes">
+      <div class="nb-shell notes">
+        <div>
+          <p class="nb-eyebrow">What is placeholder</p>
+          <ul class="dd-list">
+            <li>Seven of the twenty pages are cut from the shoot. The rest follow once the direction is approved.</li>
+            <li>Hub and home copy is draft, written to test the layout. Your voice review comes with the content phase.</li>
+            <li>The mark is a high-resolution bitmap for now. It gets traced to vector for the build.</li>
+            <li>Scroll binding, the page morphing into the essay, and the gyroscope on iPhone are checkpoint two.</li>
+            <li>Nav links marked # go nowhere yet.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="nb-eyebrow">What this checkpoint needs from you</p>
+          <ol class="dd-list dd-list--num">
+            <li>Approve or adjust the colour system and the mark.</li>
+            <li>Pick a typeface: A, B or C.</li>
+            <li>Say what feels wrong in the motion study: speed, tilt, the curl, the cursor.</li>
+            <li>Approve the three layouts as the basis for the live hero prototype.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.querySelectorAll<HTMLButtonElement>('[data-pick-type]').forEach((b) => {
+      b.addEventListener('click', () => {
+        const t = b.dataset.pickType!;
+        document.documentElement.dataset.type = t;
+        try { localStorage.setItem('awj-type', t); } catch {}
+        const sel = document.getElementById('dd-type') as HTMLSelectElement | null;
+        if (sel) sel.value = t;
+      });
+    });
+  </script>
+</DesignLayout>
+
+<style>
+  .dd-head { padding: clamp(48px, 8vw, 110px) 0 clamp(32px, 5vw, 64px); }
+  .dd-head .nb-shell { display: flex; flex-direction: column; gap: 16px; }
+  .dd-sec { padding-block: clamp(48px, 7vw, 96px); }
+  .dd-sec--tint { background: var(--nb-canvas-2); }
+  .dd-sec__head { display: flex; flex-direction: column; gap: 12px; max-width: 72ch; margin-bottom: clamp(28px, 4vw, 48px); }
+  .dd-note { color: var(--nb-text-2); font-size: 17px; line-height: 1.6; }
+
+  .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 16px; }
+  .swatch { display: flex; flex-direction: column; gap: 8px; }
+  .swatch__chip { aspect-ratio: 1.3; border-radius: var(--radius-ui); background: var(--c); color: var(--fg); display: flex; align-items: flex-end; padding: 14px; font-family: var(--font-mono); font-size: 13px; }
+  .swatch--border .swatch__chip { border: 1px solid var(--nb-line); }
+  .swatch__name { font-weight: 600; }
+  .swatch__role { font-size: 14px; color: var(--nb-text-2); line-height: 1.5; }
+  .compare { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; font-size: 14px; color: var(--nb-text-2); }
+  .compare__item { display: inline-flex; align-items: center; gap: 10px; }
+  .compare__chip { width: 28px; height: 28px; border-radius: 8px; display: inline-block; }
+
+  .marks { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px; }
+  .mark-card { display: flex; flex-direction: column; gap: 12px; }
+  .mark-card > :first-child { border-radius: var(--radius-ui); border: 1px solid var(--nb-line); background: #fff; min-height: 220px; display: flex; align-items: center; justify-content: center; padding: 28px; }
+  .mark-card--blue > :first-child { background: var(--nb-cover); border-color: var(--nb-cover); }
+  .mark-card .nb-page { padding: 0; min-height: 0; display: block; border: 0; }
+  .lockup { display: inline-flex; align-items: center; gap: 16px; }
+  .lockup img { width: 72px; height: auto; }
+  .lockup__name { font-weight: 600; font-size: 24px; letter-spacing: -0.015em; }
+  .mark-big { width: 180px; height: auto; }
+  .favicons { display: flex; gap: 18px; }
+  .fav { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; }
+  .fav img { width: 40px; height: auto; }
+  .fav--blue { background: var(--nb-cover); }
+  .fav--white { background: #fff; border: 1px solid var(--nb-line); }
+  .fav--yellow { background: var(--nb-yellow); }
+
+  .type-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+  .type-card { background: #fff; border: 1px solid var(--nb-line); border-radius: var(--radius-ui); padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+  .type-card--a { font-family: var(--font-a); }
+  .type-card--b { font-family: var(--font-b); }
+  .type-card--c { font-family: var(--font-c); }
+  .type-card__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .type-card__font { font-weight: 600; color: var(--nb-text-2); font-size: 14px; }
+  .type-sample__h1 { font-size: 34px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.05; }
+  .type-sample__h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.15; color: var(--nb-text-2); }
+  .type-sample__body { font-size: 16px; line-height: 1.6; }
+  .type-sample__meta { font-size: 13px; color: var(--nb-text-3); }
+  .type-card__note { font-size: 14px; color: var(--nb-text-2); line-height: 1.5; border-top: 1px solid var(--nb-line); padding-top: 14px; margin-top: auto; }
+  html[data-type="a"] .type-card--a, html[data-type="b"] .type-card--b, html[data-type="c"] .type-card--c { border-color: var(--nb-cover); box-shadow: 0 0 0 3px color-mix(in srgb, var(--nb-cover) 18%, transparent); }
+
+  .layout-card { text-decoration: none; color: inherit; }
+  .layout-card p { color: var(--nb-text-2); font-size: 15px; line-height: 1.5; flex: 1; }
+  .layout-card__more { font-weight: 600; color: var(--nb-ink); font-size: 14px; }
+  .phones { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; margin-top: clamp(32px, 5vw, 56px); }
+  .phone { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .phone iframe { width: 390px; height: 780px; border: 10px solid #1A2140; border-radius: 44px; background: #fff; box-shadow: var(--shadow-lift); max-width: 100%; }
+
+  .notes { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); }
+  .dd-list { margin: 14px 0 0; padding: 0 0 0 1.1em; list-style: disc; display: flex; flex-direction: column; gap: 10px; color: var(--nb-text-2); line-height: 1.5; }
+  .dd-list--num { list-style: decimal; color: var(--nb-text); }
+  @media (max-width: 760px) { .notes { grid-template-columns: 1fr; } }
+</style>
