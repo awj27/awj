@@ -45,7 +45,15 @@
   /* layout */
   --shell: 1180px;
   --gutter: clamp(16px, 4vw, 48px);
+  --header-h: 72px;
 }
+@media (max-width: 860px) { :root { --header-h: 64px; } }
+
+/* the home page snaps to the notebook's turns; nothing else on the site has snap points */
+html[data-snap] { scroll-snap-type: y proximity; scroll-padding-top: var(--header-h); }
+[id] { scroll-margin-top: calc(var(--header-h) + 12px); }
+/* without JavaScript the cover never opens, so it is not shown */
+html:not(.js) .nb-cover { display: none; }
 html[data-type="a"] { --font-sans: var(--font-a); }
 html[data-type="b"] { --font-sans: var(--font-b); }
 html[data-type="c"] { --font-sans: var(--font-c); }

@@ -71,3 +71,20 @@ The AWJ notebook, in web form. A cobalt hardcover reporter pad sits centre stage
 ## Checkpoint one
 
 Design direction: the colour and type system, the mark, home and Maxim page layouts as static mockups, and a short motion study of the flip, delivered as a preview page for review.
+
+Delivered and approved on 29 October 2026. Typeface: Instrument Sans.
+
+## Checkpoint two
+
+The live hero prototype, delivered 29 October 2026 at `/design/home/` on the preview:
+
+- The notebook is bound to the page scroll. One segment of scroll per turn (six tenths of the stage height on laptops, seven tenths on phones), native snap points at every page, a soft settle bounce on the page that lands, and the breathing curl while it waits.
+- All eighteen photographed Maxims are in the pad: 1 to 15 and 18 to 20. Numbers 16 and 17 are listed in the library as coming.
+- Every page is HTML underneath: a heading, the pillar and a link, so the hero reads as a list to search engines and screen readers. Pages load on demand, two ahead of the one on top.
+- Clicking a page opens its own Maxim page at `/design/maxim/NN/`. The page image carries a view transition name so the photograph morphs from the pad into the essay header. Essays render from the existing journal entries where they exist; the six unpublished Maxims say the essay is being written.
+- Arrow keys, Page Up and Down and the space bar turn pages while the notebook is pinned. The number rail on the right jumps to any page. A skip link drops to the library.
+- Tilt follows the pointer on desktop and the gyroscope on phones, with the iOS permission button. The custom cursor reads Open on the cover and Read on a page. The paper flick is synthesised, off by default.
+- Reduced motion collapses the hero to a static open pad on page one and shows every page in the list below.
+- Budget: 21 KB of JavaScript in total, 7.4 KB gzipped. First paint loads the cover and two pages, about 300 KB of images.
+
+Still to settle after review: the pace of one page per scroll segment, whether eighteen pages earns its length, the pillars of the six unpublished Maxims, and the vector trace of the mark.

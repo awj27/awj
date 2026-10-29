@@ -143,7 +143,10 @@ const { pages, startClosed = true, id = 'notebook' } = Astro.props;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = matchMedia('(pointer: fine)').matches;
 
+  function setupStudies() {
   document.querySelectorAll<El>('[data-notebook]').forEach((root) => {
+    if (root.dataset.ready) return;
+    root.dataset.ready = '1';
     const scene = root.querySelector<El>('.nb-scene')!;
     const pad = root.querySelector<El>('.nb-pad')!;
     const cover = root.querySelector<El>('.nb-cover')!;
@@ -283,4 +286,6 @@ const { pages, startClosed = true, id = 'notebook' } = Astro.props;
     renderSound();
     update();
   });
+  }
+  document.addEventListener('astro:page-load', setupStudies);
 </script>
