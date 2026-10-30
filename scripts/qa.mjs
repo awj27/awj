@@ -30,6 +30,15 @@ for (const file of pages) {
     if (re.test(html)) problems.push(`${file}: ${label}`);
   }
 }
+// Redirect sources must not shadow built pages: Pages applies _redirects before it looks for a static file.
+if (existsSync('public/_redirects')) {
+  for (const line of readFileSync('public/_redirects', 'utf8').split('\n')) {
+    const src = line.trim().split(/\s+/)[0];
+    if (!src || src.startsWith('#') || /[*:]/.test(src)) continue;
+    const shadowed = join('dist', decodeURIComponent(src).replace(/\/$/, ''), 'index.html');
+    if (existsSync(shadowed)) problems.push(`_redirects: ${src} shadows ${shadowed}`);
+  }
+}
 console.log(`pages: ${pages.length}, links: ${links}, images: ${imgs} (${imgsNoAlt} without alt)`);
 console.log('JSON-LD types:', Object.entries(ld).sort((a, b) => b[1] - a[1]).map(([t, c]) => `${t}×${c}`).join(', '));
 if (badLinks.size) { console.log('\nBROKEN INTERNAL LINKS:'); for (const [h, c] of [...badLinks].sort((a, b) => b[1] - a[1])) console.log(`  ${h}  (${c})`); } else console.log('no broken internal links');

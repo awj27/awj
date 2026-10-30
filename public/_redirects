@@ -34,11 +34,9 @@
 /portfolios/awj-10-imposter-syndrome-%E2%89%A1-self-awareness/  /journal/imposter-syndrome-self-awareness/  301
 
 # Catch-all: anything else under /portfolios/ → /journal/ index
-/portfolios/*  /journal/  301
+/portfolios/*  /maxims/   301
 
-# WP standalone post (alt URL for AWJ #10)
-/imposter-syndrome     /journal/imposter-syndrome-self-awareness/    301
-/imposter-syndrome/    /journal/imposter-syndrome-self-awareness/    301
+# /imposter-syndrome was WordPress's alternate URL for AWJ #10. Since 30 Oct 2026 it is the imposter syndrome hub, which links to that essay, so it must not be redirected.
 
 # WP About page slug
 /about-me              /about/      301
