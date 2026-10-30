@@ -102,9 +102,9 @@ The full build, delivered 30 October 2026 on the branch and the preview. Seventy
 - The handwritten numbers on pages 11 to 14 are painted out so the pages no longer contradict the site's numbering.
 - Budget: 21 KB of JavaScript in total across the site.
 
-### What Andy reviews before launch
+### What Andy reviews
 
-Nothing on the live site changes until this list is done and the branch is merged.
+Andy chose to launch on 30 October 2026 with this list open, so it is now a post-launch list. Each item is live copy until he edits it.
 
 1. The six new essays. Four contain light first-person details invented for rhythm (for example a line about spending a decade believing hours were the score); keep, change or cut. Two cite Robert Axelrod and Annie Duke inline.
 2. The four hubs. The imposter syndrome hub extends Maxim 10 with inferred moments (a first SKO keynote, being called CEO); Andy has not briefed his stance yet. The sales leadership hub uses the Poq "six to twenty in twelve months" figure from his Medium writing.
@@ -114,6 +114,8 @@ Nothing on the live site changes until this list is done and the branch is merge
 6. The Substack address, so the subscribe forms switch over.
 7. Maxims 16 and 17, written and photographed.
 
-### Launch, when he is ready
+### Launch
 
-Merge `redesign/notebook` into `main`. The deploy Action builds and ships it. Then: set the Substack address, submit the sitemap in Search Console, and watch the first week of analytics for the hero's turn events.
+Launched 30 October 2026. `redesign/notebook` was merged into `main` with a merge commit and the deploy Action shipped it to andywhyte.com. The old social preview images and favicon at `/assets/logos/` and `/media/awjN.webp` redirect to their notebook equivalents so earlier shares keep a picture.
+
+Still to do after launch: set the Substack address in `src/data/site.ts`, submit `sitemap-index.xml` in Search Console, watch the first week of analytics for the hero's turn events, and work through the review list above.
