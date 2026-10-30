@@ -50,17 +50,18 @@ src/
 │   ├── site.ts               # site constants, nav, hubs list, Person/Organization/WebSite schema
 │   └── notebook-pages.ts     # the photographed pages, pillars, helpers
 ├── layouts/SiteLayout.astro  # head, structured data, analytics, header, footer, view transitions
-├── components/v2/            # SiteHeader, SiteFooter, NotebookHero, SubscribeForm, FAQ
+├── components/v2/            # SiteHeader, SiteFooter, PortraitHero (Andy, the smile), NotebookHero (the journal and the Maxim sheet), SubscribeForm, FAQ
 ├── components/analytics/     # GA4 loader, consent banner, YouTube tracker
 ├── lib/                      # maxims.ts helpers, analytics.ts, videos.ts
 ├── pages/
-│   ├── index.astro           # the journal hero + library + hubs + about + book
+│   ├── index.astro           # the portrait hero + the journal + library + hubs + about + book
 │   ├── [slug].astro          # hubs, landing pages and editorial pages at the root
 │   ├── maxims/, pillars/, journal/[slug].astro, journal/rss.xml.ts
 │   ├── glossary/, frameworks/
 │   └── about, speaking, book, media, contact, subscribe, privacy, 404
 public/
 ├── notebook/                 # cover, pages, mark, og images
+├── portrait/                 # the hero cutouts: andy-serious and andy-smile, 900 and 1600 wide, WebP with alpha
 ├── fonts/                    # Instrument Sans woff2
 ├── media/                    # portraits, gallery, candids, clients, icons, video, book
 ├── _redirects                # legacy WordPress URLs, 301
@@ -122,3 +123,5 @@ GA4 behind a consent banner (`src/components/analytics/`), Cloudflare Web Analyt
 - Cloudflare Pages caps files at 25 MiB. Compress video with ffmpeg and images with sharp.
 - `gh` needs the `workflow` scope to push changes under `.github/workflows/`.
 - Component scripts must initialise on `astro:page-load`, because the site uses Astro's ClientRouter for view transitions.
+- The home page's journal owns two hash schemes: `/#awj-NN` turns to a page, `/#maxim-NN` turns to it and opens the Maxim sheet. The sheet changes the URL through Astro's `navigate()` so the router keeps its history state; a plain `history.pushState` would make the back button re-render the page. Never give an element the id `maxim-NN` or `awj-NN`, or the browser will scroll to it.
+- The sheet fetches the Maxim page and lifts out `[data-sheet-prose]` and `[data-sheet-video]`; keep those attributes on `journal/[slug].astro`.

@@ -1,0 +1,192 @@
+---
+// The person before the journal. Andy stands centred in front of his name, cut out of the studio backdrop.
+// He arrives serious and breaks into a smile as the visitor's pointer comes towards him (after a beat on a
+// touch screen), the name and the figure move at different speeds with the pointer, and scrolling hands the
+// stage over to the journal below. Everything is driven by CSS custom properties set from a small script:
+// --smile (0 to 1), --px and --py (pointer, -1 to 1) and --t (how far the section has scrolled away).
+---
+<section class="ph" data-portrait aria-labelledby="ph-name">
+  <p class="ph__eyebrow nb-eyebrow">Founder and CEO of MEDDICC &middot; Author &middot; Keynote speaker</p>
+
+  <h1 class="ph__name" id="ph-name"><span>Andy</span> <span>Whyte</span></h1>
+
+  <div class="ph__figure" data-ph-figure>
+    <div class="ph__figure-in">
+      <img
+        class="ph__img ph__img--serious"
+        src="/portrait/andy-serious-1600.webp"
+        srcset="/portrait/andy-serious-900.webp 900w, /portrait/andy-serious-1600.webp 1600w"
+        sizes="(max-width: 600px) 92vw, 60vh"
+        width="1600" height="1662"
+        alt="Andy Whyte"
+        fetchpriority="high" decoding="async" draggable="false"
+      />
+      <img
+        class="ph__img ph__img--smile"
+        src="/portrait/andy-smile-1600.webp"
+        srcset="/portrait/andy-smile-900.webp 900w, /portrait/andy-smile-1600.webp 1600w"
+        sizes="(max-width: 600px) 92vw, 60vh"
+        width="1600" height="1662"
+        alt="" aria-hidden="true"
+        decoding="async" draggable="false"
+      />
+    </div>
+  </div>
+
+  <img class="ph__sig" src="/notebook/mark/awj-mark-ink-320.png" alt="" width="320" height="200" draggable="false" />
+
+  <p class="ph__side ph__side--left">Twenty years in sales. The best-selling book on the <span class="nb-hl">common language of sales</span>. One company. One blue journal.</p>
+  <p class="ph__side ph__side--right">Principles for sales, founding and being human, written by hand. The journal is below.</p>
+
+  <a class="ph__cue" href="#journal" data-ph-cue>
+    <span>Scroll to open the journal &darr;</span>
+    <small>Turn the pages. Tap one to read the Maxim.</small>
+  </a>
+</section>
+
+<style>
+  .ph {
+    --smile: 0; --px: 0; --py: 0; --t: 0;
+    position: relative; height: calc(100svh - var(--header-h)); min-height: 540px; overflow: hidden;
+    background: #fff;
+  }
+  .ph__eyebrow { position: absolute; top: clamp(14px, 3vh, 30px); left: 16px; right: 16px; margin: 0; text-align: center; opacity: calc(1 - var(--t) * 2.5); }
+
+  .ph__name {
+    position: absolute; left: 0; right: 0; top: 17%; margin: 0; text-align: center;
+    font-size: 15.5vw; font-weight: 600; letter-spacing: -0.045em; line-height: .88; color: var(--nb-cover); white-space: nowrap;
+    transform: translate(calc(var(--px) * -8px), calc(var(--py) * -5px + var(--t) * -40px));
+    opacity: calc(1 - var(--t) * 1.2);
+    will-change: transform, opacity;
+  }
+  .ph__name span { display: inline-block; }
+
+  .ph__figure {
+    position: absolute; left: 50%; bottom: -5%; height: min(92%, 103vw); aspect-ratio: 1600 / 1662;
+    transform: translate(calc(-50% + var(--px) * 4px), calc(var(--py) * 3px + var(--t) * 60px)) scale(calc(1 - var(--t) * .08));
+    transform-origin: 50% 100%;
+    opacity: calc(1 - var(--t) * .9);
+    will-change: transform, opacity;
+  }
+  .ph__figure-in { position: absolute; inset: 0; }
+  .ph__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+  .ph__img--smile { opacity: var(--smile); }
+
+  .ph__sig { position: absolute; width: clamp(64px, 6.5vw, 96px); height: auto; left: calc(50% + 9.5vw); bottom: 31%; transform: rotate(-7deg); opacity: calc(.9 - var(--t) * 2); pointer-events: none; }
+
+  /* the side copy keeps out of the figure whatever the aspect ratio: the figure is about .89 of the hero's height wide */
+  .ph__side { position: absolute; bottom: 13%; margin: 0; max-width: min(280px, calc(50vw - 0.45 * (100svh - var(--header-h)) - 28px)); font-size: clamp(13px, 1.2vw, 17px); line-height: 1.45; color: var(--nb-text); opacity: calc(1 - var(--t) * 2); text-wrap: pretty; }
+  .ph__side--left { left: clamp(20px, 3.3vw, 48px); }
+  .ph__side--right { right: clamp(20px, 3.3vw, 48px); text-align: right; }
+
+  .ph__cue {
+    position: absolute; left: 50%; bottom: 22px; translate: -50% 0;
+    display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 22px 11px; border-radius: 999px;
+    background: #fff; box-shadow: 0 6px 24px rgba(26,33,64,.14); text-decoration: none;
+    color: var(--nb-ink); font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap;
+    opacity: calc(1 - var(--t) * 2.5); transition: transform .25s var(--ease-out), box-shadow .25s;
+  }
+  .ph__cue small { font-size: 13px; letter-spacing: 0; text-transform: none; font-weight: 400; color: var(--nb-text-2); }
+  .ph__cue:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(26,33,64,.18); }
+  .ph__cue:focus-visible { outline: 3px solid var(--nb-yellow); outline-offset: 3px; }
+
+  /* entrance, only once the script is there to remove it */
+  html.js .ph__figure-in { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+  html.js .ph__name span { opacity: 0; transform: translateY(.14em); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+  html.js .ph__name span:nth-child(2) { transition-delay: .08s; }
+  html.js .ph__sig { clip-path: inset(0 100% 0 0); transition: clip-path .7s var(--ease-out) .75s; }
+  html.js .ph__side, html.js .ph__cue, html.js .ph__eyebrow { transition: opacity .6s var(--ease-out) .45s; }
+  html.js .ph:not(.is-in) .ph__side, html.js .ph:not(.is-in) .ph__cue, html.js .ph:not(.is-in) .ph__eyebrow { opacity: 0; }
+  html.js .ph.is-in .ph__figure-in { opacity: 1; transform: none; }
+  html.js .ph.is-in .ph__name span { opacity: 1; transform: none; }
+  html.js .ph.is-in .ph__sig { clip-path: inset(0 0 0 0); }
+
+  /* narrow screens stack: name, figure fading into the page, one line of copy, the cue */
+  @media (max-width: 900px) {
+    .ph { min-height: 600px; }
+    .ph__eyebrow { font-size: 11px; letter-spacing: .12em; }
+    .ph__name { top: 10%; font-size: min(29vw, 150px); line-height: .86; white-space: normal; }
+    .ph__figure {
+      height: 64%; bottom: 19%;
+      -webkit-mask-image: linear-gradient(#000 78%, transparent 98%); mask-image: linear-gradient(#000 78%, transparent 98%);
+    }
+    .ph__sig, .ph__side--right { display: none; }
+    .ph__side--left { left: 24px; right: 24px; bottom: 84px; max-width: none; text-align: center; font-size: 15px; line-height: 1.4; }
+    .ph__cue { bottom: 16px; padding: 10px 16px 9px; font-size: 11px; }
+    .ph__cue small { display: none; }
+  }
+  @media (max-height: 640px) and (min-width: 601px) {
+    .ph__figure { height: 86%; }
+    .ph__side { bottom: 10%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ph { --t: 0 !important; --px: 0 !important; --py: 0 !important; }
+    html.js .ph__figure-in, html.js .ph__name span, html.js .ph__sig, html.js .ph__side, html.js .ph__cue, html.js .ph__eyebrow { transition: none; }
+    .ph__img--smile { transition: none; }
+  }
+</style>
+
+<script>
+  let controller: AbortController | undefined;
+  const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+
+  function setup() {
+    const el = document.querySelector<HTMLElement>('[data-portrait]');
+    controller?.abort();
+    if (!el) return;
+    controller = new AbortController();
+    const { signal } = controller;
+    const figure = el.querySelector<HTMLElement>('[data-ph-figure]')!;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fine = matchMedia('(pointer: fine)').matches;
+
+    // entrance on the next frame, so the transitions run
+    requestAnimationFrame(() => el.classList.add('is-in'));
+
+    if (reduce) { el.style.setProperty('--smile', '1'); return; }
+
+    // the smile eases towards a target: quick to smile, slow to settle back
+    let target = 0, smile = 0, raf = 0;
+    const tick = () => {
+      raf = 0;
+      smile += (target - smile) * (target > smile ? 0.14 : 0.04);
+      if (Math.abs(target - smile) < 0.003) smile = target; else raf = requestAnimationFrame(tick);
+      el.style.setProperty('--smile', smile.toFixed(3));
+    };
+    const aim = (v: number) => { target = v; if (!raf) raf = requestAnimationFrame(tick); };
+
+    if (fine) {
+      addEventListener('pointermove', (e: PointerEvent) => {
+        const r = figure.getBoundingClientRect();
+        if (r.bottom < 0) return;
+        // distance from the pointer to his head
+        const d = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height * 0.28));
+        aim(clamp(1 - (d - r.height * 0.22) / (r.height * 0.6), 0, 1));
+        const s = el.getBoundingClientRect();
+        el.style.setProperty('--px', clamp(((e.clientX - s.left) / s.width) * 2 - 1, -1, 1).toFixed(3));
+        el.style.setProperty('--py', clamp(((e.clientY - s.top) / s.height) * 2 - 1, -1, 1).toFixed(3));
+      }, { passive: true, signal });
+      document.addEventListener('pointerleave', () => { aim(0); el.style.setProperty('--px', '0'); el.style.setProperty('--py', '0'); }, { signal });
+    } else {
+      // no pointer to come close with: he smiles after a beat, and a tap toggles it
+      const t = setTimeout(() => aim(1), 1100);
+      signal.addEventListener('abort', () => clearTimeout(t));
+      figure.addEventListener('click', () => aim(target > 0.5 ? 0 : 1), { signal });
+    }
+
+    // the handoff: how far the section has scrolled away
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        el.style.setProperty('--t', clamp(scrollY / Math.max(1, el.offsetHeight), 0, 1).toFixed(4));
+        ticking = false;
+      });
+    };
+    addEventListener('scroll', onScroll, { passive: true, signal });
+    onScroll();
+  }
+
+  document.addEventListener('astro:page-load', setup);
+</script>

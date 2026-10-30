@@ -153,10 +153,15 @@ const measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
         });
       }
 
-      // Public API for pages that swap the playing video (e.g. /media).
-      // Resets the tracking state for that iframe so the next play fires
-      // a fresh video_play event.
+      // Public API for pages that swap the playing video (e.g. /media), and
+      // for components that insert an embed after load (the Maxim sheet on
+      // the home page). changeVideo resets the tracking state for an iframe
+      // so the next play fires a fresh video_play event.
       window.AWJYT = {
+        attach: function (iframe) {
+          if (!iframe || !iframe.id) return;
+          ensureApi().then(function () { attachPlayer(iframe); });
+        },
         changeVideo: function (iframeId, videoId, info) {
           var player = players[iframeId];
           if (!player || !videoId) return false;
@@ -183,6 +188,8 @@ const measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
       } else {
         init();
       }
+      // embeds that arrive through a client-side navigation
+      document.addEventListener('astro:page-load', init);
     })();
   </script>
 )}

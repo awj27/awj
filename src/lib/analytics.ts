@@ -12,6 +12,8 @@
 //   video_play             — first PLAYING state for a YouTube embed
 //   video_progress         — 25 / 50 / 75 percent milestones
 //   video_complete         — ENDED state
+//   maxim_open             — a Maxim opened in the sheet beside the journal
+//   journal_turn           — a page turned in the journal (sampled: whole turns only)
 //
 // Custom event params used across events:
 //   pillar       (string)  — sales | founder | human   (page-scoped, set on Layout)
@@ -37,6 +39,8 @@ export type AnalyticsEvent =
   | 'video_play'
   | 'video_progress'
   | 'video_complete'
+  | 'maxim_open'
+  | 'journal_turn'
   | 'outbound_click';
 
 export function track(event: AnalyticsEvent, params: Record<string, unknown> = {}): void {

@@ -88,13 +88,13 @@ const video = entry.data.video_id ? [{
     </header>
 
     <div class="entry__body nb-shell">
-      <div class="nb-prose">
+      <div class="nb-prose" data-sheet-prose>
         <Content />
       </div>
 
       <aside class="entry__side">
         {entry.data.video_id && (
-          <div class="side-card">
+          <div class="side-card" data-sheet-video>
             <p class="nb-eyebrow">Watch</p>
             <div class="side-video">
               <iframe
@@ -122,7 +122,7 @@ const video = entry.data.video_id ? [{
         )}
         <div class="side-card">
           <p class="nb-eyebrow">Back to the journal</p>
-          <a class="side-link" href="/#journal">Turn the pages &rarr;</a>
+          <a class="side-link" href={`/#awj-${pad2(n)}`}>Back to this page in the journal &rarr;</a>
           <a class="side-link" href="/maxims/">The library &rarr;</a>
         </div>
       </aside>
