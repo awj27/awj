@@ -117,7 +117,7 @@ Andy chose to launch on 30 October 2026 with this list open, so it is now a post
 
 ### The person first: portrait hero, Maxim sheet, controlled turning
 
-Decided with Andy on 30 October 2026 after launch, built on the branch `hero/portrait` for his review.
+Decided with Andy on 30 October 2026 after launch, built on the branch `hero/portrait`, reviewed on its preview and merged to `main` the same day.
 
 - The home page opens on Andy, not the journal. His black and white portrait, cut out of the studio backdrop, stands centred in front of his name set huge in cover blue, with the handwritten AWJ as a signature and one yellow highlight in the copy. He arrives serious and breaks into the smile as the pointer comes towards him (after a beat on a phone, where a tap toggles it), the name and the figure move at different speeds with the pointer, and scrolling hands over to the journal. No 3D, no helmet, no face mesh: the references were landonorris.com (WebGL helmet, Rive type) and benkaluza.com (a photo plus a depth map through a shader, with a tracking lens on top); Dennis Snellenberg's site showed the same composition works with a plain photograph.
 - The two frames come from the same shoot. The smiling frame is registered to the serious one by the shoulders (scaled 1.09 and shifted), so the body stays still and only the head and face move. Assets in `public/portrait/`, cut with the Mac's Vision person segmentation.
