@@ -1,131 +1,264 @@
-# Andy Whyte Journal — Full Essay Text (llms-full.txt)
+# Andy Whyte Journal: full text
 
-> Full text of every essay published on the Andy Whyte Journal,
-> formatted for LLM retrieval-augmented generation. Each essay is
-> introduced with its AWJ number, title, pillar, publication date,
-> and canonical URL.
+Andy Whyte is the founder and CEO of MEDDICC and the author of the best-selling book MEDDICC. Twenty years in sales. Keynote speaker at sales kickoffs and revenue summits. This file holds the full text of the journal and its reference pages.
 
-> Andy Whyte is the Founder and CEO of MEDDICC and the author of
-> the best-selling book MEDDICC: The ultimate guide to staying one
-> step ahead in the complex sale (100,000+ copies sold).
+## The Maxims
 
-> Source of truth: https://andywhyte.com/
-> Last updated: 2025-11-29
-> Essays included: 12
-
----
-
-## AWJ #01: A-Players Are Uncomfortable Being Comfortable
-
-- Pillar: Sales
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/a-players-are-uncomfortable-being-comfortable/
+### AWJ No. 01: A-Players Are Uncomfortable Being Comfortable
+Pillar: sales. URL: https://andywhyte.com/journal/a-players-are-uncomfortable-being-comfortable/
 
 A-Players are Uncomfortable Being Comfortable.
+  They are driven by an unreasonable, unforgiving, and unrelenting mandate to achieve the best version of themselves.
+  They are only satisfied when moving at full pace toward their own potential.
+  Stagnation is pain.
+  The commitment is uncomfortable. The hunger. The constant, nagging&hellip; The toll of asking: "Am I doing enough?" The Impostor Syndrome. The demand for feedback.
+  But replace it with comfort, and they'll become uncomfortable.
+  Because A-Players are Uncomfortable Being Comfortable.
 
-They are driven by an unreasonable, unforgiving, and unrelenting mandate to achieve the best version of themselves.
+A decision that defines the maxim
 
-They are only satisfied when moving at full pace toward their own potential.
+In September 2014, Roger Federer was 33 years old and had won 17 Grand Slams. He had nothing left to prove and a young family at home. Yet he decided to hire a new coach, Stefan Edberg, to rebuild his attacking game and backhand.
 
-Stagnation is pain.
+He chose to be bad at something in public, in his thirties, after he had already won everything available to win.
 
-The commitment is uncomfortable.
+He went on to win three more majors after the age of 35.
 
-The hunger.
+  
+  
+    01
+    
+      Federer and Edberg, French Open 2015. The decision to be a beginner again at 33.
+      Photo: Frédéric de Villamil &middot; CC BY-SA 2.0
+    
+  
 
-The constant, nagging...
+Federer sabotaged comfort in pursuit of finding a higher output.
 
-The toll of asking: "Am I doing enough?"
+That decision is the maxim. A-Players are uncomfortable being comfortable.
 
-The Impostor Syndrome.
+The mistake people make is thinking discomfort is the price of greatness.
 
-The demand for feedback.
+It is not the price.
 
-But...
+It is the by-product of a mind that demands more.
 
-Replace it with comfort, and they'll become uncomfortable.
+A mind that knows their career's true potential and psychologically blackmails them to strive to be more, never resting until they meet their potential.
 
-Because A-Players are Uncomfortable Being Comfortable.
+But potential is always one stride ahead.
 
-Does this resonate with you?
+A-Players know this in their body. They feel suspicious of ease. They feel ill at the idea of easy.
 
----
+Audit your comfort
 
-## AWJ #02: Feedback is like Milk. It is Best Served Fresh.
+What is the thing you are best at?
 
-- Pillar: Founder
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/feedback-is-like-milk-it-is-best-served-fresh/
+The thing other people praise you for?
 
-“𝙁𝙚𝙚𝙙𝙗𝙖𝙘𝙠 𝙞𝙨 𝙡𝙞𝙠𝙚 𝙈𝙞𝙡𝙠. 𝙄𝙩 𝙞𝙨 𝙗𝙚𝙨𝙩 𝙛𝙧𝙚𝙨𝙝.” – [Faith Meyer](https://www.linkedin.com/in/faith-meyer/)
+Where on that skill have you plateaued?
 
-My biggest failure as a leader was how bad I was at giving critical feedback.
+Where are you just running the same play because it works?
 
-It was the main reason I enlisted a coach (👋 Faith).
+How do you unlock the next level?
 
-One of my failings was that I would procrastinate about giving critical feedback.
+Seek out the discomfort between where you are and where your potential knows you can be.
 
-I’d tell myself I was waiting for the perfect moment.
+Embrace the discomfort to fuel you to your next level.
 
-I’d tell myself that I was gathering context to give better feedback.
+If you are an A-Player, you won't find comfort again until you've uncovered the next level of discomfort.
 
-But I wasn’t doing anyone any favors by doing that.
+As such, A-Players are locked in a perpetual growth cycle.
 
-It was in these shenanigans that led Faith to come up with the metaphor that feedback is like milk, it’s best served fresh… It only sours with time.
+And they'd never have it any other way.
 
-Obviously, there is a time and a place, but if you believe (𝘢𝘴 𝘺𝘰𝘶 𝘴𝘩𝘰𝘶𝘭𝘥) that feedback is a gift, then you should prioritize finding the time and place to give feedback.
+  Reflect
+  Do you see yourself in this maxim?
+  Are you stuck in a perpetual growth cycle where comfort feels uncomfortable?
+  Would you change it?
 
-Because… “𝙁𝙚𝙚𝙙𝙗𝙖𝙘𝙠 𝙞𝙨 𝙡𝙞𝙠𝙚 𝙈𝙞𝙡𝙠. 𝙄𝙩 𝙞𝙨 𝙗𝙚𝙨𝙩 𝙛𝙧𝙚𝙨𝙝.”
+### AWJ No. 02: Feedback is like Milk. It is Best Served Fresh.
+Pillar: founder. URL: https://andywhyte.com/journal/feedback-is-like-milk-it-is-best-served-fresh/
 
----
+"Feedback is like Milk. It is Best Served Fresh.", Faith Meyer
+  My biggest failure as a leader was how bad I was at giving critical feedback.
+  It was the main reason I enlisted a coach.
+  One of my failings was that I would procrastinate about giving critical feedback.
+  I'd tell myself I was waiting for the perfect moment.
+  I'd tell myself that I was gathering context to give better feedback.
+  But I wasn't doing anyone any favours by doing that.
+  It was in these shenanigans that led Faith to come up with the metaphor that feedback is like milk, it's best served fresh. It only sours with time.
+  Obviously, there is a time and a place, but if you believe (as you should) that feedback is a gift, then you should prioritise finding the time and place to give feedback.
+  Because "Feedback is like Milk. It is Best Served Fresh."
 
-## AWJ #03: The B in B-Player Stands for ‘Busy.
+The conversation I should have had a year earlier
 
-- Pillar: Founder
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/the-b-in-b-player-stands-for-busy/
+My biggest failure as a leader was avoiding the conversations that mattered most.
 
-The B in B-Player stands for “busy.”
+I had a CXO who was failing. The team saw it. I saw it. Instead of looking him in the eye and telling him the truth, I stayed silent. I told myself I was being patient. I told myself I was being supportive. I told myself I was gathering context.
 
-🙋‍♂️ Whereas A-Players focus on outcomes.
+I was being a coward.
 
-They want clear goals and thrive on challenge, accountability, and measurable outcomes.
+The silence festered. He did not just resign. He raised a grievance against the company.
 
-They measure success by impact, not appearance.
+That failure did not happen because I didn't know how to speak. It happened because I didn't have the guts or the tools to lead.
 
-🙅‍♂️ B-Players focus on optics.
+It is what pushed me to hire a coach. Faith Meyer is the person who finally named the pattern. After watching me dance around a difficult conversation for the third or fourth time, she said, "Andy. Feedback is like milk. It is best served fresh."
 
-They avoid clarity and dodge accountability.
+The line landed because it described, exactly, what I had been doing wrong.
 
-They fear exposure, resist change, and play it safe to stay liked and in control.
+Delay turns a behaviour into an identity
 
-Their energy goes to managing perception, not creating value.
+The reason delayed feedback fails is not that it lacks data. The data was there on day one. The reason it fails is that delay quietly converts a behaviour into an identity.
 
-Busyness used to be camouflage for B-Players, but in the age of AI, the lights are on, and the differentiator isn’t effort, it’s initiative.
+On Tuesday, your rep ran a bad discovery call. By the following Monday, your rep is someone who runs bad discovery calls. The first version of the conversation is a coaching note. The second is a performance issue.
 
-Gone are the days when signalling busyness is a badge of honor.
+The same dynamic eats marriages, friendships, and exec hires. Small, specific things go unnamed. They compound. By the time you finally raise them, you are not arguing about the original behaviour. You are arguing about the pattern, the silence, and the resentment that grew in the gap. The original five-minute conversation is now a forty-minute fight. The other person is right to feel ambushed.
 
-Today, it’s the opposite: if you’re not automating, delegating, or eliminating tasks, you’ll look like a Luddite, not a legend.
+Three frames make this trap operational
 
-B-Players are not competing with coworkers anymore. They are competing with machines and the humans who know how to use them.
+The first is the Ebbinghaus forgetting curve. People lose roughly half the context of a moment within 24 hours.1 By the time you find "the right time," your colleague cannot accurately reconstruct the moment you are describing. You are now both arguing about a memory, not a behaviour.
 
-It is not about how hard you work. It’s about how you measure and communicate your impact.
+The second is loss aversion. Kahneman and Tversky showed that we feel near-term social discomfort far more sharply than diffuse future cost.2 So we delay. The math is wrong, but the feeling is real. Naming the bias is the first step to overriding it.
 
-A-Players don’t talk about how busy they are because it’s a moot point. They manage their schedules in accordance with their energy, bandwidth, and prioritize impact.
+The third is compounding. Feedback debt accrues interest. The interest is paid in repeated mistakes by the same person. Charlie Munger's frame is sharp here: avoid stupidity before seeking brilliance.3 Most "stupidity" inside teams is a delayed correction.
 
-A-Players don’t talk about how busy they are the same way as Jordan, Williams, Hamilton, Messi, Biles, etc don’t talk about how long they spend on the court/gym/simulator/track… They talk about the impact. The wins. The championships, titles, and medals.
+The right counter-question is not "when is the right time to give this feedback?" That question protects your comfort. The right counter-question is: "what is the cost of waiting one more week?" That question reveals the bill.
 
-Am I wrong? Is there someone you class as an A-Player who talks about how busy they are?
+Fresh is not the same as raw
 
-Question: If the B in B-Player stands for ‘busy’, then what does the A in A-Player stand for?
+This is the part most people miss. John Gottman's work on emotional flooding shows that when the giver is hot, the feedback lands worse.4 Fresh means before the moment cools. Not before you have cooled. The window is short. It is not zero. If you cannot speak without your voice shaking, wait an hour. Not a week.
 
----
+The strongest counter is: half-baked feedback is worse than no feedback. Sometimes you genuinely need to gather context.
 
-## AWJ #04: There is no such thing as a C Player.
+The honest test is this. If you can name precisely what you need to learn before you can speak, and the answer is something you can learn within 24 hours, the delay is justified. If the honest answer is "I just want to feel more sure," you are procrastinating.
 
-- Pillar: Founder
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/there-is-no-such-thing-as-a-c-player/
+The move in that case is to give the partial feedback now, name it as partial, and invite their side. "Here is what I noticed. Here is what I do not know yet. Help me understand." That is fresh feedback that respects complexity. Silence does not.
+
+The 48-hour rule
+
+One practical rule.
+
+If you notice something worth feeding back on, you have 48 hours to either say it, book the time to say it within the next five working days, or decide formally that it is not worth saying. Anything else is procrastination dressed as judgment.
+
+The version of you that gives feedback inside 48 hours has better-performing reps, longer-tenured exec hires, and harder-edged friendships that survive disagreement. The version of you that waits ends up paying the bill in a meeting room where the conversation is no longer about the behaviour. It is about the year of silence.
+
+The price of delayed feedback is always paid. The only question is whether it costs you five minutes or twelve months.
+
+Feedback is like milk. It is best served fresh.
+
+  
+    
+  
+  
+    The Coach
+    Faith Meyer
+    Faith is a former CEO and COO with over two decades of leadership experience. Today she is a coach for the world-class coaching institute Mochary Method, led by legendary CEO coach Matt Mochary, where they help the world's best startup operators, Sam Altman at OpenAI, Brian Armstrong at Coinbase and Naval Ravikant at AngelList among them, unlock their full potential.
+    Faith's coaching profile →
+  
+
+Citations
+
+  
+    Ebbinghaus, H. (1885). Über das Gedächtnis: Untersuchungen zur experimentellen Psychologie (Memory: A Contribution to Experimental Psychology). Duncker &amp; Humblot, Leipzig. The forgetting curve shows roughly half of newly learned material is lost within 24 hours without reinforcement. &#8617;
+  
+  
+    Kahneman, D., &amp; Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. Econometrica, 47(2), 263&ndash;291. https://doi.org/10.2307/1914185. &#8617;
+  
+  
+    Munger, C. T. (2005). Poor Charlie's Almanack: The Wit and Wisdom of Charles T. Munger (P. Kaufman, Ed.). Donning Company. See in particular the chapters on inversion and avoiding stupidity. &#8617;
+  
+  
+    Gottman, J. M., &amp; Silver, N. (1999). The Seven Principles for Making Marriage Work. Crown Publishing. Gottman's emotional-flooding research shows physiological arousal above ~100 BPM compromises the ability to give or receive feedback constructively. &#8617;
+
+### AWJ No. 03: The B in B-Player Stands for ‘Busy.'
+Pillar: founder. URL: https://andywhyte.com/journal/the-b-in-b-player-stands-for-busy/
+
+The B in B-Player stands for "busy."
+  A-Players focus on outcomes.
+  They want clear goals and thrive on challenge, accountability, and measurable outcomes.
+  They measure success by impact, not appearance.
+  B-Players focus on optics.
+  They avoid clarity and dodge accountability.
+  They fear exposure, resist change, and play it safe to stay liked and in control.
+  Their energy goes to managing perception, not creating value.
+  Busyness used to be camouflage for B-Players, but in the age of AI, the lights are on, and the differentiator isn't effort, it's initiative.
+  Gone are the days when signalling busyness is a badge of honour.
+  Today, it's the opposite: if you're not automating, delegating, or eliminating tasks, you'll look like a Luddite, not a legend.
+  B-Players are not competing with coworkers anymore. They are competing with machines and the humans who know how to use them.
+  It is not about how hard you work. It's about how you measure and communicate your impact.
+  A-Players don't talk about how busy they are because it's a moot point. They manage their schedules in accordance with their energy and bandwidth, and prioritise impact.
+  A-Players don't talk about how busy they are the same way Jordan, Williams, Hamilton, Messi, and Biles don't talk about how long they spend on the court, gym, simulator, or track. They talk about the impact. The wins. The championships, titles, and medals.
+  Am I wrong? Is there someone you class as an A-Player who talks about how busy they are?
+  If the B in B-Player stands for "busy," then what does the A in A-Player stand for?
+
+What the A Stands For
+
+A pipeline review last week. The AE has 27 open opps, all yellow or red. He defends every single one with the same line. "I'm working it hard."
+
+He is working it hard. He is also the lowest performer on the team.
+
+The B-Player tell isn't laziness. It's effort displayed as evidence.
+
+The B in B-Player stands for busy. That post landed because most operators recognise the type. The deeper question is why this pattern survived for so long, and why it is finally breaking.
+
+Why busyness worked for so long
+
+It survived because outcomes were expensive to measure and effort was cheap to observe. So organisations measured what they could see. Hours at the desk. Calls dialled. Emails sent. Meetings booked. Slides built. The proxy became the metric. The metric became the goal. Goodhart's Law in slow motion.1
+
+For most of working history, this was a tolerable trade. You couldn't read every commit. You couldn't watch every customer call. You couldn't quantify the quality of a strategy doc. So you rewarded the visible inputs and prayed the outputs followed.
+
+The B-Player figured this out early. They optimised for the visible. They built careers on activity that looked dispositive but wasn't. They kept moving, so no one could ask what they had moved.
+
+The work just got legible
+
+That trade is ending. Not because management got smarter. Because the work got legible.
+
+Every commit is in Git. Every deal stage is in Salesforce. Every customer interaction is in Winni Calls. Every doc edit is timestamped. Every Linear ticket has a velocity. The cost of measuring outcomes has collapsed. The cost of fabricating effort has not.
+
+Bolt AI onto this stack, and the asymmetry sharpens. Anyone with an LLM and ten minutes can ship the deliverable that a B-Player would have stretched across three days. The 9 am meeting brief. The first-draft proposal. The competitor analysis. The board update. The work that used to fill calendars is now a single prompt.
+
+A calendar full of "work" is starting to look like an admission, not a defence.
+
+Reverse the question
+
+The useful move is to reverse the question. Forget "how do I become an A-Player." Ask "what behaviours are now unmistakably B-Player, and how do I stop doing them this week?"
+
+A short list.
+
+Talking about how busy you are. The lights are on. The room can see your output. Reporting hours is reporting the input cost. No one asked.
+
+Defending stalled deals with effort verbs. Worked, chased, pushed, nurtured. Activities, all of them. None of them are MEDDPICC. If you cannot articulate the Champion's economic case in three sentences, the deal is not real, and the effort was theatre.
+
+Owning meetings instead of decisions. The B-Player schedules a meeting to "align." The A-Player writes a one-page memo, names the decision, names the deciders, and books the meeting only if the memo creates disagreement.
+
+Hoarding tasks AI can do. Draft summaries. First-pass research. Comparison grids. Status updates. If you spent the morning on any of those, you spent it competing with a machine for the boring half of your job. The machine wins on cost.
+
+Performing thoroughness. Forty slides when six would do. Three frameworks when one would land. Optics is the tell.
+
+The shift underneath the list
+
+The shift underneath the list is the one that matters. The B-Player believes the job is to be valuable. The A-Player runs the job as if value has to be proved on a single page every Friday. One paragraph on outcomes shipped. One paragraph on what was killed. One paragraph on what's next and why.
+
+Most people will not do this. Writing one page is hard. Running ten meetings is not. The page exposes the week. The meetings hide it. Exposure is the point.
+
+So what does the A stand for?
+
+Not "ambitious." Not "achiever." Both are flattery dressed as identity.
+
+The A stands for accountable. To the outcome, not the activity. To the impact, not the calendar. To a small set of measurable wins, defended in writing, on a regular cadence.
+
+Accountability holds up in daylight because it was built for daylight. Busyness was built for the dark.
+
+This week, run the test on yourself. Open your calendar. Strike out every block that exists to be seen rather than to produce. If half the week disappears, you are closer to the truth than you were on Monday.
+
+Then write the page.
+
+Citations
+
+  
+    Goodhart, C. A. E. (1975). Problems of monetary management: The U.K. experience. Papers in Monetary Economics. Reserve Bank of Australia. Popularised by Marilyn Strathern (1997) as: "When a measure becomes a target, it ceases to be a good measure." &#8617;
+
+### AWJ No. 04: There is no such thing as a C Player.
+Pillar: founder. URL: https://andywhyte.com/journal/there-is-no-such-thing-as-a-c-player/
 
 There is no such thing as a C Player.
 
@@ -137,18 +270,18 @@ Professional sports teams wouldn’t have any space for C Players, so why should
 
 This lens does require two considerations:
 
-1️⃣ – Your A Player rating is relative to the level of your role. For example, you could have a junior and senior AE who are both A Players. The junior AE with 1 year of experience isn’t going to be as strong as the senior AE with 10+ years of experience.
+1️⃣ Your A Player rating is relative to the level of your role. For example, you could have a junior and senior AE who are both A Players. The junior AE with 1 year of experience isn’t going to be as strong as the senior AE with 10+ years of experience.
 
 You rate them relative to their position.
 
-2️⃣ – Being an A Player is subject to form.  There’s literally a phrase for it: ‘Bringing your A game.’
+2️⃣ Being an A Player is subject to form.  There’s literally a phrase for it: ‘Bringing your A game.’
 
 Even the greatest performers can fall out of form.
 
 This is why a critical part of creating the environment for a winning team is to create a place where A Players can thrive.
 
 Help the A and B+ Players in your team to thrive by:
-🔋 Focusing on their growth – empowering their growth mindset with a roadmap
+🔋 Focusing on their growth: empowering their growth mindset with a roadmap
 
 🔋 Removing barriers that slow them down (𝙐𝙣𝙥𝙤𝙥𝙪𝙡𝙖𝙧 𝙤𝙥𝙞𝙣𝙞𝙤𝙣: 𝘵𝘩𝘦 ‘𝘣𝘢𝘳𝘳𝘪𝘦𝘳𝘴’ 𝘵𝘦𝘯𝘥 𝘵𝘰 𝘣𝘦 𝘵𝘩𝘦 𝘉− 𝘗𝘭𝘢𝘺𝘦𝘳𝘴)
 
@@ -159,21 +292,16 @@ There is obviously a great deal of depth to each of the above, but it’s not ov
 Yet, one thing I don’t think we discuss enough is how disproportionately leaders focus their time on the non-A players in their team.
 
 If leaders were forced to profile their team:
-• A Player – 🥇.
-• B+ Player – Has potential to be an A, 𝗢𝗥 is out of form.
-• B− Player – Does not have the potential to be an A.
+• A Player: 🥇.
+• B+ Player: has potential to be an A, 𝗢𝗥 is out of form.
+• B− Player: does not have the potential to be an A.
 
 How much of their time is w̶a̶s̶t̶e̶d̶ spent on the B− Players? 🤔
 
----
+### AWJ No. 05: Failure and invention are inseparable twins
+Pillar: founder. URL: https://andywhyte.com/journal/failure-and-invention-are-inseparable-twins-jeff-bezos/
 
-## AWJ #05: Failure and invention are inseparable twins – Jeff Bezos
-
-- Pillar: Founder
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/failure-and-invention-are-inseparable-twins-jeff-bezos/
-
-Failure and invention are inseparable twins – Jeff Bezos
+Failure and invention are inseparable twins. Jeff Bezos said it first.
 
 Not going to lie…
 
@@ -195,13 +323,8 @@ Then, when writing it out, I made a spelling mistake.
 
 Perfect 😂.
 
----
-
-## AWJ #06: Authenticity is the Most Intangible Invaluable Interest You Can Have
-
-- Pillar: Human
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/authenticity-is-the-most-intangible-invaluable-interest-you-can-have/
+### AWJ No. 06: Authenticity is the Most Intangible Invaluable Interest You Can Have
+Pillar: human. URL: https://andywhyte.com/journal/authenticity-is-the-most-intangible-invaluable-interest-you-can-have/
 
 I just got back from a few days in the South of France, and I was struck by how little authenticity I saw.
 
@@ -227,13 +350,8 @@ Yet, unfortunately, I don’t think we’ve hit peak nonsense yet. 🤦‍♂️
 
 So, instead of posting the shot of me sipping the perfect rosé in my swimming trunks that I know you all want (🤥), here’s a Maxim I think of a lot to stay aligned with genuine authenticity 🙅‍♂️📸🩲:
 
----
-
-## AWJ #07: Your Mental Health is not Linear
-
-- Pillar: Human
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/your-mental-health-is-not-linear/
+### AWJ No. 07: Your Mental Health is not Linear
+Pillar: human. URL: https://andywhyte.com/journal/your-mental-health-is-not-linear/
 
 Your Mental Health is not Linear.
 
@@ -285,13 +403,8 @@ Be kind to yourself, friends.
 
 🫶
 
----
-
-## AWJ #08: Take. Take. Mistake. Cut. Direction. Retake.
-
-- Pillar: Founder
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/take-take-mistake-cut-direction-retake/
+### AWJ No. 08: Take. Take. Mistake. Cut. Direction. Retake.
+Pillar: founder. URL: https://andywhyte.com/journal/take-take-mistake-cut-direction-retake/
 
 𝗧𝗮𝗸𝗲. 𝗧𝗮𝗸𝗲. 𝗠𝗶𝘀𝘁𝗮𝗸𝗲. 𝗖𝘂𝘁. 𝗗𝗶𝗿𝗲𝗰𝘁𝗶𝗼𝗻. 𝗥𝗲𝘁𝗮𝗸𝗲.
 
@@ -309,13 +422,8 @@ Be coachable enough to adopt it.
 
 So when it’s time to retake, you ace it.
 
----
-
-## AWJ #09: Authenticity is felt, not found.
-
-- Pillar: Human
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/authenticity-is-felt-not-found/
+### AWJ No. 09: Authenticity is felt, not found.
+Pillar: human. URL: https://andywhyte.com/journal/authenticity-is-felt-not-found/
 
 Authenticity is felt, not found.
 
@@ -352,13 +460,8 @@ So whether you’re building a brand, creating, or leading a team, remember:
 
 Authenticity lives in the hearts and minds of others, not just in the facts they find.
 
----
-
-## AWJ #10: Imposter Syndrome ≡ Self-Awareness
-
-- Pillar: Human
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/imposter-syndrome-self-awareness/
+### AWJ No. 10: Imposter Syndrome ≡ Self-Awareness
+Pillar: human. URL: https://andywhyte.com/journal/imposter-syndrome-self-awareness/
 
 “Imposter Syndrome ≡ Self-Awareness”
 
@@ -402,13 +505,8 @@ And in this ever-inauthentic world, where unearned egos go unchecked, your authe
 
 P.S. Does anyone else’s spelling go out of the window when you are concentrating on your handwriting? 🤦‍♂️
 
----
-
-## AWJ #11: Urgency is an emotion. Not a message.
-
-- Pillar: Sales
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/urgency-is-an-emotion-not-a-message/
+### AWJ No. 11: Urgency is an emotion. Not a message.
+Pillar: sales. URL: https://andywhyte.com/journal/urgency-is-an-emotion-not-a-message/
 
 Urgency is an emotion. Not a message.
 
@@ -451,13 +549,8 @@ There must be clear communication surrounding the urgency:
 
 And above all else, urgency must be authentic.
 
----
-
-## AWJ #12: Nobody Regrets Qualifying Out
-
-- Pillar: Sales
-- Date: 2025-11-29
-- URL: https://andywhyte.com/journal/nobody-regrets-qualifying-out/
+### AWJ No. 12: Nobody Regrets Qualifying Out
+Pillar: sales. URL: https://andywhyte.com/journal/nobody-regrets-qualifying-out/
 
 “Nobody Regrets Qualifying Out”
 
@@ -475,5 +568,1128 @@ I’ve not regretted qualifying out of a job with a bad manager.
 
 What have you not regretted qualifying out of?
 
----
+### AWJ No. 13: Arrogance is only a strength at holding back growth
+Pillar: human. URL: https://andywhyte.com/journal/arrogance-is-only-a-strength-at-holding-back-growth/
 
+A Seller finishes the year at 140% of target and walks into the January kick-off a different person. He stops filling in the MEDDICC fields because he knows his deals. He skips the call reviews because he has heard it all before. He interrupts the new VP in her first meeting to explain how this market really works. By June he is at 30% and telling anyone who will listen that the territory changed.
+
+The territory did not change. He did.
+
+I have watched that arc more times than I can count in twenty years of selling, and I have been the man in it. Never at 140%, sadly, but the mechanics were identical. A bit of success arrived, I decided it was proof of who I was, and I stopped taking anything in.
+
+Arrogance feels like strength from the inside. It feels like certainty. It feels like finally not needing anyone. That is the trick of it, because what you are actually feeling is a door shutting.
+
+What arrogance is good at
+
+Growth only ever arrives from outside you, and it comes through three doors. Feedback, which is somebody telling you something you did not want to hear. Failure, which is reality telling you the same thing less politely. And being a beginner again, which is choosing to be bad at something in public so that you can get good at it.
+
+Arrogance locks all three. It hears feedback as an attack. It files failure under bad luck, bad territory, bad quarter. And it will not be a beginner at anything, because the arrogant person's whole position rests on already knowing.
+
+So the Maxim is literal. Arrogance is strong at exactly one thing. It holds back growth with a grip nothing else can match. A lazy person can be shaken out of it. A scared person can be encouraged through it. An arrogant person built the wall themselves and is proud of the brickwork.
+
+Confidence is a different thing, and you need to be able to tell them apart. Confidence is a conclusion drawn from evidence, and it stays open to new evidence. Arrogance is confidence that has stopped taking evidence. Confidence takes the feedback. Arrogance takes offence.
+
+Where it shows up
+
+In a deal, it is the Seller who tells the forecast call that the Economic Buyer's silence is a formality. In a leadership team, it is the VP who has run the same playbook for eight years and calls every idea from the floor naive. In a founder, it is the one who dismisses the new competitor as a toy, twelve months before the toy takes the account.
+
+More than 35,000 people have been through the MEDDICC Masterclass. The ones who get the least from it tell you inside the first ten minutes that they already do all of this. Sometimes they do. They still get the least from it, because the day was never going to get past the door.
+
+The cruel part is that arrogance usually arrives with a track record attached. You earned the right to be sure. That is what makes it so hard to spot in yourself: the evidence for your certainty is real. It is just old.
+
+The audit
+
+Three questions. Answer them honestly and you will know where you stand.
+
+When did you last lose an argument with someone junior to you and say so out loud?
+
+When did you last choose to be bad at something new, somewhere people could see?
+
+When did someone last tell you something uncomfortable about your work, and what did you do about it in the following week?
+
+If the answers are "I can't remember", "nothing recently" and "I explained why they were wrong", you have found the wall. Humility as a pose will not take it down. Reopening the doors will. Ask for the feedback you have stopped receiving. Pick one skill to be a beginner at this quarter. Treat your next failure as information rather than injustice.
+
+The people still growing at fifty were sure of themselves all along. They just never stopped taking the evidence in.
+
+Which door have you shut, and when did you shut it?
+
+### AWJ No. 14: Whether you were created or coded, you were put here to play a role
+Pillar: human. URL: https://andywhyte.com/journal/created-or-coded-you-were-put-here-to-play-a-role/
+
+Think about everything that had to happen for you to be reading this. The town you grew up in. The teacher who took an interest, or didn't. The job you took because the other offer fell through. The manager who gave you the territory nobody else wanted. How much of that was accident, and how much of it was design?
+
+I was reading a devotional this morning and it asked a question that stopped me cold. If you truly believed God designed you for a specific purpose, how would you behave differently? What would you attempt? Which problems would you go after?
+
+Then I flipped it.
+
+Forget God for a second. Say none of this is real. Say it is a simulation, and you were coded. Loaded in with specific attributes, dropped into a specific environment, with a specific set of problems placed around you. A character with a role to play.
+
+The answer did not change.
+
+Two worldviews that cannot both be true, and they hand you the same instruction. You are not here by accident. Whether you were created or coded, you were put here to play a role.
+
+Reading the role
+
+The useful part is that both versions give you the same three clues, and you already hold all of them.
+
+Your attributes. The things you are unusually good at, and the things you cannot stop doing even when nobody is paying you to do them. I cannot walk past a badly qualified deal. Twenty years in sales and I still want to ask who the Economic Buyer is at a dinner party.
+
+Your environment. Where you were placed, who is around you, and what you can see from where you stand that other people cannot. The industry you know from the inside. The team you happen to lead. The city you happen to live in.
+
+Your problems. The specific things that are broken in your line of sight. Nobody put them there for someone else to fix. They are in front of you.
+
+Where those three overlap is the role. Attributes you did not choose, an environment you did not pick, and problems you keep bumping into. The overlap is rarely mysterious. If you are honest, you can name it in a sentence, and you have been able to for years.
+
+I wrote MEDDICC because the book I needed did not exist. I had the attribute, which was having learnt the framework the hard way across several companies. I had the environment, which was teams of Sellers who had been told to use MEDDICC and given nothing to read. I had the problem in my lap every Monday. I did not get a sign. I got a problem and a laptop. That book has now sold over 100,000 copies, and the only decision that mattered was accepting that it was mine to write.
+
+What you are waiting for
+
+The devotional question is the one that bites. If you believed you were here on purpose, what would you attempt?
+
+People answer that question in private and then carry on exactly as before. They are waiting for a sign, or permission, or a version of themselves that feels ready. The Seller who knows the Champion is not real but waits for someone else to call it. The founder with the idea written in a notebook from 2019. The person who knows exactly what they should be doing right now and has built a diary that makes sure they never get to it.
+
+You do not need another sign. You do not need permission. However you got here, you got here on purpose, and the role is sitting in the overlap of three things you already have.
+
+So play it.
+
+What is the role you have known about for years, and what have you been waiting for before you play it?
+
+### AWJ No. 15: Authenticity beats deception
+Pillar: human. URL: https://andywhyte.com/journal/authenticity-beats-deception/
+
+A Seller on a discovery call gets asked whether the product does something it does not do. There is a half-second pause. Then he says yes, absolutely, there are customers doing exactly that. The call goes well. The deal moves to stage three. Four months later the customer is in the pilot, finds out, and the Champion who put her name on it stops answering emails.
+
+The lie bought four months. It cost the deal, the Champion, and the account for the next five years.
+
+Deception works in the short term, which is exactly why it is dangerous. If it never worked, nobody would do it. Deception wins the call. Authenticity wins the customer. That is the entire argument, and it took me longer than I would like to admit to believe it.
+
+Why deception loses
+
+Sales is a repeated game. The buyer who sat across from you in 2016 is running procurement somewhere else in 2024. The Champion you let down talks to the Champion at the company you are pitching next quarter. In twenty years I have sold to the same people over and over, at different companies, with different titles. They remember.
+
+Robert Axelrod ran computer tournaments in the early 1980s to find the best strategy in a repeated game. The strategies that won were the ones that never cheated first. The clever, deceptive strategies won early rounds and lost the tournament. Nothing about enterprise sales has changed that.
+
+There is also the maintenance cost. A true thing costs you once, when you say it. A false thing has to be defended on every subsequent call, in every proposal, in the pilot, and in the reference call you now have to coach. The deceptive Seller carries a growing stack of positions to protect. The authentic Seller carries nothing.
+
+And the first person a Seller deceives is themselves. Happy ears. The Economic Buyer who is "basically on board" because she smiled. The "not a no, just a not right now." Forecast accuracy is where self-deception goes to be measured, and every leader reading this knows the rep whose 90% commit lands at 40%.
+
+What authentic selling looks like
+
+Authenticity in a deal is a set of things you are prepared to say out loud.
+
+You say what the product does not do before the customer finds out. Their trust goes up, because now they can believe the things you say it does do.
+
+You say "I don't know, I will find out" and then you find out. The same day.
+
+You tell the Champion where the deal is weak. If you cannot be honest with your Champion, you do not have one.
+
+You put the real number in the forecast. Not the number that makes Monday's call comfortable. The one you would bet your own money on.
+
+You stop pretending to be a consultant, a partner, an advisor. You are a Seller. Customers know, and they respect the ones who know it too.
+
+More than 35,000 people have been through the MEDDICC Masterclass, and the hardest shift for most of them is this one. Qualification is honesty applied to a pipeline. Every letter of MEDDICC is a question you can answer truthfully or fudge. The ones who fudge it get a clean-looking CRM and a terrible year.
+
+The test
+
+Before your next customer call, write down the one thing you are currently letting that customer believe that you know is not quite true. The feature that is on the roadmap rather than in the product. The reference who was coached. The "fully committed" sponsor you have never met.
+
+Then decide whether you say it on the call or let it find them.
+
+Deception always gets found. The only variable is who tells the customer. Authenticity beats deception because the customer finds out either way, and the only choice you ever had was whether they heard it from you.
+
+What are you letting a customer believe right now that you would not want them to discover on their own?
+
+### AWJ No. 18: We fight most what we almost are
+Pillar: human. URL: https://andywhyte.com/journal/we-fight-most-what-we-almost-are/
+
+The post that wound me up most this year was written by a founder bragging about a 4am alarm, a 90-hour week and a team that matches his energy. I read it twice. I drafted a reply and deleted it. I thought about it in the car. A stranger's post about his alarm clock took an hour of my day.
+
+Then the uncomfortable bit. I know why it landed. I spent most of my twenties believing hours were the score. I have measured my own worth by them more times than I would like to admit, and I have had to unlearn it in public, slowly, over the last decade. He was a version of me with worse timing.
+
+Indifference is the sign of true distance. You do not fight what you have nothing in common with. You ignore it. The things that get under your skin are the things you recognise.
+
+The narrow band
+
+Freud called it the narcissism of small differences. The fiercest hostility runs between groups that are nearly identical, and the gap gets all the attention while the overlap gets none. Watch two sales methodologies argue on LinkedIn. Watch two founders in the same category at a conference. Watch two siblings.
+
+Think of it as a band. Far from you, nothing. You feel no heat about a trait you have never had. Identical to you, nothing again, because you cannot see it. The fight lives in the narrow band in between: the trait you nearly have, the trait you used to have, the trait you have and have not admitted yet.
+
+That is why your strongest reactions are so useful. Your irritations are a map of your own edges. Every disproportionate reaction is pointing at something.
+
+Where it costs you
+
+In a sales team, the manager who is hardest on one rep is usually looking at his younger self. That rep gets the harshest reviews, the sharpest comments in the pipeline meeting, the least patience. Everyone else in the room can see it. The manager calls it high standards.
+
+In a deal, the competitor you obsess over is the one the customer cannot tell apart from you. The one in a different category gets a shrug. The one with the same positioning, the same three slides and the same reference customers gets the whole team's attention and most of the venom. Your anger is telling you the differentiation is missing. That is a positioning problem, and venom will not fix it.
+
+And in how you carry yourself, the trait you mock loudest in others is the one you are least sure you have shed. I have written more than one post taking apart the self-congratulatory LinkedIn headline. I know exactly how the pull works. That is why I can describe it so precisely.
+
+Using it
+
+Next time you feel the heat rise over someone, do two things before you react.
+
+First, measure the reaction against the offence. If a stranger's post has had an hour of your day, the hour is the data. The post was never worth it. Something in you was involved.
+
+Second, name the overlap. Write down the trait that is annoying you, in one line. Then write down when you last showed it yourself. Not whether. When. You will nearly always find a date.
+
+Once you have the date, the fight loses most of its energy. You are no longer defending the border between you and them. You are looking at a trait you share and deciding how much of it you want to keep. That is a question you can work on. Fighting the other person was never going to change anything about you.
+
+The people you are indifferent to teach you nothing. The people you cannot stand are a reading list.
+
+Who do you fight hardest, and what do the two of you have in common?
+
+### AWJ No. 19: You can't coach a lagging indicator
+Pillar: sales. URL: https://andywhyte.com/journal/you-cant-coach-a-lagging-indicator/
+
+A one-to-one, second week of the quarter. The rep is at 38% of her number with ten weeks to go. The manager opens with the dashboard, walks through the gap, and closes with the coaching: she needs to get to 100%. She nods. He books the same meeting for next week.
+
+Nothing in that meeting can change the number. The number is a result. Everything that produced it happened weeks or months ago, in discovery calls he did not listen to and deals he did not inspect. He has coached the scoreboard.
+
+Quota attainment, win rate, revenue, average deal size. They all share the same problem. By the time you can see them, the behaviour that produced them is over. You are looking at a photograph of something that already happened. You cannot coach a photograph.
+
+What you can coach
+
+The behaviours that produce the result are visible long before the result is, if you look in the right place. In a deal, that place is MEDDICC.
+
+Has the rep quantified the Metrics with the customer, or is there a vague line about "efficiency" in the CRM? Has she met the Economic Buyer, or is she taking a Coach's word for it? Can she describe the Decision Process with dates and the Paper Process with names? Is the Champion tested, or merely friendly? Each of those is a leading indicator. Each of those can be changed this week. That is what makes them coachable.
+
+The test is simple. Ask two questions about anything you are about to coach. Can the rep change it before the next meeting? Will you be able to see whether she did? If the answer to either is no, you are not coaching. You are reporting.
+
+Attainment fails both questions. A tested Champion passes both.
+
+The trap on the other side
+
+There is a version of this that goes wrong. Some leaders hear "leading indicator" and reach for activity. Calls made, emails sent, meetings booked. Those are early and they are measurable, so they look like the answer. They are a trap. Activity is a leading indicator of effort. It is only loosely connected to revenue, and the moment you coach to it, you get reps who dial for the dashboard. The B in B-Player stands for busy for exactly this reason.
+
+The leading indicators worth coaching are the ones that cause the outcome, which is a smaller set than the ones that merely happen before it. A rep with 400 dials and no Champion is behind. A rep with 40 dials and three tested Champions is ahead. Coach the cause.
+
+Rewrite the meeting
+
+Take the one-to-one from the opening and run it again.
+
+This time the manager leaves the dashboard closed. He opens with her three biggest deals and asks the same questions of each. What did the Economic Buyer say, in their own words, about the pain? When did she last ask the Champion to do something that cost him political capital, and did he do it? What is the next step, and is it in the customer's calendar or only in hers?
+
+Every answer is something she can act on by Friday. Every answer is something he can check the following week. The number will move because the inputs moved. That is the only direction the causality runs.
+
+More than 35,000 people have been through the MEDDICC Masterclass, and the change leaders describe most often afterwards is the shape of their pipeline review. They stopped asking where a deal would land and started asking what was true about it. That is the whole shift. Inspect the deal, and you will never need to shout at the rep.
+
+Find your last three coaching conversations and write down the thing you coached in each one.
+
+Could the rep have changed it that week, and would you have seen it if they had?
+
+### AWJ No. 20: Judge decisions, not outcomes
+Pillar: sales. URL: https://andywhyte.com/journal/judge-decisions-not-outcomes/
+
+Two reps, same team, same quarter. The first closes a deal everyone knew should have been qualified out in month one. No Economic Buyer, no Metrics, a Champion who was really a Coach, and a 35% discount in the final week to drag it over the line. It counts. The second qualifies out of a deal in month two because the Decision Criteria had been written by the Competition and the Economic Buyer would not take a meeting. The Competition closes it.
+
+At the kick-off, the first rep is on stage. The second is explaining herself in a one-to-one.
+
+That is how most sales organisations judge, and it is backwards. The first rep made a bad decision and got a good outcome. The second made a good decision and got a bad one. Reward the outcomes and you will get more of the first rep's decisions, and within a year you will have a team that chases luck and hides its process.
+
+Why outcomes lie
+
+Every outcome is a mix of two things: the quality of the decision and the luck that followed. Over a career you can start to tell them apart. On any single deal you cannot. The deal that closed because the Competition's rep left mid-cycle looks identical, on the dashboard, to the deal that closed because you ran it properly.
+
+Poker players have a word for this. Annie Duke calls it resulting: judging a decision by how it turned out rather than by what you knew when you made it. Poker punishes resulting fast, because you play thousands of hands and the luck washes out. Sales punishes it slowly, because you play twenty deals a year and the luck has time to hide.
+
+Nobody regrets qualifying out. I have said that for years and I stand by it. But a leader who praises the lucky close and interrogates the correct qualify-out is training the team to regret it.
+
+Four boxes
+
+Draw a grid. Good decision or bad decision across the top. Good outcome or bad outcome down the side. Every deal lands in one of four boxes.
+
+Good decision, good outcome. The deserved win. Easy to judge, little to learn.
+
+Bad decision, bad outcome. The deserved loss. Also easy, and usually the only box that gets a review.
+
+Good decision, bad outcome. The unlucky loss. The qualify-out that went to the Competition. The honest forecast that missed because the customer's budget was pulled in the last week. Punish this box and people stop telling you the truth.
+
+Bad decision, good outcome. The lucky win. The 35% discount that closed. The sandbagged forecast that was then "beaten". This is the most dangerous box in the business, because nobody examines a win. The bad decision gets rewarded, repeated, and taught to the new hires.
+
+Most organisations only see two of these boxes. They see wins and losses. The grid gives you the other two, and that is where all the learning is.
+
+Judge the decision
+
+The practical move is to judge the decision at the time it is made, with the information available then, and write it down.
+
+For every significant call on a deal, three lines. What I knew. What I chose. What I expected to happen. Qualify out, discount, walk away from the RFP, go over the Champion's head to the Economic Buyer. Three lines, dated.
+
+Then, when the outcome arrives, you have something to judge other than the outcome. Review the lines, not the result. Was that the right call with what was known at the time? If yes and it lost, say so publicly, because the team is watching what you reward. If no and it won, say that too, quietly, to the rep, because the next one will not be lucky.
+
+A leader who does this for a year ends up with a team that makes better decisions, which is the only thing in sales that compounds. Luck does not.
+
+Go back through your wins this year. Which were good decisions, and which were good luck?
+
+## Topic hubs
+
+### MEDDPICC and MEDDICC
+URL: https://andywhyte.com/meddpicc/
+
+The qualification framework behind the best-run sales teams in the world, explained by the person who wrote the book on it. What the letters mean, where teams get it wrong, and how I want it used.
+
+Most teams I meet are running MEDDPICC as a form. Eight fields in the CRM, filled in after the meeting, scored by the rep, admired by the manager, and about as useful for forecasting as a horoscope.
+
+I wrote the book on it. I did not write it so you could fill in a form.
+
+MEDDPICC is a set of questions. Each letter is something you need to know about a deal before you can say you understand it. Ask the questions before the meeting and they tell you what to go and find out. Ask them afterwards and they tell you what you missed. The framework only does its job when you are honest about the gaps.
+
+What the letters mean
+
+MEDDIC is the original. Dick Dunkel and Jack Napoli built it at PTC. Six letters, each one a thing you must know about a deal.
+
+Metrics. The quantifiable value the customer gets from you, in numbers they would defend in their own boardroom and in their words rather than yours.
+
+Economic Buyer. The person with discretionary control of the budget. The one who can say yes when everyone else has said no, and no when everyone else has said yes.
+
+Decision Criteria. The formal and informal standards the customer will use to choose. Yours, if you got there first. Your competitor's, if they did.
+
+Decision Process. The steps, the people and the timing between a decision being made and a contract being signed.
+
+Identify Pain, or as I prefer it, Implicate the Pain. Finding the pain is the easy bit. The work is tying that pain to its cost, and your solution to its relief, until the customer can feel what doing nothing costs them.
+
+Champion. A person with power and influence who sells for you when you are not in the room. A Champion wants you to win because your winning helps them win.
+
+MEDDICC adds a second C for Competition. Anyone or anything competing for the same budget, and that includes doing nothing. The competitor I have lost to most often in twenty years never had a sales team.
+
+MEDDPICC adds a P for Paper Process. Legal, procurement, security. The part of the deal that slides a forecast from this quarter into next in the final week, because nobody asked in month one who signs, who reviews, and how long their queue is.
+
+MEDDIC, MEDDICC or MEDDPICC?
+
+Use the longest one. The thinking is identical across all three. The extra letters stop you pretending that Competition and Paper Process are somebody else's problem. Nobody ever lost a deal because they understood too much of it.
+
+One letter I would not add is a third C for Compelling Event. If you need an extra letter for urgency, you have missed the point of three you already have. Pain plus Metrics plus a Champion is urgency. A compelling event is what you get when those three are real. The end of your quarter is not one, and the customer does not care about it.
+
+Checklist or questions?
+
+Here is how the checklist version goes wrong. A deal review, any company, any quarter.
+
+Manager: "Who is the Economic Buyer?"
+
+Rep: "Eve. The CFO."
+
+Manager: "Have we met her?"
+
+Rep: "Charlie says she is fully on board."
+
+Manager: "Right. Green it is."
+
+What that team has is a Champion's opinion of an Economic Buyer. What they have written down is an Economic Buyer. The CRM cannot tell the difference, and by the time the forecast call comes round, neither can the manager.
+
+The questions version runs the other way. Before the next meeting with Charlie, the rep writes down what she knows about each letter and how she knows it. Economic Buyer: named, never met, status second-hand.
+
+That is now the agenda. The meeting exists to get Charlie to put her in front of Eve, or to find out why he will not. The framework has told the rep what to do on Tuesday. That is what it is for.
+
+A checklist measures how confident the rep feels. Questions measure how much evidence the deal has. Only one of those forecasts anything.
+
+Inspect the deal, not the rep
+
+Deal reviews turn into box-ticking because they turn into interrogations. The rep is on trial, so the rep defends. Worked, chased, pushed, nurtured. Effort verbs. None of them are MEDDPICC.
+
+Put the deal on trial instead. Four questions, in order:
+
+1. Do we belong in this deal?
+2. Where is the deal strong for us?
+3. Where is it weak, and for what reasons is it weak?
+4. What actions move it forward?
+
+Run it that way and the rep stops defending and starts thinking, because the review is now helping her win. The leader learns something true about the forecast. If you cannot articulate the Champion's economic case in three sentences, the deal is not real, and no amount of effort makes it real.
+
+Nobody regrets qualifying out
+
+The hardest part of MEDDPICC is what you do when the letters come back empty. I coined "Nobody regrets qualifying out" to give sellers permission to walk, and I have never seen it proved wrong. One of two things happens. Either you were right, and the opportunity was never worth the time, or the customer's behaviour corrects and they start treating the engagement with the respect a real deal deserves.
+
+Twenty years in sales taught me that the deals which hurt were never the ones I qualified out of. They were the ones I kept in the forecast because the form looked full.
+
+Everything above is the thinking. The letter-by-letter detail, with the deals behind it, is in the book, which has sold over 100,000 copies. If you want your team trained and certified on it, that work happens at meddicc.com, where the MEDDICC Masterclass has more than 35,000 graduates. The glossary on this site defines every term.
+
+Now do one thing. Take your biggest open deal. Write the eight letters down the left of a page. Next to each one, write what you know. In a third column, write how you know it.
+
+How many of the eight survive the third column?
+
+### Sales leadership
+URL: https://andywhyte.com/sales-leadership/
+
+Deal inspection, forecast calls that find the truth, and what to do with A-Players and B-Players. Twenty years in sales, boiled down to the leadership habits that hold up on the last day of the quarter.
+
+Every forecast call has the same two people in it. The rep who says "commit" and means "hope", and the leader who hears "commit" and writes it down.
+
+Your job is to be neither.
+
+I have led sales teams for most of my twenty years in the job. At Poq I took the team from six to twenty in twelve months. I have also been the leader who wrote "commit" down and paid for it on the last day of the quarter.
+
+What follows is what I learnt. None of it is complicated. All of it is uncomfortable.
+
+Deal reviews that find truth
+
+A deal review that finds the truth has one rule. The deal is on trial. The rep is not.
+
+Put the rep on trial and you get a defence. Worked it hard. Chased. Pushed. Nurtured. Effort verbs, and not one of them tells you whether the deal will close.
+
+A pipeline review I sat in recently had an AE with 27 open opportunities, every one of them yellow or red, defending each with the same line: "I'm working it hard." He was. He was also the lowest performer on the team.
+
+Put the deal on trial and the questions change. Who is the Economic Buyer, and when did we last speak to her? What has the Champion done for us while we were not in the room? What are the Decision Criteria, and who wrote them? Who owns the Paper Process on their side? Every answer is evidence or it is a gap, and the gap is the rep's plan for next week.
+
+A review that finds truth sends the rep away with a to-do list rather than a bruise.
+
+Commit means what?
+
+Forecast accuracy does not come from pressure. Hassling reps on a Monday produces a number that moves again the following Monday.
+
+The number is a lagging indicator. By the time it is wrong, the quarter is over. You cannot coach a photograph. The leading indicators live inside the deal: a Champion who has introduced you to the Economic Buyer, Metrics the customer wrote down themselves, a Decision Process with dates on it, a Paper Process somebody on their side owns. Count those every week and the forecast looks after itself. Count only the number and you are coaching the scoreboard.
+
+Activity is the trap on the other side. Calls made, emails sent, meetings booked. Those are leading indicators of effort, and coaching to them gets you reps who dial for the dashboard.
+
+Two questions sort them. Can the rep change it before the next meeting? Will you be able to see whether she did? Attainment fails both. A tested Champion passes both.
+
+So when a rep says "commit", ask what they know. Commit means the Economic Buyer has agreed, the Paper Process is mapped and in motion, and the Champion has told you when it signs. Upside means the evidence is there but one of those is missing. Everything else is pipeline. Hold those definitions every week and the words start to mean something.
+
+A, B and no C
+
+There is no such thing as a C-Player. Or at least, there should not be. You are an A-Player, or you are a B-Player with or without the potential to become one. Professional sports teams do not carry C-Players, so why should your team?
+
+Two things make that lens fair. First, the rating is relative to the role. A junior AE with a year's experience and a senior AE with ten can both be A-Players. Second, form. "Bringing your A game" is a phrase for a reason, and even the best fall out of it.
+
+The B in B-Player stands for busy. A-Players focus on outcomes. B-Players focus on optics, and busyness is their camouflage.
+
+The lights are on now. Every deal stage is in the CRM, every call is recorded, and anyone with an LLM can produce in ten minutes the deliverable that used to take three days. A full calendar is starting to look like an admission.
+
+A-Players, meanwhile, are uncomfortable being comfortable. That is what one looks like on your team: suspicious of ease, hungry for feedback, slightly ill at the idea of easy.
+
+Now look at where your time goes. Profile the team honestly. A-Players. B-plus Players, who have the potential to be A-Players or are temporarily out of form. B-minus Players, who do not have that potential.
+
+Most leaders spend most of their week on the B-minus Players and then wonder why the A-Players leave. Spend it on the A and B-plus Players instead: a growth roadmap, barriers removed, recognition that is more than money. Unpopular opinion: the barriers tend to be the B-minus Players.
+
+Judge the decision, not the outcome
+
+A rep closes a deal with no Champion and an Economic Buyer she never met. Luck. Another rep loses a deal he ran perfectly, letter by letter, because the customer's budget was pulled. Good decisions, bad outcome.
+
+Reward the second rep. Coach the first. Every outcome is a mix of the decision and the luck that followed, and on a single deal you cannot tell them apart.
+
+So judge the decision at the time it is made, in writing. What I knew. What I chose. What I expected. Three lines, dated. Review the lines when the outcome arrives, and praise the correct qualify-out out loud, because the team is watching what you reward. Good decisions compound. Luck does not.
+
+That includes your own decisions. My biggest failure as a leader was a conversation I avoided for the best part of a year with an executive who was failing. I told myself I was gathering context. He resigned, and then he raised a grievance against the company.
+
+Feedback is like milk. It is best served fresh, and it sours with every week you wait.
+
+A thinking discipline
+
+Sales leadership is a thinking discipline, and the leader's job is to raise the quality of thinking in the room. Reps copy what you inspect. Inspect effort and you get busyness. Inspect evidence and you get qualification. Panic on the forecast call and you get sandbagging. Show calm, consistent, truthful urgency and you get a team that plays to the watch, not the calendar.
+
+More than 35,000 people have been through the MEDDICC Masterclass. The change leaders describe most often afterwards is the shape of their pipeline review: they stopped asking where a deal would land and started asking what was true about it.
+
+One habit holds it together. One page, every Friday, from every person on the team, including you.
+
+A paragraph on what shipped, a paragraph on what was killed, a paragraph on what is next and why. Writing one page is hard. Running ten meetings is easy. The page exposes the week, which is the point.
+
+The deal review questions, the commit definitions and the Friday page are written up as frameworks on this site, and the thinking behind them is in the book.
+
+Take one deal from this week's commit. Ask five questions about it, none of which contain an effort verb. What do you actually know?
+
+### Keynote speaking
+URL: https://andywhyte.com/keynote-speaking/
+
+Keynotes and sales kickoff sessions built around your deals, from the author of MEDDICC. What I speak about, what a good SKO keynote does and does not do, and how I prepare.
+
+The first stage I stood on was at Potters, a holiday resort, in 2001. Entertainer and DJ, three years before I sold anything. You learn fast in that job what a room feels like when it is with you, and the exact moment it leaves. Twenty years of selling later, that is still the only metric I care about on a stage.
+
+Most sales kickoff keynotes lose the room by the third slide. A speaker who has never carried a number tells a team that has to carry one how to feel about it. The team claps, goes to the bar, and sells on Monday exactly the way they sold on Friday.
+
+A keynote has one job. Monday has to be different.
+
+What I speak about
+
+Four things, and they overlap.
+
+Qualification. MEDDPICC, from the person who wrote the book on it and runs the company that teaches it. What the letters mean, where teams fake them, and what the framework looks like when it is a way of thinking rather than a form in the CRM.
+
+Deal inspection. How leaders run deal reviews and forecast calls that find the truth. Why "I'm working it hard" is a confession. Why the B in B-Player stands for busy, and why there is no such thing as a C-Player.
+
+Sales as a thinking discipline. The habits of A-Players, who are uncomfortable being comfortable, and the patterns that separate them from theatre.
+
+The human side of selling. Imposter syndrome, which only the self-aware suffer from. Authenticity, which is felt, not found. Urgency, which is an emotion and cannot be emailed. The things reps carry into the room that no methodology covers.
+
+I speak at sales kickoffs, revenue summits and leadership offsites, in person around the world and virtually.
+
+What a good SKO keynote does
+
+It gives the room one way of thinking they can use on Monday. One. If your team leaves with a framework for their next deal review, you have had a good keynote. If they leave with twelve takeaways and a quote for the wall, they have had a nice morning.
+
+It uses your deals. The best session I can run is built around your team's actual opportunities, your stage gates and the objections your reps hear every week. When the examples are theirs, nobody can dismiss it as theory.
+
+It respects the leaders in the room. Your managers hear their own language in the talk and can carry it into Tuesday's pipeline review without translating.
+
+And it entertains, because people do not act on what bored them.
+
+Now what it does not do. It does not pitch my company. If you want training, that lives at meddicc.com, and the keynote stands on its own.
+
+It does not tell your team they are amazing for an hour, because motivational soundbites fade by Tuesday and your reps know it before you do. It does not recycle last year's deck with your logo on the title slide. And it does not pretend selling is easy. The room is full of people who know it is not.
+
+Three formats
+
+Keynote. A 30 to 60 minute talk built around the MEDDICC framework: the principles, the failure modes, and the patterns that separate A-Players from theatre. For conferences and revenue summits.
+
+Sales kickoff. A bespoke session designed around your deals, your stage gates and your objection patterns. It goes deeper than a keynote because the material is yours.
+
+Master of ceremonies. I host the event end to end. Set the tone, hold the energy, conduct the panels, deliver the close. Best for SKOs and revenue summits, where the day has to feel like one event rather than eight.
+
+How I prepare
+
+I treat every keynote like it has to be the greatest of all time. At MEDDICC we call it the KEYGOAT mindset. Nobody is claiming to be the greatest speaker alive. The standard is for the talk: painstakingly curated, built from scratch for the room, and engineered to send every person out ready to take immediate action.
+
+That starts with your deals. Before I write a word, I want the opportunities your team is working, the stage gates they have to pass, and the objections they keep hearing. I want to know what your leaders inspect and what they let slide. The talk is written from that, which is why no two are the same.
+
+Then it gets rehearsed until the room gets a performance rather than a presentation. The Potters training never left.
+
+Who books me
+
+Sales and enablement leaders at CrowdStrike, Microsoft, Amazon Web Services and Dun and Bradstreet, and at Net Health, MRI Software and Arctic Wolf Networks. Michael Sentonas, President of CrowdStrike, said the session had "incredible passion" and that I "absolutely nailed it". Hannah Klug, VP of Sales Enablement at Arctic Wolf Networks, put it more plainly: "OMG Andy owned the stage!" Susan Kinser at Net Health was grateful that I "flew halfway across the world" to their event. That is the job.
+
+The review I value most came from Adeeb Chowdhury, a sales leader at CrowdStrike, looking back on the half that followed the SKO: "an awesome first half of the FY since SKO". Applause on the day is nice. The half that follows is the point.
+
+If your kickoff or summit is in the diary, tell me about your deals and what your team needs to do differently afterwards. That is where every talk starts.
+
+So. What does your team need to do differently on Monday?
+
+### Imposter syndrome
+URL: https://andywhyte.com/imposter-syndrome/
+
+Only the self-aware suffer from imposter syndrome. Where it comes from, why it shows up when you are growing, and why I treat it as a skill: in sales, in founding and on stage.
+
+Only the self-aware suffer from imposter syndrome.
+
+I first wrote that line down as Maxim 10, and I have put it to a lot of people since. Every one of them agreed. But the longer I sit with it, the more I think it looks at the wrong end of the problem. We talk endlessly about the syndrome. We never talk about the imposters.
+
+Who are the imposters?
+
+Not you. The actual imposters. The ones overselling themselves, claiming success they did not authentically achieve, bigging themselves up beyond their worth. The LinkedIn headline that reads "I took the company from $x to $xxx" when there were a hundred other people in the building. Without them there would be no imposter syndrome, because there would be nothing to be mistaken for.
+
+Think about what the feeling actually is. You walk into the room and you worry about what people are thinking. Who does he think he is? He should not be in here. Clearly, he is out of his depth.
+
+You only imagine those sentences because you know they are what people think about actual imposters. You have seen it. You have thought it yourself, about someone else.
+
+So by virtue of having imposter syndrome, you are not an imposter. It would not be a syndrome if you were. The real ones never feel it. That is rather the point of them.
+
+When does it show up?
+
+Only when you are growing. A self-aware person does not get imposter syndrome doing something they have done a hundred times. It arrives at the edge, in the uncharted territory of your own potential, where you cannot yet prove to yourself that you belong. That uncertainty is the feeling. It is also the only evidence you get, in the moment, that you are moving.
+
+A-Players are uncomfortable being comfortable. When I wrote that maxim, imposter syndrome was on the list of discomforts, next to the hunger and the nagging question of whether you are doing enough. Roger Federer hired a new coach at 33, with 17 Grand Slams already won, and chose to be bad at a new backhand in public. You do not do that without feeling, on some Tuesday in practice, like a fraud. He won three more majors after 35.
+
+And that is okay. The two conditions are that you are kind to yourself while it happens, and that you do not let it hold you back. Feel it, name it, walk in anyway.
+
+The first deal, the first team, the first stage
+
+Sales is where I learnt this. Early in my career I felt like I was playing sales on hard mode while everyone around me was on easy mode. The first time I sat across from a real Economic Buyer, someone who could say yes or no to the whole deal, every one of those borrowed sentences ran through my head.
+
+What I know now is that the rep who feels nothing in that room is the one to worry about. The feeling means you understand what is at stake. MEDDIC gave me a way to turn the uncertainty into questions I could go and answer, and the B-Player version of me became the A-Player version. The feeling did not go away. It got a job.
+
+Then the first team. I was a store manager at Phones 4u in 2004 and Head of Sales at Everest Home Improvements before the year was out. Nobody hands you a manual. You are certain the team will work out that you are making it up as you go, and the honest answer is that every first-time leader is.
+
+My biggest failure as a leader came later and had nothing to do with making it up. I avoided a hard conversation with a failing executive for the best part of a year, telling myself I was gathering context, when the truth is I did not yet have the guts or the tools. The feeling had been telling me to go and get the tools. Eventually I listened and hired a coach.
+
+Then the first stage. Mine was at a holiday resort in 2001, as an entertainer and DJ, so I had a head start, and it still did nothing for me the first time I walked out in front of a sales kickoff as the person flown in to tell them how to sell. Founding a company was the same feeling at a larger scale. The first hire. The first time someone introduced me as the CEO and I glanced over my shoulder to see who they meant.
+
+Every one of those firsts had the same signature. New territory, no proof yet, and a self-aware mind filling the silence with other people's imagined verdicts. Every one of them was growth.
+
+Why it is a skill
+
+Your imposter syndrome is a skill. A strength. An indicator of your emotional intelligence. It means you can read a room, see yourself the way others might, and care whether your claims are earned. The actual imposters cannot do any of that, which is exactly why they are so comfortable.
+
+Authenticity is felt, not found. People cannot always say why they trust someone, but they feel the difference between earned and performed, the way the brain lights up for a Rembrandt it believes is real. In an ever-inauthentic world, where unearned egos go unchecked, your authenticity becomes your number one intangible asset.
+
+One honest caveat, because I wrote a Maxim about it. We fight most what we almost are. The self-congratulatory headline winds me up precisely because I know how the pull works, and so do you.
+
+You feel the pull too. The imposter gives in to it. You check your claims against what you actually did before you make them, and that habit is the whole difference. Authenticity beats deception, in a deal and in a career, because the room finds out either way.
+
+The imposters are busy performing. You are busy growing. Over twenty years, only one of those compounds.
+
+So the next time it shows up, do not go looking for a cure. Write down what you are doing that is new. That list is the growth. The feeling is the receipt.
+
+What are you growing into right now?
+
+## Editorial pages
+
+### Start here
+URL: https://andywhyte.com/start-here/
+
+Twenty years in sales, one book, one company, and a notebook of principles I keep going back to. This page tells you what is here and where to start.
+
+I am the founder and CEO of MEDDICC and the author of the book of the same name, which has sold more than 100,000 copies. Before that I spent twenty years selling and leading sales teams, at Oracle, Sprinklr, Tealium, Poq and Branch among others, and the turning point in all of it was discovering MEDDIC, which took me from the B-player version of myself to the A-player version. These days I keynote sales kickoffs and revenue summits, run the company, and keep a notebook.
+
+That notebook is what you are looking at.
+
+What the notebook is
+
+A cobalt reporter's pad. Twenty Maxims, handwritten, one to a page. A Maxim is a single principle cut down until nothing spare is left. Nobody Regrets Qualifying Out. The B in B-Player Stands for Busy. Urgency is an emotion. Not a message. Behind each page sits an essay on where the line came from, usually a deal, a forecast call or a mistake I would rather not have made, and what to do with it.
+
+Three pillars run through the pages. Sales is the authority pillar: MEDDICC, deal inspection, selling as a thinking discipline. Founder is the operator pillar: building a company without theatre. Human is the truth pillar: the lessons I only learnt by getting things wrong. Every Maxim sits under one of them.
+
+How to read it
+
+Scroll and the pages flip. Stop on the one that lands, click it, and the essay opens underneath. Then do something with it before you read the next one. Twenty principles skimmed in ten minutes will do nothing for you. One principle applied on Monday will.
+
+If you would rather have a list, the Maxims archive has every page in order. The glossary defines every term I capitalise, Champion and Economic Buyer included. The frameworks page holds the models behind the Maxims, the ones you can run in a deal review.
+
+Where to begin
+
+If you lead a sales team, start with sales leadership, then the MEDDPICC hub. Your forecast is only as honest as the qualification underneath it, and both pages are about making it honest. Then read Nobody Regrets Qualifying Out and count how many deals on your commit line would survive it.
+
+If you are a founder, read the Founder Maxims first. The B in B-Player Stands for Busy and There is no such thing as a C Player will tell you more about your team than your last review cycle did. Then imposter syndrome, because only the self-aware suffer from it, and you will know which camp you are in.
+
+If you are an account executive, go straight to the MEDDPICC hub and the glossary, then the book. The book is the full method, letter by letter. The hub is the opinionated version, with the mistakes I see most often and what to do about them.
+
+If you are booking a speaker, the keynote speaking hub explains what I talk about and what a room should leave with. The speaking page has the formats, the clients and the reel, and it is where you enquire about a date.
+
+And if you want new pages as they go into the pad, subscribe. One email when there is a new Maxim, nothing in between.
+
+Which page are you starting on?
+
+## Landing pages
+
+### MEDDPICC training
+URL: https://andywhyte.com/meddpicc-training/
+
+I wrote the book on MEDDICC and founded the company that trains it. This page is what good training looks like, so you can judge any provider against it, mine included.
+
+Most MEDDPICC training fails in the same place. The sessions go well, the slides are good, everyone leaves with a scorecard, and by the third forecast call the team is back to reporting deals instead of inspecting them. The training taught the letters. It never changed the behaviour.
+
+I have sat on every side of this. I spent twenty years selling and leading sales teams, and early on I was playing sales on hard mode while everyone around me seemed to be on easy. Discovering MEDDIC was the turning point. It took me from the B-player version of myself to the A-player version. I wrote the book about it, MEDDICC, which has sold more than 100,000 copies, and I founded the company that built the MEDDICC Masterclass, which has more than 35,000 graduates. The course lives at meddicc.com. This page is my opinion on what good training looks like, written so you can judge any provider against it, mine included.
+
+Who needs it
+
+Anyone selling a deal with more than one decision maker and a procurement process at the end. Account executives running complex deals. The managers who run their forecast calls, because a manager who cannot inspect a deal cannot coach one. Founders selling their own product, who usually need it most and get it last.
+
+The test is simple. Has a rep ever told you a deal is going great? Did you have any way of checking? If not, that is the gap the training fills.
+
+What it should be, and what it should not
+
+Good training does one thing: it changes what a seller does in a live deal.
+
+After it, Metrics are quantified rather than gestured at. The Economic Buyer is named, and met. The Champion is tested: does this person sell for you when you are not in the room, or do they just like you? The Paper Process is mapped before the end of the quarter rather than discovered during it. Competition is named, including the one that wins most often, doing nothing.
+
+Bad training is a checklist with a certificate stapled to it. Eight boxes, ticked. It feels like qualification. It produces the same fiction you had before, better organised, and it hands everyone a shared vocabulary for being wrong. MEDDPICC is a way of thinking about a deal, and you cannot tick your way to a way of thinking.
+
+Bad training also skips the managers. Sellers revert the moment the forecast call rewards the old behaviour, and managers run the forecast call. Train the team without its leaders and you have bought a quarter of good intentions.
+
+What changes when it works
+
+Two things, and you can measure both.
+
+Your forecast gets honest. A forecast is only as reliable as the qualification underneath it. When every deal on the commit line has a quantified Metric, a met Economic Buyer, a tested Champion and a mapped Paper Process, the commit line stops carrying hope. The forecast call turns into an inspection. Do we belong in this deal? Where is it strong? Where is it weak, and why? What moves it forward? Four questions, every deal, every week.
+
+Your team qualifies out. Deals that were never going to close get found early, and the time goes into the deals that can. Nobody regrets qualifying out. The rep gets their quarter back, the customer who was never going to buy gets left alone, and the forecast stops lying.
+
+My position
+
+Go all in or do not start. MEDDICC is binary. You either use it or you do not, and a team that runs it on the big deals and skips it on the small ones has not adopted it. Adoption takes a full sales cycle, because you need deals qualified under the new rules from first meeting to close before the numbers move. Budget for the cycle and inspect every week.
+
+Pick a provider on three questions. Who wrote the content, and have they carried a quota? How are the managers trained? What happens after the sessions end? Thin answers, keep looking.
+
+If you want the methodology explained and argued over, the MEDDPICC hub is where I do that, and the book is the full method, letter by letter. If you want your team trained, go to meddicc.com. If you want me in the room for your kickoff, that is a speaking enquiry.
+
+How many deals on your commit line would survive the four questions?
+
+### Sales keynote speaker, UK and Europe
+URL: https://andywhyte.com/sales-keynote-speaker-uk/
+
+Keynotes and SKO sessions built around your deals, your stage gates and your objection patterns, so the room leaves with something to run on Monday. Based in the UK, on stage worldwide or virtual.
+
+A sales keynote has one job: change what the room does on Monday. Most of them fail it. The speaker is funny, the slides are slick, the team claps, and by Tuesday nobody can tell you what they are doing differently. The energy was real. It had nothing to attach to.
+
+I keynote sales kickoffs, conferences and revenue summits, in person worldwide and virtually, for organisations including CrowdStrike, Microsoft, Amazon Web Services and Dun and Bradstreet. Before that I spent twenty years selling and leading sales teams, at Oracle, Sprinklr, Tealium, Poq and Branch among others, and I wrote MEDDICC, the book that has sold more than 100,000 copies. I am based in the UK. The passport gets used.
+
+What I talk about
+
+Enterprise sales, MEDDICC and MEDDPICC, sales as a thinking discipline, and the patterns that separate A-players from theatre.
+
+The keynote runs 30 to 60 minutes and is built around the MEDDICC framework: the principles, the failure modes, and what the best sellers do that the rest miss. Why the deal that was going great died at procurement. Why the Champion who loved the demo never sold a thing internally. Why the Economic Buyer nobody met said no to a proposal nobody wrote for them. A room full of sellers recognises every one of those, because every one of them has lived it.
+
+I do not do motivation without a method. Fired up is the aim, and the KEYGOAT mindset is the standard: every keynote treated as though it has to be the greatest of all time. But fired up with nothing to run is gone by the first objection. The room leaves with frameworks they can apply on Monday, not soundbites that fade by Tuesday.
+
+Three formats
+
+A keynote, for a conference or a revenue summit. 30 to 60 minutes, cut for the room in front of it.
+
+A sales kickoff session, built around your team's actual deals, stage gates and objection patterns. This goes deeper than a keynote can, because the examples are yours, and the team leaves with something specific to inspect on the next forecast call.
+
+Master of ceremonies, for the whole event. Set the tone, hold the energy, run the panels, deliver the close. Best for SKOs and revenue summits where you want one voice holding the day together.
+
+All three work in person anywhere in the world. The keynote and the kickoff session also work virtually, for distributed teams, leadership offsites and summits.
+
+How we build it
+
+The best sessions start with the organiser, which is why I would rather have an hour of your time before the event than a polished brief. Tell me the deals your team is stuck on. Tell me which stage gates they skip and which objections they hear most. Tell me the one thing you need them to do differently afterwards. The talk gets built around those answers, so what is on stage is your pipeline, not a case study from somebody else's.
+
+That is what people remember. Michael Sentonas, President of CrowdStrike: "great session with incredible passion and he absolutely nailed it!" Hannah Klug, VP Sales Enablement at Arctic Wolf Networks: "OMG Andy owned the stage!" Mandira Mehra, CMO of MRI Software: "Andy helped take our GKO to the next level." And Susan Kinser at Net Health, who was grateful I flew halfway across the world to ignite something big within her organisation. I did. It was worth the flight.
+
+Booking
+
+Tell me the event, the date, the city or whether it is virtual, and who is in the room, on the speaking page or through contact. If you want to see how it plays first, the reel is on the speaking page. If you want to read how I think before you book, the keynote speaking hub covers what makes an SKO work and how to brief any speaker, and the MEDDPICC hub is the method most of the talks are built on.
+
+What do you need your team doing differently the Monday after?
+
+## Frameworks
+
+### MEDDPICC
+URL: https://andywhyte.com/frameworks/meddpicc/
+
+Eight questions that tell you whether a deal is real, where it is weak and what to do next.
+
+MEDDPICC is a qualification framework. Eight letters, each one a question you ask about a deal: Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion, Competition. Answer all eight with evidence from the customer and you know whether the deal is real, where it is strong, where it is weak and what to do about it. Leave any of them blank and you are forecasting a guess.
+
+It exists because complex deals fail in predictable places. The original six letters came out of PTC in the 1990s, where Dick Dunkel and Jack Napoli worked out what the won deals had in common that the lost ones did not. The seventh, Competition, was added because sellers kept losing to rivals and to "do nothing" without seeing either coming. The eighth, Paper Process, was added because the stretch between a verbal yes and a signed contract was killing deals on the last day of the quarter. Every letter is a scar.
+
+How to run it
+
+Start with the deal in front of you and write the eight letters down. Against each one, record what the customer has actually said or done, not what you believe. "The CFO is the Economic Buyer" is an assumption until the CFO has engaged. "They want to save money" is not a Metric until there is a number, a baseline and an agreement. Then score honestly. Which letters are proven, which are assumed, which are blank?
+
+The weakest letter tells you the next action. A deal with no Champion needs a Champion built or tested before it needs another demo. A deal with no Paper Process mapped needs that conversation before anyone talks about dates. Do this every week on the deals that count, and let the gaps drive the agenda.
+
+It boils down to four questions. Do we belong in this deal? Where is it strong for us? Where is it weak, and why? What actions will move it forward?
+
+Where it breaks
+
+It breaks the moment it becomes admin. Eight mandatory CRM fields filled in from memory on a Friday afternoon are a form, and a form never closed anything. It breaks when the letters are answered by the seller instead of the customer. It breaks when leaders ask whether the fields are complete instead of asking how we know. And it breaks when teams half-adopt it, running it on big deals only, or in forecast week only, and then conclude it does not work.
+
+MEDDPICC is binary. You use it on everything or you do not use it. Go all in and it pays you back in a forecast you can stand behind. Do it by halves and you get the paperwork without the insight.
+
+### The Champion Test
+URL: https://andywhyte.com/frameworks/champion-test/
+
+A short set of asks that proves whether your Champion is real before you forecast on them.
+
+The Champion Test is a model for one of the most expensive mistakes in enterprise sales: forecasting a deal on a person who was never going to sell it for you. A Champion has power and influence, a vested interest in your success, and actively sells on your behalf when you are not there. A Coach likes you, helps you and gives you information. Both are valuable. Only one closes deals. The test exists because, from the outside, they look identical. Both take your calls. Both say encouraging things. The difference only shows up under load.
+
+Why it matters is simple arithmetic. A deal with a real Champion is one you can forecast, because someone inside the building is working it between your meetings. A deal with a Coach is one you are working alone, in a building you cannot enter. Most of the "surprise" losses I have inspected over twenty years were not surprises. The seller had a Coach, called them a Champion, and the deal died in a meeting the Coach could not get into.
+
+How to run it
+
+First, the three criteria, answered with evidence rather than feeling. Power and influence: when this person speaks in a meeting, do decisions change? Vested interest: what do they personally get if we win, and what do they lose if we do not? Actively selling: what have they done for us, without being asked, in the last two weeks?
+
+Second, the ask. Request something with a cost attached. Thirty minutes with the Economic Buyer. The evaluation team's scoring sheet. A straight account of what the Economic Buyer said about you after the last meeting. A slot on the steering committee agenda. Make it specific and give it a date.
+
+Third, watch the behaviour. A Champion finds a way, or tells you plainly why not and what they will do instead. A Coach goes quiet, or explains the politics at length and does nothing. The action is the answer.
+
+Fourth, write it down. "Champion: got us the EB meeting on the 14th" is evidence. "Champion: very supportive" is not.
+
+Where it breaks
+
+It breaks when the ask is too easy, because anyone will forward a document. It breaks when the seller asks "are you our Champion?" and accepts the yes, since nobody has ever said no to that. It breaks when it is run once and never again. People change roles, lose internal battles, and get handed bigger projects. The Champion who passed in month one can be a Coach by month four, and the only way to know is to ask them for something again.
+
+Keep the bar high. A true Champion does not just prefer your product. A true Champion sells it internally when you are not in the room, and the proof is always something they did.
+
+### Qualifying Out
+URL: https://andywhyte.com/frameworks/qualifying-out/
+
+A decision rule for walking away from deals that fail qualification, so your time goes where it wins.
+
+Qualifying out is the decision to stop working an opportunity because it fails qualification. It is deliberate, it has a reason you can say out loud, and it is one of the most underused moves in sales. Nobody regrets qualifying out. I coined that line to give sellers permission, and in all the years since I have not found the exception.
+
+It exists because pipeline has a cost. Every hour spent on a deal with no Economic Buyer access, no Champion and no reason to act this year is an hour taken from a deal that has all three. Sellers know this and still hold on, because killing a deal feels like admitting failure and a fat pipeline feels like safety. It is not safety. It is a coverage number that the leadership team is relying on and that will evaporate in the last two weeks of the quarter, when it is too late to replace.
+
+How to run it
+
+Start with the gap, named in MEDDPICC terms. Not "it has gone a bit quiet" but "we have never met the Economic Buyer and the Champion has not been able to get us there in six weeks". Then set one dated action that would close it, and be direct with the customer about what you need. "For this to make sense for both of us, I need thirty minutes with your CFO before the 20th."
+
+If the date passes and nothing moves, decide. Tell the customer, politely and without drama, that you are stepping back until the conditions change. Write the reason down in one sentence so the forecast is honest. Then watch.
+
+One of two things happens, and both are a win. Either you were right, the deal was never going to close, and you have your time back. Or the act of walking away changes the customer's behaviour. The Economic Buyer who could not find a slot finds one. The procurement process that was going to take ninety days takes thirty. The Coach who could not help you finds some power they had been keeping in reserve. People treat an engagement with more respect when they see it can be withdrawn. You cannot bluff this. You have to mean it.
+
+Where it breaks
+
+It breaks when it is used as an excuse. Qualifying out of a hard deal is not the same as qualifying out of a bad one, and sellers who walk away from every deal that needs real work are avoiding, not qualifying. The gap has to be real, named, and tested with an action first.
+
+It also breaks when leaders punish it. If a rep gets shouted at for shrinking their pipeline, they will learn to keep dead deals alive, and the forecast will be fiction again within a quarter. Judge the decision. A clean qualify-out, with the reason stated, is a good decision even when a competitor later wins the account. Reward it as one.
+
+### Deal Inspection
+URL: https://andywhyte.com/frameworks/deal-inspection/
+
+A weekly rhythm for examining the deals that matter against MEDDPICC and judging the decisions inside them.
+
+Deal inspection is the discipline of looking into a deal instead of listening to a summary of it. A seller tells you the deal is going great. Inspection asks how we know. Who is the Economic Buyer and when did we last speak to them? What Metrics has the customer agreed, in their words? What has the Champion done for us in the last fortnight? Where is the Paper Process and who owns it on their side? Every answer gets the same follow-up, and the follow-up is the whole method: how do we know?
+
+It exists because a forecast is only as good as the evidence under it, and most forecasts are built on what reps say. Reps are not lying. They are optimistic, they are close to the deal, and they have a quarter to make. A leader who only hears the rep's version is forecasting blind, and the miss, when it comes, is a surprise to everyone except the customer. Inspection is how a leader stops being surprised.
+
+How to run it
+
+First, choose. You cannot inspect forty deals in an hour, so pick the five or six that decide the quarter and go deep. Second, run the letters. MEDDPICC gives you the questions, and the rep's answers go into one of three piles: proven by the customer, assumed by the seller, or blank. Third, find the weakest letter and agree one action that would change it, with an owner and a date.
+
+Fourth, judge the decisions. This is the part that separates inspection from interrogation. The question is never "why is this deal red?". It is "what decision was made that left us without a Champion in week six, and what do we do differently?". You can coach a decision. You cannot coach a result that has already happened.
+
+That last point is the heart of it. Judge decisions, not outcomes. A rep who qualified out of a weak deal made a good decision even if a competitor later closed it. A rep who won without ever meeting the Economic Buyer got lucky, and luck does not scale. Inspection rewards the first rep and asks hard questions of the second, because the first behaviour produces forecasts you can trust and the second produces a quarter that depends on the weather.
+
+Where it breaks
+
+It breaks when it becomes an interrogation. A rep who leaves feeling attacked learns to hide the gaps, and a hidden gap is worse than an open one. It breaks when the leader inspects lagging indicators, shouting at a win rate the rep already knows about instead of coaching the Champion conversation that would change the next one. It breaks when actions are agreed and never followed up, so the same deal appears with the same gap three weeks running.
+
+And it breaks when it is done in forecast week only. Inspection is a rhythm. Weekly, on the deals that matter, with the follow-ups kept. The forecast you can stand behind comes out of that rhythm and nowhere else.
+
+### A, B and C Players
+URL: https://andywhyte.com/frameworks/a-b-c-players/
+
+A model for profiling a team honestly and putting leadership time where it compounds.
+
+The model has three parts, and each one is a Maxim. A Players are uncomfortable being comfortable. The B in B-Player stands for busy. There is no such thing as a C Player.
+
+A Players are driven by an unreasonable demand to reach their own potential. They want clear goals, they thrive on accountability, and they measure themselves on impact. Stagnation is pain to them. Roger Federer at 33, with 17 Grand Slams, hiring a new coach to rebuild his backhand in public, is the picture. B Players focus on optics. They avoid clarity, dodge accountability and spend their energy managing perception. The tell is effort displayed as evidence: the AE with 27 open opportunities, all yellow or red, defending every one with "I'm working it hard". He is working it hard. He is also the lowest performer on the team. And C Players do not exist, or at least should not. Professional sports teams have no room for them. Neither does yours.
+
+It exists because leaders put their time in the wrong place. Profile a team honestly and you get A Players, B+ Players who have the potential to be an A or are temporarily out of form, and B- Players who do not have the potential. Most leaders spend a disproportionate share of their week on the B- group. The A Players, who would grow fastest with that attention, are left to get on with it, and the barriers in their way, which are often the B- Players themselves, stay where they are.
+
+How to run it
+
+Profile every person, privately and honestly. Rate them relative to their role: a first-year AE and a ten-year veteran can both be A Players, and the junior one will not be as strong in absolute terms. Allow for form, because A is subject to it, and even the best lose their A game for a quarter.
+
+Then allocate your time. Growth plans and stretch for the As. Clear goals, feedback and a fair window for the B+ group to show which way they are going. A direct conversation with the B- group, early, because feedback is like milk and it sours. Then remove barriers. Ask each A Player what slows them down and fix it.
+
+Where it breaks
+
+It breaks when the labels become permanent. Form changes, people grow, and a B+ who gets the right coaching becomes an A. It breaks when A is confused with loud, senior or busy, which is how B Players get promoted. It breaks when the leader uses it as a sorting exercise rather than a coaching one, because the point of the model is to decide where your time goes, and the answer is almost always more on the As than you are currently spending.
+
+And it breaks when you do not act on the B- conversation. Knowing someone does not have the potential and keeping them anyway is the most expensive kind of comfort, for them and for you.
+
+### Judge Decisions, Not Outcomes
+URL: https://andywhyte.com/frameworks/judge-decisions-not-outcomes/
+
+A way of reviewing performance that separates the quality of a decision from the luck in its result.
+
+Judge decisions, not outcomes. Sales is a game of probabilities played with incomplete information, which means good decisions lose and bad decisions win, often enough to fool anyone who only looks at the scoreboard. A rep who forecasts a deal with no Economic Buyer, no Metrics and a Coach they call a Champion, and then closes it because the customer's CFO happened to have budget to burn in December, has made a bad decision with a good outcome. A rep who qualified out of a deal that a competitor later won has often made a good decision with a bad outcome. If you reward the first and punish the second, you are training your team to gamble.
+
+It exists because outcomes are loud and decisions are quiet. The number is on the dashboard. The decision that produced it is buried in a CRM note from eight weeks ago, if it was recorded at all. Left alone, every review drifts towards the result, and results carry luck in them that nobody can coach. Decisions can be coached. They are the leading indicator. The outcome is the lagging one.
+
+How to run it
+
+Take the result and put it to one side. Then go back to the point of decision and reconstruct what was known. In a deal, that means the state of MEDDPICC at the time: which letters were proven, which were assumed, which were blank. Ask what the best available decision was with that information. Was committing the deal reasonable? Was walking away reasonable? Was spending another month on it reasonable? Then compare it to the decision actually taken. Grade that, out loud.
+
+Finally, grade the process that produced the information. A rep who made a sound decision on bad information has a discovery problem, which is a different conversation from a judgement problem.
+
+Then do the uncomfortable part. Praise the good decision that lost, in front of the team. Correct the bad decision that won, in private but clearly. Both feel wrong in the moment. Both are the only way a team learns that the rule is real.
+
+Where it breaks
+
+It breaks when it is used as an excuse. "It was a good decision at the time" has to be earned by showing what was known at the time, and a rep who cannot reconstruct that has not earned it. It breaks when leaders apply it to others and not to themselves. The forecast you called, the hire you made and the territory plan you signed off deserve the same review. It breaks under quarter-end pressure, when a leader who believes in the rule on the first of the month abandons it on the thirtieth because the number is the number.
+
+And it breaks if you drop outcomes entirely. Outcomes still matter. They are the scoreboard, and over a long enough run of decisions they are also the best evidence of whether the decisions were any good. Judge the decisions first. Let the outcomes accumulate.
+
+### Lead on Leading Indicators
+URL: https://andywhyte.com/frameworks/leading-indicators/
+
+Pick the few inputs that predict the result and coach those, because the result itself cannot be coached.
+
+You can't coach a lagging indicator. Bookings, quota attainment, win rate, churn: by the time any of those is on a dashboard, the work that produced it is over. Telling a rep they are at 40% of target tells them something they knew before you opened your mouth, and no amount of discussing it changes a single decision that led there. A leading indicator is different. It happens earlier, it predicts the result, and it is still in play. The whole model is choosing to lead on those.
+
+It exists because sales leadership defaults to the scoreboard. Attainment sits at the top of every report, every one-to-one starts there, and the conversation that follows is a post-mortem dressed as coaching. Leaders who run this way spend the quarter shouting at a number. The result shows up ninety days after the behaviour that caused it, and by then the only thing left to do is explain it to the board.
+
+How to run it
+
+Start with the lagging indicators you are measured on and accept that you cannot touch them directly. Then work backwards. What, if it happened more, would make bookings go up? For most teams I have led, the answers were the same few things. The quality of MEDDPICC on the top deals. The number of Economic Buyer conversations in a month. The share of new pipeline that carried a tested Champion. Discovery calls where the consequence of doing nothing was named by the customer. Pick three or four, no more, and put a number on each.
+
+Then change the shape of your conversations. The one-to-one starts with the leading indicators, the coaching is about the next action that moves one of them, and the attainment number is mentioned once, if at all. Over a quarter, the lagging number follows, with a lag you can roughly predict. That lag is the forecast.
+
+Where it breaks
+
+It breaks when you pick activity instead of leading indicators. Calls dialled and emails sent are inputs, and the B-Player will happily give you more of them. A leading indicator has to predict the result, which means it has to carry quality: a Champion who passed the test, a Metric the customer agreed, an Economic Buyer meeting that actually happened. It breaks when the indicator becomes the target and people start gaming it, which is why you check monthly that it still predicts anything. It breaks when leaders keep both dashboards and still coach from the lagging one out of habit.
+
+And it breaks when the board only wants the lagging number and the leader stops showing them the leading ones. Show them anyway. A board that can see Economic Buyer coverage on the top ten deals has a better forecast than one that can see last quarter's attainment. Everyone can see last quarter. The job is to see this one.
+
+## Glossary
+
+### Metrics
+URL: https://andywhyte.com/glossary/metrics/
+
+Metrics are the quantifiable measures of the value your solution delivers to a customer, expressed in numbers the Economic Buyer would recognise and sign off against.
+
+Metrics are the numbers that prove your solution is worth buying. Not your product's numbers, the customer's. A 30% shorter sales cycle. Four hours a week handed back to every engineer. A churn rate cut from 8% to 5%. If the figure describes what changes in their business, it is a Metric. If it describes your feature, it is a brochure.
+
+The question Metrics answer is the one the Economic Buyer will ask whether you are in the room or not: what do we get for the money?
+
+The mistake is to treat Metrics as a line you fill in after the demo. Sellers write "efficiency gains" in the CRM and call it done. That is a word, not a Metric. A Metric has a number, a baseline and a timeframe, and the customer has agreed it. The biggest gap I see is between a Metric the seller believes and a Metric the customer has said out loud. Only the second one moves a deal.
+
+Here is how I use them. Metrics are the bridge between the pain you have implicated and the urgency the deal needs. Pain tells the customer something hurts. Metrics tell them how much, and what fixing it is worth. Put the two together with a Champion who will carry the numbers to the Economic Buyer and the deal starts to move. Without them, your proposal is a price with nothing on the other side of the scales.
+
+### Economic Buyer
+URL: https://andywhyte.com/glossary/economic-buyer/
+
+The Economic Buyer is the person with final authority over the budget for your deal, who can say yes when everyone else says no.
+
+The Economic Buyer is the one person who can release the funds for your deal. They have discretionary control of the budget, they can veto a decision the rest of the organisation has already made, and they can find money that officially does not exist. Everyone else in the deal is influencing. The Economic Buyer is deciding.
+
+The question this letter answers is simple: who actually signs this off, and have we met them?
+
+The mistake, and I have made it myself, is to accept the first senior person who talks to you as the Economic Buyer. A VP who manages the budget is not the same as the person who owns it. Procurement is almost never it. Your Champion will sometimes tell you they are it, because admitting otherwise feels like admitting they lack power. Ask the question that settles it: if this decision were made today, whose name would be on the approval? If the answer is a committee, keep digging. Committees do not own budgets. People do.
+
+How I use it. In twenty years I have not seen a complex deal close without the Economic Buyer engaged somewhere, either directly by the seller or through a Champion who could get in front of them. So I treat access as a qualification test. If I cannot get to the Economic Buyer, and my Champion cannot either, I ask why. Usually the honest answer is that the deal is not as important to them as it is to me. That is a deal to qualify out, or to fix before it costs me a quarter.
+
+### Decision Criteria
+URL: https://andywhyte.com/glossary/decision-criteria/
+
+Decision Criteria are the standards a customer uses to judge which solution to buy, split into technical, business and often legal or commercial requirements.
+
+Decision Criteria are the rules the customer will use to pick a winner. They come in two main flavours. Technical Decision Criteria: does it integrate, is it secure, will it scale, can our people run it? Business Decision Criteria: what does it cost, what does it return, how fast, and what is the risk if it fails? Many deals carry a third set around legal and commercial terms, and those are the ones nobody mentions until week eleven.
+
+The question this letter answers is: on what basis will they choose, and who wrote that basis?
+
+The mistake is to assume the criteria are fixed and fair. They are neither. Decision Criteria are written by people, and in most competitive deals one of your competitors wrote them with the customer months before you arrived. If the RFP asks for a feature only one vendor has, you know who was in the room. Sellers who take the criteria as given spend the whole deal answering someone else's exam paper.
+
+How I use them. First, I find out whether the criteria exist in writing, who authored them, and whether the Economic Buyer agrees with them. Second, I work with my Champion to influence them while they are still soft. If the customer's real pain is a Metric we move and the competition cannot, that Metric belongs in the criteria. Third, I test my own position against them honestly. If we meet six of nine and the three we miss are the ones the Economic Buyer cares about, the colour of the deal in the CRM is red, whatever the rep says.
+
+### Decision Process
+URL: https://andywhyte.com/glossary/decision-process/
+
+The Decision Process is the series of steps, people and approvals a customer goes through to arrive at a buying decision, with dates attached.
+
+The Decision Process is how the customer gets from "we should look at this" to "we have chosen". Who evaluates, who validates, who recommends, who approves, in what order, and by when. It covers the proof of concept, the security review, the business case to the board, the vote in the steering committee. Every one of those is a step, and every step has an owner and a date, whether or not anyone has told you what they are.
+
+The question it answers: what has to happen, in what order, for this customer to decide?
+
+The mistake is confusing your sales process with their buying process. Your pipeline stages are yours. The customer does not know they are in "Stage 3: Proposal". They are in "waiting for Priya to come back from leave so she can look at the integration". Sellers who forecast off their own stages are guessing. Sellers who forecast off the customer's Decision Process are reporting.
+
+How I use it. I ask my Champion to walk me through the last time their company bought something like this, step by step. Who was involved, how long it took, where it stalled. Then I write it down and test it with the Economic Buyer, because the Champion's version and the Economic Buyer's version are often different, and the Economic Buyer's is the one that counts. The output is a dated plan the customer has agreed to. That plan, shared and owned by both sides, is what a Mutual Action Plan is. If a step on it slips with no explanation, the close date slips with it. No exceptions.
+
+### Paper Process
+URL: https://andywhyte.com/glossary/paper-process/
+
+The Paper Process is every legal, procurement, security and compliance step between the customer saying yes and a signed contract landing in your inbox.
+
+The Paper Process is the part of the deal that happens after the customer has decided to buy you and before you can book it. Legal redlines. Procurement onboarding. The security questionnaire with 214 questions. Data processing agreements. Signature authority, which in some companies means one person and in others means three people in two countries. It is the P that turned MEDDICC into MEDDPICC, and it earned its letter because of how many deals it has quietly killed on the last day of a quarter.
+
+The question it answers: once they say yes, what has to be signed, by whom, and how long does that take?
+
+The mistake is to start asking about it when the verbal is in. By then the clock is already running and you have nothing left to negotiate with. Legal does not care about your quarter end. Procurement has a 30 day onboarding cycle it will not shorten because you asked nicely. The seller who discovers in the last week of March that the customer's standard terms need a 45 day review has not been unlucky. They have been unprepared.
+
+How I use it. I map the Paper Process in discovery, in the same conversation as the Decision Process, and I treat the two as one timeline. Who owns legal review, what their standard terms look like, whether they have bought from a vendor like us before and how long that took. Then every step goes on the Mutual Action Plan with a date and an owner on their side. If the close date in the CRM lands before the Paper Process can physically finish, the close date is wrong, and I would rather know that in month one than on the last day of the quarter.
+
+### Implicate the Pain
+URL: https://andywhyte.com/glossary/implicate-the-pain/
+
+Implicating the Pain means going beyond naming a customer's problem to the point where they feel its cost, own its consequences and connect your solution to the cure.
+
+In MEDDIC, the I stood for Identify Pain. In my book it stands for Implicate the Pain, and the difference is the whole game. Identifying pain is noticing the customer has a problem. Every seller on earth can do that in the first call. Implicating the pain is when the customer themselves connects the problem to what it costs them, what it will cost them if it continues, and what fixing it would mean for them personally. Identified pain sits in your notes. Implicated pain sits in their stomach.
+
+The question it answers: why would this customer change anything at all?
+
+The mistake is to stop at identification and start pitching. The seller hears "our reporting is manual" and launches into the dashboard demo. The customer nods, says it looks great, and does nothing, because manual reporting has been annoying for three years and nobody has been fired for it yet. Annoying is survivable. You have to help them see what else is true: the board decision made late on bad data, the two analysts who quit, the forecast miss that followed. Pain without consequence is a feature request.
+
+How I use it. I ask what happens if nothing changes. Then I ask again, one level up, until I reach a consequence somebody with a budget would lose sleep over. That consequence, with a number attached, becomes a Metric. The person who feels it most becomes my Champion. Urgency in a deal is an emotion, the same as it is in a team. You cannot message it into existence. You implicate it, and then the customer brings it to the meetings for you.
+
+### Champion
+URL: https://andywhyte.com/glossary/champion/
+
+A Champion is someone inside the customer with power and influence, a vested interest in your success, and who actively sells for you when you are absent.
+
+A Champion has three things. Power and influence in the organisation, which is rarely the same as seniority. A vested interest in your success, meaning a personal win riding on your deal: a promotion, a problem that has been embarrassing them for a year, a project they put their name to. And they actively sell for you. They fight for you in meetings you will never see, and they tell you what the Economic Buyer really said after the door closed.
+
+The question a Champion answers is the one that decides most complex deals: who is selling this when we are not there?
+
+The mistake is to confuse someone who likes you with someone who champions you. The friendly contact who takes every call, loves the product and gives you great information is often a Coach. Valuable, but a Coach has either no power to move the deal or no reason to spend their political capital on it. Sellers write "Champion" next to that name in the CRM because it feels better than writing "nice person, no power". Then the deal dies in a meeting they were not invited to and nobody can explain why.
+
+How I use it. I do not take the title on trust. I test it. I ask the Champion to do something that costs them: get me in front of the Economic Buyer, share the real Decision Process, tell me where we are losing to the competition. Champions do these things. Coaches apologise and explain why they cannot. The deals I regret are the ones where I knew which of the two I had and carried on anyway. Nobody regrets qualifying out of a deal with no Champion. Plenty regret the reverse.
+
+### Competition
+URL: https://andywhyte.com/glossary/competition/
+
+Competition is anyone or anything competing for the same budget, attention or decision as your deal, including rival vendors, an internal build and doing nothing at all.
+
+Competition is wider than the vendor whose logo sits next to yours on the shortlist. It is any person, project or option competing for the same money, the same people and the same slot on the Economic Buyer's agenda. The other vendor, yes. Also the internal team who want to build it themselves. The other initiative that needs the same budget this year. And the biggest competitor of all, which beats every seller more often than any rival does: the status quo. Doing nothing is free, familiar and carries no risk of a career-ending mistake. That is a hard opponent.
+
+The question this letter answers: what else could they do with this money, and why would they do it?
+
+The mistake is losing to a competitor you never named. Sellers fill the Competition field with "none" or with the one rival they heard mentioned on the first call. Meanwhile the CFO has a list of eleven things she could fund and your project is number seven. You were never competing with the vendor. You were competing with a warehouse refit.
+
+How I use it. I ask the Champion a direct question: if we did not exist, what would you do? The answer tells me who I am really up against. Then I find out which competitor helped write the Decision Criteria, because somebody usually did. And I work out where each option is stronger than us, honestly, in writing. If the honest answer is that the internal build is good enough and the Economic Buyer trusts the team doing it, the deal is a qualify-out, and I would rather know that in week two than in week twenty.
+
+### MEDDIC
+URL: https://andywhyte.com/glossary/meddic/
+
+MEDDIC is the original six-part sales qualification framework, created at PTC in the 1990s, covering Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain and Champion.
+
+MEDDIC is where it all started. Dick Dunkel and Jack Napoli built it at PTC in the 1990s, out of a study of why the company won deals, lost deals, and sometimes never got a decision at all. Six things kept showing up, and they became the letters: Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion. PTC went on one of the great growth runs in enterprise software with it, and it has been the backbone of serious sales qualification ever since. Dick and Jack were generous enough to write the foreword to my book on it.
+
+The question MEDDIC answers has not changed in thirty years: is this deal real, and what do we not know about it?
+
+The mistake is to treat the six letters as fields to fill in rather than questions to answer. A CRM with every MEDDIC box ticked tells you the rep is good at admin. It tells you nothing about whether the Champion would walk into the Economic Buyer's office for you. The framework is binary. You are either using it to interrogate your deals or you are using it to decorate them.
+
+How I use it. MEDDIC is the base the later variants build on, and I still think of it as the minimum. If a seller cannot tell me the Metrics, name the Economic Buyer, describe the criteria and the process, explain the pain and point to a Champion, the deal is not qualified, whatever stage the pipeline says it is in. Everything that came later, the second C and the P, sits on top of these six. Learn these first.
+
+### MEDDICC
+URL: https://andywhyte.com/glossary/meddicc/
+
+MEDDICC is the MEDDIC qualification framework with a second C added for Competition, so sellers qualify who and what they are really up against.
+
+MEDDICC is MEDDIC plus Competition. Seven letters: Metrics, Economic Buyer, Decision Criteria, Decision Process, Implicate the Pain, Champion, Competition. The second C was added because sellers kept losing deals that looked qualified on every other letter, to rivals they had never properly assessed, or to the customer deciding to do nothing at all. Competition was always part of the conversation. Adding the letter made it part of the inspection.
+
+It is also the name of my book, which has sold over 100,000 copies and carries a foreword from Dick Dunkel and Jack Napoli, who created the original, and the name of the company I founded. The book is called MEDDICC and it covers all three versions, because the letters matter less than the questions behind them.
+
+The question MEDDICC answers: is this deal real, and who else is in it?
+
+The mistake is arguing about the acronym instead of running it. I have watched sales leaders spend a whole offsite debating whether they are a MEDDIC team or a MEDDICC team. Nobody at the offsite could name the Economic Buyer on their three biggest deals. Pick a version, write the questions down, and ask them on every deal every week.
+
+How I use it. MEDDICC is binary. You either use it on every opportunity or you do not use it at all, and the teams that half-use it get the worst of both: the admin without the insight. The teams that go all in get a forecast they can stand behind and a pipeline where the weak deals are known early enough to fix or kill. Go all in or leave it alone.
+
+### MEDDPICC
+URL: https://andywhyte.com/glossary/meddpicc/
+
+MEDDPICC is the eight-part version of the MEDDIC qualification framework, adding Paper Process and Competition so a deal is qualified all the way to signature.
+
+MEDDPICC is the full version. Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion, Competition. The P is the one people notice, and it is there because the gap between a verbal yes and a signed contract is where quarters go to die. Legal, procurement, security and signature authority were always part of the deal. MEDDPICC made them part of the qualification.
+
+The question MEDDPICC answers is bigger than the other two: is this deal real, can it actually close, by when, and what would stop it?
+
+The mistake is treating it as a form. I have seen CRMs with eight mandatory MEDDPICC fields and a forecast that was still fiction, because the fields were filled in by the seller on a Friday afternoon from memory and nobody ever inspected them. The letters are questions, and the answers have to come from the customer. If the customer has not said it, you do not know it. You are guessing, and guessing is not qualification.
+
+How I use it. MEDDPICC is what I teach, and it is the methodology the MEDDICC Masterclass has taken more than 35,000 graduates through. I use it in two directions. Downwards, into a deal: where are we strong, where are we weak, and what is the next action that changes a weak letter? Upwards, into a forecast: a deal with no Economic Buyer, no Metrics and no Paper Process mapped does not go in commit, whatever the rep's gut says. And one rule above all. People sometimes add a third C for Compelling Event. Do not. Implicated Pain, agreed Metrics and a real Champion produce the urgency. Bolting on a letter does not.
+
+### Coach
+URL: https://andywhyte.com/glossary/coach/
+
+A Coach is a contact inside the customer who gives you information and guidance but lacks the power, vested interest or will to sell your deal internally.
+
+A Coach is the person in the account who helps you. They take your calls, tell you who matters, warn you when the mood changes and explain the politics. What they do not do is sell for you. Either they lack the power and influence to move the decision, or they have no personal stake in the outcome, or both. They want you to win in the way a friend wants you to win. They are not going to put their own neck on the line to make it happen.
+
+The question a Coach helps you answer is: what is really going on in there? The question they cannot answer is: who is going to make this happen when I am not there?
+
+The mistake is the oldest one in enterprise sales, and I have made it. You mislabel a Coach as a Champion because the relationship feels strong. Then you forecast the deal on the strength of that relationship. Then the deal stalls in a meeting your Coach could not get into, and the best they can offer is an apology and a summary. Both are useful. Neither closes anything.
+
+How I use it. I value Coaches and I keep them, because the intelligence they give is real. But I never let a Coach stand in the Champion slot of my qualification. The test is behaviour. Ask them to get you in front of the Economic Buyer. A Champion finds a way. A Coach tells you why it is difficult right now. If every senior contact in a deal turns out to be a Coach, I have a deal with information and no engine. That is a deal I build a Champion in, fast, or qualify out of.
+
+### Compelling Event
+URL: https://andywhyte.com/glossary/compelling-event/
+
+A Compelling Event is a dated reason, with real consequences, why the customer must act now, built from implicated pain and agreed Metrics rather than the seller's quarter end.
+
+A Compelling Event is something with a date and a cost on the customer's side of the table. A contract expiring. A regulation landing in April. A product launch that fails without the capability you sell. A new CFO who has told the team the number must move by Q3. If the date passes and nothing bad happens to them, it was not compelling. It was a preference.
+
+The question it answers is the one that quietly kills more deals than any competitor: why now?
+
+The mistake is on both sides of the desk. Sellers think a discount that expires on Friday is a Compelling Event. It is not, and customers know it, which is why they call you on the following Tuesday to ask if it is still available. The other mistake is adding a C to the acronym. Some people run MEDDPICCC with a third C for Compelling Event. My view is that this tells the world their understanding of the framework is shallow. The urgency is already in there. Implicated Pain plus agreed Metrics plus a Champion who owns the outcome gives you a customer who needs to move. You do not need a ninth letter. You need to do the other eight properly.
+
+How I use it. Urgency is an emotion, and you cannot email an emotion. So I do not try to manufacture a Compelling Event with pressure. I look for the one that already exists in the customer's world, and if there is none, I help the Champion build one out of the consequences of doing nothing, with a date on it. If there is no date and no consequence, "later" wins every time, and I would rather plan for that than forecast against it.
+
+### Qualifying Out
+URL: https://andywhyte.com/glossary/qualifying-out/
+
+Qualifying out is the deliberate decision to stop pursuing an opportunity that fails qualification, so your time goes to deals you can actually win.
+
+Qualifying out is walking away on purpose. You have run the deal through MEDDPICC, you have found that there is no Economic Buyer access, no Champion, no Metrics anyone has agreed to, or no reason to act this year, and you have decided that your time is worth more somewhere else. It is a decision, with a reason you can state out loud, and it is one of the strongest moves a seller can make.
+
+The question it answers: should we even be in this deal?
+
+The mistake is believing that more pipeline is always better. It is not. A pipeline full of deals that will never close costs you the deals that would have. Every hour on a no-hope opportunity is an hour not spent building a Champion in a real one. The other mistake is softer and more common: the seller knows the deal is dead and keeps it alive in the CRM because killing it feels like admitting failure. So it sits there, ageing, propping up a coverage number that everyone upstairs is relying on.
+
+How I use it. Nobody regrets qualifying out. I coined that line years ago to give sellers permission, and I have yet to find the exception. One of two things happens when you qualify out. Either you were right, the opportunity was not worth it, and you have your time back. Or the act of walking away corrects the customer's behaviour. The Economic Buyer who would not meet you suddenly has a slot on Thursday. The Champion who was a Coach finds some power. Either way you win. Carry on pretending and you lose slowly, which is the most expensive way to lose.
+
+### Champion Test
+URL: https://andywhyte.com/glossary/champion-test/
+
+The Champion Test checks whether a contact has power and influence, a vested interest in your success, and will act on your behalf when asked.
+
+The Champion Test is how you find out whether the name in your Champion field deserves to be there. It has two halves. First, the three criteria: do they have power and influence, do they have a personal stake in you winning, and are they actively selling for you? Second, and this is the half most sellers skip, you ask them to prove it. You request something that costs them effort or political capital and you watch what happens.
+
+The question it answers: if I disappeared for a month, would this person keep my deal alive?
+
+The mistake is testing with questions instead of asks. "Would you say you are our Champion?" is a question anyone will say yes to, because it is flattering and free. An ask is different. Can you get me thirty minutes with the Economic Buyer before the end of the month? Can you share the scoring sheet the evaluation team is using? Can you tell me what the Economic Buyer said about us after our last meeting? Each of those costs something. The answers, and more importantly the actions that follow, are the test.
+
+How I use it. I run the test early and I run it again before anything goes into commit. A Champion who passes in month one can fail in month four, because they changed role, lost a fight, or found a bigger project. I keep the bar deliberately high. Liking your product is what a Coach does. The Champion I will forecast on sells it internally when I am not in the room, and the only proof of that is something they did. Pass the test and the deal is forecastable. Fail it and you know your next action.
+
+### Discovery
+URL: https://andywhyte.com/glossary/discovery/
+
+Discovery is the ongoing work of finding out a customer's pain, Metrics, people and process, carried on through the whole deal rather than finished in one call.
+
+Discovery is how you earn the right to the rest of the deal. It is the questioning, listening and testing that uncovers what the customer is trying to change, why it matters, what it is worth, who decides and how. Done well, discovery is where every letter of MEDDPICC gets its first real answer. Done badly, it is a forty-minute interrogation from a script, followed by a demo the customer did not ask for.
+
+The question it answers: what is actually true about this customer, as opposed to what we hoped was true when we booked the meeting?
+
+The mistake is treating discovery as a stage. A box between "qualified lead" and "demo" that you tick once and never revisit. Deals change. The Economic Buyer gets replaced. The budget gets cut in half. The Champion's rival takes over the project. If your discovery stopped in week two, your qualification is a photograph of a deal that no longer exists. Discovery never stops. The best sellers I know are still discovering in the contract negotiation.
+
+How I use it. I go into every conversation with a point of view on the customer's business and a short list of what I do not know yet. The point of view earns respect. The list keeps me honest. I ask about consequences more than features, I ask the same question of more than one person, and I write down what the customer said in their words rather than my summary of it. Then I check the deal against MEDDPICC and the gaps tell me what to discover next. If I cannot name a gap, I am not inspecting hard enough.
+
+### Mutual Action Plan
+URL: https://andywhyte.com/glossary/mutual-action-plan/
+
+A Mutual Action Plan is a shared, dated document agreed with the customer that lists every step, owner and milestone from today to signature and go-live.
+
+A Mutual Action Plan is the Decision Process and the Paper Process written down in one place, with a date and an owner against every line, and agreed by both sides. It starts today and ends at the outcome the customer cares about, which is rarely the signature. It is the go-live, the first report, the number moving. Working backwards from that date, through legal, procurement, security, the business case, the evaluation and the executive meeting, is what turns a hope into a plan.
+
+The question it answers: what has to happen, by whom, by when, for this customer to get what they want?
+
+The mistake is building it alone. A plan the seller writes and emails to the customer is a close plan with the word "mutual" stuck on the front. The customer did not agree to it, so the dates mean nothing. The second mistake is anchoring it on your close date. Customers do not care about your quarter. Anchor it on their outcome and the close date falls out of the maths, usually earlier than you feared or later than you hoped. Both are useful to know.
+
+How I use it. I build the plan with my Champion, then I get the Economic Buyer to see it, because an executive who has looked at a dated plan with their name on a line has made a small commitment that is hard to walk back. Then it becomes the deal's heartbeat. Every slipped line is a question: why, and what does it mean for the rest? A Mutual Action Plan that nobody on the customer's side has touched in three weeks is telling you something. Listen to it.
+
+### Deal Inspection
+URL: https://andywhyte.com/glossary/deal-inspection/
+
+Deal inspection is a leader examining a single opportunity against MEDDPICC to find what is proven, what is assumed and what action changes it.
+
+Deal inspection is what a sales leader does to a deal, as opposed to what a seller says about it. You take one opportunity and you go through it letter by letter. Who is the Economic Buyer and when did we last speak to them? What are the Metrics, in the customer's words? Who is the Champion and what have they done for us? Where is the Paper Process and who owns it? For every answer, one follow-up: how do we know? The point is to separate what has been proven by the customer from what has been assumed by the seller.
+
+The question it answers: is this deal as strong as it looks, and what do we do about the parts that are not?
+
+The mistake is confusing inspection with interrogation. An inspection where the seller leaves feeling attacked teaches them to hide things, and a leader who only hears good news is forecasting blind. The other mistake is inspecting outcomes. "Why did we lose?" is a lagging question. "Why did we have no Champion in week six and still forecast it?" is a leading one, and it is the only one you can coach.
+
+How I use it. I judge the decisions in the deal, not the result. A rep who qualified out of a bad deal made a good decision, even if a competitor later closed it. A rep who won without ever meeting the Economic Buyer got lucky, and luck is not a skill I can scale. Inspection done well is a conversation about the next action, every week, on the deals that matter. The book calls it the deal inspection rhythm. The forecast you can stand behind comes out of it.
+
+### Deal Review
+URL: https://andywhyte.com/glossary/deal-review/
+
+A deal review is the regular meeting where a seller and their leader inspect live opportunities, agree what is real and decide the next actions.
+
+A deal review is the meeting. Deal inspection is what should happen inside it. A good deal review takes a handful of opportunities, runs each through MEDDPICC with the seller, and ends with a short list of actions, owners and dates. A bad deal review takes forty opportunities, asks "where are we with this one?", gets "I'm working it hard" forty times, and ends with everyone agreeing the forecast is fine.
+
+The question it answers: of all the deals in this pipeline, which are real, which are at risk, and what are we doing this week to change that?
+
+The mistake is letting it become a status update. The seller reads out the CRM. The leader nods. Activity is reported as progress: emailed, chased, pushed, nurtured. None of those are MEDDPICC. If a seller cannot articulate the Champion's economic case in three sentences, the deal is not real, and the effort was theatre. The B in B-Player stands for busy, and the deal review is where busy goes to hide. A leader who accepts effort as evidence will get a pipeline full of it.
+
+How I use it. Fewer deals, more depth. I would rather inspect five opportunities properly than skim thirty. I ask the seller to lead with the weakest letter, because the strong ones look after themselves. I judge the quality of the decisions made in the deal, not the colour of the stage. And I keep the actions. A deal review that produces no actions was a meeting about a meeting. If the same deal turns up three weeks running with the same gap and no movement, that is the signal to qualify out, and it is better to hear it in a review than on the last day of the quarter.
+
+### Forecast Categories
+URL: https://andywhyte.com/glossary/forecast-categories/
+
+Forecast categories sort open deals by confidence, typically commit, best case and pipeline, so a leader can roll up a number they will stand behind.
+
+Forecast categories are the shelves you put deals on. Commit is the shelf you would bet your job on: the deals that will close in the period unless something unforeseeable happens. Best case is the shelf of deals that could close in the period if the things still outstanding go your way. Pipeline is everything else that is qualified and real but not yet close enough to call. The names matter less than the rule for what goes on each shelf.
+
+The question they answer: what number can this team put in front of the board and defend?
+
+The mistake is letting gut feel decide the shelf. A seller puts a deal in commit because they like the Champion, or because the quarter needs it, or because they put it there last month and moving it would prompt a conversation. Then the leader rolls up a number built on forty feelings and calls it a forecast. The miss, when it comes, is treated as bad luck. It was not luck. It was a decision, made without evidence, and it should be judged as one.
+
+How I use it. Each category has an evidence test, and the evidence is MEDDPICC. Nothing goes into commit without a Champion who has passed the test, an Economic Buyer who has engaged, Metrics the customer has agreed, and a Paper Process that physically fits the dates. Best case can have a gap, as long as the gap is named and there is an action against it. The categories then stop being opinions and start being leading indicators. A commit deal with no Economic Buyer is a contradiction in terms, and I would rather see it moved than wait for the quarter to move it for me.
+
+### Leading and Lagging Indicators
+URL: https://andywhyte.com/glossary/leading-and-lagging-indicators/
+
+Leading indicators are the behaviours and deal conditions that predict a result, while lagging indicators such as revenue and quota attainment report a result that has already happened.
+
+A lagging indicator is a result. Bookings, quota attainment, win rate, churn. By the time you can read it, the work that produced it is finished, and so is your chance to change it. A leading indicator is something that happens earlier and predicts the lagging one. Economic Buyer meetings held. Champions who have passed the test. Metrics agreed in the customer's words. Discovery calls where the consequence of doing nothing was named. Pipeline created from accounts you chose rather than accounts that found you.
+
+The question they answer: what should I be looking at today to know what the quarter will look like in ninety days?
+
+The mistake is running the team on the lagging number. Every sales leader has a dashboard with attainment at the top, and most coaching conversations start there. "You are at 40%." The rep already knew. You cannot coach a lagging indicator. The number is a verdict on decisions made two months ago, and no amount of talking about it changes a single one of them. Leaders who manage this way end up shouting at the scoreboard.
+
+How I use it. I pick a small number of leading indicators that I know produce the result, and I inspect those relentlessly. For most teams I have led, that meant the quality of MEDDPICC on the top deals, the number of Economic Buyer conversations in a month, and how much new pipeline carried a real Champion. Coach those and the lagging number follows, with a lag you can predict. Ignore them and the quarter will tell you how it went, long after you could have done anything about it.
+
+### A, B and C Players
+URL: https://andywhyte.com/glossary/a-b-c-players/
+
+A Players are accountable to outcomes, B Players are busy and focused on optics, and a C Player is a label that should not exist on any serious team.
+
+A Players are uncomfortable being comfortable. They are driven by an unreasonable demand to reach their own potential, they measure themselves on impact, and they are suspicious of ease. The A stands for accountable. B Players focus on optics. They avoid clarity, dodge accountability and manage perception rather than create value. The B stands for busy. And a C Player? There is no such thing. Or at least there should not be. Professional sports teams have no room for them, and neither does your go-to-market team.
+
+The question this answers for a leader: who on this team is actually producing, and where should my time go?
+
+The mistake is spending leadership time in the wrong place. Profile a team honestly and you get three groups. A Players. B+ Players, who have the potential to be an A or are out of form. And B- Players, who do not have the potential. Most leaders spend a disproportionate amount of their week on the B- group, and the A Players, who would grow fastest with that attention, get left to get on with it. The other mistake is forgetting that A is relative to the role and subject to form. A first-year AE can be an A Player. A ten-year veteran can lose their A game for a quarter.
+
+How I use it. I look for effort displayed as evidence. The AE with 27 open opportunities, all yellow or red, defending each one with "I'm working it hard", is the B-Player tell. It is not laziness. It is activity standing in for outcomes. The work is legible now, so busyness hides nothing. I coach to the outcome, I remove the barriers that slow A Players down, and I am honest with myself that the barrier is sometimes a B- Player.
+
+### Sales Kickoff
+URL: https://andywhyte.com/glossary/sales-kickoff/
+
+A sales kickoff, or SKO, is the annual event where a sales organisation aligns on strategy, targets, product and methodology for the year ahead.
+
+A sales kickoff is the one time in the year the whole revenue team is in a room together. Strategy, targets, new products, the comp plan, the methodology, and usually a keynote speaker, an awards dinner and a hangover. I have sat through a lot of them, on both sides of the stage, and the good ones are easy to spot. They change what people do on the Monday after.
+
+The question an SKO should answer: what are we doing differently this year, and does every seller leave knowing their part in it?
+
+The mistake is treating the kickoff as the message. Leaders stand up and talk about urgency, about hunger, about a big year. Then everyone flies home and the pipeline looks exactly as it did in December. Urgency is an emotion, not a message. You cannot tell a team to be urgent from a stage, and you cannot email it to them afterwards. It is built from how leaders behave in the weeks that follow: consistent, truthful, clear about consequences and commitments. A kickoff that is not followed by that behaviour was a party with slides.
+
+How I use it. I treat SKO as the launch of an operating rhythm rather than the rhythm itself. If MEDDPICC is being introduced or sharpened, the kickoff is where the whole team hears the same definitions, works real deals in the room, and watches the leadership team run a deal inspection live, including the uncomfortable bits. Then the deal reviews start the following week and do not stop. The two sessions I would never cut: the A Players telling the room what they actually did last year, and the leadership team saying what they got wrong. Both are more useful than the keynote. Including mine.

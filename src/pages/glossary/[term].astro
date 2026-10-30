@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { pageFor, pad2 } from '../../data/notebook-pages';
+import { SITE } from '../../data/site';
+import { entryHref } from '../../lib/maxims';
+
+export async function getStaticPaths() {
+  const terms = await getCollection('glossary');
+  return terms.map((entry) => ({ params: { term: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const url = `${SITE.url}/glossary/${entry.id}/`;
+const all = await getCollection('glossary');
+const related = d.related.map((slug: string) => all.find((t) => t.id === slug)).filter(Boolean) as typeof all;
+const journal = await getCollection('journal', (e) => !e.data.draft);
+const maxims = d.maxims.map((n: number) => { const e = journal.find((x) => x.data.awj_number === n); const p = pageFor(n); return e && p ? { n, href: entryHref(e), page: p } : null; }).filter(Boolean) as { n: number; href: string; page: NonNullable<ReturnType<typeof pageFor>> }[];
+
+const definedTerm = {
+  '@type': 'DefinedTerm',
+  '@id': `${url}#term`,
+  name: d.term,
+  description: d.short,
+  url,
+  inDefinedTermSet: { '@id': `${SITE.url}/glossary/#set` },
+};
+---
+<SiteLayout
+  title={`${d.term}: definition and how to use it | Andy Whyte`}
+  description={d.short}
+  pageType="glossary-term"
+  schema={[definedTerm]}
+  breadcrumbs={[{ name: 'Glossary', href: '/glossary/' }, { name: d.term, href: `/glossary/${entry.id}/` }]}
+>
+  <section class="nb-page-head">
+    <div class="nb-shell nb-page-head__in">
+      <p class="nb-eyebrow">Glossary{d.letter ? ` · the ${d.letter} in MEDDPICC` : ''}</p>
+      <h1>{d.term}</h1>
+      <p class="nb-lede">{d.short}</p>
+    </div>
+  </section>
+
+  <section class="nb-section" style="padding-top:clamp(16px,2vw,32px)">
+    <div class="nb-shell body">
+      <div class="nb-prose"><Content /></div>
+      <aside class="body__side">
+        {related.length > 0 && (
+          <div class="side-card">
+            <p class="nb-eyebrow">Related terms</p>
+            {related.map((t) => <a class="side-link" href={`/glossary/${t.id}/`}>{t.data.term} &rarr;</a>)}
+          </div>
+        )}
+        {maxims.length > 0 && (
+          <div class="side-card">
+            <p class="nb-eyebrow">In the notebook</p>
+            {maxims.map((m) => <a class="side-link" href={m.href}>No. {pad2(m.n)}: {m.page.title} &rarr;</a>)}
+          </div>
+        )}
+        <div class="side-card">
+          <p class="nb-eyebrow">All terms</p>
+          <a class="side-link" href="/glossary/">The glossary &rarr;</a>
+          <a class="side-link" href="/meddpicc/">The MEDDPICC hub &rarr;</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .body { display: grid; grid-template-columns: minmax(0, 66ch) 280px; gap: clamp(32px, 5vw, 80px); }
+  .body__side { display: flex; flex-direction: column; gap: 20px; }
+  .side-card { display: flex; flex-direction: column; gap: 10px; padding: 18px; border: 1px solid var(--nb-line); border-radius: var(--radius-ui); background: #fff; }
+  .side-link { font-weight: 600; text-decoration: none; font-size: 15px; }
+  .side-link:hover { text-decoration: underline; }
+  @media (max-width: 900px) { .body { grid-template-columns: minmax(0, 1fr); } }
+</style>

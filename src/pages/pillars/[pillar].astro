@@ -1,153 +1,106 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Eyebrow from '../../components/Eyebrow.astro';
-import Pillar from '../../components/Pillar.astro';
-import FAQ from '../../components/FAQ.astro';
 import { getCollection } from 'astro:content';
-import { PILLAR_META, formatDate, type Pillar as PillarT } from '../../lib/utils';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { pillarInfo, pillarLabel, pad2, pageFor, pageImage, type Pillar } from '../../data/notebook-pages';
+import { SITE, HUBS } from '../../data/site';
+import { entryHref, byNumber } from '../../lib/maxims';
 
-export async function getStaticPaths() {
-  return (['sales', 'founder', 'human'] as PillarT[]).map(pillar => ({
-    params: { pillar },
-    props: { pillar },
-  }));
+export function getStaticPaths() {
+  return (['sales', 'founder', 'human'] as Pillar[]).map((pillar) => ({ params: { pillar }, props: { pillar } }));
 }
 
-const { pillar } = Astro.props;
-const meta = PILLAR_META[pillar];
-const entries = (await getCollection('journal', e => !e.data.draft && e.data.pillar === pillar))
-  .sort((a, b) => b.data.awj_number - a.data.awj_number);
+const { pillar } = Astro.props as { pillar: Pillar };
+const info = pillarInfo[pillar];
+const entries = (await getCollection('journal', (e) => !e.data.draft && e.data.pillar === pillar)).sort(byNumber);
+const related = HUBS.filter((h) => info.hubs.includes(h.slug));
 
-// Page-tailored title + meta per pillar (no em dashes, search-keyword-aligned).
-const PILLAR_SEO: Record<typeof pillar, { title: string; description: string }> = {
-  sales:   { title: 'Sales: MEDDICC, Deal Inspection, A-Player Habits | Andy Whyte Journal',     description: 'The AWJ Sales pillar. MEDDICC, deal inspection, qualifying out, and the patterns that separate A-players from theatre.' },
-  founder: { title: 'Founder Operating System: Bootstrap SaaS Without Theatre | Andy Whyte Journal', description: 'Bootstrap SaaS, trade-offs under uncertainty, founder-led sales, and the mental models for operators who actually ship.' },
-  human:   { title: 'The Human Pillar: Mental Models for Authenticity, Mental Health, Failure | Andy Whyte Journal', description: 'Controlled lessons from failure. Imposter syndrome, authenticity, mental health, and the discipline of writing it down.' },
+const titles: Record<Pillar, string> = {
+  sales: 'Sales Maxims: MEDDICC, deal inspection and qualifying out',
+  founder: 'Founder Maxims: building a company without the theatre',
+  human: 'Human Maxims: authenticity, mental health and growth',
 };
-const seo = PILLAR_SEO[pillar];
+const descriptions: Record<Pillar, string> = {
+  sales: 'The sales pillar of the Andy Whyte Journal: Maxims on qualification, MEDDICC, deal inspection and leading a sales team as a thinking discipline.',
+  founder: 'The founder pillar of the Andy Whyte Journal: Maxims on hiring, feedback, failure and running a bootstrapped company.',
+  human: 'The human pillar of the Andy Whyte Journal: Maxims on authenticity, imposter syndrome, mental health and growth.',
+};
 
-// Per-pillar FAQs — each Q is a real long-tail query an LLM might field, each A
-// is a citable answer. Structured-data-paired via the FAQ component.
-const PILLAR_FAQS: Record<typeof pillar, { q: string; a: string }[]> = {
-  sales: [
-    { q: 'What is MEDDICC?', a: 'MEDDICC is a sales qualification methodology used to determine whether an enterprise B2B deal is real, winnable, and worth pursuing. It stands for Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion, and Competition. MEDDPICC adds Paper Process, the procurement, legal, and contracting steps required to close.' },
-    { q: 'What is the difference between MEDDIC, MEDDICC, and MEDDPICC?', a: 'MEDDIC is the original 6-letter framework created by Jack Napoli and Dick Dunkel at PTC. MEDDICC adds Competition. MEDDPICC adds the Paper Process, the procurement and legal steps that often kill deals at the close. The MEDDICC book by Andy Whyte covers all three.' },
-    { q: 'How do I qualify a sales deal?', a: 'Use the MEDDPICC framework letter by letter. For each letter, ask the diagnostic question, score your evidence, and identify the gap. Where the evidence is weak, build a plan to close the gap or qualify out.' },
-    { q: 'What does qualifying out mean?', a: 'Qualifying out is the deliberate decision to walk away from a deal because the evidence shows it is not real, not winnable, or not worth the time it would consume. The discipline of qualifying out is what frees A-player sellers to focus on the deals that actually close.' },
-    { q: 'What separates an A-player from a B-player in sales?', a: 'A-players are uncomfortable being comfortable. They are driven by an unreasonable mandate to achieve their full potential and treat stagnation as pain. B-players are busy. They confuse activity with progress. The Andy Whyte Journal has multiple essays on this distinction.' },
-    { q: 'Who is Andy Whyte?', a: 'Andy Whyte is the Founder and CEO of MEDDICC and the author of the best-selling book MEDDICC: The ultimate guide to staying one step ahead in the complex sale (100,000+ copies sold).' },
-  ],
-  founder: [
-    { q: 'What is bootstrap SaaS?', a: 'Bootstrap SaaS is the practice of building a SaaS company without raising venture capital, funding growth from revenue rather than dilution. It trades raw growth speed for control, optionality, and capital efficiency.' },
-    { q: 'What is founder-led sales?', a: 'Founder-led sales is the period in a company\'s life when the founder is the primary salesperson, closing early customers, learning the objections first-hand, and using each deal as a discovery channel for product, pricing, and positioning. Most founders should keep selling longer than they think.' },
-    { q: 'When should a founder stop selling?', a: 'Not until they have a repeatable, documented motion that someone they hire can follow with reasonable confidence. Stopping earlier hands the most important learning loop in the company to someone who has not done the work.' },
-    { q: 'What mental models matter most for founders?', a: 'Inversion, first principles, second-order consequences, and Munger\'s "avoid stupidity before seeking brilliance." The Andy Whyte Journal Founder pillar applies each of these to the working life of a SaaS operator.' },
-    { q: 'What is the difference between an A-player and a B-player on a startup team?', a: 'A-players make hard decisions visible. B-players are busy. The B in B-player stands for "busy" — activity that looks like progress but isn\'t. There is no such thing as a C-player on a high-bar team; either someone clears the bar or they are not there.' },
-  ],
-  human: [
-    { q: 'How should a CEO deal with imposter syndrome?', a: "Reframe it. Imposter Syndrome is the sensation of being self-aware about your own gap from the version of you that the role demands. That sensation is the most useful one in a CEO's day, not the worst. Use it as an instrument, not as a verdict." },
-    { q: 'Is mental health linear?', a: 'No. Mental health is not linear. Recovery, growth, and resilience all happen in non-monotonic curves. The lie men tell themselves about suffering is that it should be linear. It is not.' },
-    { q: 'What does authenticity mean as a leader?', a: "Authenticity is felt, not found. It is not a strategy you decide on in a workshop; it is what is left when you stop performing. The shortest path to being seen as authentic is to stop trying to be seen as authentic and start saying what you actually think." },
-    { q: 'How do you stay sane while running a company?', a: "Write things down. Keep a journal. Catch the patterns early. The quality of your thinking determines the quality of your life. The Andy Whyte Journal is the public form of that practice." },
-  ],
+const collection = {
+  '@type': 'CollectionPage',
+  '@id': `${SITE.url}/pillars/${pillar}/#page`,
+  url: `${SITE.url}/pillars/${pillar}/`,
+  name: titles[pillar],
+  description: descriptions[pillar],
+  mainEntity: { '@type': 'ItemList', itemListElement: entries.map((e, i) => ({ '@type': 'ListItem', position: i + 1, name: e.data.title, url: `${SITE.url}${entryHref(e)}` })) },
 };
-const faqs = PILLAR_FAQS[pillar];
 ---
-<Layout
-  title={seo.title}
-  description={seo.description}
-  pillar={pillar}
+<SiteLayout
+  title={`${titles[pillar]} | Andy Whyte Journal`}
+  description={descriptions[pillar]}
   pageType="pillar"
+  pillar={pillar}
+  schema={[collection]}
+  breadcrumbs={[{ name: 'Maxims', href: '/maxims/' }, { name: info.label, href: `/pillars/${pillar}/` }]}
 >
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@graph': [
-        {
-          '@type': 'CollectionPage',
-          '@id': `https://andywhyte.com/pillars/${pillar}/#collection`,
-          name: `${meta.label} — Andy Whyte Journal`,
-          description: meta.description,
-          url: `https://andywhyte.com/pillars/${pillar}/`,
-          isPartOf: { '@id': 'https://andywhyte.com/#website' },
-          mainEntity: {
-            '@type': 'ItemList',
-            numberOfItems: entries.length,
-            itemListElement: entries.map((e, i) => ({
-              '@type': 'ListItem',
-              position: i + 1,
-              url: `https://andywhyte.com/journal/${e.data.slug ?? e.id}/`,
-              name: e.data.title,
-            })),
-          },
-        },
-        {
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://andywhyte.com/' },
-            { '@type': 'ListItem', position: 2, name: meta.label, item: `https://andywhyte.com/pillars/${pillar}/` },
-          ],
-        },
-      ],
-    })} />
-  </Fragment>
-  <section class="ph-hero" style={`background: ${meta.bg}; color: ${meta.fg};`}>
-    <div class="site-shell">
-      <Eyebrow color={meta.fg === '#FFFFFF' ? '#FFCE00' : '#0A0A0A'}>{meta.tag}</Eyebrow>
-      <h1 class="ph-hero__title awj-display">{meta.label}</h1>
-      <p class="ph-hero__blurb">{meta.description}</p>
+  <section class="nb-page-head">
+    <div class="nb-shell nb-page-head__in">
+      <p class="nb-eyebrow">Pillar · {info.tag}</p>
+      <h1>{info.label}</h1>
+      <p class="nb-lede">{info.description}</p>
     </div>
   </section>
 
-  <section class="ph-list">
-    <div class="site-shell">
-      <h2 class="ph-list__head awj-display">{entries.length} {entries.length === 1 ? 'entry' : 'entries'}</h2>
-      <ol class="ph-list__items">
-        {entries.map(e => (
-          <li>
-            <a href={`/journal/${e.data.slug ?? e.id}/`} class="ph-list__row">
-              <span class="ph-list__num">AWJ #{e.data.awj_number}</span>
-              <span class="ph-list__title awj-display">{e.data.title}</span>
-              <time class="ph-list__date">{formatDate(e.data.date)}</time>
-            </a>
-          </li>
-        ))}
+  <section class="nb-section" style="padding-top:0">
+    <div class="nb-shell">
+      <ol class="wall">
+        {entries.map((e) => {
+          const p = pageFor(e.data.awj_number);
+          return (
+            <li>
+              <a href={entryHref(e)} class="wall__card">
+                <div class="nb-page"><img src={p?.src ?? pageImage(e.data.awj_number)} alt={p?.alt ?? e.data.title} loading="lazy" width="1600" height="1096" /></div>
+                <p class="nb-meta">No. {pad2(e.data.awj_number)}</p>
+                <h2 class="wall__title">{e.data.title}</h2>
+              </a>
+            </li>
+          );
+        })}
       </ol>
     </div>
   </section>
 
-  {/* FAQ — visible block + FAQPage schema for AEO */}
-  <FAQ items={faqs} eyebrow={`${meta.label} FAQs`} heading={`${meta.label} questions, answered`} />
-</Layout>
+  <section class="nb-section nb-section--tint">
+    <div class="nb-shell">
+      <div class="nb-section-head">
+        <p class="nb-eyebrow">Go deeper</p>
+        <h2>The hubs behind the {info.label.toLowerCase()} Maxims.</h2>
+      </div>
+      <div class="nb-grid nb-grid--3">
+        {related.map((h) => (
+          <a class="nb-card hub-card" href={`/${h.slug}/`}>
+            <h3>{h.title}</h3>
+            <p>{h.line}</p>
+            <span class="hub-card__more">Read the hub &rarr;</span>
+          </a>
+        ))}
+        <a class="nb-card hub-card" href="/maxims/">
+          <h3>All the Maxims</h3>
+          <p>Every pillar, every page, in order.</p>
+          <span class="hub-card__more">The library &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</SiteLayout>
 
 <style>
-  .ph-hero {
-    padding: var(--sp-9) 0;
-    background-image: url('/assets/textures/paper_white.png');
-    background-size: cover;
-    border-bottom: var(--border-hard);
-  }
-  .ph-hero__title { font-size: clamp(72px, 14vw, 200px); margin: var(--sp-3) 0; line-height: 0.85; }
-  .ph-hero__blurb { font-size: var(--fs-body-lg); margin: 0; max-width: 60ch; }
-
-  .ph-list { padding: var(--sp-8) 0 var(--sp-9); }
-  .ph-list__head { font-size: clamp(28px, 3.5vw, 44px); margin: 0 0 var(--sp-5); }
-  .ph-list__items { list-style: none; padding: 0; margin: 0; }
-  .ph-list__row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-2);
-    padding: var(--sp-5) 0;
-    border-bottom: 1px solid var(--rule);
-    color: var(--awj-black);
-    text-decoration: none;
-    transition: background var(--t-fast);
-  }
-  .ph-list__row:hover { background: rgba(255,206,0,0.12); }
-  @media (min-width: 720px) {
-    .ph-list__row { grid-template-columns: 80px 1fr 110px; align-items: center; gap: var(--sp-4); }
-  }
-  .ph-list__num { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--fg-2); }
-  .ph-list__title { font-size: clamp(22px, 3vw, 32px); line-height: 1.05; overflow-wrap: anywhere; }
-  .ph-list__date { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); }
+  .wall { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: clamp(20px, 3vw, 36px); }
+  .wall__card { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; }
+  .wall__card .nb-page img { object-fit: contain; background: var(--nb-paper); }
+  .wall__card .nb-page { transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out); }
+  .wall__card:hover .nb-page { transform: translateY(-4px) rotate(-.4deg); box-shadow: var(--shadow-lift); }
+  .wall__title { font-size: clamp(17px, 1.4vw, 20px); font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+  .hub-card { text-decoration: none; color: inherit; }
+  .hub-card p { color: var(--nb-text-2); font-size: 15px; line-height: 1.5; flex: 1; }
+  .hub-card__more { font-weight: 600; font-size: 14px; color: var(--nb-ink); }
 </style>

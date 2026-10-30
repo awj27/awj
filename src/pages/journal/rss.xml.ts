@@ -7,8 +7,8 @@ export async function GET(context: APIContext) {
     .sort((a, b) => b.data.awj_number - a.data.awj_number);
 
   return rss({
-    title: 'Andy Whyte Journal — AWJ',
-    description: 'A notebook page that earned the right to be on a billboard. Maxims and essays from Andy Whyte across sales, founding, and being human.',
+    title: 'Andy Whyte Journal',
+    description: 'A notebook of principles for sales, founding and being human. Maxims and the essays behind them, from the author of MEDDICC.',
     site: context.site!,
     items: entries.map(e => ({
       title: `AWJ #${e.data.awj_number}: ${e.data.title}`,

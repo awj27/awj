@@ -1,0 +1,383 @@
+---
+// The live hero: the pad pinned in view while the page scroll drives the cover and every flip.
+// One segment of scroll per turn, native snap points per Maxim, HTML text for every page.
+import type { NotebookPage } from '../../data/notebook-pages';
+import { pad2, pillarLabel } from '../../data/notebook-pages';
+
+interface Props { pages: NotebookPage[]; id?: string; }
+const { pages, id = 'notebook-hero' } = Astro.props;
+const n = pages.length;
+---
+<section class="hero" id={id} data-hero style={`--n:${n}`} aria-roledescription="notebook" aria-label="The AWJ notebook. Scroll to open it and turn the pages, or use the arrow keys.">
+  <div class="hero__track" data-track>
+    {Array.from({ length: n + 1 }, (_, k) => <i class="hero__snap" style={`--k:${k}`} aria-hidden="true"></i>)}
+
+    <div class="hero__stage" data-stage>
+      <div class="hero__intro" data-intro>
+        <p class="nb-eyebrow">Andy Whyte Journal</p>
+        <h1 class="hero__title">A notebook of principles for sales, founding and being human.</h1>
+        <p class="hero__cue" aria-hidden="true">Scroll to open</p>
+      </div>
+
+      <div class="nb-scene" data-scene>
+        <div class="nb-pad" data-pad>
+          <div class="nb-pad__stack" aria-hidden="true"><i></i><i></i><i></i></div>
+
+          <ol class="nb-leaves">
+            {pages.map((p, i) => (
+              <li class="nb-leaf" data-index={i} data-number={pad2(p.number)} style={`--i:${i}`}>
+                <div class="nb-leaf__body">
+                  <a class="nb-leaf__front" href={p.href} data-leaf-link aria-label={`Read Maxim ${pad2(p.number)}: ${p.title}`}>
+                    <img src={i < 2 ? p.src : undefined} data-src={i < 2 ? undefined : p.src} alt={p.alt} width="1600" height="1096" decoding="async" draggable="false" data-leaf-img />
+                    <span class="nb-leaf__shade" aria-hidden="true"></span>
+                  </a>
+                  <div class="nb-leaf__back" aria-hidden="true"></div>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div class="nb-spine" aria-hidden="true"></div>
+
+          <button type="button" class="nb-cover" data-cover aria-label="Open the notebook">
+            <span class="nb-cover__front"><img src="/notebook/cover-landscape.webp" alt="" width="1638" height="1200" draggable="false" /></span>
+            <span class="nb-cover__back"></span>
+          </button>
+
+          <div class="nb-shadow" aria-hidden="true"></div>
+        </div>
+        <div class="nb-cursor" aria-hidden="true"><span>Open</span></div>
+      </div>
+
+      <div class="hero__captions">
+        {pages.map((p, i) => (
+          <article class="hero__cap" data-cap={i}>
+            <p class="hero__cap-meta nb-meta">
+              <span>AWJ No. {pad2(p.number)}</span>
+              <span class={`nb-pill nb-pill--${p.pillar}`}>{pillarLabel[p.pillar]}</span>
+            </p>
+            <h2 class="hero__cap-title">{p.title}</h2>
+            <a class="hero__cap-link" href={p.href}>Read the essay &rarr;</a>
+          </article>
+        ))}
+      </div>
+
+      <div class="hero__controls">
+        <button type="button" class="nb-ctl" data-prev aria-label="Previous page">&larr;</button>
+        <p class="nb-counter"><span data-counter aria-live="polite">Closed</span></p>
+        <button type="button" class="nb-ctl" data-next aria-label="Next page">&rarr;</button>
+        <button type="button" class="nb-ctl nb-ctl--text" data-sound aria-pressed="false" title="A quiet paper flick on each turn">Sound off</button>
+        <button type="button" class="nb-ctl nb-ctl--text" data-tilt hidden>Enable tilt</button>
+        <a class="hero__skip" href="#library">Skip to the library &darr;</a>
+      </div>
+
+      <ol class="hero__rail" aria-label="Jump to a Maxim">
+        {pages.map((p, i) => (
+          <li><button type="button" data-go={i} aria-label={`Go to Maxim ${pad2(p.number)}`}>{pad2(p.number)}</button></li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; }
+  .hero__track { position: relative; height: calc(var(--stage-h, 100svh) + var(--n) * var(--seg, 60svh)); }
+  .hero__snap { position: absolute; left: 0; top: calc(var(--k) * var(--seg, 60svh)); width: 1px; height: 1px; scroll-snap-align: start; }
+  .hero__stage {
+    position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h));
+    display: grid; grid-template-rows: auto 1fr auto auto; justify-items: center; align-items: center;
+    gap: 10px; padding: 10px 0 14px; overflow: hidden;
+  }
+  .hero.is-static .hero__track { height: auto; }
+  .hero.is-static .hero__stage { position: static; height: auto; overflow: visible; }
+
+  .hero__intro { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: opacity .3s, transform .3s; max-width: 30ch; }
+  .hero__title { font-size: clamp(20px, 2.1vw, 28px); color: var(--nb-text-2); font-weight: 500; letter-spacing: -0.015em; line-height: 1.2; }
+  .hero__cue { font-size: 13px; color: var(--nb-text-3); animation: hero-cue 2.4s ease-in-out infinite; }
+  @keyframes hero-cue { 0%, 100% { transform: translateY(0); opacity: .7; } 50% { transform: translateY(4px); opacity: 1; } }
+  .hero.is-open .hero__intro { opacity: 0; transform: translateY(-6px); pointer-events: none; }
+  .hero.is-open .hero__cue { animation: none; }
+
+  /* the pad scales with the viewport so stage, caption and controls fit without scrolling inside the stage */
+  .nb-scene { position: relative; perspective: 1800px; perspective-origin: 50% -10%; width: min(640px, 92vw, calc((100svh - var(--header-h) - 330px) * 1.46)); }
+  .has-cursor .nb-scene { cursor: none; }
+  .nb-pad { position: relative; aspect-ratio: 1.46; transform-style: preserve-3d; transition: transform .6s var(--ease-out); }
+
+  .nb-pad__stack { position: absolute; inset: 0; border-radius: var(--radius-page); background: var(--nb-paper); box-shadow: var(--shadow-page); transform: translateZ(-3px); }
+  .nb-pad__stack i { position: absolute; inset: 0; border-radius: inherit; background: var(--nb-paper); border-bottom: 1px solid var(--nb-paper-shade); }
+  .nb-pad__stack i:nth-child(1) { transform: translate3d(0, 2px, -1px); }
+  .nb-pad__stack i:nth-child(2) { transform: translate3d(0, 4px, -2px); }
+  .nb-pad__stack i:nth-child(3) { transform: translate3d(0, 6px, -3px); box-shadow: 0 10px 24px rgba(20,28,60,.12); }
+
+  .nb-leaves { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; transform-style: preserve-3d; }
+  .nb-leaf { position: absolute; inset: 0; transform-origin: 50% 0%; transform-style: preserve-3d; visibility: hidden; transform: translateZ(calc(var(--i) * -2px)); will-change: transform; }
+  .nb-leaf__body { position: absolute; inset: 0; transform-origin: 50% 0%; transform-style: preserve-3d; }
+  .nb-leaf.is-current .nb-leaf__body { animation: nb-curl 7s ease-in-out infinite; }
+  .nb-leaf.is-settling .nb-leaf__body { animation: nb-settle .55s var(--ease-out); }
+  .nb-leaf__front, .nb-leaf__back { position: absolute; inset: 0; border-radius: var(--radius-page); overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+  .nb-leaf__front { display: block; background: var(--nb-paper); }
+  .nb-leaf__front img { width: 100%; height: 100%; object-fit: contain; background: var(--nb-paper); }
+  .nb-leaf__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,28,60,0) 30%, rgba(20,28,60,.42)); opacity: 0; pointer-events: none; }
+  .nb-leaf__back { background: linear-gradient(180deg, #EBE7E1, var(--nb-paper) 45%); transform: rotateX(180deg); }
+
+  .nb-spine { position: absolute; left: -1.2%; right: -1.2%; top: -2.4%; height: 4.2%; background: linear-gradient(180deg, var(--nb-cover-lit), var(--nb-cover) 55%, var(--nb-cover-deep)); border-radius: 5px 5px 2px 2px; box-shadow: 0 2px 4px rgba(20,28,60,.28); transform: translateZ(1px); }
+
+  .nb-cover { position: absolute; inset: -2.4% -1.2% -1.8% -1.2%; padding: 0; border: 0; background: none; cursor: pointer; transform-origin: 50% 0%; transform-style: preserve-3d; transform: translateZ(2px); will-change: transform; }
+  .nb-cover:focus-visible { outline: 3px solid var(--nb-yellow); outline-offset: 6px; border-radius: 8px; }
+  .nb-cover__front, .nb-cover__back { position: absolute; inset: 0; border-radius: 7px; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: block; }
+  .nb-cover__front { box-shadow: var(--shadow-cover); background: var(--nb-cover); }
+  .nb-cover__front img { width: 100%; height: 100%; object-fit: cover; }
+  .nb-cover__back { background: linear-gradient(180deg, #E9E5DF, var(--nb-paper) 40%); transform: rotateX(180deg); }
+
+  .nb-shadow { position: absolute; left: 3%; right: 3%; bottom: -9%; height: 16%; background: radial-gradient(50% 50% at 50% 50%, rgba(20,28,60,.30), transparent 72%); filter: blur(12px); transform: translateZ(-12px); pointer-events: none; }
+
+  .nb-cursor { position: absolute; left: 0; top: 0; z-index: 5; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 999px; background: var(--nb-cover); color: #fff; display: grid; place-items: center; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; pointer-events: none; opacity: 0; transform: translate(-200px, -200px); transition: opacity .2s; }
+  .nb-cursor.is-on { opacity: .94; }
+
+  .hero__captions { position: relative; width: min(640px, 92vw); min-height: 96px; }
+  .hero__cap { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .25s; pointer-events: none; }
+  .hero__cap.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  .hero__cap-meta { display: flex; align-items: center; gap: 10px; }
+  .hero__cap-title { font-size: clamp(18px, 1.8vw, 24px); font-weight: 600; letter-spacing: -0.015em; line-height: 1.15; max-width: 30ch; }
+  .hero__cap-link { font-weight: 600; font-size: 14px; text-decoration: none; }
+  .hero__cap-link:hover { text-decoration: underline; }
+
+  .hero__controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .nb-ctl { height: 38px; min-width: 38px; padding: 0 13px; border-radius: 999px; border: 1px solid var(--nb-line); background: #fff; font: inherit; font-size: 14px; font-weight: 600; color: var(--nb-text); cursor: pointer; transition: border-color .2s, transform .2s var(--ease-out); }
+  .nb-ctl:hover { border-color: var(--nb-text-3); transform: translateY(-1px); }
+  .nb-ctl[aria-pressed="true"] { background: var(--nb-text); color: #fff; border-color: var(--nb-text); }
+  .nb-counter { margin: 0; min-width: 104px; text-align: center; font-size: 13px; color: var(--nb-text-3); font-variant-numeric: tabular-nums; }
+  .hero__skip { font-size: 13px; color: var(--nb-text-3); text-decoration: none; margin-left: 6px; }
+  .hero__skip:hover { color: var(--nb-text); text-decoration: underline; }
+
+  .hero__rail { position: absolute; right: clamp(8px, 2vw, 28px); top: 50%; transform: translateY(-50%); margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .hero__rail button { width: 30px; height: 22px; border: 0; background: none; font: inherit; font-size: 11px; font-weight: 600; color: var(--nb-text-3); cursor: pointer; border-radius: 6px; font-variant-numeric: tabular-nums; }
+  .hero__rail button:hover { color: var(--nb-text); background: var(--nb-canvas-2); }
+  .hero__rail button.is-on { color: #fff; background: var(--nb-cover); }
+
+  @keyframes nb-curl { 0%, 100% { transform: rotateX(0deg); } 50% { transform: rotateX(3.5deg); } }
+  @keyframes nb-settle { 0% { transform: rotateX(0deg); } 35% { transform: rotateX(3deg); } 70% { transform: rotateX(-0.6deg); } 100% { transform: rotateX(0deg); } }
+
+  @media (max-width: 900px) { .hero__rail { display: none; } }
+  @media (max-height: 700px) { .hero__intro .nb-eyebrow { display: none; } .hero__captions { min-height: 80px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__track { height: auto; }
+    .hero__stage { position: static; height: auto; overflow: visible; }
+    .hero__cue { animation: none; }
+    .nb-leaf.is-current .nb-leaf__body, .nb-leaf.is-settling .nb-leaf__body { animation: none; }
+    .nb-pad { transition: none; }
+  }
+</style>
+
+<script>
+  // Scroll-driven notebook. Re-runs after client-side navigation; tears down the previous instance first.
+  let controller: AbortController | undefined;
+
+  function setup() {
+    controller?.abort();
+    controller = new AbortController();
+    const { signal } = controller;
+
+    document.querySelectorAll<HTMLElement>('[data-hero]').forEach((hero) => {
+      const track = hero.querySelector<HTMLElement>('[data-track]')!;
+      const stage = hero.querySelector<HTMLElement>('[data-stage]')!;
+      const scene = hero.querySelector<HTMLElement>('[data-scene]')!;
+      const pad = hero.querySelector<HTMLElement>('[data-pad]')!;
+      const cover = hero.querySelector<HTMLElement>('[data-cover]')!;
+      const leaves = Array.from(hero.querySelectorAll<HTMLElement>('.nb-leaf'));
+      const shades = leaves.map((l) => l.querySelector<HTMLElement>('.nb-leaf__shade')!);
+      const imgs = leaves.map((l) => l.querySelector<HTMLElement>('[data-leaf-img]')!);
+      const caps = Array.from(hero.querySelectorAll<HTMLElement>('[data-cap]'));
+      const rail = Array.from(hero.querySelectorAll<HTMLElement>('[data-go]'));
+      const counter = hero.querySelector<HTMLElement>('[data-counter]')!;
+      const cursor = hero.querySelector<HTMLElement>('.nb-cursor')!;
+      const cursorLabel = cursor.querySelector('span')!;
+      const soundBtn = hero.querySelector<HTMLButtonElement>('[data-sound]')!;
+      const tiltBtn = hero.querySelector<HTMLButtonElement>('[data-tilt]')!;
+
+      const N = leaves.length;           // pages
+      const SEGMENTS = N;                // cover + (N - 1) turns
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const finePointer = matchMedia('(pointer: fine)').matches;
+      const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
+
+      let seg = 0, stageH = 0, p = 0, lastWhole = 0, settleTimer = 0, soundOn = false, audio: AudioContext | undefined;
+      const smooth = (t: number) => t * t * (3 - 2 * t);
+      const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+
+      function measure() {
+        stageH = stage.getBoundingClientRect().height || (innerHeight - headerH);
+        const frac = innerWidth < 760 ? 0.7 : 0.6;
+        seg = Math.round(stageH * frac);
+        track.style.setProperty('--seg', `${seg}px`);
+        track.style.setProperty('--stage-h', `${stageH}px`);
+        if (!reduce) track.style.height = `${stageH + SEGMENTS * seg}px`;
+      }
+
+      function progress() {
+        const top = track.getBoundingClientRect().top;
+        return clamp((headerH - top) / seg, 0, SEGMENTS);
+      }
+
+      function currentIndex(pv: number) {
+        return pv < 1 ? -1 : Math.min(N - 1, Math.floor(pv - 0.5));
+      }
+
+      function render(pv: number) {
+        p = pv;
+        // cover
+        const c = clamp(pv, 0, 1);
+        cover.style.transform = `translateZ(2px) rotateX(${(smooth(c) * 178).toFixed(3)}deg)`;
+        cover.style.visibility = c >= 1 ? 'hidden' : 'visible';
+        hero.classList.toggle('is-open', pv >= 0.5);
+        // leaves: leaf i turns while pv is in [i+1, i+2)
+        for (let i = 0; i < N; i++) {
+          const f = clamp(pv - (i + 1), 0, 1);
+          const visible = pv >= i - 0.001 && pv < i + 2;
+          const leaf = leaves[i];
+          // load this page and the three beneath it just before they are needed
+          if (pv >= i - 3 && !imgs[i].getAttribute('src') && imgs[i].dataset.src) { imgs[i].setAttribute('src', imgs[i].dataset.src!); }
+          leaf.style.visibility = visible ? 'visible' : 'hidden';
+          if (visible) {
+            leaf.style.transform = `translateZ(${-2 * i}px) rotateX(${(smooth(f) * 178).toFixed(3)}deg)`;
+            shades[i].style.opacity = (Math.sin(f * Math.PI) * 0.45).toFixed(3);
+          }
+        }
+        // captions, rail, counter, cursor
+        const cur = currentIndex(pv);
+        caps.forEach((el, i) => el.classList.toggle('is-on', i === cur));
+        rail.forEach((el, i) => el.classList.toggle('is-on', i === cur));
+        counter.textContent = cur < 0 ? 'Closed' : `${cur + 1} / ${N}`;
+        cursorLabel.textContent = cur < 0 ? 'Open' : 'Read';
+        // the breathing page only rests between turns
+        const whole = Math.round(pv);
+        const atRest = Math.abs(pv - whole) < 0.02;
+        leaves.forEach((l, i) => l.classList.toggle('is-current', atRest && i === cur));
+        // view transition hand-off: name only the page on top
+        imgs.forEach((img, i) => { (img.style as any).viewTransitionName = atRest && i === cur ? 'maxim-page' : ''; });
+        // sounds at each boundary
+        if (whole !== lastWhole && atRest) { play(whole === 1 && lastWhole === 0 ? 'open' : 'flip'); lastWhole = whole; }
+      }
+
+      function onSettle() {
+        const cur = currentIndex(p);
+        if (cur < 0 || Math.abs(p - Math.round(p)) > 0.02) return;
+        const leaf = leaves[cur];
+        leaf.classList.remove('is-current');
+        leaf.classList.add('is-settling');
+        leaf.addEventListener('animationend', () => { leaf.classList.remove('is-settling'); leaf.classList.add('is-current'); }, { once: true });
+      }
+
+      function goTo(k: number) {
+        k = clamp(k, 0, SEGMENTS);
+        // a jump needs its destination pages before the scroll lands
+        for (let i = Math.max(0, k - 2); i <= Math.min(N - 1, k + 1); i++) { if (!imgs[i].getAttribute('src') && imgs[i].dataset.src) imgs[i].setAttribute('src', imgs[i].dataset.src!); }
+        const trackTop = track.getBoundingClientRect().top + scrollY;
+        scrollTo({ top: trackTop - headerH + k * seg, behavior: reduce ? 'auto' : 'smooth' });
+      }
+
+      // static mode: reduced motion, or anything that makes the scrub pointless
+      if (reduce) {
+        hero.classList.add('is-static', 'is-open');
+        cover.style.visibility = 'hidden';
+        leaves[0].style.visibility = 'visible';
+        caps[0]?.classList.add('is-on');
+        counter.textContent = `1 / ${N}`;
+        imgs.forEach((img) => { if (img.dataset.src) img.setAttribute('src', img.dataset.src); });
+        return;
+      }
+
+      measure();
+      render(progress());
+      lastWhole = Math.round(p);
+
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { render(progress()); ticking = false; });
+        clearTimeout(settleTimer);
+        settleTimer = window.setTimeout(onSettle, 140);
+      };
+      addEventListener('scroll', onScroll, { passive: true, signal });
+      addEventListener('resize', () => { measure(); render(progress()); }, { signal });
+
+      // controls
+      hero.querySelector('[data-next]')!.addEventListener('click', () => goTo(Math.round(p) + 1), { signal });
+      hero.querySelector('[data-prev]')!.addEventListener('click', () => goTo(Math.round(p) - 1), { signal });
+      rail.forEach((b, i) => b.addEventListener('click', () => goTo(i + 1), { signal }));
+      cover.addEventListener('click', () => goTo(1), { signal });
+
+      // keyboard turns while the notebook is pinned
+      addEventListener('keydown', (e: KeyboardEvent) => {
+        const t = e.target as HTMLElement;
+        if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+        const pinned = p > -0.001 && p < SEGMENTS + 0.001 && stage.getBoundingClientRect().top <= headerH + 1 && track.getBoundingClientRect().bottom > innerHeight - 1;
+        if (!pinned) return;
+        if (['ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); goTo(Math.round(p) + 1); }
+        else if (['ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); goTo(Math.round(p) - 1); }
+      }, { signal });
+
+      // tilt toward the pointer, and the custom cursor
+      if (finePointer) {
+        hero.classList.add('has-cursor');
+        scene.addEventListener('pointerenter', () => cursor.classList.add('is-on'), { signal });
+        scene.addEventListener('pointerleave', () => { cursor.classList.remove('is-on'); pad.style.transform = ''; }, { signal });
+        scene.addEventListener('pointermove', (e: PointerEvent) => {
+          const r = scene.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          cursor.style.transform = `translate(${e.clientX - r.left}px, ${e.clientY - r.top}px)`;
+          pad.style.transform = `rotateX(${(-y * 7).toFixed(2)}deg) rotateY(${(x * 9).toFixed(2)}deg)`;
+        }, { signal });
+      }
+
+      // gyroscope on phones (iOS asks on a tap)
+      const bindOrientation = () => addEventListener('deviceorientation', (e: DeviceOrientationEvent) => {
+        if (e.beta == null) return;
+        const rx = clamp((e.beta - 50) / 6, -8, 8);
+        const ry = clamp((e.gamma || 0) / 6, -8, 8);
+        pad.style.transform = `rotateX(${(-rx).toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+      }, { signal });
+      const DOE: any = (window as any).DeviceOrientationEvent;
+      if (DOE && !finePointer) {
+        if (typeof DOE.requestPermission === 'function') {
+          tiltBtn.hidden = false;
+          tiltBtn.addEventListener('click', async () => {
+            try { if ((await DOE.requestPermission()) === 'granted') { bindOrientation(); tiltBtn.hidden = true; } } catch {}
+          }, { signal });
+        } else {
+          bindOrientation();
+        }
+      }
+
+      // sound: a synthesised paper flick, off by default
+      try { soundOn = localStorage.getItem('awj-sound') === '1'; } catch {}
+      const renderSound = () => { soundBtn.setAttribute('aria-pressed', String(soundOn)); soundBtn.textContent = soundOn ? 'Sound on' : 'Sound off'; };
+      soundBtn.addEventListener('click', () => {
+        soundOn = !soundOn;
+        try { localStorage.setItem('awj-sound', soundOn ? '1' : '0'); } catch {}
+        renderSound(); if (soundOn) play('flip');
+      }, { signal });
+      function play(kind: 'flip' | 'open') {
+        if (!soundOn) return;
+        try {
+          audio = audio || new (window.AudioContext || (window as any).webkitAudioContext)();
+          const ctx = audio;
+          const dur = kind === 'open' ? 0.3 : 0.17;
+          const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
+          const d = buf.getChannelData(0);
+          for (let i = 0; i < d.length; i++) { const t = i / d.length; d[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 2.4) * (t < 0.06 ? t / 0.06 : 1); }
+          const src = ctx.createBufferSource(); src.buffer = buf;
+          const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = kind === 'open' ? 850 : 1700; bp.Q.value = 0.7;
+          const g = ctx.createGain(); g.gain.value = kind === 'open' ? 0.5 : 0.32;
+          src.connect(bp).connect(g).connect(ctx.destination); src.start();
+        } catch {}
+      }
+      renderSound();
+    });
+  }
+
+  document.addEventListener('astro:page-load', setup);
+</script>

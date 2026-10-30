@@ -1,129 +1,66 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Eyebrow from '../components/Eyebrow.astro';
-import Gallery from '../components/Gallery.astro';
-import Scribble from '../components/Scribble.astro';
-import { VIDEOS, PILLAR_VIDEO_META, type Pillar } from '../lib/videos';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { VIDEOS } from '../lib/videos';
+import { pillarLabel } from '../data/notebook-pages';
 
-const longform = VIDEOS.filter(v => v.type === 'longform');
-const shorts   = VIDEOS.filter(v => v.type === 'short');
+const longform = VIDEOS.filter((v) => v.type === 'longform');
+const shorts = VIDEOS.filter((v) => v.type === 'short');
+const featured = longform[0];
 
-const featured       = longform[0] ?? VIDEOS[0];
-const featuredShort  = shorts[0];
-
-const pillars: Pillar[] = ['sales', 'founder', 'human'];
-
-const galleryImages = [
-  { src: '/media/gallery/DSC03093-scaled.webp',   alt: 'Andy Whyte, CEO and Founder of MEDDICC' },
-  { src: '/media/gallery/DSC03017-2.webp',        alt: 'Andy Whyte portrait' },
-  { src: '/media/gallery/DSC03060-scaled.jpg',    alt: 'Andy Whyte speaking on stage' },
+const gallery = [
+  { src: '/media/gallery/DSC03093-scaled.webp', alt: 'Andy Whyte, founder and CEO of MEDDICC' },
+  { src: '/media/gallery/DSC03017-2.webp', alt: 'Andy Whyte portrait' },
+  { src: '/media/gallery/DSC03060-scaled.jpg', alt: 'Andy Whyte speaking on stage' },
   { src: '/media/gallery/DSC02799-2-scaled.webp', alt: 'Andy Whyte at a keynote' },
-  { src: '/media/gallery/DSC03231.webp',          alt: 'Andy Whyte candid' },
-  { src: '/media/gallery/DSC02731-2-scaled.webp', alt: 'Andy Whyte off-stage' },
-  { src: '/media/gallery/DSC02886-scaled.webp',   alt: 'Andy Whyte portrait' },
+  { src: '/media/gallery/DSC03231.webp', alt: 'Andy Whyte, candid' },
+  { src: '/media/gallery/DSC02731-2-scaled.webp', alt: 'Andy Whyte off stage' },
+  { src: '/media/gallery/DSC02886-scaled.webp', alt: 'Andy Whyte portrait' },
 ];
-
-const candidImages = [
-  { src: '/media/candids/img_4156.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/img_4234.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/img_4233_2.jpg',                                alt: 'Candid' },
-  { src: '/media/candids/img_4212.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/img_4211.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/img_4122.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/img_4276.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/img_4288.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/img_4967.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/img_5122.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/2917b53f-0436-4802-98e7-091521d23217.jpg',      alt: 'Candid' },
-  { src: '/media/candids/img_5283.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/img_5316.jpg',                                  alt: 'Candid' },
-  { src: '/media/candids/432bffbc-5983-493b-b79c-3ccc938350e3.jpg',      alt: 'Candid' },
-  { src: '/media/candids/7de8a61e-c393-4d1c-92db-1e9bfd96bb6f.jpg',      alt: 'Candid' },
-  { src: '/media/candids/d078843e-d199-4126-9223-904d32d6f884.jpg',      alt: 'Candid' },
-  { src: '/media/candids/img_5671.jpg',                                  alt: 'Candid' },
-];
+const candids = ['img_4156.jpg', 'img_4234.jpg', 'img_4233_2.jpg', 'img_4212.jpg', 'img_4211.jpg', 'img_4122.jpg', 'img_4276.jpg', 'img_4288.jpg', 'img_4967.jpg', 'img_5122.jpg', '2917b53f-0436-4802-98e7-091521d23217.jpg', 'img_5283.jpg', 'img_5316.jpg', '432bffbc-5983-493b-b79c-3ccc938350e3.jpg', '7de8a61e-c393-4d1c-92db-1e9bfd96bb6f.jpg', 'd078843e-d199-4126-9223-904d32d6f884.jpg', 'img_5671.jpg'].map((f) => `/media/candids/${f}`);
 ---
-<Layout
-  title="Media — AWJ"
-  description="Videos and photos from Andy Whyte. Long-form essays, vertical Shorts, and behind-the-scenes."
+<SiteLayout
+  title="Media: videos, headshots and candids | Andy Whyte"
+  description="Andy Whyte's long-form videos and shorts, press headshots and behind-the-scenes photos. Everything an event organiser or editor needs."
   pageType="media"
+  breadcrumbs={[{ name: 'Media', href: '/media/' }]}
 >
-  {/* HERO */}
-  <section class="md-hero">
-    <div class="site-shell md-hero__inner">
-      <Scribble src="/assets/scribbles/scribble_fire_1.png" rotate={12} top="40px" right="6%" width={120} />
-      <Eyebrow>Watch & see</Eyebrow>
-      <h1 class="md-hero__title">Media.</h1>
-      <p class="md-hero__sub">Long-form essays, vertical Shorts, and a place to look around. Filter by pillar — Sales, Founder, Human — or browse the lot.</p>
+  <section class="nb-page-head">
+    <div class="nb-shell nb-page-head__in">
+      <p class="nb-eyebrow">Media</p>
+      <h1>Videos, headshots and candids.</h1>
+      <p class="nb-lede">{longform.length} long-form videos and {shorts.length} shorts from the channel, plus the photographs an organiser or editor might need.</p>
     </div>
   </section>
 
-  {/* CINEMA — long-form 16:9 */}
-  {longform.length > 0 && (
-    <section class="cinema awj-bg-paper-black">
-      <div class="site-shell cinema__inner">
-        <div class="cinema__head">
-          <Eyebrow color="#FFCE00">The screening room</Eyebrow>
-          <h2 class="cinema__h">Long-form. <span class="cinema__count">({longform.length})</span></h2>
+  {featured && (
+    <section class="nb-section" style="padding-top:0" id="videos">
+      <div class="nb-shell">
+        <div class="player">
+          <iframe
+            id="media-player"
+            src={`https://www.youtube-nocookie.com/embed/${featured.id}?rel=0&modestbranding=1`}
+            title={featured.title}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            data-yt-track
+            data-yt-title={featured.title}
+            data-yt-type="longform"
+          ></iframe>
         </div>
-
-        <div class="cinema__stage">
-          <div class="cinema__player">
-            <iframe
-              id="cinema-iframe"
-              src={`https://www.youtube-nocookie.com/embed/${featured.id}?rel=0&modestbranding=1`}
-              title="Andy Whyte video"
-              loading="lazy"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-              data-yt-track
-              data-yt-title={featured.title}
-              data-yt-type="longform"
-            ></iframe>
-          </div>
-          <div class="cinema__caption">
-            <span class="cinema__pill" id="cinema-pillar" data-pillar={featured.pillar}>{PILLAR_VIDEO_META[featured.pillar].label}</span>
-            <h3 class="cinema__title" id="cinema-title">{featured.title}</h3>
-            <a id="cinema-yt-link" href={`https://www.youtube.com/watch?v=${featured.id}`} target="_blank" rel="noopener" class="cinema__yt-link">Open on YouTube →</a>
-          </div>
+        <p class="nb-meta" style="margin-top:12px" data-player-title>Now playing: {featured.title}</p>
+        <div class="nb-section-head" style="margin:clamp(28px,4vw,48px) 0 20px">
+          <p class="nb-eyebrow">Long-form</p>
+          <h2>The videos.</h2>
         </div>
-
-        <div class="cinema__filters" role="tablist" aria-label="Filter long-form videos by pillar">
-          <button type="button" class="cinema__filter is-active" data-filter="all">All ({longform.length})</button>
-          {pillars.map(p => {
-            const count = longform.filter(v => v.pillar === p).length;
-            if (count === 0) return null;
-            return <button type="button" class={`cinema__filter cinema__filter--${p}`} data-filter={p}>{PILLAR_VIDEO_META[p].label} ({count})</button>;
-          })}
-        </div>
-
-        <ul class="cinema__thumbs" role="list">
-          {longform.map((v, i) => (
-            <li
-              class:list={['cinema__thumb', { 'is-active': i === 0 }]}
-              data-video-id={v.id}
-              data-title={v.title}
-              data-pillar={v.pillar}
-              data-pillar-label={PILLAR_VIDEO_META[v.pillar].label}
-            >
-              <button type="button" class="cinema__thumb-btn" aria-label={`Play: ${v.title}`}>
-                <span class="cinema__thumb-frame">
-                  <img
-                    src={`https://i.ytimg.com/vi/${v.id}/mqdefault.jpg`}
-                    srcset={`https://i.ytimg.com/vi/${v.id}/mqdefault.jpg 320w, https://i.ytimg.com/vi/${v.id}/hqdefault.jpg 480w, https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg 1280w`}
-                    sizes="(max-width: 720px) 90vw, 24vw"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <span class="cinema__thumb-play" aria-hidden="true">▶</span>
-                  <span class={`cinema__thumb-pill cinema__thumb-pill--${v.pillar}`}>{PILLAR_VIDEO_META[v.pillar].label}</span>
-                </span>
-                <span class="cinema__thumb-meta">
-                  <span class="cinema__thumb-title">{v.title}</span>
-                </span>
+        <ul class="thumbs">
+          {longform.map((v) => (
+            <li>
+              <button type="button" class="thumb" data-video={v.id} data-title={v.title} data-type="longform">
+                <img src={`https://i.ytimg.com/vi/${v.id}/mqdefault.jpg`} alt="" loading="lazy" width="320" height="180" />
+                <span class="thumb__title">{v.title}</span>
+                <span class="nb-meta">{pillarLabel[v.pillar]}{v.awjNumber ? ` · Maxim ${v.awjNumber}` : ''}</span>
               </button>
             </li>
           ))}
@@ -132,66 +69,20 @@ const candidImages = [
     </section>
   )}
 
-  {/* SHORTS — vertical 9:16 */}
   {shorts.length > 0 && (
-    <section class="shorts awj-bg-paper-yellow">
-      <div class="site-shell shorts__inner">
-        <div class="shorts__head">
-          <Eyebrow>Quick takes</Eyebrow>
-          <h2 class="shorts__h">Shorts. <span class="shorts__count">({shorts.length})</span></h2>
-          <p class="shorts__sub">Vertical, snackable, made for the feed.</p>
+    <section class="nb-section nb-section--tint">
+      <div class="nb-shell">
+        <div class="nb-section-head">
+          <p class="nb-eyebrow">Shorts</p>
+          <h2>The short ones.</h2>
         </div>
-
-        <div class="shorts__stage">
-          <div class="shorts__player">
-            <iframe
-              id="shorts-iframe"
-              src={`https://www.youtube-nocookie.com/embed/${featuredShort?.id}?rel=0&modestbranding=1`}
-              title="Andy Whyte short"
-              loading="lazy"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-              data-yt-track
-              data-yt-title={featuredShort?.title}
-              data-yt-type="short"
-            ></iframe>
-          </div>
-
-          <div class="shorts__caption">
-            <span class="shorts__pill" id="shorts-pillar" data-pillar={featuredShort?.pillar}>{featuredShort && PILLAR_VIDEO_META[featuredShort.pillar].label}</span>
-            <h3 class="shorts__title" id="shorts-title">{featuredShort?.title}</h3>
-            <a id="shorts-yt-link" href={`https://www.youtube.com/shorts/${featuredShort?.id}`} target="_blank" rel="noopener" class="shorts__yt-link">Open on YouTube →</a>
-          </div>
-        </div>
-
-        <div class="shorts__filters" role="tablist" aria-label="Filter Shorts by pillar">
-          <button type="button" class="shorts__filter is-active" data-filter="all">All ({shorts.length})</button>
-          {pillars.map(p => {
-            const count = shorts.filter(v => v.pillar === p).length;
-            if (count === 0) return null;
-            return <button type="button" class={`shorts__filter shorts__filter--${p}`} data-filter={p}>{PILLAR_VIDEO_META[p].label} ({count})</button>;
-          })}
-        </div>
-
-        <ul class="shorts__rail" role="list">
-          {shorts.map((v, i) => (
-            <li
-              class:list={['shorts__thumb', { 'is-active': i === 0 }]}
-              data-video-id={v.id}
-              data-title={v.title}
-              data-pillar={v.pillar}
-              data-pillar-label={PILLAR_VIDEO_META[v.pillar].label}
-            >
-              <button type="button" class="shorts__thumb-btn" aria-label={`Play: ${v.title}`}>
-                <span class="shorts__thumb-frame">
-                  <img src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`} alt="" loading="lazy" decoding="async" />
-                  <span class="shorts__thumb-play" aria-hidden="true">▶</span>
-                  <span class={`shorts__thumb-pill shorts__thumb-pill--${v.pillar}`}>{PILLAR_VIDEO_META[v.pillar].label}</span>
-                </span>
-                <span class="shorts__thumb-title">{v.title}</span>
-              </button>
+        <ul class="shorts">
+          {shorts.map((v) => (
+            <li>
+              <a class="short" href={`https://www.youtube.com/shorts/${v.id}`} target="_blank" rel="noopener">
+                <img src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
+                <span class="thumb__title">{v.title}</span>
+              </a>
             </li>
           ))}
         </ul>
@@ -199,511 +90,65 @@ const candidImages = [
     </section>
   )}
 
-  {/* HEADSHOTS GALLERY */}
-  <section class="md-gallery">
-    <div class="site-shell md-gallery__head">
-      <Eyebrow>Look around</Eyebrow>
-      <h2 class="md-gallery__h">Headshots.</h2>
-      <p class="md-gallery__sub">Studio shots and portraits.</p>
-    </div>
-    <div class="md-gallery__grid">
-      <Gallery images={galleryImages} />
-    </div>
-  </section>
-
-  {/* CANDIDS */}
-  <section class="md-candids">
-    <div class="site-shell md-candids__head">
-      <Eyebrow>Off the record</Eyebrow>
-      <h2 class="md-candids__h">Candids.</h2>
-      <p class="md-candids__sub">Behind-the-scenes, on-stage, mid-laugh, and the occasional bad idea caught on camera.</p>
-    </div>
-    <div class="md-candids__grid">
-      <Gallery images={candidImages} />
+  <section class="nb-section" id="photos">
+    <div class="nb-shell">
+      <div class="nb-section-head">
+        <p class="nb-eyebrow">Headshots</p>
+        <h2>For programmes and press.</h2>
+        <p class="nb-lede">Right-click to save. Credit is appreciated but not required.</p>
+      </div>
+      <div class="masonry">
+        {gallery.map((g) => <a href={g.src} target="_blank" rel="noopener"><img src={g.src} alt={g.alt} loading="lazy" /></a>)}
+      </div>
     </div>
   </section>
-</Layout>
 
-<style>
-  /* HERO */
-  .md-hero { padding: var(--sp-9) 0 var(--sp-7); border-bottom: var(--border-hard); position: relative; overflow: hidden; }
-  .md-hero__inner { padding: 0 var(--gutter); position: relative; }
-  .md-hero__title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(72px, 14vw, 220px);
-    margin: var(--sp-3) 0;
-    line-height: 0.85;
-    letter-spacing: -0.01em;
-  }
-  .md-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0; max-width: 60ch; }
-
-  /* PILL UTILITY (re-used by both cinema + shorts) */
-  .cinema__pill, .shorts__pill, .cinema__thumb-pill, .shorts__thumb-pill {
-    display: inline-flex;
-    align-items: center;
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 4px 10px 3px;
-    border-radius: var(--radius-pill);
-  }
-  .cinema__pill[data-pillar='sales'],
-  .shorts__pill[data-pillar='sales']     { background: var(--awj-yellow); color: var(--awj-black); }
-  .cinema__pill[data-pillar='founder'],
-  .shorts__pill[data-pillar='founder']   { background: var(--awj-blue);   color: var(--awj-white); }
-  .cinema__pill[data-pillar='human'],
-  .shorts__pill[data-pillar='human']     { background: var(--awj-white);  color: var(--awj-black); border: 1.5px solid var(--awj-black); }
-
-  /* CINEMA (long-form) */
-  .cinema { color: var(--awj-white); border-bottom: var(--border-hard); }
-  .cinema__inner { padding: var(--sp-9) var(--gutter); max-width: var(--site-max); margin: 0 auto; }
-  .cinema__head { margin-bottom: var(--sp-7); }
-  .cinema__h {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(40px, 5vw, 80px);
-    margin: var(--sp-2) 0 0;
-    line-height: 1;
-    letter-spacing: -0.005em;
-    color: var(--awj-white);
-  }
-  .cinema__count { font-family: var(--font-mono); font-size: 0.4em; color: var(--awj-yellow); letter-spacing: 0.1em; vertical-align: middle; }
-
-  .cinema__stage {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-5);
-    margin-bottom: var(--sp-7);
-  }
-  @media (min-width: 1100px) {
-    .cinema__stage { grid-template-columns: 2fr 1fr; gap: var(--sp-7); align-items: end; }
-  }
-  .cinema__player {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    background: #000;
-    border: var(--border-thicc);
-    box-shadow: 12px 12px 0 var(--awj-yellow);
-    overflow: hidden;
-  }
-  .cinema__player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .cinema__caption { padding: 0; }
-  .cinema__title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(28px, 3vw, 40px);
-    line-height: 1.05;
-    margin: var(--sp-3) 0 var(--sp-3);
-    letter-spacing: -0.005em;
-    color: var(--awj-white);
-  }
-  .cinema__yt-link {
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--awj-yellow);
-    text-decoration: none;
-    border-bottom: 1px solid var(--awj-yellow);
-    padding-bottom: 2px;
-  }
-  .cinema__yt-link:hover { color: var(--awj-white); border-color: var(--awj-white); }
-
-  /* PILLAR FILTERS */
-  .cinema__filters {
-    display: flex;
-    gap: var(--sp-2);
-    flex-wrap: wrap;
-    margin-bottom: var(--sp-5);
-    padding-top: var(--sp-5);
-    border-top: 1px solid rgba(255,255,255,0.12);
-  }
-  .cinema__filter {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 8px 14px;
-    background: transparent;
-    color: var(--awj-white);
-    border: 1.5px solid rgba(255,255,255,0.3);
-    border-radius: var(--radius-pill);
-    cursor: pointer;
-    transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
-  }
-  .cinema__filter:hover { border-color: var(--awj-yellow); color: var(--awj-yellow); }
-  .cinema__filter.is-active { background: var(--awj-yellow); color: var(--awj-black); border-color: var(--awj-yellow); }
-
-  .cinema__thumbs {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-4);
-  }
-  @media (min-width: 600px) { .cinema__thumbs { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1000px) { .cinema__thumbs { grid-template-columns: repeat(3, 1fr); } }
-  @media (min-width: 1300px) { .cinema__thumbs { grid-template-columns: repeat(4, 1fr); } }
-
-  .cinema__thumb-btn {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background: transparent;
-    border: 0;
-    padding: 0;
-    text-align: left;
-    cursor: pointer;
-    color: var(--awj-white);
-  }
-  .cinema__thumb-frame {
-    position: relative;
-    display: block;
-    aspect-ratio: 16 / 9;
-    background: var(--awj-grey-900);
-    border: 2px solid rgba(255,255,255,0.2);
-    overflow: hidden;
-    transition: border-color var(--t-fast);
-  }
-  .cinema__thumb-frame img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform var(--t-base) var(--ease-out);
-  }
-  .cinema__thumb-pill {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    z-index: 2;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-  }
-  .cinema__thumb-pill--sales   { background: var(--awj-yellow); color: var(--awj-black); }
-  .cinema__thumb-pill--founder { background: var(--awj-blue);   color: var(--awj-white); }
-  .cinema__thumb-pill--human   { background: var(--awj-white);  color: var(--awj-black); }
-  .cinema__thumb-play {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 56px; height: 56px;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(0,0,0,0.7);
-    color: var(--awj-yellow);
-    font-size: 20px;
-    border-radius: 50%;
-    border: 2px solid var(--awj-yellow);
-    opacity: 0;
-    transition: opacity var(--t-fast);
-  }
-  .cinema__thumb-btn:hover .cinema__thumb-frame { border-color: var(--awj-yellow); }
-  .cinema__thumb-btn:hover .cinema__thumb-frame img { transform: scale(1.04); }
-  .cinema__thumb-btn:hover .cinema__thumb-play { opacity: 1; }
-  .cinema__thumb.is-active .cinema__thumb-frame { border-color: var(--awj-yellow); }
-  .cinema__thumb.is-active .cinema__thumb-play { opacity: 1; background: var(--awj-yellow); color: var(--awj-black); }
-
-  .cinema__thumb-meta { display: flex; flex-direction: column; gap: 4px; padding: var(--sp-3) 0 0; }
-  .cinema__thumb-title {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 1.35;
-    color: var(--awj-white);
-  }
-  .cinema__thumb[hidden] { display: none; }
-
-  /* SHORTS */
-  .shorts { color: var(--awj-black); border-bottom: var(--border-hard); }
-  .shorts__inner { padding: var(--sp-9) var(--gutter); max-width: var(--site-max); margin: 0 auto; }
-  .shorts__head { margin-bottom: var(--sp-6); }
-  .shorts__h {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(40px, 5vw, 80px);
-    margin: var(--sp-2) 0 var(--sp-3);
-    line-height: 1;
-    letter-spacing: -0.005em;
-  }
-  .shorts__count { font-family: var(--font-mono); font-size: 0.4em; color: var(--awj-blue); letter-spacing: 0.1em; vertical-align: middle; }
-  .shorts__sub { font-size: var(--fs-body); margin: 0; max-width: 56ch; }
-
-  .shorts__stage {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-6);
-    align-items: start;
-    margin-bottom: var(--sp-6);
-  }
-  @media (min-width: 720px) {
-    .shorts__stage { grid-template-columns: minmax(280px, 360px) 1fr; gap: var(--sp-7); align-items: center; }
-  }
-  .shorts__player {
-    position: relative;
-    aspect-ratio: 9 / 16;
-    background: #000;
-    border: var(--border-thicc);
-    box-shadow: 8px 8px 0 var(--awj-black);
-    overflow: hidden;
-    max-width: 360px;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .shorts__player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .shorts__caption { padding: 0; }
-  .shorts__title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(28px, 3.5vw, 48px);
-    line-height: 1.05;
-    margin: var(--sp-3) 0;
-    letter-spacing: -0.005em;
-  }
-  .shorts__yt-link {
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--awj-black);
-    text-decoration: none;
-    border-bottom: 1.5px solid var(--awj-black);
-    padding-bottom: 2px;
-  }
-  .shorts__yt-link:hover { color: var(--awj-blue); border-color: var(--awj-blue); }
-
-  .shorts__filters {
-    display: flex;
-    gap: var(--sp-2);
-    flex-wrap: wrap;
-    margin-bottom: var(--sp-5);
-    padding-top: var(--sp-5);
-    border-top: 1.5px solid rgba(0,0,0,0.18);
-  }
-  .shorts__filter {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 8px 14px;
-    background: transparent;
-    color: var(--awj-black);
-    border: 1.5px solid var(--awj-black);
-    border-radius: var(--radius-pill);
-    cursor: pointer;
-  }
-  .shorts__filter:hover { background: var(--awj-black); color: var(--awj-yellow); }
-  .shorts__filter.is-active { background: var(--awj-black); color: var(--awj-white); }
-
-  .shorts__rail {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: var(--sp-4);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: var(--sp-3);
-  }
-  .shorts__thumb { flex: 0 0 auto; scroll-snap-align: start; }
-  .shorts__thumb[hidden] { display: none; }
-  .shorts__thumb-btn {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-3);
-    background: transparent;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-    color: var(--awj-black);
-    width: 160px;
-    text-align: left;
-  }
-  .shorts__thumb-frame {
-    position: relative;
-    display: block;
-    aspect-ratio: 9 / 16;
-    background: #000;
-    border: 2px solid var(--awj-black);
-    overflow: hidden;
-  }
-  .shorts__thumb-frame img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform var(--t-base) var(--ease-out);
-  }
-  .shorts__thumb-pill {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    z-index: 2;
-    font-size: 9px;
-    padding: 3px 7px 2px;
-  }
-  .shorts__thumb-pill--sales   { background: var(--awj-yellow); color: var(--awj-black); }
-  .shorts__thumb-pill--founder { background: var(--awj-blue);   color: var(--awj-white); }
-  .shorts__thumb-pill--human   { background: var(--awj-white);  color: var(--awj-black); }
-  .shorts__thumb-play {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 44px; height: 44px;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(0,0,0,0.65);
-    color: var(--awj-yellow);
-    font-size: 16px;
-    border-radius: 50%;
-    border: 2px solid var(--awj-yellow);
-    opacity: 0;
-    transition: opacity var(--t-fast);
-  }
-  .shorts__thumb-btn:hover .shorts__thumb-frame img { transform: scale(1.04); }
-  .shorts__thumb-btn:hover .shorts__thumb-play { opacity: 1; }
-  .shorts__thumb.is-active .shorts__thumb-frame { box-shadow: 0 0 0 4px var(--awj-yellow); }
-  .shorts__thumb.is-active .shorts__thumb-play { opacity: 1; background: var(--awj-yellow); color: var(--awj-black); }
-  .shorts__thumb-title {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 1.35;
-  }
-
-  /* HEADSHOTS GALLERY */
-  .md-gallery { padding: var(--sp-9) 0 var(--sp-8); }
-  .md-gallery__head { padding: 0 var(--gutter); margin-bottom: var(--sp-6); }
-  .md-gallery__h {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(56px, 9vw, 144px);
-    margin: var(--sp-3) 0;
-    line-height: 0.9;
-    letter-spacing: -0.005em;
-  }
-  .md-gallery__sub { font-size: var(--fs-body); color: var(--fg-2); margin: 0; max-width: 56ch; }
-  .md-gallery__grid { padding: 0 var(--gutter); }
-
-  /* CANDIDS — same layout, different intro */
-  .md-candids { padding: var(--sp-7) 0 var(--sp-10); border-top: 1px solid var(--rule); }
-  .md-candids__head { padding: 0 var(--gutter); margin-bottom: var(--sp-6); }
-  .md-candids__h {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(56px, 9vw, 144px);
-    margin: var(--sp-3) 0;
-    line-height: 0.9;
-    letter-spacing: -0.005em;
-  }
-  .md-candids__sub { font-size: var(--fs-body); color: var(--fg-2); margin: 0; max-width: 56ch; }
-  .md-candids__grid { padding: 0 var(--gutter); }
-</style>
+  <section class="nb-section nb-section--tint">
+    <div class="nb-shell">
+      <div class="nb-section-head">
+        <p class="nb-eyebrow">Candids</p>
+        <h2>Behind the scenes.</h2>
+      </div>
+      <div class="masonry masonry--4">
+        {candids.map((src) => <a href={src} target="_blank" rel="noopener"><img src={src} alt="Andy Whyte, behind the scenes" loading="lazy" /></a>)}
+      </div>
+    </div>
+  </section>
+</SiteLayout>
 
 <script>
-  // Long-form cinema player + pillar filter
-  (() => {
-    const iframe = document.getElementById('cinema-iframe') as HTMLIFrameElement | null;
-    const titleEl = document.getElementById('cinema-title');
-    const pillarEl = document.getElementById('cinema-pillar');
-    const ytLink = document.getElementById('cinema-yt-link') as HTMLAnchorElement | null;
-    const thumbs = document.querySelectorAll<HTMLLIElement>('.cinema__thumb');
-    const filters = document.querySelectorAll<HTMLButtonElement>('.cinema__filter');
-
-    function loadCinemaVideo(id: string, title: string) {
-      // Prefer the YouTube IFrame API path so analytics tracking persists.
-      // Falls back to direct src assignment if the tracker isn't loaded
-      // (e.g. analytics disabled or API not yet ready).
-      const awjyt = (window as any).AWJYT;
-      if (awjyt && awjyt.changeVideo && awjyt.changeVideo('cinema-iframe', id, { title, type: 'longform' })) {
-        return;
-      }
-      if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1&enablejsapi=1`;
-    }
-
-    thumbs.forEach(thumb => {
-      const btn = thumb.querySelector<HTMLButtonElement>('.cinema__thumb-btn');
-      btn?.addEventListener('click', () => {
-        const id = thumb.dataset.videoId!;
-        const title = thumb.dataset.title ?? '';
-        loadCinemaVideo(id, title);
-        if (titleEl) titleEl.textContent = title;
-        if (pillarEl) {
-          pillarEl.textContent = thumb.dataset.pillarLabel ?? '';
-          pillarEl.dataset.pillar = thumb.dataset.pillar ?? '';
-        }
-        if (ytLink)  ytLink.href = `https://www.youtube.com/watch?v=${id}`;
-        thumbs.forEach(t => t.classList.remove('is-active'));
-        thumb.classList.add('is-active');
-        document.querySelector('.cinema__player')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-
-    filters.forEach(filter => {
-      filter.addEventListener('click', () => {
-        const f = filter.dataset.filter!;
-        filters.forEach(x => x.classList.remove('is-active'));
-        filter.classList.add('is-active');
-        thumbs.forEach(thumb => {
-          if (f === 'all' || thumb.dataset.pillar === f) thumb.removeAttribute('hidden');
-          else thumb.setAttribute('hidden', '');
-        });
-      });
-    });
-  })();
-
-  // Shorts player + pillar filter
-  (() => {
-    const iframe = document.getElementById('shorts-iframe') as HTMLIFrameElement | null;
-    const titleEl = document.getElementById('shorts-title');
-    const pillarEl = document.getElementById('shorts-pillar');
-    const ytLink = document.getElementById('shorts-yt-link') as HTMLAnchorElement | null;
-    const thumbs = document.querySelectorAll<HTMLLIElement>('.shorts__thumb');
-    const filters = document.querySelectorAll<HTMLButtonElement>('.shorts__filter');
-
-    function loadShortsVideo(id: string, title: string) {
-      const awjyt = (window as any).AWJYT;
-      if (awjyt && awjyt.changeVideo && awjyt.changeVideo('shorts-iframe', id, { title, type: 'short' })) {
-        return;
-      }
-      if (iframe) iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1&enablejsapi=1`;
-    }
-
-    thumbs.forEach(thumb => {
-      const btn = thumb.querySelector<HTMLButtonElement>('.shorts__thumb-btn');
-      btn?.addEventListener('click', () => {
-        const id = thumb.dataset.videoId!;
-        const title = thumb.dataset.title ?? '';
-        loadShortsVideo(id, title);
-        if (titleEl) titleEl.textContent = title;
-        if (pillarEl) {
-          pillarEl.textContent = thumb.dataset.pillarLabel ?? '';
-          pillarEl.dataset.pillar = thumb.dataset.pillar ?? '';
-        }
-        if (ytLink)  ytLink.href = `https://www.youtube.com/shorts/${id}`;
-        thumbs.forEach(t => t.classList.remove('is-active'));
-        thumb.classList.add('is-active');
-        document.querySelector('.shorts__player')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-
-    filters.forEach(filter => {
-      filter.addEventListener('click', () => {
-        const f = filter.dataset.filter!;
-        filters.forEach(x => x.classList.remove('is-active'));
-        filter.classList.add('is-active');
-        thumbs.forEach(thumb => {
-          if (f === 'all' || thumb.dataset.pillar === f) thumb.removeAttribute('hidden');
-          else thumb.setAttribute('hidden', '');
-        });
-      });
-    });
-  })();
+  function wire() {
+    const player = document.getElementById('media-player') as HTMLIFrameElement | null;
+    if (!player || player.dataset.ready) return;
+    player.dataset.ready = '1';
+    const title = document.querySelector<HTMLElement>('[data-player-title]');
+    document.querySelectorAll<HTMLButtonElement>('[data-video]').forEach((b) => b.addEventListener('click', () => {
+      const id = b.dataset.video!, t = b.dataset.title || '';
+      const api = (window as any).AWJYT;
+      if (api && typeof api.changeVideo === 'function') api.changeVideo('media-player', id, { title: t, type: b.dataset.type });
+      else player.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=1`;
+      if (title) title.textContent = `Now playing: ${t}`;
+      player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }));
+  }
+  document.addEventListener('astro:page-load', wire);
 </script>
+
+<style>
+  .player { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius-ui); overflow: hidden; background: var(--nb-text); box-shadow: var(--shadow-lift); }
+  .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .thumbs, .shorts { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px; }
+  .thumbs { grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  .shorts { grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); }
+  .thumb, .short { display: flex; flex-direction: column; gap: 8px; text-align: left; background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-decoration: none; }
+  .thumb img, .short img { width: 100%; border-radius: 10px; object-fit: cover; aspect-ratio: 16 / 9; transition: transform .2s var(--ease-out); }
+  .short img { aspect-ratio: 9 / 16; object-position: center; }
+  .thumb:hover img, .short:hover img { transform: translateY(-2px); }
+  .thumb__title { font-weight: 600; font-size: 14px; line-height: 1.3; }
+  .masonry { column-count: 3; column-gap: 16px; }
+  .masonry--4 { column-count: 4; }
+  .masonry a { display: block; margin-bottom: 16px; break-inside: avoid; border-radius: 10px; overflow: hidden; }
+  .masonry img { width: 100%; display: block; transition: transform .25s var(--ease-out); }
+  .masonry a:hover img { transform: scale(1.02); }
+  @media (max-width: 760px) { .masonry { column-count: 2; } .masonry--4 { column-count: 2; } }
+</style>

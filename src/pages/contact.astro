@@ -1,251 +1,105 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Eyebrow from '../components/Eyebrow.astro';
-import Hl from '../components/Hl.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import SocialIcons from '../components/SocialIcons.astro';
-import Scribble from '../components/Scribble.astro';
+import { SITE } from '../data/site';
 
-// Topic prefilled from query string (e.g., /contact/?topic=speaking)
-const topic = Astro.url.searchParams.get('topic') ?? '';
 const topics = ['General', 'Speaking / SKO', 'Advisory', 'Press', 'Book', 'Other'];
-const initialTopic = topics.find(t => t.toLowerCase().includes(topic.toLowerCase())) ?? 'General';
 ---
-<Layout
-  title="Contact — AWJ"
-  description="Speaking, advisory, press, or just a hello. Get in touch with Andy Whyte."
+<SiteLayout
+  title="Contact Andy Whyte: speaking, press, advisory"
+  description="Speaking enquiries, press, advisory, or just a hello. Every message that comes through this form gets read."
   pageType="contact"
+  breadcrumbs={[{ name: 'Contact', href: '/contact/' }]}
 >
-  {/* HERO */}
-  <section class="ct-hero">
-    <div class="site-shell ct-hero__inner">
-      <Scribble src="/assets/scribbles/pen_star_yellow.png" rotate={14} top="40px" right="6%" width={120} />
-      <Eyebrow>Get in touch</Eyebrow>
-      <h1 class="ct-hero__title">
-        Say <Hl>hello</Hl>.
-      </h1>
-      <p class="ct-hero__sub">Speaking, advisory, press, or just a hello. I read everything that comes through this form.</p>
+  <section class="nb-page-head">
+    <div class="nb-shell nb-page-head__in">
+      <p class="nb-eyebrow">Get in touch</p>
+      <h1>Say hello.</h1>
+      <p class="nb-lede">Speaking, advisory, press, or just a hello. I read everything that comes through this form.</p>
     </div>
   </section>
 
-  {/* MAIN GRID — form + social */}
-  <section class="ct-main">
-    <div class="site-shell ct-main__inner">
-      {/* FORM */}
-      <form class="ct-form" id="ct-form" novalidate>
-        {/* Honeypot — hidden from users; bots auto-fill it and we reject */}
-        <div aria-hidden="true" style="position:absolute; left:-9999px; opacity:0; pointer-events:none; height:0; overflow:hidden;">
-          <label>Don't fill this in if you're human: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-        </div>
-
-        <label class="ct-field">
-          <span>Your name</span>
-          <input type="text" name="name" required autocomplete="name" />
+  <section class="nb-section" style="padding-top:0">
+    <div class="nb-shell contact">
+      <form class="form" id="contact-form" novalidate>
+        <div aria-hidden="true" class="hp"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <label class="field"><span>Your name</span><input type="text" name="name" required autocomplete="name" /></label>
+        <label class="field"><span>Email</span><input type="email" name="email" required autocomplete="email" /></label>
+        <label class="field"><span>Topic</span>
+          <select name="topic">{topics.map((t) => <option value={t}>{t}</option>)}</select>
         </label>
-
-        <label class="ct-field">
-          <span>Email</span>
-          <input type="email" name="email" required autocomplete="email" />
-        </label>
-
-        <label class="ct-field">
-          <span>Topic</span>
-          <select name="topic">
-            {topics.map(t => (
-              <option value={t} selected={t === initialTopic}>{t}</option>
-            ))}
-          </select>
-        </label>
-
-        <label class="ct-field">
-          <span>Message</span>
-          <textarea name="message" rows="6" required minlength="10"></textarea>
-        </label>
-
-        <button class="ct-form__btn" type="submit" id="ct-submit">Send →</button>
-        <p class="ct-form__msg" id="ct-msg" aria-live="polite"></p>
+        <label class="field"><span>Message</span><textarea name="message" rows="6" required minlength="10"></textarea></label>
+        <button class="btn btn--blue" type="submit" id="contact-submit">Send</button>
+        <p class="form__msg" id="contact-msg" aria-live="polite"></p>
       </form>
 
-      {/* SOCIAL + DIRECT */}
-      <aside class="ct-side">
-        <div class="ct-side__block">
-          <Eyebrow>Or find me on</Eyebrow>
-          <div class="ct-side__socials">
-            <SocialIcons tone="dark" size={28} />
-          </div>
+      <aside class="side nb-stack">
+        <div>
+          <p class="nb-eyebrow">Or find me on</p>
+          <div class="side__social"><SocialIcons tone="dark" size={26} /></div>
         </div>
-
-        <div class="ct-side__block">
-          <Eyebrow>Direct</Eyebrow>
-          <p class="ct-side__direct">
-            Email <a href="mailto:hello@andywhyte.com">hello@andywhyte.com</a> if you'd rather skip the form.
-          </p>
+        <div>
+          <p class="nb-eyebrow">Direct</p>
+          <p>Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> if you would rather skip the form.</p>
         </div>
-
-        <div class="ct-side__block ct-side__note">
-          <p><strong>For speaking enquiries:</strong> include the event date, location, audience size, and budget if you have one. Saves a round of email tag.</p>
+        <div class="side__note">
+          <p><strong>For speaking enquiries:</strong> include the event date, location, audience size and budget if you have one. It saves a round of email tag. <a href="/speaking/">What I do on stage &rarr;</a></p>
         </div>
       </aside>
     </div>
   </section>
-</Layout>
-
-<style>
-  .ct-hero {
-    padding: var(--sp-9) 0 var(--sp-7);
-    border-bottom: var(--border-hard);
-    position: relative;
-    overflow: hidden;
-  }
-  .ct-hero__inner { padding: 0 var(--gutter); position: relative; }
-  .ct-hero__title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: -0.005em;
-    font-size: clamp(56px, 9vw, 144px);
-    margin: var(--sp-3) 0;
-    line-height: 0.95;
-  }
-  .ct-hero__sub { font-size: var(--fs-body-lg); color: var(--fg-2); margin: 0; max-width: 60ch; }
-
-  .ct-main { padding: var(--sp-8) 0 var(--sp-9); }
-  .ct-main__inner {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-7);
-    padding: 0 var(--gutter);
-  }
-  @media (min-width: 900px) {
-    .ct-main__inner { grid-template-columns: 1.6fr 1fr; gap: var(--sp-8); }
-  }
-
-  .ct-form { display: grid; gap: var(--sp-5); position: relative; }
-  .ct-field { display: flex; flex-direction: column; gap: var(--sp-2); }
-  .ct-field span {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-  .ct-field input, .ct-field select, .ct-field textarea {
-    font-family: var(--font-body);
-    font-size: 16px;
-    padding: 14px 16px;
-    background: var(--awj-white);
-    color: var(--awj-black);
-    border: var(--border-hard);
-    border-radius: 0;
-  }
-  .ct-field textarea { resize: vertical; min-height: 140px; }
-  .ct-field input:focus, .ct-field select:focus, .ct-field textarea:focus {
-    outline: 2px solid var(--awj-yellow);
-    outline-offset: -4px;
-  }
-
-  .ct-form__btn {
-    justify-self: start;
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 13px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 16px 28px;
-    background: var(--awj-black);
-    color: var(--awj-white);
-    border: var(--border-hard);
-    cursor: pointer;
-    transition: background var(--t-fast), color var(--t-fast);
-  }
-  .ct-form__btn:hover { background: var(--awj-yellow); color: var(--awj-black); }
-  .ct-form__btn:disabled { opacity: 0.6; cursor: wait; }
-  .ct-form__msg { font-size: 14px; margin: 0; min-height: 1.4em; }
-  .ct-form__msg[data-state='success'] { color: var(--awj-blue); font-weight: 700; }
-  .ct-form__msg[data-state='error']   { color: var(--awj-red); font-weight: 700; }
-
-  .ct-side { display: flex; flex-direction: column; gap: var(--sp-7); }
-  .ct-side__block .awj-eyebrow { margin-bottom: var(--sp-3); }
-  .ct-side__socials { margin-top: var(--sp-2); }
-  .ct-side__direct { font-size: var(--fs-body); margin: 0; }
-  .ct-side__direct a {
-    background-image: linear-gradient(transparent 80%, var(--awj-yellow) 80%, var(--awj-yellow) 95%, transparent 95%);
-    background-repeat: no-repeat;
-    color: var(--awj-black);
-  }
-  .ct-side__note {
-    background: var(--awj-yellow);
-    background-image: url('/assets/textures/paper_yellow.png');
-    background-size: cover;
-    padding: var(--sp-5);
-    border: var(--border-hard);
-    transform: rotate(-1deg);
-  }
-  .ct-side__note p { margin: 0; font-size: 14px; line-height: 1.55; }
-  .ct-side__note strong { font-weight: 800; }
-</style>
+</SiteLayout>
 
 <script>
-  // Form posts to /api/contact — a Cloudflare Pages Function that emails
-  // hello@andywhyte.com via Resend. See functions/api/contact.ts for the
-  // server logic and required env vars.
-  const form = document.getElementById('ct-form') as HTMLFormElement | null;
-  const msg = document.getElementById('ct-msg') as HTMLElement | null;
-  const btn = document.getElementById('ct-submit') as HTMLButtonElement | null;
-
-  form?.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (!form || !msg || !btn) return;
-
-    const fd = new FormData(form);
-
-    // Honeypot — server also enforces, but short-circuit here too
-    if (fd.get('website')) {
-      msg.dataset.state = 'success';
-      msg.textContent = 'Thanks — your message is on its way.';
-      form.reset();
-      return;
+  function wire() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    if (!form || form.dataset.ready) return;
+    form.dataset.ready = '1';
+    // topic from the query string, for example /contact/?topic=speaking
+    const want = new URLSearchParams(location.search).get('topic');
+    const select = form.querySelector<HTMLSelectElement>('select[name="topic"]');
+    if (want && select) {
+      const match = Array.from(select.options).find((o) => o.value.toLowerCase().includes(want.toLowerCase()));
+      if (match) select.value = match.value;
     }
-
-    const payload = {
-      name:    String(fd.get('name')    ?? '').trim(),
-      email:   String(fd.get('email')   ?? '').trim(),
-      topic:   String(fd.get('topic')   ?? 'General').trim(),
-      message: String(fd.get('message') ?? '').trim(),
-    };
-
-    if (!payload.name || !payload.email.includes('@') || payload.message.length < 10) {
-      msg.dataset.state = 'error';
-      msg.textContent = 'Please fill all fields and write at least 10 characters.';
-      return;
-    }
-
-    btn.disabled = true;
-    const original = btn.textContent;
-    btn.textContent = 'Sending…';
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json();
-      if (data.ok) {
-        msg.dataset.state = 'success';
-        msg.textContent = data.message ?? "Thanks — your message is on its way.";
-        form.reset();
-        btn.textContent = 'Sent ✓';
+    const msg = document.getElementById('contact-msg')!;
+    const btn = document.getElementById('contact-submit') as HTMLButtonElement;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+      if (!data.name?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || '') || (data.message || '').trim().length < 10) {
+        form.dataset.state = 'error';
+        msg.textContent = 'Please add your name, a valid email and at least a sentence.';
         return;
       }
-      msg.dataset.state = 'error';
-      msg.textContent = data.error ?? 'Send failed. Try emailing hello@andywhyte.com directly.';
-      btn.disabled = false;
-      btn.textContent = original ?? 'Send →';
-    } catch {
-      msg.dataset.state = 'error';
-      msg.textContent = 'Network error. Try again or email hello@andywhyte.com.';
-      btn.disabled = false;
-      btn.textContent = original ?? 'Send →';
-    }
-  });
+      btn.disabled = true; btn.textContent = 'Sending';
+      form.dataset.state = '';
+      try {
+        const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        const out = (await res.json()) as { ok: boolean; message?: string; error?: string };
+        if (out.ok) { form.dataset.state = 'success'; msg.textContent = out.message ?? 'Sent. I will reply soon.'; form.reset(); btn.textContent = 'Sent'; }
+        else { form.dataset.state = 'error'; msg.textContent = out.error ?? 'That did not send. Try again, or email hello@andywhyte.com.'; btn.disabled = false; btn.textContent = 'Send'; }
+      } catch {
+        form.dataset.state = 'error'; msg.textContent = 'Network error. Try again, or email hello@andywhyte.com.'; btn.disabled = false; btn.textContent = 'Send';
+      }
+    });
+  }
+  document.addEventListener('astro:page-load', wire);
 </script>
+
+<style>
+  .contact { display: grid; grid-template-columns: minmax(0, 620px) 300px; gap: clamp(32px, 6vw, 96px); }
+  @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+  .form { display: flex; flex-direction: column; gap: 16px; }
+  .hp { position: absolute; left: -9999px; opacity: 0; pointer-events: none; height: 0; overflow: hidden; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field span { font-size: 13px; font-weight: 600; color: var(--nb-text-2); }
+  .field input, .field select, .field textarea { font: inherit; padding: 12px 14px; border: 1px solid var(--nb-line); border-radius: 12px; background: #fff; color: var(--nb-text); }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--nb-cover); outline-offset: 2px; }
+  .form .btn { align-self: flex-start; }
+  .form__msg { font-size: 14px; color: var(--nb-text-3); min-height: 1.2em; }
+  .form[data-state="success"] .form__msg { color: var(--nb-ink); font-weight: 600; }
+  .form[data-state="error"] .form__msg { color: #B3261E; font-weight: 600; }
+  .side__social { margin-top: 8px; }
+  .side__note { padding: 16px 18px; border-radius: var(--radius-ui); background: color-mix(in srgb, var(--nb-yellow) 18%, #fff); font-size: 15px; line-height: 1.5; }
+</style>

@@ -12,7 +12,7 @@ original_wp_id: 15091
 ---
 
 <div class="awj-hero-script awj-hero-script--cols" role="note" aria-label="Maxim script">
-  <p><strong>"Feedback is like Milk. It is Best Served Fresh."</strong> — <a href="https://www.linkedin.com/in/faith-meyer/" rel="nofollow noopener" target="_blank">Faith Meyer</a></p>
+  <p><strong>"Feedback is like Milk. It is Best Served Fresh."</strong>, <a href="https://www.linkedin.com/in/faith-meyer/" rel="nofollow noopener" target="_blank">Faith Meyer</a></p>
   <p>My biggest failure as a leader was how bad I was at giving critical feedback.</p>
   <p>It was the main reason I enlisted a coach.</p>
   <p>One of my failings was that I would procrastinate about giving critical feedback.</p>
@@ -91,7 +91,7 @@ The price of delayed feedback is always paid. The only question is whether it co
   <div class="awj-coach__body">
     <p class="awj-coach__eyebrow">The Coach</p>
     <h3 id="coach-heading" class="awj-coach__name">Faith Meyer</h3>
-    <p class="awj-coach__bio">Faith is a former CEO and COO with over two decades of leadership experience. Today she is a coach for the world-class coaching institute <a href="https://www.mocharymethod.com/team/faith-meyer" rel="nofollow noopener" target="_blank">Mochary Method</a>, led by legendary CEO coach Matt Mochary, where they help the world's best startup operators — Sam Altman at OpenAI, Brian Armstrong at Coinbase, Naval Ravikant at AngelList — unlock their full potential.</p>
+    <p class="awj-coach__bio">Faith is a former CEO and COO with over two decades of leadership experience. Today she is a coach for the world-class coaching institute <a href="https://www.mocharymethod.com/team/faith-meyer" rel="nofollow noopener" target="_blank">Mochary Method</a>, led by legendary CEO coach Matt Mochary, where they help the world's best startup operators, Sam Altman at OpenAI, Brian Armstrong at Coinbase and Naval Ravikant at AngelList among them, unlock their full potential.</p>
     <p class="awj-coach__cta"><a href="https://www.mocharymethod.com/team/faith-meyer" rel="nofollow noopener" target="_blank">Faith's coaching profile →</a></p>
   </div>
 </aside>
