@@ -15,7 +15,7 @@ const n = pages.length;
       <div class="hero__intro" data-intro>
         <p class="nb-eyebrow">The journal</p>
         <h2 class="hero__title">A journal of principles for sales, founding and being human.</h2>
-        <p class="hero__how">Twenty principles, one line each, written by hand. Scroll to turn the pages. Tap a page to read the Maxim.</p>
+        <p class="hero__how"><span class="hero__how-what">Twenty principles, one line each, written by hand.</span> Scroll to turn the pages. Tap a page to read the Maxim.</p>
         <p class="hero__cue" aria-hidden="true">Scroll to open</p>
       </div>
 
@@ -225,9 +225,10 @@ const n = pages.length;
   /* phones: the introduction floats over the top of the stage, so the pad does not drop when it fades */
   @media (max-width: 600px) {
     .hero__stage { grid-template-rows: 1fr auto auto; padding-top: 0; }
-    .hero__intro { position: absolute; top: 14px; left: 0; right: 0; z-index: 2; max-width: none; }
-    .hero__title { font-size: 19px; max-width: 30ch; margin-inline: auto; }
-    .hero__how { font-size: 14px; max-width: 34ch; margin-inline: auto; }
+    .hero__intro { position: absolute; top: 12px; left: 0; right: 0; z-index: 2; max-width: none; gap: 6px; }
+    .hero__intro .nb-eyebrow, .hero__how-what { display: none; }   /* the portrait's cue has already said what this is */
+    .hero__title { font-size: 18px; max-width: 30ch; margin-inline: auto; }
+    .hero__how { font-size: 14px; max-width: 30ch; margin-inline: auto; }
   }
   @media (max-height: 700px) { .hero__intro .nb-eyebrow, .hero__how { display: none; } .hero__captions { min-height: 80px; } .nb-scene { width: min(640px, 92vw, calc((100svh - var(--header-h) - 300px) * 1.46)); } }
   @media (prefers-reduced-motion: reduce) {
