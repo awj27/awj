@@ -10,35 +10,27 @@
 
   <h1 class="ph__name" id="ph-name"><span>Andy</span> <span>Whyte</span></h1>
 
-  <!-- three layers: the serious head fades out as the smiling head fades in, under a body that never moves -->
+  <!-- two full frames from the same shoot: the serious one fades out as the smiling one fades in -->
   <div class="ph__figure" data-ph-figure>
     <div class="ph__figure-in">
       <img
         class="ph__img ph__img--serious"
-        src="/portrait/andy-head-serious-1600.webp"
-        srcset="/portrait/andy-head-serious-900.webp 900w, /portrait/andy-head-serious-1600.webp 1600w"
-        sizes="(max-width: 600px) 92vw, 60vh"
-        width="1600" height="1662"
-        alt="" aria-hidden="true"
-        fetchpriority="high" decoding="async" draggable="false"
-      />
-      <img
-        class="ph__img ph__img--smile"
-        src="/portrait/andy-head-smile-1600.webp"
-        srcset="/portrait/andy-head-smile-900.webp 900w, /portrait/andy-head-smile-1600.webp 1600w"
-        sizes="(max-width: 600px) 92vw, 60vh"
-        width="1600" height="1662"
-        alt="" aria-hidden="true"
-        decoding="async" draggable="false"
-      />
-      <img
-        class="ph__img ph__img--body"
-        src="/portrait/andy-body-1600.webp"
-        srcset="/portrait/andy-body-900.webp 900w, /portrait/andy-body-1600.webp 1600w"
+        src="/portrait/andy-serious-1600.webp"
+        srcset="/portrait/andy-serious-900.webp 900w, /portrait/andy-serious-1600.webp 1600w"
         sizes="(max-width: 600px) 92vw, 60vh"
         width="1600" height="1662"
         alt="Andy Whyte"
         fetchpriority="high" decoding="async" draggable="false"
+        data-ph-serious
+      />
+      <img
+        class="ph__img ph__img--smile"
+        src="/portrait/andy-smile-1600.webp"
+        srcset="/portrait/andy-smile-900.webp 900w, /portrait/andy-smile-1600.webp 1600w"
+        sizes="(max-width: 600px) 92vw, 60vh"
+        width="1600" height="1662"
+        alt="" aria-hidden="true"
+        decoding="async" draggable="false"
       />
     </div>
   </div>
@@ -167,19 +159,38 @@
     const aim = (v: number) => { target = v; if (!raf) raf = requestAnimationFrame(tick); };
 
     if (fine) {
-      addEventListener('pointermove', (e: PointerEvent) => {
+      // he smiles when the pointer is over him, not merely near him: the cutout's own alpha decides
+      const serious = el.querySelector<HTMLImageElement>('[data-ph-serious]')!;
+      let hit: Uint8ClampedArray | null = null, hitW = 0, hitH = 0;
+      const buildHit = () => {
+        try {
+          const c = document.createElement('canvas');
+          hitW = c.width = 160;
+          hitH = c.height = Math.round((160 * serious.naturalHeight) / serious.naturalWidth);
+          const ctx = c.getContext('2d', { willReadFrequently: true })!;
+          ctx.drawImage(serious, 0, 0, hitW, hitH);
+          hit = ctx.getImageData(0, 0, hitW, hitH).data;
+        } catch { hit = null; }
+      };
+      if (serious.complete && serious.naturalWidth) buildHit(); else serious.addEventListener('load', buildHit, { once: true, signal });
+      const over = (x: number, y: number) => {
         const r = figure.getBoundingClientRect();
-        if (r.bottom < 0) return;
-        // distance from the pointer to his head
-        const d = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height * 0.28));
-        aim(clamp(1 - (d - r.height * 0.22) / (r.height * 0.6), 0, 1));
+        if (x < r.left || x > r.right || y < r.top || y > r.bottom) return false;
+        if (!hit) return true;
+        const px = Math.min(hitW - 1, Math.floor(((x - r.left) / r.width) * hitW));
+        const py = Math.min(hitH - 1, Math.floor(((y - r.top) / r.height) * hitH));
+        return hit[(py * hitW + px) * 4 + 3] > 40;
+      };
+      addEventListener('pointermove', (e: PointerEvent) => {
+        if (figure.getBoundingClientRect().bottom < 0) return;
+        aim(over(e.clientX, e.clientY) ? 1 : 0);
         const s = el.getBoundingClientRect();
         el.style.setProperty('--px', clamp(((e.clientX - s.left) / s.width) * 2 - 1, -1, 1).toFixed(3));
         el.style.setProperty('--py', clamp(((e.clientY - s.top) / s.height) * 2 - 1, -1, 1).toFixed(3));
       }, { passive: true, signal });
       document.addEventListener('pointerleave', () => { aim(0); el.style.setProperty('--px', '0'); el.style.setProperty('--py', '0'); }, { signal });
     } else {
-      // no pointer to come close with: he smiles after a beat, and a tap toggles it
+      // no pointer: he smiles after a beat, and a tap toggles it
       const t = setTimeout(() => aim(1), 1100);
       signal.addEventListener('abort', () => clearTimeout(t));
       figure.addEventListener('click', () => aim(target > 0.5 ? 0 : 1), { signal });
