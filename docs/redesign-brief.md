@@ -101,7 +101,7 @@ The full build, delivered 30 October 2026 on the branch and the preview. Seventy
 - Structured data on every page: Person, Organization, WebSite, BreadcrumbList, then Article and VideoObject on Maxims, FAQPage on hubs and landing pages, CollectionPage and ItemList on the indexes, Book, Service, ProfilePage, DefinedTermSet, HowTo. Social preview images for every Maxim and a default. `llms.txt` rewritten and `llms-full.txt` generated from the content.
 - Newsletter: Substack first. The publication address goes in `substackUrl` in `src/data/site.ts`; until it is set, forms post to the existing Beehiiv function. The Beehiiv auto-publish Action is removed.
 - The handwritten numbers on pages 11 to 14 are painted out so the pages no longer contradict the site's numbering.
-- Budget: 21 KB of JavaScript in total across the site.
+- Budget: 24 KB of JavaScript in total across the site, 3.4 KB of it the paper sound.
 
 ### What Andy reviews
 

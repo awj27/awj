@@ -174,6 +174,105 @@ const n = pages.length;
   // Scroll-driven journal. Re-runs after client-side navigation; tears down the previous instance first.
   let controller: AbortController | undefined;
 
+  // A page turn is three sounds in order: the whip of the page through the air (a resonant hiss whose colour
+  // sweeps up as it accelerates and down as it slows), the crackle of the fibres (hundreds of tiny clicks, dense
+  // while the page moves, a last flurry as it lands) and the landing (a soft, low pat on the stack). 'open' is the
+  // cardboard cover: the same three layers, lower, slower and heavier. Rendered as PCM once per visit.
+  type PaperKind = 'flip' | 'open';
+  function renderPaper(sr: number, kind: PaperKind): Float32Array {
+    const open = kind === 'open';
+    const n = Math.floor(sr * (open ? 0.44 : 0.3));
+    const out = new Float32Array(n);
+    // deterministic noise, so the sound is the same on every visit; playback adds the variation
+    let seed = open ? 0x9e3779b9 : 0x2545f491;
+    const rnd = () => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296);
+    const noise = () => rnd() * 2 - 1;
+    const lerp = (a: number, b: number, x: number) => a + (b - a) * x;
+    const ease = (x: number) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+    // raised-cosine hump from t0 to t1, peaking at tp
+    const hump = (t: number, t0: number, tp: number, t1: number) => {
+      if (t <= t0 || t >= t1) return 0;
+      const x = t < tp ? (t - t0) / (tp - t0) : 1 - (t - tp) / (t1 - tp);
+      return 0.5 - 0.5 * Math.cos(Math.PI * x);
+    };
+    // Chamberlin state-variable filter: run a sample, read low or band
+    const svf = () => {
+      const s = { low: 0, band: 0, run(x: number, fc: number, q: number) {
+        const f = 2 * Math.sin((Math.PI * Math.min(fc, sr / 8)) / sr);
+        s.low += f * s.band;
+        const high = x - s.low - q * s.band;
+        s.band += f * high;
+        return s;
+      } };
+      return s;
+    };
+
+    const whipPeak = open ? 0.09 : 0.05;   // when the page moves fastest
+    const whipEnd = open ? 0.26 : 0.165;   // when it stops moving through the air
+    const land = open ? 0.245 : 0.14;      // when it meets the stack, just as the whip fades
+
+    // 1. the whip: white noise through a swept resonant bandpass
+    const whip = svf();
+    const whipQ = open ? 0.5 : 0.4;
+    const [fStart, fTop, fEnd] = open ? [420, 1300, 480] : [1200, 3600, 900];
+    for (let i = 0; i < n; i++) {
+      const t = i / sr;
+      const env = hump(t, 0, whipPeak, whipEnd);
+      if (env <= 0) continue;
+      const fc = t < whipPeak ? lerp(fStart, fTop, ease(t / whipPeak)) : lerp(fTop, fEnd, ease((t - whipPeak) / (whipEnd - whipPeak)));
+      out[i] += whip.run(noise(), fc, whipQ).band * env * (open ? 0.9 : 0.8);
+    }
+
+    // 2. the crackle: a sparse train of decaying clicks, dense in the whip and again at the landing
+    const rateMax = open ? 700 : 1400;     // clicks per second at the peak
+    const [cfLo, cfHi] = open ? [900, 3000] : [2400, Math.min(7500, sr * 0.4)];
+    const [tauLo, tauHi] = open ? [0.0006, 0.0022] : [0.00035, 0.0012];
+    for (let i = 0; i < n; i++) {
+      const t = i / sr;
+      const density = hump(t, 0, whipPeak, whipEnd) + 0.9 * hump(t, land - 0.012, land + 0.004, land + 0.07);
+      if (density <= 0 || rnd() >= (rateMax * density) / sr) continue;
+      const w = (2 * Math.PI * lerp(cfLo, cfHi, rnd())) / sr;
+      const tau = lerp(tauLo, tauHi, rnd()) * sr;
+      const r = rnd();
+      const amp = (0.12 + 0.88 * r * r) * (open ? 0.45 : 0.5);
+      const len = Math.min(n - i, Math.ceil(tau * 6));
+      for (let k = 0; k < len; k++) out[i + k] += amp * Math.sin(w * k) * Math.exp(-k / tau);
+    }
+
+    // 3. the landing: a lowpassed pat plus a small thump that drops in pitch
+    const pat = svf();
+    const patFc = open ? 650 : 1100;
+    const patTau = (open ? 0.034 : 0.02) * sr;
+    const thumpTau = (open ? 0.05 : 0.022) * sr;
+    const [thStart, thEnd] = open ? [120, 72] : [175, 115];
+    const landIdx = Math.floor(land * sr);
+    const attack = Math.floor(0.0015 * sr);
+    let phase = 0;
+    for (let i = landIdx; i < n; i++) {
+      const k = i - landIdx;
+      const a = k < attack ? 0.5 - 0.5 * Math.cos((Math.PI * k) / attack) : 1;
+      phase += (2 * Math.PI * lerp(thStart, thEnd, ease(k / (open ? 0.06 : 0.04) / sr))) / sr;
+      out[i] += pat.run(noise(), patFc, 0.9).low * a * Math.exp(-k / patTau) * (open ? 1.1 : 0.9);
+      out[i] += Math.sin(phase) * a * Math.exp(-k / thumpTau) * (open ? 0.55 : 0.22);
+    }
+
+    // finish: fizz off the top, rumble off the bottom, fade the tail, normalise
+    const lpA = Math.exp((-2 * Math.PI * (open ? 5000 : 7000)) / sr);
+    const hpA = Math.exp((-2 * Math.PI * 90) / sr);
+    const fade = Math.floor(0.02 * sr);
+    let lp = 0, hpPrev = 0, hpOut = 0, peak = 0;
+    for (let i = 0; i < n; i++) {
+      lp = lp * lpA + out[i] * (1 - lpA);
+      hpOut = hpA * (hpOut + lp - hpPrev);
+      hpPrev = lp;
+      const v = i > n - fade ? hpOut * ((n - i) / fade) : hpOut;
+      out[i] = v;
+      peak = Math.max(peak, Math.abs(v));
+    }
+    if (peak > 0) for (let i = 0; i < n; i++) out[i] *= 0.85 / peak;
+    return out;
+  }
+
   function setup() {
     controller?.abort();
     controller = new AbortController();
@@ -257,7 +356,7 @@ const n = pages.length;
         // view transition hand-off: name only the page on top
         imgs.forEach((img, i) => { (img.style as any).viewTransitionName = atRest && i === cur ? 'maxim-page' : ''; });
         // sounds at each boundary
-        if (whole !== lastWhole && atRest) { play(whole === 1 && lastWhole === 0 ? 'open' : 'flip'); lastWhole = whole; }
+        if (whole !== lastWhole && atRest) { play(whole === 0 || lastWhole === 0 ? 'open' : 'flip'); lastWhole = whole; }
       }
 
       function onSettle() {
@@ -352,27 +451,48 @@ const n = pages.length;
         }
       }
 
-      // sound: a synthesised paper flick, off by default
+      // sound: paper, synthesised in three layers (see renderPaper) and rendered once. Off by default; the choice is remembered.
+      const AC: typeof AudioContext | undefined = window.AudioContext || (window as any).webkitAudioContext;
+      const buffers: Partial<Record<PaperKind, AudioBuffer>> = {};
       try { soundOn = localStorage.getItem('awj-sound') === '1'; } catch {}
       const renderSound = () => { soundBtn.setAttribute('aria-pressed', String(soundOn)); soundBtn.textContent = soundOn ? 'Sound on' : 'Sound off'; };
+      // browsers only let audio start inside a gesture, so the context wakes on the first click or key press
+      const wake = () => {
+        if (!soundOn || !AC) return;
+        try { audio = audio || new AC(); if (audio.state === 'suspended') audio.resume().catch(() => {}); } catch {}
+      };
+      addEventListener('pointerdown', wake, { passive: true, signal });
+      addEventListener('keydown', wake, { signal });
       soundBtn.addEventListener('click', () => {
         soundOn = !soundOn;
         try { localStorage.setItem('awj-sound', soundOn ? '1' : '0'); } catch {}
-        renderSound(); if (soundOn) play('flip');
+        renderSound(); if (soundOn) { wake(); play('flip'); }
       }, { signal });
-      function play(kind: 'flip' | 'open') {
-        if (!soundOn) return;
+      let lastPlay = 0;
+      function play(kind: PaperKind) {
+        if (!soundOn || !AC) return;
+        const now = performance.now();
+        if (now - lastPlay < 90) return;   // a fast riffle still reads as separate pages
+        lastPlay = now;
         try {
-          audio = audio || new (window.AudioContext || (window as any).webkitAudioContext)();
-          const ctx = audio;
-          const dur = kind === 'open' ? 0.3 : 0.17;
-          const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
-          const d = buf.getChannelData(0);
-          for (let i = 0; i < d.length; i++) { const t = i / d.length; d[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 2.4) * (t < 0.06 ? t / 0.06 : 1); }
-          const src = ctx.createBufferSource(); src.buffer = buf;
-          const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = kind === 'open' ? 850 : 1700; bp.Q.value = 0.7;
-          const g = ctx.createGain(); g.gain.value = kind === 'open' ? 0.5 : 0.32;
-          src.connect(bp).connect(g).connect(ctx.destination); src.start();
+          const ctx = (audio = audio || new AC());
+          const start = () => {
+            const src = ctx.createBufferSource();
+            if (!buffers[kind]) {
+              const pcm = renderPaper(ctx.sampleRate, kind);
+              const buf = ctx.createBuffer(1, pcm.length, ctx.sampleRate);
+              buf.getChannelData(0).set(pcm);
+              buffers[kind] = buf;
+            }
+            src.buffer = buffers[kind]!;
+            src.playbackRate.value = 0.94 + Math.random() * 0.12;   // no two turns quite alike
+            const g = ctx.createGain();
+            g.gain.value = (kind === 'open' ? 0.3 : 0.22) * (0.9 + Math.random() * 0.2);
+            src.connect(g).connect(ctx.destination);
+            src.start();
+          };
+          if (ctx.state === 'running') start();
+          else { const at = performance.now(); ctx.resume().then(() => { if (performance.now() - at < 400) start(); }, () => {}); }
         } catch {}
       }
       renderSound();
