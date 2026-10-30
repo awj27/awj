@@ -8,7 +8,7 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: 'Andy Whyte Journal',
-    description: 'A notebook of principles for sales, founding and being human. Maxims and the essays behind them, from the author of MEDDICC.',
+    description: 'A journal of principles for sales, founding and being human. Twenty Maxims, each written in full, from the author of MEDDICC.',
     site: context.site!,
     items: entries.map(e => ({
       title: `AWJ #${e.data.awj_number}: ${e.data.title}`,

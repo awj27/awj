@@ -27,7 +27,7 @@ const howTo = d.steps.length ? [{
 }] : [];
 ---
 <SiteLayout
-  title={`${d.name}: the framework, step by step | Andy Whyte`}
+  title={`${d.name}, step by step | Andy Whyte`}
   description={d.oneLiner}
   pageType="framework"
   schema={howTo}
@@ -65,7 +65,7 @@ const howTo = d.steps.length ? [{
         )}
         {maxims.length > 0 && (
           <div class="side-card">
-            <p class="nb-eyebrow">In the notebook</p>
+            <p class="nb-eyebrow">In the journal</p>
             {maxims.map((m) => <a class="side-link" href={m.href}>No. {pad2(m.n)}: {m.page.title} &rarr;</a>)}
           </div>
         )}
@@ -82,7 +82,7 @@ const howTo = d.steps.length ? [{
     <section class="nb-section nb-section--tint">
       <div class="nb-shell">
         <div class="nb-section-head">
-          <p class="nb-eyebrow">From the notebook</p>
+          <p class="nb-eyebrow">From the journal</p>
           <h2>The Maxims this comes from.</h2>
         </div>
         <div class="nb-grid nb-grid--3">

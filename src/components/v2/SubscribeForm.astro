@@ -10,7 +10,7 @@ const substack = SITE.substackUrl ? `${SITE.substackUrl.replace(/\/$/, '')}/subs
 ---
 <form class={`nb-sub nb-sub--${tone}`} action={substack || '/api/subscribe'} method={substack ? 'get' : 'post'} data-subscribe data-source={source} novalidate>
   {!compact && <label class="nb-sub__label" for={id}>The journal, in your inbox</label>}
-  {!compact && <p class="nb-sub__hint">New Maxims and essays, published on Substack. No schedule promised, no spam.</p>}
+  {!compact && <p class="nb-sub__hint">New Maxims, published on Substack. No schedule promised, no spam.</p>}
   <div class="nb-sub__row">
     <input id={id} type="email" name="email" placeholder="you@company.com" autocomplete="email" required aria-describedby={`${id}-msg`} />
     <button class={`btn ${tone === 'blue' ? 'btn--yellow' : 'btn--blue'}`} type="submit">Subscribe</button>

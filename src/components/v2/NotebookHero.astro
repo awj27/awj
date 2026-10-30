@@ -5,17 +5,17 @@ import type { NotebookPage } from '../../data/notebook-pages';
 import { pad2, pillarLabel } from '../../data/notebook-pages';
 
 interface Props { pages: NotebookPage[]; id?: string; }
-const { pages, id = 'notebook-hero' } = Astro.props;
+const { pages, id = 'journal' } = Astro.props;
 const n = pages.length;
 ---
-<section class="hero" id={id} data-hero style={`--n:${n}`} aria-roledescription="notebook" aria-label="The AWJ notebook. Scroll to open it and turn the pages, or use the arrow keys.">
+<section class="hero" id={id} data-hero style={`--n:${n}`} aria-roledescription="journal" aria-label="The AWJ journal. Scroll to open it and turn the pages, or use the arrow keys.">
   <div class="hero__track" data-track>
     {Array.from({ length: n + 1 }, (_, k) => <i class="hero__snap" style={`--k:${k}`} aria-hidden="true"></i>)}
 
     <div class="hero__stage" data-stage>
       <div class="hero__intro" data-intro>
         <p class="nb-eyebrow">Andy Whyte Journal</p>
-        <h1 class="hero__title">A notebook of principles for sales, founding and being human.</h1>
+        <h1 class="hero__title">A journal of principles for sales, founding and being human.</h1>
         <p class="hero__cue" aria-hidden="true">Scroll to open</p>
       </div>
 
@@ -39,7 +39,7 @@ const n = pages.length;
 
           <div class="nb-spine" aria-hidden="true"></div>
 
-          <button type="button" class="nb-cover" data-cover aria-label="Open the notebook">
+          <button type="button" class="nb-cover" data-cover aria-label="Open the journal">
             <span class="nb-cover__front"><img src="/notebook/cover-landscape.webp" alt="" width="1638" height="1200" draggable="false" /></span>
             <span class="nb-cover__back"></span>
           </button>
@@ -57,7 +57,7 @@ const n = pages.length;
               <span class={`nb-pill nb-pill--${p.pillar}`}>{pillarLabel[p.pillar]}</span>
             </p>
             <h2 class="hero__cap-title">{p.title}</h2>
-            <a class="hero__cap-link" href={p.href}>Read the essay &rarr;</a>
+            <a class="hero__cap-link" href={p.href}>Read the Maxim &rarr;</a>
           </article>
         ))}
       </div>
@@ -171,7 +171,7 @@ const n = pages.length;
 </style>
 
 <script>
-  // Scroll-driven notebook. Re-runs after client-side navigation; tears down the previous instance first.
+  // Scroll-driven journal. Re-runs after client-side navigation; tears down the previous instance first.
   let controller: AbortController | undefined;
 
   function setup() {
@@ -309,7 +309,7 @@ const n = pages.length;
       rail.forEach((b, i) => b.addEventListener('click', () => goTo(i + 1), { signal }));
       cover.addEventListener('click', () => goTo(1), { signal });
 
-      // keyboard turns while the notebook is pinned
+      // keyboard turns while the journal is pinned
       addEventListener('keydown', (e: KeyboardEvent) => {
         const t = e.target as HTMLElement;
         if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;

@@ -5,11 +5,11 @@ import { SITE, HUBS } from '../data/site';
 import { pillarInfo } from '../data/notebook-pages';
 
 const faqs = [
-  { q: 'Who is Andy Whyte?', a: `Andy Whyte is the founder and CEO of MEDDICC, the sales qualification methodology and platform used by enterprise B2B sales teams worldwide. He wrote MEDDICC, the best-selling book on sales qualification, with over ${SITE.facts.copies} copies sold, and more than ${SITE.facts.graduates} people have graduated from the MEDDICC Masterclass built on it. Before founding MEDDICC in 2021 he spent twenty years as a seller and sales leader at companies including Oracle, Sprinklr, Tealium, Branch and Poq.` },
-  { q: 'What is the Andy Whyte Journal?', a: 'A notebook of principles, written by hand and published online. Each entry is a Maxim, a single line, with the essay behind it. The Maxims sit in three pillars: Sales, Founder and Human. There is no fixed schedule; a new page is published when it is written.' },
+  { q: 'Who is Andy Whyte?', a: `Andy Whyte is the founder and CEO of MEDDICC, the company behind the common language for qualification, methodology and value selling used by enterprise B2B sales teams worldwide. He wrote MEDDICC, the best-selling book on it, with over ${SITE.facts.copies} copies sold, and more than ${SITE.facts.graduates} people have graduated from the MEDDICC Masterclass built on it. Before founding MEDDICC in 2021 he spent twenty years as a seller and sales leader at companies including Oracle, Sprinklr, Tealium, Branch and Poq.` },
+  { q: 'What is the Andy Whyte Journal?', a: 'A journal of principles, written by hand and published online. Each entry is a Maxim, a single line, with the thinking behind it written in full. The Maxims sit in three pillars: Sales, Founder and Human. There is no fixed schedule; a new page is published when it is written.' },
   { q: 'What does Andy do?', a: 'He runs MEDDICC. He keynotes at sales kickoffs, sales conferences and revenue summits for organisations including CrowdStrike, Microsoft, Amazon Web Services and Dun and Bradstreet. He writes the journal.' },
   { q: 'How can I work with Andy?', a: 'For keynotes, sales kickoffs and master-of-ceremonies engagements, see the Speaking page or use the Contact page. For MEDDICC training, certification and sales enablement programmes, visit meddicc.com. For press and other enquiries, use the Contact page.' },
-  { q: 'What topics does Andy write and speak about?', a: 'MEDDPICC and MEDDICC, sales leadership, keynote speaking for sales teams, and imposter syndrome. Each has its own hub on this site, with the essays, the questions people ask and the frameworks behind the thinking.' },
+  { q: 'What topics does Andy write and speak about?', a: 'MEDDPICC and MEDDICC, sales leadership, keynote speaking for sales teams, and imposter syndrome. Each has its own hub on this site, with the Maxims, the questions people ask and the frameworks behind the thinking.' },
 ];
 
 const milestones = [
@@ -29,7 +29,7 @@ const profile = { '@type': 'ProfilePage', '@id': `${SITE.url}/about/#profile`, u
 ---
 <SiteLayout
   title="About Andy Whyte: founder and CEO of MEDDICC, author, keynote speaker"
-  description="Andy Whyte. Founder and CEO of MEDDICC, author of the best-selling book on sales qualification, keynote speaker. Twenty years in sales, and why the journal exists."
+  description="Andy Whyte. Founder and CEO of MEDDICC, author of the best-selling book MEDDICC, keynote speaker. Twenty years in sales, and why the journal exists."
   pageType="about"
   schema={[profile]}
   breadcrumbs={[{ name: 'About', href: '/about/' }]}
@@ -39,7 +39,7 @@ const profile = { '@type': 'ProfilePage', '@id': `${SITE.url}/about/#profile`, u
       <div class="nb-page-head__in">
         <p class="nb-eyebrow">Who is this?</p>
         <h1>Andy Whyte. Founder and CEO, best-selling author, dad, human.</h1>
-        <p class="nb-lede">Outcome-oriented, results-driven. MEDDIC superfan. Twenty years in sales, one company, one book, one blue notebook.</p>
+        <p class="nb-lede">Outcome-oriented, results-driven. MEDDIC superfan. Twenty years in sales, one company, one book, one blue journal.</p>
         <div class="nb-page-head__actions">
           <a class="btn btn--blue" href="/speaking/">Book Andy to speak</a>
           <a class="btn btn--ghost" href="/maxims/">Read the Maxims</a>
@@ -94,7 +94,7 @@ const profile = { '@type': 'ProfilePage', '@id': `${SITE.url}/about/#profile`, u
     <div class="nb-shell">
       <div class="nb-section-head">
         <p class="nb-eyebrow">Why the journal exists</p>
-        <h2>A notebook page that earned the right to be on a billboard.</h2>
+        <h2>A journal page that earned the right to be on a billboard.</h2>
         <p class="nb-lede">The public form of the journal I keep in private: applied thinking from someone who has done both the work and the worrying. Three pillars.</p>
       </div>
       <div class="nb-grid nb-grid--3">

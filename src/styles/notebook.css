@@ -15,7 +15,7 @@
 }
 
 /* ==========================================================================
-   AWJ v2: the notebook on a white desk
+   AWJ v2: the journal on a white desk
    Colour tokens are sampled from the real pad (October 2026 shoot): the
    cover under even light, the pen ink at stroke core, the paper itself.
    ========================================================================== */
@@ -65,7 +65,7 @@
 }
 @media (max-width: 860px) { :root { --header-h: 64px; } }
 
-/* the home page snaps to the notebook's turns; nothing else on the site has snap points */
+/* the home page snaps to the journal's turns; nothing else on the site has snap points */
 html[data-snap] { scroll-snap-type: y proximity; scroll-padding-top: var(--header-h); }
 [id] { scroll-margin-top: calc(var(--header-h) + 12px); }
 /* without JavaScript the cover never opens, so it is not shown */
@@ -189,7 +189,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .nb-prose code { font-family: var(--font-mono); font-size: .9em; background: var(--nb-canvas-2); padding: .1em .35em; border-radius: 4px; }
 .nb-prose strong { font-weight: 600; }
 
-/* blocks that live inside the older Maxim essays (1 to 3) */
+/* blocks that live inside the older Maxims (1 to 3) */
 .nb-prose .awj-hero-script { margin: 0 0 2em; padding: clamp(18px, 2.5vw, 28px); border-left: 4px solid var(--nb-cover); background: var(--nb-canvas-2); border-radius: 0 var(--radius-ui) var(--radius-ui) 0; font-size: 1.05em; font-weight: 500; }
 .nb-prose .awj-hero-script p + p { margin-top: .9em; }
 .nb-prose .awj-hero-script--cols { font-weight: 400; font-size: .95em; column-gap: 32px; column-rule: 1px solid var(--nb-line); }
@@ -206,7 +206,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .nb-prose .awj-citations { margin-top: 2.5em; padding-top: 1.4em; border-top: 1px solid var(--nb-line); font-size: .9em; color: var(--nb-text-2); }
 .nb-prose .awj-reflect { margin: 2em 0; padding: clamp(18px, 2.5vw, 28px); border-radius: var(--radius-ui); background: color-mix(in srgb, var(--nb-yellow) 18%, #fff); }
 
-/* the analytics consent banner, restyled for the notebook */
+/* the analytics consent banner, restyled for the journal */
 :root { --awj-black: var(--nb-text); --awj-white: #FFFFFF; --awj-yellow: var(--nb-yellow); --awj-blue: var(--nb-cover); --font-body: var(--font-sans); --t-fast: .2s ease; }
 .awj-consent { border: 0 !important; box-shadow: var(--shadow-lift) !important; border-radius: 14px; background: var(--nb-text) !important; }
 .awj-consent__btn { border-radius: 999px !important; letter-spacing: .02em !important; text-transform: none !important; font-weight: 600 !important; font-size: 14px !important; }

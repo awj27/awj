@@ -12,7 +12,7 @@ faqs:
   - q: "What should an SKO keynote avoid?"
     a: "Motivational soundbites that fade by Tuesday, a product pitch dressed up as a talk, last year's deck with a new logo on the title slide, and any speaker who has never carried a number telling a room full of people who carry one how to feel about it. A sales team can smell theatre from the back row. If the examples are generic, the room has already decided the advice is too."
   - q: "What speaking formats does Andy Whyte offer?"
-    a: "Three. A keynote, which is a 30 to 60 minute talk built around the MEDDICC framework, its principles, its failure modes and the patterns that separate A-Players from theatre. A sales kickoff session, bespoke to the team's deals, stage gates and objection patterns, which goes deeper than a keynote. And master of ceremonies, hosting an event end to end: setting the tone, holding the energy, conducting the panels and delivering the close. MC is best for SKOs and revenue summits."
+    a: "Three. A keynote, which is a 30 to 60 minute talk built around MEDDICC, its principles, its failure modes and the patterns that separate A-Players from theatre. A sales kickoff session, bespoke to the team's deals, stage gates and objection patterns, which goes deeper than a keynote. And master of ceremonies, hosting an event end to end: setting the tone, holding the energy, conducting the panels and delivering the close. MC is best for SKOs and revenue summits."
   - q: "How long is an Andy Whyte keynote?"
     a: "A keynote runs 30 to 60 minutes. A sales kickoff session is built to the client's agenda and goes deeper, because the material is the team's own deals rather than a general talk. As master of ceremonies, Andy hosts the whole event from opening to close. The right length is the one that leaves the team with a single way of thinking they will use on Monday, which usually means shorter and sharper than people expect."
   - q: "Does Andy Whyte speak virtually and outside the UK?"
@@ -45,7 +45,7 @@ A keynote has one job. Monday has to be different.
 
 Four things, and they overlap.
 
-Qualification. MEDDPICC, from the person who wrote the book on it and runs the company that teaches it. What the letters mean, where teams fake them, and what the framework looks like when it is a way of thinking rather than a form in the CRM.
+Qualification. MEDDPICC, from the person who wrote the book on it and runs the company that teaches it. What the letters mean, where teams fake them, and what it looks like when it is a way of thinking rather than a form in the CRM.
 
 Deal inspection. How leaders run deal reviews and forecast calls that find the truth. Why "I'm working it hard" is a confession. Why the B in B-Player stands for busy, and why there is no such thing as a C-Player.
 
@@ -71,7 +71,7 @@ It does not tell your team they are amazing for an hour, because motivational so
 
 ## Three formats
 
-Keynote. A 30 to 60 minute talk built around the MEDDICC framework: the principles, the failure modes, and the patterns that separate A-Players from theatre. For conferences and revenue summits.
+Keynote. A 30 to 60 minute talk built around MEDDICC: the principles, the failure modes, and the patterns that separate A-Players from theatre. For conferences and revenue summits.
 
 Sales kickoff. A bespoke session designed around your deals, your stage gates and your objection patterns. It goes deeper than a keynote because the material is yours.
 

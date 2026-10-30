@@ -13,7 +13,7 @@ const collection = {
   '@id': `${SITE.url}/maxims/#page`,
   url: `${SITE.url}/maxims/`,
   name: 'The AWJ Maxims',
-  description: 'Every Maxim in the notebook: single-line principles for sales, founding and being human, each with the essay behind it.',
+  description: 'Every Maxim in the journal: single-line principles for sales, founding and being human, each written in full.',
   mainEntity: {
     '@type': 'ItemList',
     itemListElement: entries.map((e, i) => ({ '@type': 'ListItem', position: i + 1, name: e.data.title, url: `${SITE.url}${entryHref(e)}` })),
@@ -22,7 +22,7 @@ const collection = {
 ---
 <SiteLayout
   title="The AWJ Maxims: principles for sales, founding and being human"
-  description="Every Maxim in Andy Whyte's notebook, in order. Single-line principles on sales, founding and being human, each with the essay behind it."
+  description="Every Maxim in Andy Whyte's journal, in order. Single-line principles on sales, founding and being human, each written in full."
   pageType="maxims-list"
   schema={[collection]}
   breadcrumbs={[{ name: 'Maxims', href: '/maxims/' }]}
@@ -30,8 +30,8 @@ const collection = {
   <section class="nb-page-head">
     <div class="nb-shell nb-page-head__in">
       <p class="nb-eyebrow">The library</p>
-      <h1>Twenty Maxims. One line each. An essay behind every one.</h1>
-      <p class="nb-lede">Written by hand in a blue notebook, photographed, and explained. Filter by pillar or read them in order.</p>
+      <h1>Twenty Maxims. One line each. The thinking behind every one.</h1>
+      <p class="nb-lede">Written by hand in a blue journal, photographed, and explained. Filter by pillar or read them in order.</p>
       <div class="filters" role="group" aria-label="Filter by pillar">
         <button type="button" class="nb-pill is-on" data-filter="all" aria-pressed="true">All</button>
         {(['sales', 'founder', 'human'] as const).map((p) => (

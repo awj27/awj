@@ -110,19 +110,19 @@ const video = entry.data.video_id ? [{
                 data-yt-type="longform"
               ></iframe>
             </div>
-            <p class="nb-meta">The short version, filmed over the notebook.</p>
+            <p class="nb-meta">The short version, filmed over the journal.</p>
           </div>
         )}
         {partOf.length > 0 && (
           <div class="side-card">
             <p class="nb-eyebrow">Part of</p>
             {partOf.map((h) => <a class="side-link" href={h.href}>{h.title} &rarr;</a>)}
-            <p class="nb-meta">The hub: essays, questions answered, the frameworks.</p>
+            <p class="nb-meta">The hub: Maxims, questions answered, the frameworks.</p>
           </div>
         )}
         <div class="side-card">
-          <p class="nb-eyebrow">Back to the notebook</p>
-          <a class="side-link" href="/#notebook-hero">Turn the pages &rarr;</a>
+          <p class="nb-eyebrow">Back to the journal</p>
+          <a class="side-link" href="/#journal">Turn the pages &rarr;</a>
           <a class="side-link" href="/maxims/">The library &rarr;</a>
         </div>
       </aside>
@@ -133,7 +133,7 @@ const video = entry.data.video_id ? [{
         <img class="author__photo" src="/media/portrait/andy-portrait.jpg" alt="" loading="lazy" width="128" height="128" />
         <div>
           <p class="author__name"><a href="/about/">Andy Whyte</a></p>
-          <p class="nb-meta">Founder and CEO of MEDDICC. Author of the best-selling book on sales qualification. Twenty years in sales, one blue notebook.</p>
+          <p class="nb-meta">Founder and CEO of MEDDICC. Author of the best-selling book MEDDICC. Twenty years in sales, one blue journal.</p>
         </div>
       </div>
     </footer>
@@ -142,7 +142,7 @@ const video = entry.data.video_id ? [{
   <section class="nb-section nb-section--tint">
     <div class="nb-shell">
       <div class="nb-section-head">
-        <p class="nb-eyebrow">Next in the notebook</p>
+        <p class="nb-eyebrow">Next in the journal</p>
         <h2>Keep turning.</h2>
       </div>
       <div class="nb-grid nb-grid--3">
@@ -165,7 +165,7 @@ const video = entry.data.video_id ? [{
       <div class="nb-stack">
         <p class="nb-eyebrow">The journal</p>
         <h2>New Maxims, as they are written.</h2>
-        <p class="nb-lede">No schedule promised. When a page gets filled in, you get the essay.</p>
+        <p class="nb-lede">No schedule promised. When a page gets filled in, you get the Maxim.</p>
       </div>
       <SubscribeForm source={`maxim-${pad2(n)}`} compact />
     </div>

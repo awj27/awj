@@ -13,7 +13,7 @@ hub: "meddpicc"
 order: 1
 ---
 
-MEDDPICC is a qualification framework. Eight letters, each one a question you ask about a deal: Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion, Competition. Answer all eight with evidence from the customer and you know whether the deal is real, where it is strong, where it is weak and what to do about it. Leave any of them blank and you are forecasting a guess.
+MEDDPICC is a common language for qualification, methodology and value selling. Eight letters, each one a question you ask about a deal: Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion, Competition. Answer all eight with evidence from the customer and you know whether the deal is real, where it is strong, where it is weak and what to do about it. Leave any of them blank and you are forecasting a guess.
 
 It exists because complex deals fail in predictable places. The original six letters came out of PTC in the 1990s, where Dick Dunkel and Jack Napoli worked out what the won deals had in common that the lost ones did not. The seventh, Competition, was added because sellers kept losing to rivals and to "do nothing" without seeing either coming. The eighth, Paper Process, was added because the stretch between a verbal yes and a signed contract was killing deals on the last day of the quarter. Every letter is a scar.
 

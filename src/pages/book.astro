@@ -7,12 +7,12 @@ const AMAZON_UK = 'https://www.amazon.co.uk/MEDDICC-ultimate-guide-staying-compl
 const AMAZON_US = 'https://www.amazon.com/MEDDICC-ultimate-guide-staying-complex/dp/1838239707';
 
 const faqs = [
-  { q: 'What is the MEDDICC book about?', a: 'MEDDICC by Andy Whyte is the field-tested playbook for the qualification methodology used by the best-performing enterprise sales teams. It explains every letter of MEDDPICC, Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion and Competition, with the depth and case studies needed to apply the framework in real deals.' },
+  { q: 'What is the MEDDICC book about?', a: 'MEDDICC by Andy Whyte is the field-tested playbook for MEDDPICC, the common language for qualification, methodology and value selling used by the best-performing enterprise sales teams. It explains every letter of MEDDPICC, Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion and Competition, with the depth and case studies needed to apply it in real deals.' },
   { q: 'How many copies has the MEDDICC book sold?', a: `Over ${SITE.facts.copies} copies worldwide. It is the highest-rated MEDDIC and MEDDPICC book on Amazon, with a 4.7-star rating across more than 1,447 reviews, and more than ${SITE.facts.graduates} people have graduated from the MEDDICC Masterclass built on it.` },
-  { q: 'Who is the foreword by?', a: 'The book includes a foreword and commentary from the co-creators of MEDDIC, Dick Dunkel and Jack Napoli, who originally developed the methodology at PTC.' },
-  { q: 'Is the MEDDICC book good for beginners?', a: 'Yes. It is written for account executives running their first complex deal, sales leaders who want better forecast accuracy, and founders selling enterprise. The framework is explained letter by letter with examples, then layered with the patterns that separate A-players from theatre.' },
+  { q: 'Who is the foreword by?', a: 'The book includes a foreword and commentary from the co-creators of MEDDIC, Dick Dunkel and Jack Napoli, who originally developed MEDDIC at PTC.' },
+  { q: 'Is the MEDDICC book good for beginners?', a: 'Yes. It is written for account executives running their first complex deal, sales leaders who want better forecast accuracy, and founders selling enterprise. The letters are explained one by one with examples, then layered with the patterns that separate A-players from theatre.' },
   { q: 'Is there a Kindle or audiobook version?', a: 'Yes. MEDDICC is available in paperback, Kindle and audiobook from Amazon globally.' },
-  { q: 'What is the difference between MEDDIC, MEDDICC and MEDDPICC?', a: 'MEDDIC is the original six-letter framework created by Jack Napoli and Dick Dunkel at PTC: Metrics, Economic Buyer, Decision Criteria, Decision Process, Implicate the Pain and Champion. MEDDICC adds Competition. MEDDPICC adds the Paper Process, the procurement and legal steps that so often kill deals at the close. The book covers all three.' },
+  { q: 'What is the difference between MEDDIC, MEDDICC and MEDDPICC?', a: 'MEDDIC is the original six letters, created by Jack Napoli and Dick Dunkel at PTC: Metrics, Economic Buyer, Decision Criteria, Decision Process, Implicate the Pain and Champion. MEDDICC adds Competition. MEDDPICC adds the Paper Process, the procurement and legal steps that so often kill deals at the close. The book covers all three.' },
 ];
 
 const reviews = [
@@ -40,11 +40,11 @@ const book = {
   image: `${SITE.url}/media/book/meddicc-cover.jpg`,
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.7', ratingCount: '1447', bestRating: '5', worstRating: '1' },
   offers: { '@type': 'Offer', url: AMAZON_UK, availability: 'https://schema.org/InStock' },
-  about: ['MEDDICC', 'MEDDPICC', 'Sales Qualification', 'Enterprise Sales', 'Complex Sales'],
+  about: ['MEDDICC', 'MEDDPICC', 'Sales Qualification', 'Value Selling', 'Enterprise Sales', 'Complex Sales'],
 };
 ---
 <SiteLayout
-  title="MEDDICC, the best-selling book on sales qualification by Andy Whyte"
+  title="MEDDICC by Andy Whyte: the best-selling book on the common language of sales"
   description="The ultimate guide to staying one step ahead in the complex sale. Over 100,000 copies sold, 4.7 stars across 1,447+ reviews. Paperback, Kindle and audiobook."
   pageType="book"
   ogImage="/media/book/meddicc-cover.jpg"
@@ -76,11 +76,11 @@ const book = {
       <div class="nb-prose">
         <h2>What it is.</h2>
         <p>The first book to put MEDDICC down in writing, with a foreword and commentary from the co-creators of MEDDIC, <strong>Dick Dunkel</strong> and <strong>Jack Napoli</strong>.</p>
-        <p>It is the field-tested playbook for the qualification methodology used by the best-performing enterprise sales teams. Built for sellers who refuse to lose deals to bad qualification, and for leaders who want a forecast they can stand behind.</p>
+        <p>It is the field-tested playbook for MEDDPICC, the common language for qualification, methodology and value selling used by the best-performing enterprise sales teams. Built for sellers who refuse to lose deals to bad qualification, and for leaders who want a forecast they can stand behind.</p>
         <h2>Who it is for.</h2>
         <p>Account executives running complex deals. Sales leaders who want their team inspecting the deal rather than reciting it. Founders selling enterprise. Anyone who has ever heard a rep say "the deal is going great" and wanted a way to test that claim.</p>
         <h2>What you get.</h2>
-        <p><strong>The framework.</strong> Every letter of MEDDPICC explained with a depth nothing else on the market matches. Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion, Competition.</p>
+        <p><strong>The letters.</strong> Every letter of MEDDPICC explained with a depth nothing else on the market matches. Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion, Competition.</p>
         <p><strong>The patterns.</strong> What A-players do that B-players miss. The deal-killers. The early signals that a forecast is fiction.</p>
         <p><strong>The plays.</strong> Real frameworks, the Champion Test, qualifying out, the deal-inspection rhythm, that you can run on Monday morning. The <a href="/frameworks/">frameworks</a> and the <a href="/glossary/">glossary</a> on this site are the companion.</p>
       </div>

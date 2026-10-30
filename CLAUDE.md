@@ -2,12 +2,12 @@
 
 The codebase for **andywhyte.com**. Live via Cloudflare Pages (project `awj`), source on GitHub `awj27/awj` (Andy's GitHub user is `awj27`).
 
-> A notebook of principles for sales, founding and being human. Twenty handwritten Maxims, one line each, an essay behind every one.
+> A journal of principles for sales, founding and being human. Twenty handwritten Maxims, one line each, each written in full.
 
 ## Stack
 
 - **Astro 6**, static output. Content collections for the journal, hubs, glossary, frameworks, landing pages and editorial pages (`src/content.config.ts`).
-- **TypeScript** strict. **No frameworks**: the notebook hero is CSS 3D plus a few kilobytes of vanilla script.
+- **TypeScript** strict. **No frameworks**: the journal hero is CSS 3D plus a few kilobytes of vanilla script.
 - **Cloudflare Pages** hosting. **Pages Functions** for `/api/contact` (Resend) and `/api/subscribe` (the Beehiiv fallback, see Newsletter).
 - **GitHub Actions**: `.github/workflows/deploy.yml` builds and deploys to Cloudflare Pages on every push to `main`.
 
@@ -26,7 +26,7 @@ A branch deploy gets an alias at `https://<branch-name>.awj-ehz.pages.dev`, prot
 
 ## Design
 
-The design is the notebook on a white desk. Everything derives from the real pad photographed in October 2026.
+The design is the journal on a white desk. Everything derives from the real journal photographed in October 2026.
 
 - Tokens in `src/styles/notebook.css`: cover blue `#3B4DB2`, ink `#224A8F`, paper `#F3F1EE`, white canvas, yellow accent `#FFCE00`, text `#1A2140`. Typeface Instrument Sans, self-hosted from `public/fonts/`.
 - The mark is Andy's handwritten "AWJ" lifted from page one: `public/notebook/mark/` (ink, blue, white; 320px versions for UI).
@@ -50,16 +50,15 @@ src/
 │   ├── site.ts               # site constants, nav, hubs list, Person/Organization/WebSite schema
 │   └── notebook-pages.ts     # the photographed pages, pillars, helpers
 ├── layouts/SiteLayout.astro  # head, structured data, analytics, header, footer, view transitions
-├── components/v2/            # SiteHeader, SiteFooter, NotebookHero, Notebook (study), SubscribeForm, FAQ
+├── components/v2/            # SiteHeader, SiteFooter, NotebookHero, SubscribeForm, FAQ
 ├── components/analytics/     # GA4 loader, consent banner, YouTube tracker
 ├── lib/                      # maxims.ts helpers, analytics.ts, videos.ts
 ├── pages/
-│   ├── index.astro           # the notebook hero + library + hubs + about + book
+│   ├── index.astro           # the journal hero + library + hubs + about + book
 │   ├── [slug].astro          # hubs, landing pages and editorial pages at the root
 │   ├── maxims/, pillars/, journal/[slug].astro, journal/rss.xml.ts
 │   ├── glossary/, frameworks/
-│   ├── about, speaking, book, media, contact, subscribe, privacy, 404
-│   └── design/               # review-only pages from the redesign (noindex); delete once no longer useful
+│   └── about, speaking, book, media, contact, subscribe, privacy, 404
 public/
 ├── notebook/                 # cover, pages, mark, og images
 ├── fonts/                    # Instrument Sans woff2
@@ -72,7 +71,7 @@ docs/redesign-brief.md        # the decisions
 
 ## Adding a Maxim
 
-1. Write the page in the pad, photograph it like the others, cut it to `public/notebook/pages/awj-NN.webp` (paper normalised to `#F3F1EE`; the cutting script lives in the redesign session's scratchpad, or redo it with sharp).
+1. Write the page in the journal, photograph it like the others, cut it to `public/notebook/pages/awj-NN.webp` (paper normalised to `#F3F1EE`; the cutting script lives in the redesign session's scratchpad, or redo it with sharp).
 2. Add the page to `notebookPages` in `src/data/notebook-pages.ts` (number, title, pillar, alt text) and to `library` if it fills one of the "coming" slots.
 3. Create `src/content/journal/awj-NN-<slug>.md`:
 
@@ -86,7 +85,7 @@ date: 2026-MM-DD
 modified: 2026-MM-DD
 video_id: abcXyz123  # optional
 ---
-The essay.
+The Maxim, written in full.
 ```
 
 4. Run `node scripts/og-images.mjs` to make the social preview, build, deploy.
@@ -100,6 +99,14 @@ The journal is published on Substack. Set `substackUrl` in `src/data/site.ts` to
 ## Voice
 
 Calm authority. Direct. Instructional. British English. No em dashes, ever. Observation, principle, model, application. Capitalise defined concepts (Champion, Economic Buyer). End on a question where it fits. The `andy-whyte-writing` skill holds the full voice model; use it for any new copy.
+
+## Language
+
+Corrected by Andy on 30 October 2026. `node scripts/qa.mjs` flags these in the built pages.
+
+- It is a journal. Never a notebook, a notepad or a pad in anything a visitor or a crawler reads. File names, class names and asset paths keep `notebook`; copy does not.
+- They are Maxims. Never essays. A Maxim is the handwritten line and the writing beneath it: "read the Maxim", "the Maxim in full", "the thinking behind it".
+- MEDDIC, MEDDICC and MEDDPICC are a common language used for qualification, methodology and value selling. Never "a qualification framework", "a sales methodology" or "the MEDDICC framework".
 
 ## Facts to use everywhere
 

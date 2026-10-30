@@ -36,7 +36,7 @@ export const SITE = {
 };
 
 export const HUBS = [
-  { slug: 'meddpicc', title: 'MEDDPICC and MEDDICC', line: 'The qualification framework, from the person who wrote the book on it.' },
+  { slug: 'meddpicc', title: 'MEDDPICC and MEDDICC', line: 'The common language for qualification, methodology and value selling, from the person who wrote the book on it.' },
   { slug: 'sales-leadership', title: 'Sales leadership', line: 'Inspect the deal, not the rep. Forecasts, deal reviews and the thinking behind them.' },
   { slug: 'keynote-speaking', title: 'Keynote speaking', line: 'Sales kickoffs and revenue summits. Practical, direct, no theatre.' },
   { slug: 'imposter-syndrome', title: 'Imposter syndrome', line: 'Only the self-aware suffer from it. Why that is a strength.' },
@@ -57,7 +57,7 @@ export const personSchema = {
   image: `${SITE.url}/media/portrait/andy-portrait.jpg`,
   description: `Founder and CEO of MEDDICC and author of the best-selling book MEDDICC. Twenty years in sales at companies including Oracle, Sprinklr, Tealium, Branch and Poq before founding MEDDICC in ${SITE.facts.founded}. Keynote speaker at sales kickoffs and revenue summits.`,
   knowsAbout: [
-    'MEDDICC', 'MEDDPICC', 'MEDDIC', 'Sales Qualification', 'Deal Inspection', 'Sales Forecasting',
+    'MEDDICC', 'MEDDPICC', 'MEDDIC', 'Sales Qualification', 'Value Selling', 'Deal Inspection', 'Sales Forecasting',
     'Sales Leadership', 'Enterprise Sales', 'Keynote Speaking', 'Sales Kickoffs', 'Imposter Syndrome',
     'Founder-led Sales', 'Bootstrapped SaaS',
   ],
@@ -78,7 +78,7 @@ export const websiteSchema = {
   '@id': `${SITE.url}/#website`,
   url: `${SITE.url}/`,
   name: SITE.name,
-  description: 'Principles for sales, founding and being human, written in a blue notebook. Essays, frameworks and a glossary from the author of MEDDICC.',
+  description: 'Principles for sales, founding and being human, written in a blue journal. Maxims, frameworks and a glossary from the author of MEDDICC.',
   publisher: { '@id': `${SITE.url}/#org` },
   inLanguage: 'en-GB',
 };

@@ -2,21 +2,21 @@
 title: "MEDDPICC and MEDDICC"
 eyebrow: "Topic hub"
 description: "MEDDIC, MEDDICC and MEDDPICC explained by Andy Whyte, author of the MEDDICC book: what every letter means, how they differ, and how to use them properly."
-standfirst: "The qualification framework behind the best-run sales teams in the world, explained by the person who wrote the book on it. What the letters mean, where teams get it wrong, and how I want it used."
+standfirst: "The common language for qualification, methodology and value selling behind the best-run sales teams in the world, explained by the person who wrote the book on it. What the letters mean, where teams get it wrong, and how I want it used."
 position: "Most teams use MEDDPICC as a checklist filled in after the meeting. I want it used as a set of questions asked before the meeting, so the letters tell you what you still do not know and the gaps become the plan. In a deal review, inspect the deal, not the rep: evidence or gap, never effort. And when the letters will not fill, qualify out. Nobody regrets it."
 faqs:
   - q: "What is MEDDICC in sales?"
-    a: "MEDDICC is a qualification framework for complex B2B sales. Each letter names something you must know about a deal before you can trust it in a forecast: Metrics, Economic Buyer, Decision Criteria, Decision Process, Implicate the Pain, Champion and Competition. It does not tell you what to say in a meeting. It tells you what you still do not know, so you can go and find out before the customer decides without you."
+    a: "MEDDICC is a common language for complex B2B sales, used for qualification, methodology and value selling. Each letter names something you must know about a deal before you can trust it in a forecast: Metrics, Economic Buyer, Decision Criteria, Decision Process, Implicate the Pain, Champion and Competition. It does not tell you what to say in a meeting. It tells you what you still do not know, so you can go and find out before the customer decides without you."
   - q: "What is the difference between MEDDIC, MEDDICC and MEDDPICC?"
-    a: "MEDDIC is the original six-letter framework created by Dick Dunkel and Jack Napoli at PTC. MEDDICC adds a second C for Competition, which includes the customer doing nothing. MEDDPICC adds a P for Paper Process, the legal, procurement and security steps that decide whether a deal signs this quarter or next. The thinking is the same in all three. The longer versions simply refuse to let you ignore the two things that most often kill a forecast."
+    a: "MEDDIC is the original six letters, created by Dick Dunkel and Jack Napoli at PTC. MEDDICC adds a second C for Competition, which includes the customer doing nothing. MEDDPICC adds a P for Paper Process, the legal, procurement and security steps that decide whether a deal signs this quarter or next. The thinking is the same in all three. The longer versions simply refuse to let you ignore the two things that most often kill a forecast."
   - q: "What does each letter of MEDDPICC stand for?"
     a: "Metrics, the quantifiable value the customer gets. Economic Buyer, the person with discretionary control of the budget. Decision Criteria, the standards the customer will use to choose. Decision Process, the steps and people between decision and signature. Paper Process, legal and procurement. Implicate the Pain, called Identify Pain in the original, tying the customer's pain to its cost and your solution to its relief. Champion, the person with power who sells for you when you are not in the room. Competition, anyone competing for the same budget, including doing nothing."
   - q: "Who created MEDDIC?"
     a: "Dick Dunkel and Jack Napoli created MEDDIC at PTC. Andy Whyte wrote the book MEDDICC, which explains MEDDIC, MEDDICC and MEDDPICC letter by letter, and Dunkel and Napoli contributed the foreword and commentary to it. The book has sold over 100,000 copies and is the highest-rated book on MEDDIC and MEDDPICC on Amazon."
   - q: "Is MEDDPICC a sales methodology or a qualification framework?"
-    a: "A qualification framework. MEDDPICC measures how well you understand a deal. It does not tell you how to run a discovery call or structure a sales process. Teams pair it with a sales process and a discovery method, and it makes both sharper, because every meeting now has a purpose: close the gaps in the letters. Calling it a methodology is harmless. Treating it as a script is where teams go wrong."
+    a: "Neither label is big enough. MEDDPICC is a common language, and teams use it for three things. Qualification: does this deal have the evidence to sit in the forecast? Methodology: every stage, deal review and forecast call asks the same questions in the same words. Value selling: Metrics and Implicated Pain are the customer's value, in the customer's words. It does not tell you what to say in a discovery call. It tells you what you still do not know, so every meeting has a purpose: close the gaps in the letters. Call it a framework if you like. Treating it as a script, or as a form, is where teams go wrong."
   - q: "How do you use MEDDPICC to qualify a deal?"
-    a: "Write the eight letters down the side of a page and, next to each, what you know and how you know it. Where the evidence is second-hand or missing, you have a gap, and the gaps become the agenda for the next meeting. Do this before the meeting, so the framework tells you what to find out, rather than afterwards, when it only tells you what you missed. If the gaps will not close, qualify out."
+    a: "Write the eight letters down the side of a page and, next to each, what you know and how you know it. Where the evidence is second-hand or missing, you have a gap, and the gaps become the agenda for the next meeting. Do this before the meeting, so the letters tell you what to find out, rather than afterwards, when it only tells you what you missed. If the gaps will not close, qualify out."
   - q: "Why do sales teams fail with MEDDPICC?"
     a: "Because they use it as a checklist filled in after the meeting instead of a set of questions asked before it. The rep scores their own deal, the CRM turns the scores green, and the forecast inherits the rep's confidence rather than the deal's evidence. The fix is to inspect the deal, not the rep: ask how we know each letter, treat opinion as a gap, and make the gap the plan."
   - q: "How do you identify the Economic Buyer in a deal?"
@@ -41,7 +41,7 @@ Most teams I meet are running MEDDPICC as a form. Eight fields in the CRM, fille
 
 I wrote the book on it. I did not write it so you could fill in a form.
 
-MEDDPICC is a set of questions. Each letter is something you need to know about a deal before you can say you understand it. Ask the questions before the meeting and they tell you what to go and find out. Ask them afterwards and they tell you what you missed. The framework only does its job when you are honest about the gaps.
+MEDDPICC is a common language. One set of words a team uses for qualification, for its methodology and for value selling, so that when a rep says Champion, the manager, the forecast and the customer all mean the same thing. It is also a set of questions. Each letter is something you need to know about a deal before you can say you understand it. Ask the questions before the meeting and they tell you what to go and find out. Ask them afterwards and they tell you what you missed. The letters only do their job when you are honest about the gaps.
 
 ## What the letters mean
 
@@ -87,7 +87,7 @@ What that team has is a Champion's opinion of an Economic Buyer. What they have 
 
 The questions version runs the other way. Before the next meeting with Charlie, the rep writes down what she knows about each letter and how she knows it. Economic Buyer: named, never met, status second-hand.
 
-That is now the agenda. The meeting exists to get Charlie to put her in front of Eve, or to find out why he will not. The framework has told the rep what to do on Tuesday. That is what it is for.
+That is now the agenda. The meeting exists to get Charlie to put her in front of Eve, or to find out why he will not. MEDDPICC has told the rep what to do on Tuesday. That is what it is for.
 
 A checklist measures how confident the rep feels. Questions measure how much evidence the deal has. Only one of those forecasts anything.
 

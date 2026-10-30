@@ -7,7 +7,7 @@ const frameworks = (await getCollection('frameworks')).sort((a, b) => a.data.ord
 const list = {
   '@type': 'ItemList',
   '@id': `${SITE.url}/frameworks/#list`,
-  name: 'Frameworks by Andy Whyte',
+  name: 'The frameworks Andy Whyte runs',
   itemListElement: frameworks.map((f, i) => ({ '@type': 'ListItem', position: i + 1, name: f.data.name, url: `${SITE.url}/frameworks/${f.id}/` })),
 };
 ---

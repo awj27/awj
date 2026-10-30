@@ -1,4 +1,4 @@
-// Pages cut from the October 2026 notebook shoot. Eighteen of the twenty are
+// Pages cut from the October 2026 journal shoot. Eighteen of the twenty are
 // photographed; 16 and 17 are still to be written and shot by Andy.
 export type Pillar = 'sales' | 'founder' | 'human';
 
@@ -22,7 +22,7 @@ const page = (number: number, title: string, pillar: Pillar, alt: string, provis
 });
 
 export const notebookPages: NotebookPage[] = [
-  page(1,  'A-Players are uncomfortable being comfortable', 'sales',   'Handwritten in blue ink on a cream notebook page: A-Players are uncomfortable being comfortable. Signed AWJ, number 1.'),
+  page(1,  'A-Players are uncomfortable being comfortable', 'sales',   'Handwritten in blue ink on a cream journal page: A-Players are uncomfortable being comfortable. Signed AWJ, number 1.'),
   page(2,  'Feedback is like milk. It is best fresh.',        'founder', 'Handwritten in blue ink: Feedback is like milk. It is best fresh. Attributed to Faith Meyer. Number 2.'),
   page(3,  'The B in B-Player stands for Busy',               'founder', 'Handwritten in blue ink: The B in B-Player stands for Busy. Signed AWJ, number 3.'),
   page(4,  'There is no such thing as a C Player',            'founder', 'Handwritten in blue ink: There is no such thing as a C Player. Signed AWJ, number 4.'),
@@ -42,7 +42,7 @@ export const notebookPages: NotebookPage[] = [
   page(20, 'Judge decisions, not outcomes',                   'sales',   'Handwritten in blue ink: Judge decisions, not outcomes. Signed AWJ, number 20.', true),
 ];
 
-/** The full library for the index below the notebook, including the two still to come. */
+/** The full library for the index below the journal, including the two still to come. */
 export const library: { number: number; title: string; pillar?: Pillar; coming?: boolean }[] = [
   ...notebookPages.slice(0, 15).map((p) => ({ number: p.number, title: p.title, pillar: p.pillar })),
   { number: 16, title: 'Being written', coming: true },

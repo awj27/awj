@@ -12,7 +12,7 @@ secondaryCta:
   href: "/speaking/#reel"
 points:
   - title: "The talks"
-    body: "Enterprise sales, MEDDICC, sales as a thinking discipline, and the patterns that separate A-players from theatre. The keynote is 30 to 60 minutes built around the MEDDICC framework: the principles, the failure modes, and what the best sellers do that the rest miss. Every talk is cut for the room in front of it, with your deals in it, never a deck lifted from the last event."
+    body: "Enterprise sales, MEDDICC, sales as a thinking discipline, and the patterns that separate A-players from theatre. The keynote is 30 to 60 minutes built around MEDDICC: the principles, the failure modes, and what the best sellers do that the rest miss. Every talk is cut for the room in front of it, with your deals in it, never a deck lifted from the last event."
   - title: "What the room leaves with"
     body: "Frameworks they can run on Monday, not soundbites that fade by Tuesday. A seller walks out knowing how to test a Champion, find the Economic Buyer and quantify a Metric. A leader walks out knowing what to inspect on the next forecast call. Fired up is the aim, but fired up with a plan, because motivation without a method is gone by the first objection."
   - title: "Three formats"
@@ -26,7 +26,7 @@ proof:
   - "Mandira Mehra, Chief Marketing Officer, MRI Software: \"Andy helped take our GKO to the next level.\""
 faqs:
   - q: "What does Andy Whyte speak about?"
-    a: "Enterprise sales, MEDDICC and MEDDPICC, sales as a thinking discipline, and the patterns that separate A-players from theatre. The keynote is built around the MEDDICC framework: the principles, the failure modes, and what the best sellers do that the rest miss. A sales kickoff session goes further and is built around your team's own deals, stage gates and objection patterns."
+    a: "Enterprise sales, MEDDICC and MEDDPICC, sales as a thinking discipline, and the patterns that separate A-players from theatre. The keynote is built around MEDDICC: the principles, the failure modes, and what the best sellers do that the rest miss. A sales kickoff session goes further and is built around your team's own deals, stage gates and objection patterns."
   - q: "How long is a keynote?"
     a: "A keynote runs 30 to 60 minutes, and the right length depends on the slot and the room. A sales kickoff session goes deeper than a keynote and is scoped around what your team needs to leave with. As master of ceremonies I host the whole event, from setting the tone at the open to delivering the close."
   - q: "Is Andy a good fit for a sales kickoff?"
@@ -52,7 +52,7 @@ I keynote sales kickoffs, conferences and revenue summits, in person worldwide a
 
 Enterprise sales, MEDDICC and MEDDPICC, sales as a thinking discipline, and the patterns that separate A-players from theatre.
 
-The keynote runs 30 to 60 minutes and is built around the MEDDICC framework: the principles, the failure modes, and what the best sellers do that the rest miss. Why the deal that was going great died at procurement. Why the Champion who loved the demo never sold a thing internally. Why the Economic Buyer nobody met said no to a proposal nobody wrote for them. A room full of sellers recognises every one of those, because every one of them has lived it.
+The keynote runs 30 to 60 minutes and is built around MEDDICC: the principles, the failure modes, and what the best sellers do that the rest miss. Why the deal that was going great died at procurement. Why the Champion who loved the demo never sold a thing internally. Why the Economic Buyer nobody met said no to a proposal nobody wrote for them. A room full of sellers recognises every one of those, because every one of them has lived it.
 
 I do not do motivation without a method. Fired up is the aim, and the KEYGOAT mindset is the standard: every keynote treated as though it has to be the greatest of all time. But fired up with nothing to run is gone by the first objection. The room leaves with frameworks they can apply on Monday, not soundbites that fade by Tuesday.
 

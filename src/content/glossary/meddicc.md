@@ -1,6 +1,6 @@
 ---
 term: "MEDDICC"
-short: "MEDDICC is the MEDDIC qualification framework with a second C added for Competition, so sellers qualify who and what they are really up against."
+short: "MEDDICC is MEDDIC with a second C added for Competition, so sellers qualify who and what they are really up against."
 group: qualification
 related: [meddic, meddpicc, competition]
 maxims: []

@@ -640,13 +640,13 @@ Your problems. The specific things that are broken in your line of sight. Nobody
 
 Where those three overlap is the role. Attributes you did not choose, an environment you did not pick, and problems you keep bumping into. The overlap is rarely mysterious. If you are honest, you can name it in a sentence, and you have been able to for years.
 
-I wrote MEDDICC because the book I needed did not exist. I had the attribute, which was having learnt the framework the hard way across several companies. I had the environment, which was teams of Sellers who had been told to use MEDDICC and given nothing to read. I had the problem in my lap every Monday. I did not get a sign. I got a problem and a laptop. That book has now sold over 100,000 copies, and the only decision that mattered was accepting that it was mine to write.
+I wrote MEDDICC because the book I needed did not exist. I had the attribute, which was having learnt MEDDICC the hard way across several companies. I had the environment, which was teams of Sellers who had been told to use MEDDICC and given nothing to read. I had the problem in my lap every Monday. I did not get a sign. I got a problem and a laptop. That book has now sold over 100,000 copies, and the only decision that mattered was accepting that it was mine to write.
 
 What you are waiting for
 
 The devotional question is the one that bites. If you believed you were here on purpose, what would you attempt?
 
-People answer that question in private and then carry on exactly as before. They are waiting for a sign, or permission, or a version of themselves that feels ready. The Seller who knows the Champion is not real but waits for someone else to call it. The founder with the idea written in a notebook from 2019. The person who knows exactly what they should be doing right now and has built a diary that makes sure they never get to it.
+People answer that question in private and then carry on exactly as before. They are waiting for a sign, or permission, or a version of themselves that feels ready. The Seller who knows the Champion is not real but waits for someone else to call it. The founder with the idea written down in 2019. The person who knows exactly what they should be doing right now and has built a diary that makes sure they never get to it.
 
 You do not need another sign. You do not need permission. However you got here, you got here on purpose, and the role is sitting in the overlap of three things you already have.
 
@@ -825,13 +825,13 @@ Go back through your wins this year. Which were good decisions, and which were g
 ### MEDDPICC and MEDDICC
 URL: https://andywhyte.com/meddpicc/
 
-The qualification framework behind the best-run sales teams in the world, explained by the person who wrote the book on it. What the letters mean, where teams get it wrong, and how I want it used.
+The common language for qualification, methodology and value selling behind the best-run sales teams in the world, explained by the person who wrote the book on it. What the letters mean, where teams get it wrong, and how I want it used.
 
 Most teams I meet are running MEDDPICC as a form. Eight fields in the CRM, filled in after the meeting, scored by the rep, admired by the manager, and about as useful for forecasting as a horoscope.
 
 I wrote the book on it. I did not write it so you could fill in a form.
 
-MEDDPICC is a set of questions. Each letter is something you need to know about a deal before you can say you understand it. Ask the questions before the meeting and they tell you what to go and find out. Ask them afterwards and they tell you what you missed. The framework only does its job when you are honest about the gaps.
+MEDDPICC is a common language. One set of words a team uses for qualification, for its methodology and for value selling, so that when a rep says Champion, the manager, the forecast and the customer all mean the same thing. It is also a set of questions. Each letter is something you need to know about a deal before you can say you understand it. Ask the questions before the meeting and they tell you what to go and find out. Ask them afterwards and they tell you what you missed. The letters only do their job when you are honest about the gaps.
 
 What the letters mean
 
@@ -877,7 +877,7 @@ What that team has is a Champion's opinion of an Economic Buyer. What they have 
 
 The questions version runs the other way. Before the next meeting with Charlie, the rep writes down what she knows about each letter and how she knows it. Economic Buyer: named, never met, status second-hand.
 
-That is now the agenda. The meeting exists to get Charlie to put her in front of Eve, or to find out why he will not. The framework has told the rep what to do on Tuesday. That is what it is for.
+That is now the agenda. The meeting exists to get Charlie to put her in front of Eve, or to find out why he will not. MEDDPICC has told the rep what to do on Tuesday. That is what it is for.
 
 A checklist measures how confident the rep feels. Questions measure how much evidence the deal has. Only one of those forecasts anything.
 
@@ -1000,7 +1000,7 @@ What I speak about
 
 Four things, and they overlap.
 
-Qualification. MEDDPICC, from the person who wrote the book on it and runs the company that teaches it. What the letters mean, where teams fake them, and what the framework looks like when it is a way of thinking rather than a form in the CRM.
+Qualification. MEDDPICC, from the person who wrote the book on it and runs the company that teaches it. What the letters mean, where teams fake them, and what it looks like when it is a way of thinking rather than a form in the CRM.
 
 Deal inspection. How leaders run deal reviews and forecast calls that find the truth. Why "I'm working it hard" is a confession. Why the B in B-Player stands for busy, and why there is no such thing as a C-Player.
 
@@ -1026,7 +1026,7 @@ It does not tell your team they are amazing for an hour, because motivational so
 
 Three formats
 
-Keynote. A 30 to 60 minute talk built around the MEDDICC framework: the principles, the failure modes, and the patterns that separate A-Players from theatre. For conferences and revenue summits.
+Keynote. A 30 to 60 minute talk built around MEDDICC: the principles, the failure modes, and the patterns that separate A-Players from theatre. For conferences and revenue summits.
 
 Sales kickoff. A bespoke session designed around your deals, your stage gates and your objection patterns. It goes deeper than a keynote because the material is yours.
 
@@ -1112,21 +1112,21 @@ What are you growing into right now?
 ### Start here
 URL: https://andywhyte.com/start-here/
 
-Twenty years in sales, one book, one company, and a notebook of principles I keep going back to. This page tells you what is here and where to start.
+Twenty years in sales, one book, one company, and a journal of principles I keep going back to. This page tells you what is here and where to start.
 
-I am the founder and CEO of MEDDICC and the author of the book of the same name, which has sold more than 100,000 copies. Before that I spent twenty years selling and leading sales teams, at Oracle, Sprinklr, Tealium, Poq and Branch among others, and the turning point in all of it was discovering MEDDIC, which took me from the B-player version of myself to the A-player version. These days I keynote sales kickoffs and revenue summits, run the company, and keep a notebook.
+I am the founder and CEO of MEDDICC and the author of the book of the same name, which has sold more than 100,000 copies. Before that I spent twenty years selling and leading sales teams, at Oracle, Sprinklr, Tealium, Poq and Branch among others, and the turning point in all of it was discovering MEDDIC, which took me from the B-player version of myself to the A-player version. These days I keynote sales kickoffs and revenue summits, run the company, and keep a journal.
 
-That notebook is what you are looking at.
+That journal is what you are looking at.
 
-What the notebook is
+What the journal is
 
-A cobalt reporter's pad. Twenty Maxims, handwritten, one to a page. A Maxim is a single principle cut down until nothing spare is left. Nobody Regrets Qualifying Out. The B in B-Player Stands for Busy. Urgency is an emotion. Not a message. Behind each page sits an essay on where the line came from, usually a deal, a forecast call or a mistake I would rather not have made, and what to do with it.
+A cobalt blue journal. Twenty Maxims, handwritten, one to a page. A Maxim is a single principle cut down until nothing spare is left. Nobody Regrets Qualifying Out. The B in B-Player Stands for Busy. Urgency is an emotion. Not a message. Behind each page is the Maxim written in full: where the line came from, usually a deal, a forecast call or a mistake I would rather not have made, and what to do with it.
 
 Three pillars run through the pages. Sales is the authority pillar: MEDDICC, deal inspection, selling as a thinking discipline. Founder is the operator pillar: building a company without theatre. Human is the truth pillar: the lessons I only learnt by getting things wrong. Every Maxim sits under one of them.
 
 How to read it
 
-Scroll and the pages flip. Stop on the one that lands, click it, and the essay opens underneath. Then do something with it before you read the next one. Twenty principles skimmed in ten minutes will do nothing for you. One principle applied on Monday will.
+Scroll and the pages flip. Stop on the one that lands, click it, and the Maxim opens in full underneath. Then do something with it before you read the next one. Twenty principles skimmed in ten minutes will do nothing for you. One principle applied on Monday will.
 
 If you would rather have a list, the Maxims archive has every page in order. The glossary defines every term I capitalise, Champion and Economic Buyer included. The frameworks page holds the models behind the Maxims, the ones you can run in a deal review.
 
@@ -1140,7 +1140,7 @@ If you are an account executive, go straight to the MEDDPICC hub and the glossar
 
 If you are booking a speaker, the keynote speaking hub explains what I talk about and what a room should leave with. The speaking page has the formats, the clients and the reel, and it is where you enquire about a date.
 
-And if you want new pages as they go into the pad, subscribe. One email when there is a new Maxim, nothing in between.
+And if you want new pages as they go into the journal, subscribe. One email when there is a new Maxim, nothing in between.
 
 Which page are you starting on?
 
@@ -1185,7 +1185,7 @@ Go all in or do not start. MEDDICC is binary. You either use it or you do not, a
 
 Pick a provider on three questions. Who wrote the content, and have they carried a quota? How are the managers trained? What happens after the sessions end? Thin answers, keep looking.
 
-If you want the methodology explained and argued over, the MEDDPICC hub is where I do that, and the book is the full method, letter by letter. If you want your team trained, go to meddicc.com. If you want me in the room for your kickoff, that is a speaking enquiry.
+If you want MEDDPICC explained and argued over, the MEDDPICC hub is where I do that, and the book is the full method, letter by letter. If you want your team trained, go to meddicc.com. If you want me in the room for your kickoff, that is a speaking enquiry.
 
 How many deals on your commit line would survive the four questions?
 
@@ -1202,7 +1202,7 @@ What I talk about
 
 Enterprise sales, MEDDICC and MEDDPICC, sales as a thinking discipline, and the patterns that separate A-players from theatre.
 
-The keynote runs 30 to 60 minutes and is built around the MEDDICC framework: the principles, the failure modes, and what the best sellers do that the rest miss. Why the deal that was going great died at procurement. Why the Champion who loved the demo never sold a thing internally. Why the Economic Buyer nobody met said no to a proposal nobody wrote for them. A room full of sellers recognises every one of those, because every one of them has lived it.
+The keynote runs 30 to 60 minutes and is built around MEDDICC: the principles, the failure modes, and what the best sellers do that the rest miss. Why the deal that was going great died at procurement. Why the Champion who loved the demo never sold a thing internally. Why the Economic Buyer nobody met said no to a proposal nobody wrote for them. A room full of sellers recognises every one of those, because every one of them has lived it.
 
 I do not do motivation without a method. Fired up is the aim, and the KEYGOAT mindset is the standard: every keynote treated as though it has to be the greatest of all time. But fired up with nothing to run is gone by the first objection. The room leaves with frameworks they can apply on Monday, not soundbites that fade by Tuesday.
 
@@ -1235,7 +1235,7 @@ URL: https://andywhyte.com/frameworks/meddpicc/
 
 Eight questions that tell you whether a deal is real, where it is weak and what to do next.
 
-MEDDPICC is a qualification framework. Eight letters, each one a question you ask about a deal: Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion, Competition. Answer all eight with evidence from the customer and you know whether the deal is real, where it is strong, where it is weak and what to do about it. Leave any of them blank and you are forecasting a guess.
+MEDDPICC is a common language for qualification, methodology and value selling. Eight letters, each one a question you ask about a deal: Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion, Competition. Answer all eight with evidence from the customer and you know whether the deal is real, where it is strong, where it is weak and what to do about it. Leave any of them blank and you are forecasting a guess.
 
 It exists because complex deals fail in predictable places. The original six letters came out of PTC in the 1990s, where Dick Dunkel and Jack Napoli worked out what the won deals had in common that the lost ones did not. The seventh, Competition, was added because sellers kept losing to rivals and to "do nothing" without seeing either coming. The eighth, Paper Process, was added because the stretch between a verbal yes and a signed contract was killing deals on the last day of the quarter. Every letter is a scar.
 
@@ -1500,20 +1500,20 @@ How I use it. I ask the Champion a direct question: if we did not exist, what wo
 ### MEDDIC
 URL: https://andywhyte.com/glossary/meddic/
 
-MEDDIC is the original six-part sales qualification framework, created at PTC in the 1990s, covering Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain and Champion.
+MEDDIC is the original six letters of the common language created at PTC in the 1990s: Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain and Champion.
 
 MEDDIC is where it all started. Dick Dunkel and Jack Napoli built it at PTC in the 1990s, out of a study of why the company won deals, lost deals, and sometimes never got a decision at all. Six things kept showing up, and they became the letters: Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion. PTC went on one of the great growth runs in enterprise software with it, and it has been the backbone of serious sales qualification ever since. Dick and Jack were generous enough to write the foreword to my book on it.
 
 The question MEDDIC answers has not changed in thirty years: is this deal real, and what do we not know about it?
 
-The mistake is to treat the six letters as fields to fill in rather than questions to answer. A CRM with every MEDDIC box ticked tells you the rep is good at admin. It tells you nothing about whether the Champion would walk into the Economic Buyer's office for you. The framework is binary. You are either using it to interrogate your deals or you are using it to decorate them.
+The mistake is to treat the six letters as fields to fill in rather than questions to answer. A CRM with every MEDDIC box ticked tells you the rep is good at admin. It tells you nothing about whether the Champion would walk into the Economic Buyer's office for you. MEDDIC is binary. You are either using it to interrogate your deals or you are using it to decorate them.
 
 How I use it. MEDDIC is the base the later variants build on, and I still think of it as the minimum. If a seller cannot tell me the Metrics, name the Economic Buyer, describe the criteria and the process, explain the pain and point to a Champion, the deal is not qualified, whatever stage the pipeline says it is in. Everything that came later, the second C and the P, sits on top of these six. Learn these first.
 
 ### MEDDICC
 URL: https://andywhyte.com/glossary/meddicc/
 
-MEDDICC is the MEDDIC qualification framework with a second C added for Competition, so sellers qualify who and what they are really up against.
+MEDDICC is MEDDIC with a second C added for Competition, so sellers qualify who and what they are really up against.
 
 MEDDICC is MEDDIC plus Competition. Seven letters: Metrics, Economic Buyer, Decision Criteria, Decision Process, Implicate the Pain, Champion, Competition. The second C was added because sellers kept losing deals that looked qualified on every other letter, to rivals they had never properly assessed, or to the customer deciding to do nothing at all. Competition was always part of the conversation. Adding the letter made it part of the inspection.
 
@@ -1528,7 +1528,7 @@ How I use it. MEDDICC is binary. You either use it on every opportunity or you d
 ### MEDDPICC
 URL: https://andywhyte.com/glossary/meddpicc/
 
-MEDDPICC is the eight-part version of the MEDDIC qualification framework, adding Paper Process and Competition so a deal is qualified all the way to signature.
+MEDDPICC is the eight-letter version of MEDDIC, adding Paper Process and Competition: a common language for qualification, methodology and value selling that follows a deal all the way to signature.
 
 MEDDPICC is the full version. Metrics, Economic Buyer, Decision Criteria, Decision Process, Paper Process, Implicate the Pain, Champion, Competition. The P is the one people notice, and it is there because the gap between a verbal yes and a signed contract is where quarters go to die. Legal, procurement, security and signature authority were always part of the deal. MEDDPICC made them part of the qualification.
 
@@ -1536,7 +1536,7 @@ The question MEDDPICC answers is bigger than the other two: is this deal real, c
 
 The mistake is treating it as a form. I have seen CRMs with eight mandatory MEDDPICC fields and a forecast that was still fiction, because the fields were filled in by the seller on a Friday afternoon from memory and nobody ever inspected them. The letters are questions, and the answers have to come from the customer. If the customer has not said it, you do not know it. You are guessing, and guessing is not qualification.
 
-How I use it. MEDDPICC is what I teach, and it is the methodology the MEDDICC Masterclass has taken more than 35,000 graduates through. I use it in two directions. Downwards, into a deal: where are we strong, where are we weak, and what is the next action that changes a weak letter? Upwards, into a forecast: a deal with no Economic Buyer, no Metrics and no Paper Process mapped does not go in commit, whatever the rep's gut says. And one rule above all. People sometimes add a third C for Compelling Event. Do not. Implicated Pain, agreed Metrics and a real Champion produce the urgency. Bolting on a letter does not.
+How I use it. MEDDPICC is what I teach, and it is the common language the MEDDICC Masterclass has taken more than 35,000 graduates through. I use it in two directions. Downwards, into a deal: where are we strong, where are we weak, and what is the next action that changes a weak letter? Upwards, into a forecast: a deal with no Economic Buyer, no Metrics and no Paper Process mapped does not go in commit, whatever the rep's gut says. And one rule above all. People sometimes add a third C for Compelling Event. Do not. Implicated Pain, agreed Metrics and a real Champion produce the urgency. Bolting on a letter does not.
 
 ### Coach
 URL: https://andywhyte.com/glossary/coach/
@@ -1560,7 +1560,7 @@ A Compelling Event is something with a date and a cost on the customer's side of
 
 The question it answers is the one that quietly kills more deals than any competitor: why now?
 
-The mistake is on both sides of the desk. Sellers think a discount that expires on Friday is a Compelling Event. It is not, and customers know it, which is why they call you on the following Tuesday to ask if it is still available. The other mistake is adding a C to the acronym. Some people run MEDDPICCC with a third C for Compelling Event. My view is that this tells the world their understanding of the framework is shallow. The urgency is already in there. Implicated Pain plus agreed Metrics plus a Champion who owns the outcome gives you a customer who needs to move. You do not need a ninth letter. You need to do the other eight properly.
+The mistake is on both sides of the desk. Sellers think a discount that expires on Friday is a Compelling Event. It is not, and customers know it, which is why they call you on the following Tuesday to ask if it is still available. The other mistake is adding a C to the acronym. Some people run MEDDPICCC with a third C for Compelling Event. My view is that this tells the world their understanding of MEDDPICC is shallow. The urgency is already in there. Implicated Pain plus agreed Metrics plus a Champion who owns the outcome gives you a customer who needs to move. You do not need a ninth letter. You need to do the other eight properly.
 
 How I use it. Urgency is an emotion, and you cannot email an emotion. So I do not try to manufacture a Compelling Event with pressure. I look for the one that already exists in the customer's world, and if there is none, I help the Champion build one out of the consequences of doing nothing, with a date on it. If there is no date and no consequence, "later" wins every time, and I would rather plan for that than forecast against it.
 

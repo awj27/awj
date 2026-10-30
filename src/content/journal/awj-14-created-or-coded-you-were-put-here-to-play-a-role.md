@@ -31,13 +31,13 @@ Your problems. The specific things that are broken in your line of sight. Nobody
 
 Where those three overlap is the role. Attributes you did not choose, an environment you did not pick, and problems you keep bumping into. The overlap is rarely mysterious. If you are honest, you can name it in a sentence, and you have been able to for years.
 
-I wrote MEDDICC because the book I needed did not exist. I had the attribute, which was having learnt the framework the hard way across several companies. I had the environment, which was teams of Sellers who had been told to use MEDDICC and given nothing to read. I had the problem in my lap every Monday. I did not get a sign. I got a problem and a laptop. That book has now sold over 100,000 copies, and the only decision that mattered was accepting that it was mine to write.
+I wrote MEDDICC because the book I needed did not exist. I had the attribute, which was having learnt MEDDICC the hard way across several companies. I had the environment, which was teams of Sellers who had been told to use MEDDICC and given nothing to read. I had the problem in my lap every Monday. I did not get a sign. I got a problem and a laptop. That book has now sold over 100,000 copies, and the only decision that mattered was accepting that it was mine to write.
 
 ## What you are waiting for
 
 The devotional question is the one that bites. If you believed you were here on purpose, what would you attempt?
 
-People answer that question in private and then carry on exactly as before. They are waiting for a sign, or permission, or a version of themselves that feels ready. The Seller who knows the Champion is not real but waits for someone else to call it. The founder with the idea written in a notebook from 2019. The person who knows exactly what they should be doing right now and has built a diary that makes sure they never get to it.
+People answer that question in private and then carry on exactly as before. They are waiting for a sign, or permission, or a version of themselves that feels ready. The Seller who knows the Champion is not real but waits for someone else to call it. The founder with the idea written down in 2019. The person who knows exactly what they should be doing right now and has built a diary that makes sure they never get to it.
 
 You do not need another sign. You do not need permission. However you got here, you got here on purpose, and the role is sitting in the overlap of three things you already have.
 

@@ -26,8 +26,31 @@ for (const file of pages) {
   if (!/<title>[^<]+<\/title>/.test(html)) problems.push(`${file}: missing title`);
   if (!/<meta name="description" content="[^"]{20,}"/.test(html)) problems.push(`${file}: missing or short description`);
   if (!/<h1[\s>]/.test(html)) problems.push(`${file}: no h1`);
-  for (const [re, label] of [[/\/assets\//, 'old /assets/ path'], [/awj_main_logo|awj_submark/, 'old logo'], [/every Friday/i, '"every Friday"'], [/17 years/, '"17 years"'], [/#1F47FF/i, 'old electric blue']]) {
+  for (const [re, label] of [[/\/assets\//, 'old /assets/ path'], [/awj_main_logo|awj_submark/, 'old logo'], [/17 years/, '"17 years"'], [/#1F47FF/i, 'old electric blue']]) {
     if (re.test(html)) problems.push(`${file}: ${label}`);
+  }
+  // Language rules (Andy, 30 Oct 2026), checked on what a reader or crawler sees: text, meta, alt, aria-label, JSON-LD. URLs are ignored.
+  const copy = [
+    html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, ' ').replace(/<style\b[^>]*>[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' '),
+    ...[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => m[1].replace(/"https?:\/\/[^"]*"/g, '""')),
+    ...[...html.matchAll(/\b(?:content|alt|aria-label|title)="([^"]*)"/g)].map((m) => m[1]).filter((v) => !/^(https?:)?\//.test(v)),
+  ].join(' ');
+  const banned = [
+    [/\bnotebooks?\b/i, 'it is a journal, not a notebook'],
+    [/\bnote ?pads?\b/i, 'it is a journal, not a notepad'],
+    [/\bessays?\b/i, 'they are Maxims, not essays'],
+    [/\b(qualification|sales) (framework|methodology)\b/i, 'MEDDPICC is a common language for qualification, methodology and value selling'],
+    [/\bMEDD[A-Z]+ framework\b/, 'MEDDPICC is a common language, not a framework'],
+    [/every Friday/i, '"every Friday" promises a cadence'],
+  ];
+  const allowed = [
+    [/failure-and-invention-are-inseparable-twins/, /notebook/i], // Andy's own 2025 text
+    [/the-b-in-b-player-stands-for-busy\/|sales-leadership\//, /every Friday/i], // the weekly one-page habit, not a publishing cadence
+    [/^dist\/meddpicc\//, /sales methodology|qualification framework/i], // the question people ask, answered on the page
+  ];
+  for (const [re, label] of banned) {
+    const m = copy.match(re);
+    if (m && !allowed.some(([f, ok]) => f.test(file) && ok.test(m[0]))) problems.push(`${file}: ${label} ("${m[0]}")`);
   }
 }
 // Redirect sources must not shadow built pages: Pages applies _redirects before it looks for a static file.
@@ -42,4 +65,5 @@ if (existsSync('public/_redirects')) {
 console.log(`pages: ${pages.length}, links: ${links}, images: ${imgs} (${imgsNoAlt} without alt)`);
 console.log('JSON-LD types:', Object.entries(ld).sort((a, b) => b[1] - a[1]).map(([t, c]) => `${t}×${c}`).join(', '));
 if (badLinks.size) { console.log('\nBROKEN INTERNAL LINKS:'); for (const [h, c] of [...badLinks].sort((a, b) => b[1] - a[1])) console.log(`  ${h}  (${c})`); } else console.log('no broken internal links');
+process.exitCode = problems.length || badLinks.size ? 1 : 0;
 if (problems.length) { console.log(`\nPROBLEMS (${problems.length}):`); for (const p of problems.slice(0, 40)) console.log('  ' + p.replace('dist/', '')); if (problems.length > 40) console.log(`  ...and ${problems.length - 40} more`); } else console.log('no page problems');

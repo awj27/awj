@@ -4,7 +4,7 @@ import { glob } from 'astro/loaders';
 const faq = z.object({ q: z.string(), a: z.string() });
 const link = z.object({ label: z.string(), href: z.string() });
 
-// One Maxim per file. The body is the essay.
+// One Maxim per file. The body is the Maxim written in full.
 const journal = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/journal' }),
   schema: z.object({
@@ -24,7 +24,7 @@ const journal = defineCollection({
   }),
 });
 
-// Topic hubs: the authority pages. Body is an 800 to 1,200 word essay.
+// Topic hubs: the authority pages. Body is 800 to 1,200 words of Andy's position.
 const hubs = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/hubs' }),
   schema: z.object({

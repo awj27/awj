@@ -1,6 +1,6 @@
 # Andy Whyte Journal (AWJ)
 
-> A notebook of principles for sales, founding and being human. Twenty handwritten Maxims, one line each, with the essay behind every one, from Andy Whyte, founder and CEO of MEDDICC and author of the best-selling book on sales qualification.
+> A journal of principles for sales, founding and being human. Twenty handwritten Maxims, one line each, each written in full, from Andy Whyte, founder and CEO of MEDDICC and author of MEDDICC, the best-selling book on the common language for qualification, methodology and value selling.
 
 Andy Whyte is the founder and CEO of [MEDDICC](https://meddicc.com/) and the author of *MEDDICC: The ultimate guide to staying one step ahead in the complex sale* (over 100,000 copies sold, 4.7 stars across 1,447+ Amazon reviews; more than 35,000 graduates of the MEDDICC Masterclass). He spent twenty years in sales at companies including Oracle, Sprinklr, Tealium, Branch and Poq before founding MEDDICC in 2021. He keynotes at sales kickoffs and revenue summits for organisations including CrowdStrike, Microsoft, Amazon Web Services and Dun and Bradstreet.
 
@@ -8,13 +8,13 @@ He writes and speaks about four subjects, each with its own hub: MEDDPICC and ME
 
 ## Start
 
-- [Start here](https://andywhyte.com/start-here/): who Andy is, how to read the notebook, where to begin by role
-- [The Maxims](https://andywhyte.com/maxims/): every Maxim in order, with the photographed page and the essay
-- [The notebook](https://andywhyte.com/): the home page, where the pages turn
+- [Start here](https://andywhyte.com/start-here/): who Andy is, how to read the journal, where to begin by role
+- [The Maxims](https://andywhyte.com/maxims/): every Maxim in order, with the photographed page and the Maxim in full
+- [The journal](https://andywhyte.com/): the home page, where the pages turn
 
 ## Topic hubs
 
-- [MEDDPICC and MEDDICC](https://andywhyte.com/meddpicc/): the qualification framework, letter by letter, from the person who wrote the book on it
+- [MEDDPICC and MEDDICC](https://andywhyte.com/meddpicc/): the common language for qualification, methodology and value selling, letter by letter, from the person who wrote the book on it
 - [Sales leadership](https://andywhyte.com/sales-leadership/): deal inspection, forecasts, deal reviews, A, B and C players, judging decisions not outcomes
 - [Keynote speaking](https://andywhyte.com/keynote-speaking/): what Andy speaks about and what a sales kickoff keynote should do
 - [Imposter syndrome](https://andywhyte.com/imposter-syndrome/): only the self-aware suffer from it, and why that is a strength
@@ -33,7 +33,7 @@ He writes and speaks about four subjects, each with its own hub: MEDDPICC and ME
 ## About Andy
 
 - [About](https://andywhyte.com/about/): the career from entertainer to founder, and why the journal exists
-- [The MEDDICC book](https://andywhyte.com/book/): the field-tested playbook for enterprise sales qualification
+- [The MEDDICC book](https://andywhyte.com/book/): the field-tested playbook for MEDDPICC: qualification, methodology and value selling
 - [Speaking](https://andywhyte.com/speaking/): keynotes, sales kickoff sessions and master of ceremonies
 - [MEDDPICC training](https://andywhyte.com/meddpicc-training/): what good training looks like, and where to get it
 - [Sales keynote speaker, UK and Europe](https://andywhyte.com/sales-keynote-speaker-uk/): booking a sales keynote in the UK and Europe
@@ -42,5 +42,5 @@ He writes and speaks about four subjects, each with its own hub: MEDDPICC and ME
 
 ## Optional
 
-- [llms-full.txt](https://andywhyte.com/llms-full.txt): the full text of every Maxim essay, hub, glossary term and framework in one file
+- [llms-full.txt](https://andywhyte.com/llms-full.txt): the full text of every Maxim, hub, glossary term and framework in one file
 - [RSS](https://andywhyte.com/journal/rss.xml)

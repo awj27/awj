@@ -5,7 +5,7 @@ import { SITE } from '../data/site';
 ---
 <SiteLayout
   title="Subscribe to the Andy Whyte Journal"
-  description="New Maxims and the essays behind them, in your inbox. Published on Substack when a page is written. No schedule promised, no spam."
+  description="New Maxims in your inbox, in full. Published on Substack when a page is written. No schedule promised, no spam."
   pageType="subscribe"
   breadcrumbs={[{ name: 'Subscribe', href: '/subscribe/' }]}
 >
@@ -13,13 +13,13 @@ import { SITE } from '../data/site';
     <div class="nb-shell nb-split">
       <div class="nb-page-head__in">
         <p class="nb-eyebrow">The journal, in your inbox</p>
-        <h1>When a page gets written, you get the essay.</h1>
+        <h1>When a page gets written, you get the Maxim.</h1>
         <p class="nb-lede">No schedule promised. No noise. One email when there is a new Maxim, with the line, the page and the thinking behind it.</p>
         <SubscribeForm source="subscribe-page" compact />
         <p class="nb-note">{SITE.substackUrl ? <>Published on <a href={SITE.substackUrl} target="_blank" rel="noopener">Substack</a>. </> : null}Unsubscribe with one click, any time.</p>
       </div>
       <div class="pad">
-        <img src="/notebook/pad-open-01.webp" alt="The AWJ notebook, open on page one" loading="eager" width="1400" height="1925" />
+        <img src="/notebook/pad-open-01.webp" alt="The AWJ journal, open on page one" loading="eager" width="1400" height="1925" />
       </div>
     </div>
   </section>
@@ -32,7 +32,7 @@ import { SITE } from '../data/site';
       </div>
       <div class="nb-grid nb-grid--3">
         <div class="nb-card"><h3>The Maxim</h3><p class="card-body">One line, written by hand. The kind you end up repeating in a deal review.</p></div>
-        <div class="nb-card"><h3>The essay</h3><p class="card-body">Observation, principle, model, application. Six hundred words, no filler.</p></div>
+        <div class="nb-card"><h3>The Maxim in full</h3><p class="card-body">Observation, principle, model, application. Six hundred words, no filler.</p></div>
         <div class="nb-card"><h3>The occasional note</h3><p class="card-body">A talk, a book chapter, a framework. Only when it is worth your inbox.</p></div>
       </div>
     </div>

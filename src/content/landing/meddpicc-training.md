@@ -32,7 +32,7 @@ faqs:
   - q: "What is the difference between MEDDIC, MEDDICC and MEDDPICC training?"
     a: "MEDDIC is the original six letters, created by Jack Napoli and Dick Dunkel at PTC. MEDDICC adds Competition. MEDDPICC adds the Paper Process, the procurement and legal steps that kill deals at the close. Good training covers all of it and calls the method whichever name your team already uses. The letters matter less than the thinking behind them."
   - q: "Does Andy Whyte deliver MEDDPICC training?"
-    a: "I wrote the book, I founded the company that built the Masterclass, and I keynote sales kickoffs built around the methodology. The training itself lives at meddicc.com. This page is my opinion on what good looks like, so you can judge any provider. If you want me in the room for your SKO, that is a speaking enquiry, and the speaking page is where to make it."
+    a: "I wrote the book, I founded the company that built the Masterclass, and I keynote sales kickoffs built around it. The training itself lives at meddicc.com. This page is my opinion on what good looks like, so you can judge any provider. If you want me in the room for your SKO, that is a speaking enquiry, and the speaking page is where to make it."
   - q: "How long does it take to roll out MEDDPICC?"
     a: "The sessions take days. Adoption takes a sales cycle, because you need deals qualified under the new rules from first meeting to close before the forecast changes. The first properly qualified deals show up at the next forecast call. Inspect every week, and insist on every seller using it. MEDDICC is binary. You either use it or you do not."
   - q: "Can we use a MEDDPICC checklist or template instead of training?"
@@ -78,6 +78,6 @@ Go all in or do not start. MEDDICC is binary. You either use it or you do not, a
 
 Pick a provider on three questions. Who wrote the content, and have they carried a quota? How are the managers trained? What happens after the sessions end? Thin answers, keep looking.
 
-If you want the methodology explained and argued over, the [MEDDPICC hub](/meddpicc/) is where I do that, and [the book](/book/) is the full method, letter by letter. If you want your team trained, go to [meddicc.com](https://meddicc.com). If you want me in the room for your kickoff, that is a [speaking enquiry](/speaking/).
+If you want MEDDPICC explained and argued over, the [MEDDPICC hub](/meddpicc/) is where I do that, and [the book](/book/) is the full method, letter by letter. If you want your team trained, go to [meddicc.com](https://meddicc.com). If you want me in the room for your kickoff, that is a [speaking enquiry](/speaking/).
 
 How many deals on your commit line would survive the four questions?
