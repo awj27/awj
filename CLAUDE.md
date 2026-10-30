@@ -61,7 +61,7 @@ src/
 │   └── about, speaking, book, media, contact, subscribe, privacy, 404
 public/
 ├── notebook/                 # cover, pages, mark, og images
-├── portrait/                 # the hero cutouts: andy-serious and andy-smile, 900 and 1600 wide, WebP with alpha
+├── portrait/                 # the hero in three layers: andy-body, andy-head-serious, andy-head-smile; 900 and 1600 wide, WebP with alpha
 ├── fonts/                    # Instrument Sans woff2
 ├── media/                    # portraits, gallery, candids, clients, icons, video, book
 ├── _redirects                # legacy WordPress URLs, 301

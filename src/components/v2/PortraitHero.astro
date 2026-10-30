@@ -10,25 +10,35 @@
 
   <h1 class="ph__name" id="ph-name"><span>Andy</span> <span>Whyte</span></h1>
 
+  <!-- three layers: the serious head fades out as the smiling head fades in, under a body that never moves -->
   <div class="ph__figure" data-ph-figure>
     <div class="ph__figure-in">
       <img
         class="ph__img ph__img--serious"
-        src="/portrait/andy-serious-1600.webp"
-        srcset="/portrait/andy-serious-900.webp 900w, /portrait/andy-serious-1600.webp 1600w"
+        src="/portrait/andy-head-serious-1600.webp"
+        srcset="/portrait/andy-head-serious-900.webp 900w, /portrait/andy-head-serious-1600.webp 1600w"
         sizes="(max-width: 600px) 92vw, 60vh"
         width="1600" height="1662"
-        alt="Andy Whyte"
+        alt="" aria-hidden="true"
         fetchpriority="high" decoding="async" draggable="false"
       />
       <img
         class="ph__img ph__img--smile"
-        src="/portrait/andy-smile-1600.webp"
-        srcset="/portrait/andy-smile-900.webp 900w, /portrait/andy-smile-1600.webp 1600w"
+        src="/portrait/andy-head-smile-1600.webp"
+        srcset="/portrait/andy-head-smile-900.webp 900w, /portrait/andy-head-smile-1600.webp 1600w"
         sizes="(max-width: 600px) 92vw, 60vh"
         width="1600" height="1662"
         alt="" aria-hidden="true"
         decoding="async" draggable="false"
+      />
+      <img
+        class="ph__img ph__img--body"
+        src="/portrait/andy-body-1600.webp"
+        srcset="/portrait/andy-body-900.webp 900w, /portrait/andy-body-1600.webp 1600w"
+        sizes="(max-width: 600px) 92vw, 60vh"
+        width="1600" height="1662"
+        alt="Andy Whyte"
+        fetchpriority="high" decoding="async" draggable="false"
       />
     </div>
   </div>
@@ -71,6 +81,7 @@
   .ph__figure-in { position: absolute; inset: 0; }
   .ph__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; pointer-events: none; }
   .ph__img--smile { opacity: var(--smile); }
+  .ph__img--serious { opacity: calc(1 - var(--smile)); }
 
   .ph__sig { position: absolute; width: clamp(64px, 6.5vw, 96px); height: auto; left: calc(50% + 9.5vw); bottom: 31%; transform: rotate(-7deg); opacity: calc(.9 - var(--t) * 2); pointer-events: none; }
 
@@ -149,7 +160,7 @@
     let target = 0, smile = 0, raf = 0;
     const tick = () => {
       raf = 0;
-      smile += (target - smile) * (target > smile ? 0.14 : 0.04);
+      smile += (target - smile) * (target > smile ? 0.14 : 0.06);
       if (Math.abs(target - smile) < 0.003) smile = target; else raf = requestAnimationFrame(tick);
       el.style.setProperty('--smile', smile.toFixed(3));
     };
