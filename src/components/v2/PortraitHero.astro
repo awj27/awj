@@ -35,8 +35,6 @@
     </div>
   </div>
 
-  <img class="ph__sig" src="/notebook/mark/awj-mark-ink-320.png" alt="" width="320" height="200" draggable="false" />
-
   <p class="ph__side ph__side--left">Twenty years in sales. The best-selling book on the <span class="nb-hl">common language of sales</span>. One company. One blue journal.</p>
   <p class="ph__side ph__side--right">Principles for sales, founding and being human, written by hand. The journal is below.</p>
 
@@ -75,8 +73,6 @@
   .ph__img--smile { opacity: var(--smile); }
   .ph__img--serious { opacity: calc(1 - var(--smile)); }
 
-  .ph__sig { position: absolute; width: clamp(64px, 6.5vw, 96px); height: auto; left: calc(50% + 9.5vw); bottom: 31%; transform: rotate(-7deg); opacity: calc(.9 - var(--t) * 2); pointer-events: none; }
-
   /* the side copy keeps out of the figure whatever the aspect ratio: the figure is about .89 of the hero's height wide */
   .ph__side { position: absolute; bottom: 13%; margin: 0; max-width: min(280px, calc(50vw - 0.45 * (100svh - var(--header-h)) - 28px)); font-size: clamp(13px, 1.2vw, 17px); line-height: 1.45; color: var(--nb-text); opacity: calc(1 - var(--t) * 2); text-wrap: pretty; }
   .ph__side--left { left: clamp(20px, 3.3vw, 48px); }
@@ -97,12 +93,10 @@
   html.js .ph__figure-in { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
   html.js .ph__name span { opacity: 0; transform: translateY(.14em); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
   html.js .ph__name span:nth-child(2) { transition-delay: .08s; }
-  html.js .ph__sig { clip-path: inset(0 100% 0 0); transition: clip-path .7s var(--ease-out) .75s; }
   html.js .ph__side, html.js .ph__cue, html.js .ph__eyebrow { transition: opacity .6s var(--ease-out) .45s; }
   html.js .ph:not(.is-in) .ph__side, html.js .ph:not(.is-in) .ph__cue, html.js .ph:not(.is-in) .ph__eyebrow { opacity: 0; }
   html.js .ph.is-in .ph__figure-in { opacity: 1; transform: none; }
   html.js .ph.is-in .ph__name span { opacity: 1; transform: none; }
-  html.js .ph.is-in .ph__sig { clip-path: inset(0 0 0 0); }
 
   /* narrow screens stack: name, figure fading into the page, one line of copy, the cue */
   @media (max-width: 900px) {
@@ -113,7 +107,7 @@
       height: 64%; bottom: 19%;
       -webkit-mask-image: linear-gradient(#000 78%, transparent 98%); mask-image: linear-gradient(#000 78%, transparent 98%);
     }
-    .ph__sig, .ph__side--right { display: none; }
+    .ph__side--right { display: none; }
     .ph__side--left { left: 24px; right: 24px; bottom: 84px; max-width: none; text-align: center; font-size: 15px; line-height: 1.4; }
     .ph__cue { bottom: 16px; padding: 10px 16px 9px; font-size: 11px; }
     .ph__cue small { display: none; }
@@ -124,7 +118,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .ph { --t: 0 !important; --px: 0 !important; --py: 0 !important; }
-    html.js .ph__figure-in, html.js .ph__name span, html.js .ph__sig, html.js .ph__side, html.js .ph__cue, html.js .ph__eyebrow { transition: none; }
+    html.js .ph__figure-in, html.js .ph__name span, html.js .ph__side, html.js .ph__cue, html.js .ph__eyebrow { transition: none; }
     .ph__img--smile { transition: none; }
   }
 </style>
@@ -159,27 +153,29 @@
     const aim = (v: number) => { target = v; if (!raf) raf = requestAnimationFrame(tick); };
 
     if (fine) {
-      // he smiles when the pointer is over him, not merely near him: the cutout's own alpha decides
+      // he smiles only when the pointer is on him: the cutout's own alpha decides, sampled from a small copy of the
+      // serious frame. Until that copy exists nothing triggers, so the empty corners of the picture never count.
       const serious = el.querySelector<HTMLImageElement>('[data-ph-serious]')!;
       let hit: Uint8ClampedArray | null = null, hitW = 0, hitH = 0;
-      const buildHit = () => {
-        try {
-          const c = document.createElement('canvas');
-          hitW = c.width = 160;
-          hitH = c.height = Math.round((160 * serious.naturalHeight) / serious.naturalWidth);
-          const ctx = c.getContext('2d', { willReadFrequently: true })!;
-          ctx.drawImage(serious, 0, 0, hitW, hitH);
-          hit = ctx.getImageData(0, 0, hitW, hitH).data;
-        } catch { hit = null; }
-      };
-      if (serious.complete && serious.naturalWidth) buildHit(); else serious.addEventListener('load', buildHit, { once: true, signal });
+      const probe = new Image();
+      probe.decoding = 'async';
+      probe.src = serious.currentSrc || serious.src;
+      probe.decode().then(() => {
+        const c = document.createElement('canvas');
+        hitW = c.width = 200;
+        hitH = c.height = Math.round((200 * probe.naturalHeight) / probe.naturalWidth);
+        const ctx = c.getContext('2d', { willReadFrequently: true });
+        if (!ctx) return;
+        ctx.drawImage(probe, 0, 0, hitW, hitH);
+        hit = ctx.getImageData(0, 0, hitW, hitH).data;
+      }).catch(() => { hit = null; });
       const over = (x: number, y: number) => {
+        if (!hit) return false;
         const r = figure.getBoundingClientRect();
         if (x < r.left || x > r.right || y < r.top || y > r.bottom) return false;
-        if (!hit) return true;
         const px = Math.min(hitW - 1, Math.floor(((x - r.left) / r.width) * hitW));
         const py = Math.min(hitH - 1, Math.floor(((y - r.top) / r.height) * hitH));
-        return hit[(py * hitW + px) * 4 + 3] > 40;
+        return hit[(py * hitW + px) * 4 + 3] > 128;
       };
       addEventListener('pointermove', (e: PointerEvent) => {
         if (figure.getBoundingClientRect().bottom < 0) return;
