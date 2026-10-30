@@ -115,6 +115,17 @@ Andy chose to launch on 30 October 2026 with this list open, so it is now a post
 6. The Substack address, so the subscribe forms switch over.
 7. Maxims 16 and 17, written and photographed.
 
+### The person first: portrait hero, Maxim sheet, controlled turning
+
+Decided with Andy on 30 October 2026 after launch, built on the branch `hero/portrait`, reviewed on its preview and merged to `main` the same day.
+
+- The home page opens on Andy, not the journal. His black and white portrait, cut out of the studio backdrop, stands centred in front of his name set huge in cover blue, with the handwritten AWJ as a signature and one yellow highlight in the copy. He arrives serious and breaks into the smile as the pointer comes towards him (after a beat on a phone, where a tap toggles it), the name and the figure move at different speeds with the pointer, and scrolling hands over to the journal. No 3D, no helmet, no face mesh: the references were landonorris.com (WebGL helmet, Rive type) and benkaluza.com (a photo plus a depth map through a shader, with a tracking lens on top); Dennis Snellenberg's site showed the same composition works with a plain photograph.
+- The two frames come from the same shoot. The smiling frame is registered to the serious one by the shoulders (scaled 1.09 and shifted), so the body stays still and only the head and face move. Assets in `public/portrait/`, cut with the Mac's Vision person segmentation.
+- The journal gets an introduction in plain words: what it is, scroll to turn, tap a page to read. The first time the closed journal sits in view, the cover lifts once to show what scrolling does.
+- A Maxim opens in a sheet beside the journal on wide screens and as a bottom sheet on phones, with the page photo, the video, the Maxim in full, previous and next, and a link to its own page. The journal stays where it is; the URL becomes `/#maxim-NN` so the back button closes the sheet and links can be shared; the Maxim pages at `/journal/<slug>/` are unchanged and remain the canonical pages. `/#awj-NN` turns the journal to a page without opening the sheet, and the Maxim pages link back to it.
+- Turning is animated by the site, not the browser. The CSS scroll snapping and smooth scrolling were steering the same scroll and fighting each other, which is what felt buggy. Now the scroll settles to the nearest page after the visitor stops, turns from the keys and buttons are animated and cancelled the moment the visitor moves, and phones no longer re-measure the journal when the address bar changes height.
+- Analytics gained `maxim_open` and a sampled `journal_turn`.
+
 ### Launch
 
 Launched 30 October 2026. `redesign/notebook` was merged into `main` with a merge commit and the deploy Action shipped it to andywhyte.com. The old social preview images and favicon at `/assets/logos/` and `/media/awjN.webp` redirect to their journal equivalents so earlier shares keep a picture.

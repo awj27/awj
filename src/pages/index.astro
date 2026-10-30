@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import PortraitHero from '../components/v2/PortraitHero.astro';
 import NotebookHero from '../components/v2/NotebookHero.astro';
 import { notebookPages, library, pillarLabel, pad2 } from '../data/notebook-pages';
 import { HUBS, SITE } from '../data/site';
@@ -22,9 +23,13 @@ const itemList = {
   title="Andy Whyte Journal: principles for sales, founding and being human"
   description="A journal of handwritten Maxims from Andy Whyte, founder and CEO of MEDDICC, with topic hubs, frameworks and a glossary on MEDDPICC, sales leadership, keynote speaking and imposter syndrome."
   pageType="home"
-  snap
   schema={[itemList]}
 >
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/portrait/andy-serious-1600.webp" imagesrcset="/portrait/andy-serious-900.webp 900w, /portrait/andy-serious-1600.webp 1600w" imagesizes="(max-width: 600px) 92vw, 60vh" />
+  </Fragment>
+
+  <PortraitHero />
   <NotebookHero pages={heroPages} />
 
   <section class="nb-section" id="library">

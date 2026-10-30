@@ -1,6 +1,7 @@
 ---
-// The live hero: the pad pinned in view while the page scroll drives the cover and every flip.
-// One segment of scroll per turn, native snap points per Maxim, HTML text for every page.
+// The journal: the pad pinned in view while the page scroll drives the cover and every turn. One segment of
+// scroll per page, HTML text for every page, and a sheet that opens the Maxim beside the journal rather than
+// leaving it. Deep links: #awj-NN turns to a page, #maxim-NN turns to it and opens the sheet.
 import type { NotebookPage } from '../../data/notebook-pages';
 import { pad2, pillarLabel } from '../../data/notebook-pages';
 
@@ -10,12 +11,11 @@ const n = pages.length;
 ---
 <section class="hero" id={id} data-hero style={`--n:${n}`} aria-roledescription="journal" aria-label="The AWJ journal. Scroll to open it and turn the pages, or use the arrow keys.">
   <div class="hero__track" data-track>
-    {Array.from({ length: n + 1 }, (_, k) => <i class="hero__snap" style={`--k:${k}`} aria-hidden="true"></i>)}
-
     <div class="hero__stage" data-stage>
       <div class="hero__intro" data-intro>
-        <p class="nb-eyebrow">Andy Whyte Journal</p>
-        <h1 class="hero__title">A journal of principles for sales, founding and being human.</h1>
+        <p class="nb-eyebrow">The journal</p>
+        <h2 class="hero__title">A journal of principles for sales, founding and being human.</h2>
+        <p class="hero__how"><span class="hero__how-what">Twenty principles, one line each, written by hand.</span> Scroll to turn the pages. Tap a page to read the Maxim.</p>
         <p class="hero__cue" aria-hidden="true">Scroll to open</p>
       </div>
 
@@ -27,7 +27,7 @@ const n = pages.length;
             {pages.map((p, i) => (
               <li class="nb-leaf" data-index={i} data-number={pad2(p.number)} style={`--i:${i}`}>
                 <div class="nb-leaf__body">
-                  <a class="nb-leaf__front" href={p.href} data-leaf-link aria-label={`Read Maxim ${pad2(p.number)}: ${p.title}`}>
+                  <a class="nb-leaf__front" href={p.href} data-leaf-link data-read={i} aria-label={`Read Maxim ${pad2(p.number)}: ${p.title}`}>
                     <img src={i < 2 ? p.src : undefined} data-src={i < 2 ? undefined : p.src} alt={p.alt} width="1600" height="1096" decoding="async" draggable="false" data-leaf-img />
                     <span class="nb-leaf__shade" aria-hidden="true"></span>
                   </a>
@@ -51,13 +51,13 @@ const n = pages.length;
 
       <div class="hero__captions">
         {pages.map((p, i) => (
-          <article class="hero__cap" data-cap={i}>
+          <article class="hero__cap" data-cap={i} data-number={p.number} data-title={p.title} data-pillar={p.pillar} data-href={p.href}>
             <p class="hero__cap-meta nb-meta">
               <span>AWJ No. {pad2(p.number)}</span>
               <span class={`nb-pill nb-pill--${p.pillar}`}>{pillarLabel[p.pillar]}</span>
             </p>
-            <h2 class="hero__cap-title">{p.title}</h2>
-            <a class="hero__cap-link" href={p.href}>Read the Maxim &rarr;</a>
+            <h3 class="hero__cap-title">{p.title}</h3>
+            <a class="hero__cap-link" href={p.href} data-read={i}>Read the Maxim &rarr;</a>
           </article>
         ))}
       </div>
@@ -78,29 +78,51 @@ const n = pages.length;
       </ol>
     </div>
   </div>
+
+  <!-- the Maxim, opened beside the journal -->
+  <div class="sheet" data-sheet hidden>
+    <div class="sheet__scrim" data-sheet-close></div>
+    <aside class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title" tabindex="-1" data-sheet-panel>
+      <header class="sheet__bar">
+        <button type="button" class="nb-ctl" data-sheet-prev aria-label="Previous Maxim">&larr;</button>
+        <p class="nb-counter"><span data-sheet-counter aria-live="polite"></span></p>
+        <button type="button" class="nb-ctl" data-sheet-next aria-label="Next Maxim">&rarr;</button>
+        <button type="button" class="nb-ctl sheet__close" data-sheet-close aria-label="Close and go back to the journal">Close</button>
+      </header>
+      <div class="sheet__scroll" data-sheet-scroll>
+        <div class="sheet__page nb-page"><img data-sheet-img alt="" width="1600" height="1096" decoding="async" /></div>
+        <p class="nb-meta sheet__meta"><span data-sheet-number></span><span class="nb-pill" data-sheet-pillar></span></p>
+        <h2 class="sheet__title" id="sheet-title" data-sheet-title></h2>
+        <div class="sheet__video" data-sheet-video hidden></div>
+        <div class="nb-prose sheet__prose" data-sheet-prose aria-busy="false"></div>
+        <p class="sheet__foot"><a class="side-link" data-sheet-link href="/maxims/">Open the Maxim as its own page &rarr;</a></p>
+      </div>
+    </aside>
+  </div>
 </section>
 
 <style>
-  .hero { position: relative; }
+  .hero { position: relative; scroll-margin-top: var(--header-h); }   /* an anchor jump lands exactly pinned */
   .hero__track { position: relative; height: calc(var(--stage-h, 100svh) + var(--n) * var(--seg, 60svh)); }
-  .hero__snap { position: absolute; left: 0; top: calc(var(--k) * var(--seg, 60svh)); width: 1px; height: 1px; scroll-snap-align: start; }
   .hero__stage {
     position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h));
     display: grid; grid-template-rows: auto 1fr auto auto; justify-items: center; align-items: center;
     gap: 10px; padding: 10px 0 14px; overflow: hidden;
+    transition: padding-right .45s var(--ease-out);
   }
   .hero.is-static .hero__track { height: auto; }
   .hero.is-static .hero__stage { position: static; height: auto; overflow: visible; }
 
-  .hero__intro { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: opacity .3s, transform .3s; max-width: 30ch; }
-  .hero__title { font-size: clamp(20px, 2.1vw, 28px); color: var(--nb-text-2); font-weight: 500; letter-spacing: -0.015em; line-height: 1.2; }
+  .hero__intro { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: opacity .3s, transform .3s; max-width: 38ch; padding: 0 16px; }
+  .hero__title { font-size: clamp(20px, 2.1vw, 28px); color: var(--nb-text); font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
+  .hero__how { font-size: clamp(14px, 1.1vw, 16px); color: var(--nb-text-2); line-height: 1.45; text-wrap: pretty; }
   .hero__cue { font-size: 13px; color: var(--nb-text-3); animation: hero-cue 2.4s ease-in-out infinite; }
   @keyframes hero-cue { 0%, 100% { transform: translateY(0); opacity: .7; } 50% { transform: translateY(4px); opacity: 1; } }
   .hero.is-open .hero__intro { opacity: 0; transform: translateY(-6px); pointer-events: none; }
   .hero.is-open .hero__cue { animation: none; }
 
   /* the pad scales with the viewport so stage, caption and controls fit without scrolling inside the stage */
-  .nb-scene { position: relative; perspective: 1800px; perspective-origin: 50% -10%; width: min(640px, 92vw, calc((100svh - var(--header-h) - 330px) * 1.46)); }
+  .nb-scene { position: relative; perspective: 1800px; perspective-origin: 50% -10%; width: min(640px, 92vw, calc((100svh - var(--header-h) - 360px) * 1.46)); }
   .has-cursor .nb-scene { cursor: none; }
   .nb-pad { position: relative; aspect-ratio: 1.46; transform-style: preserve-3d; transition: transform .6s var(--ease-out); }
 
@@ -125,6 +147,7 @@ const n = pages.length;
 
   .nb-cover { position: absolute; inset: -2.4% -1.2% -1.8% -1.2%; padding: 0; border: 0; background: none; cursor: pointer; transform-origin: 50% 0%; transform-style: preserve-3d; transform: translateZ(2px); will-change: transform; }
   .nb-cover:focus-visible { outline: 3px solid var(--nb-yellow); outline-offset: 6px; border-radius: 8px; }
+  .nb-cover.is-peek { animation: nb-peek 1.2s var(--ease-out); }
   .nb-cover__front, .nb-cover__back { position: absolute; inset: 0; border-radius: 7px; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: block; }
   .nb-cover__front { box-shadow: var(--shadow-cover); background: var(--nb-cover); }
   .nb-cover__front img { width: 100%; height: 100%; object-fit: cover; }
@@ -146,31 +169,82 @@ const n = pages.length;
   .hero__controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
   .nb-ctl { height: 38px; min-width: 38px; padding: 0 13px; border-radius: 999px; border: 1px solid var(--nb-line); background: #fff; font: inherit; font-size: 14px; font-weight: 600; color: var(--nb-text); cursor: pointer; transition: border-color .2s, transform .2s var(--ease-out); }
   .nb-ctl:hover { border-color: var(--nb-text-3); transform: translateY(-1px); }
+  .nb-ctl:disabled { opacity: .4; cursor: default; transform: none; }
   .nb-ctl[aria-pressed="true"] { background: var(--nb-text); color: #fff; border-color: var(--nb-text); }
   .nb-counter { margin: 0; min-width: 104px; text-align: center; font-size: 13px; color: var(--nb-text-3); font-variant-numeric: tabular-nums; }
   .hero__skip { font-size: 13px; color: var(--nb-text-3); text-decoration: none; margin-left: 6px; }
   .hero__skip:hover { color: var(--nb-text); text-decoration: underline; }
 
-  .hero__rail { position: absolute; right: clamp(8px, 2vw, 28px); top: 50%; transform: translateY(-50%); margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .hero__rail { position: absolute; right: clamp(8px, 2vw, 28px); top: 50%; transform: translateY(-50%); margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 2px; transition: opacity .3s; }
   .hero__rail button { width: 30px; height: 22px; border: 0; background: none; font: inherit; font-size: 11px; font-weight: 600; color: var(--nb-text-3); cursor: pointer; border-radius: 6px; font-variant-numeric: tabular-nums; }
   .hero__rail button:hover { color: var(--nb-text); background: var(--nb-canvas-2); }
   .hero__rail button.is-on { color: #fff; background: var(--nb-cover); }
 
+  /* the sheet: a panel beside the journal on wide screens, a bottom sheet on phones */
+  .sheet { position: fixed; inset: 0; z-index: 60; }
+  .sheet[hidden] { display: none; }
+  .sheet__scrim { position: absolute; inset: 0; background: rgba(26,33,64,.28); opacity: 0; transition: opacity .35s; touch-action: none; }
+  .sheet__panel {
+    position: absolute; left: 0; right: 0; bottom: 0; top: max(8svh, 56px);
+    display: flex; flex-direction: column; background: #fff; border-radius: 18px 18px 0 0;
+    box-shadow: 0 -20px 60px rgba(26,33,64,.22); outline: none;
+    transform: translateY(104%); transition: transform .45s var(--ease-out);
+  }
+  .sheet.is-open .sheet__scrim { opacity: 1; }
+  .sheet.is-open .sheet__panel { transform: none; }
+  .sheet__bar { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--nb-line); flex: none; }
+  .sheet__bar .nb-counter { min-width: 0; flex: 1; }
+  .sheet__close { margin-left: auto; }
+  .sheet__scroll { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 22px clamp(18px, 4vw, 40px) 48px; display: flex; flex-direction: column; gap: 14px; }
+  .sheet__page { width: min(100%, 520px); }
+  .sheet__page img { object-fit: contain; background: var(--nb-paper); }
+  .sheet__meta { display: flex; align-items: center; gap: 10px; }
+  .sheet__title { font-size: clamp(24px, 2.4vw, 32px); letter-spacing: -0.02em; line-height: 1.15; max-width: 24ch; }
+  .sheet__video { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--nb-text); margin-top: 6px; }
+  .sheet__video :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .sheet__prose { font-size: clamp(16px, 1.15vw, 18px); margin-top: 8px; }
+  .sheet__prose :global(.awj-hero-script--cols) { column-count: 1; }   /* the panel is one column wide */
+  .sheet__prose[aria-busy="true"] { color: var(--nb-text-3); }
+  .sheet__foot { padding-top: 18px; border-top: 1px solid var(--nb-line); }
+  .sheet__foot a { font-weight: 600; text-decoration: none; }
+  .sheet__foot a:hover { text-decoration: underline; }
+
+  @media (min-width: 960px) {
+    .sheet__scrim { background: rgba(26,33,64,.08); }
+    .sheet__panel { left: auto; top: var(--header-h); width: min(560px, 46vw); border-radius: 0; box-shadow: -24px 0 60px rgba(26,33,64,.16); transform: translateX(104%); }
+    /* the journal moves over to make room, and the rail steps aside */
+    .hero.has-sheet .hero__stage { padding-right: min(560px, 46vw); }
+    .hero.has-sheet .hero__rail { opacity: 0; pointer-events: none; }
+  }
+
   @keyframes nb-curl { 0%, 100% { transform: rotateX(0deg); } 50% { transform: rotateX(3.5deg); } }
   @keyframes nb-settle { 0% { transform: rotateX(0deg); } 35% { transform: rotateX(3deg); } 70% { transform: rotateX(-0.6deg); } 100% { transform: rotateX(0deg); } }
+  @keyframes nb-peek { 0%, 100% { transform: translateZ(2px) rotateX(0deg); } 45% { transform: translateZ(2px) rotateX(26deg); } 70% { transform: translateZ(2px) rotateX(18deg); } }
 
   @media (max-width: 900px) { .hero__rail { display: none; } }
-  @media (max-height: 700px) { .hero__intro .nb-eyebrow { display: none; } .hero__captions { min-height: 80px; } }
+  /* phones: the introduction floats over the top of the stage, so the pad does not drop when it fades */
+  @media (max-width: 600px) {
+    .hero__stage { grid-template-rows: 1fr auto auto; padding-top: 0; }
+    .hero__intro { position: absolute; top: 12px; left: 0; right: 0; z-index: 2; max-width: none; gap: 6px; }
+    .hero__intro .nb-eyebrow, .hero__how-what { display: none; }   /* the portrait's cue has already said what this is */
+    .hero__title { font-size: 18px; max-width: 30ch; margin-inline: auto; }
+    .hero__how { font-size: 14px; max-width: 30ch; margin-inline: auto; }
+  }
+  @media (max-height: 700px) { .hero__intro .nb-eyebrow, .hero__how { display: none; } .hero__captions { min-height: 80px; } .nb-scene { width: min(640px, 92vw, calc((100svh - var(--header-h) - 300px) * 1.46)); } }
   @media (prefers-reduced-motion: reduce) {
     .hero__track { height: auto; }
-    .hero__stage { position: static; height: auto; overflow: visible; }
+    .hero__stage { position: static; height: auto; overflow: visible; transition: none; }
     .hero__cue { animation: none; }
-    .nb-leaf.is-current .nb-leaf__body, .nb-leaf.is-settling .nb-leaf__body { animation: none; }
+    .nb-leaf.is-current .nb-leaf__body, .nb-leaf.is-settling .nb-leaf__body, .nb-cover.is-peek { animation: none; }
     .nb-pad { transition: none; }
+    .sheet__panel, .sheet__scrim { transition: none; }
   }
 </style>
 
 <script>
+  import { navigate } from 'astro:transitions/client';
+  import { track as trackEvent } from '../../lib/analytics';
+
   // Scroll-driven journal. Re-runs after client-side navigation; tears down the previous instance first.
   let controller: AbortController | undefined;
 
@@ -273,6 +347,10 @@ const n = pages.length;
     return out;
   }
 
+  const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+  const smooth = (t: number) => t * t * (3 - 2 * t);
+  const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
   function setup() {
     controller?.abort();
     controller = new AbortController();
@@ -286,7 +364,7 @@ const n = pages.length;
       const cover = hero.querySelector<HTMLElement>('[data-cover]')!;
       const leaves = Array.from(hero.querySelectorAll<HTMLElement>('.nb-leaf'));
       const shades = leaves.map((l) => l.querySelector<HTMLElement>('.nb-leaf__shade')!);
-      const imgs = leaves.map((l) => l.querySelector<HTMLElement>('[data-leaf-img]')!);
+      const imgs = leaves.map((l) => l.querySelector<HTMLImageElement>('[data-leaf-img]')!);
       const caps = Array.from(hero.querySelectorAll<HTMLElement>('[data-cap]'));
       const rail = Array.from(hero.querySelectorAll<HTMLElement>('[data-go]'));
       const counter = hero.querySelector<HTMLElement>('[data-counter]')!;
@@ -297,13 +375,13 @@ const n = pages.length;
 
       const N = leaves.length;           // pages
       const SEGMENTS = N;                // cover + (N - 1) turns
+      const numbers = caps.map((c) => Number(c.dataset.number));
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const finePointer = matchMedia('(pointer: fine)').matches;
       const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
 
       let seg = 0, stageH = 0, p = 0, lastWhole = 0, settleTimer = 0, soundOn = false, audio: AudioContext | undefined;
-      const smooth = (t: number) => t * t * (3 - 2 * t);
-      const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+      let lastWidth = innerWidth;
 
       function measure() {
         stageH = stage.getBoundingClientRect().height || (innerHeight - headerH);
@@ -314,6 +392,9 @@ const n = pages.length;
         if (!reduce) track.style.height = `${stageH + SEGMENTS * seg}px`;
       }
 
+      const trackTop = () => track.getBoundingClientRect().top + scrollY;
+      const scrollFor = (k: number) => trackTop() - headerH + k * seg;
+
       function progress() {
         const top = track.getBoundingClientRect().top;
         return clamp((headerH - top) / seg, 0, SEGMENTS);
@@ -321,6 +402,11 @@ const n = pages.length;
 
       function currentIndex(pv: number) {
         return pv < 1 ? -1 : Math.min(N - 1, Math.floor(pv - 0.5));
+      }
+
+      function loadImage(i: number) {
+        const img = imgs[i];
+        if (img && !img.getAttribute('src') && img.dataset.src) img.setAttribute('src', img.dataset.src);
       }
 
       function render(pv: number) {
@@ -336,7 +422,7 @@ const n = pages.length;
           const visible = pv >= i - 0.001 && pv < i + 2;
           const leaf = leaves[i];
           // load this page and the three beneath it just before they are needed
-          if (pv >= i - 3 && !imgs[i].getAttribute('src') && imgs[i].dataset.src) { imgs[i].setAttribute('src', imgs[i].dataset.src!); }
+          if (pv >= i - 3) loadImage(i);
           leaf.style.visibility = visible ? 'visible' : 'hidden';
           if (visible) {
             leaf.style.transform = `translateZ(${-2 * i}px) rotateX(${(smooth(f) * 178).toFixed(3)}deg)`;
@@ -355,11 +441,24 @@ const n = pages.length;
         leaves.forEach((l, i) => l.classList.toggle('is-current', atRest && i === cur));
         // view transition hand-off: name only the page on top
         imgs.forEach((img, i) => { (img.style as any).viewTransitionName = atRest && i === cur ? 'maxim-page' : ''; });
-        // sounds at each boundary
-        if (whole !== lastWhole && atRest) { play(whole === 0 || lastWhole === 0 ? 'open' : 'flip'); lastWhole = whole; }
+        // a page has landed: sound, and a sampled analytics event
+        if (whole !== lastWhole && atRest) {
+          play(whole === 0 || lastWhole === 0 ? 'open' : 'flip');
+          lastWhole = whole;
+          turned();
+        }
       }
 
-      function onSettle() {
+      let lastTurnEvent = 0;
+      function turned() {
+        const now = Date.now();
+        if (now - lastTurnEvent < 1500) return;
+        lastTurnEvent = now;
+        const cur = currentIndex(p);
+        trackEvent('journal_turn', { awj_number: cur >= 0 ? numbers[cur] : 0, page_type: 'home' });
+      }
+
+      function onLanded() {
         const cur = currentIndex(p);
         if (cur < 0 || Math.abs(p - Math.round(p)) > 0.02) return;
         const leaf = leaves[cur];
@@ -368,13 +467,183 @@ const n = pages.length;
         leaf.addEventListener('animationend', () => { leaf.classList.remove('is-settling'); leaf.classList.add('is-current'); }, { once: true });
       }
 
+      // Scrolling is ours to finish: the browser's scroll snapping and smooth scrolling were steering the same
+      // scroll and fighting each other, so turns are animated here and cancelled the moment the visitor moves.
+      let anim = 0, targetK = -1;
+      function stopAnim() { if (anim) { cancelAnimationFrame(anim); anim = 0; } targetK = -1; }
+      function animateScroll(to: number, duration: number) {
+        stopAnim();
+        const from = scrollY;
+        if (Math.abs(to - from) < 1 || reduce) { scrollTo({ top: to, behavior: 'instant' }); return; }
+        const t0 = performance.now();
+        const step = (now: number) => {
+          const t = clamp((now - t0) / duration, 0, 1);
+          scrollTo({ top: from + (to - from) * easeOut(t), behavior: 'instant' });
+          if (t < 1) anim = requestAnimationFrame(step); else { anim = 0; targetK = -1; }
+        };
+        anim = requestAnimationFrame(step);
+      }
+      const pinned = () => p > 0.001 && p < SEGMENTS - 0.001;
+      function settle() {
+        if (anim || !pinned()) return;
+        const k = Math.round(p);
+        if (Math.abs(p - k) < 0.01) return;
+        animateScroll(scrollFor(k), 260 + 240 * Math.abs(p - k));
+      }
+      // the page a step counts from: the one being turned to, if a turn is still in flight
+      const base = () => (anim && targetK >= 0 ? targetK : Math.round(p));
       function goTo(k: number) {
         k = clamp(k, 0, SEGMENTS);
-        // a jump needs its destination pages before the scroll lands
-        for (let i = Math.max(0, k - 2); i <= Math.min(N - 1, k + 1); i++) { if (!imgs[i].getAttribute('src') && imgs[i].dataset.src) imgs[i].setAttribute('src', imgs[i].dataset.src!); }
-        const trackTop = track.getBoundingClientRect().top + scrollY;
-        scrollTo({ top: trackTop - headerH + k * seg, behavior: reduce ? 'auto' : 'smooth' });
+        for (let i = Math.max(0, k - 2); i <= Math.min(N - 1, k + 1); i++) loadImage(i);
+        animateScroll(scrollFor(k), 380 + 90 * Math.min(6, Math.abs(k - p)));
+        targetK = k;
       }
+      function jumpTo(k: number) {
+        k = clamp(k, 0, SEGMENTS);
+        for (let i = Math.max(0, k - 2); i <= Math.min(N - 1, k + 1); i++) loadImage(i);
+        scrollTo({ top: scrollFor(k), behavior: 'instant' });
+        render(progress());
+        lastWhole = Math.round(p);
+      }
+      // any gesture from the visitor cancels an animated turn
+      ['wheel', 'touchstart', 'pointerdown'].forEach((ev) => addEventListener(ev, stopAnim, { passive: true, signal }));
+
+      // ---- the sheet: a Maxim opened beside the journal
+      const sheet = hero.querySelector<HTMLElement>('[data-sheet]')!;
+      const panel = sheet.querySelector<HTMLElement>('[data-sheet-panel]')!;
+      const sheetImg = sheet.querySelector<HTMLImageElement>('[data-sheet-img]')!;
+      const sheetNumber = sheet.querySelector<HTMLElement>('[data-sheet-number]')!;
+      const sheetPillar = sheet.querySelector<HTMLElement>('[data-sheet-pillar]')!;
+      const sheetTitle = sheet.querySelector<HTMLElement>('[data-sheet-title]')!;
+      const sheetVideo = sheet.querySelector<HTMLElement>('[data-sheet-video]')!;
+      const sheetProse = sheet.querySelector<HTMLElement>('[data-sheet-prose]')!;
+      const sheetLink = sheet.querySelector<HTMLAnchorElement>('[data-sheet-link]')!;
+      const sheetCounter = sheet.querySelector<HTMLElement>('[data-sheet-counter]')!;
+      const sheetScroll = sheet.querySelector<HTMLElement>('[data-sheet-scroll]')!;
+      const sheetPrev = sheet.querySelector<HTMLButtonElement>('[data-sheet-prev]')!;
+      const sheetNext = sheet.querySelector<HTMLButtonElement>('[data-sheet-next]')!;
+      const pillarNames: Record<string, string> = { sales: 'Sales', founder: 'Founder', human: 'Human' };
+      const cache = new Map<string, Promise<{ prose: string; video: HTMLIFrameElement | null }>>();
+      let sheetIndex = -1, sheetPushed = false, opener: HTMLElement | null = null, loadSeq = 0;
+      const sheetOpen = () => sheetIndex >= 0;
+      const hashFor = (i: number) => `#maxim-${String(numbers[i]).padStart(2, '0')}`;
+      const indexForNumber = (num: number) => numbers.indexOf(num);
+
+      function fetchMaxim(href: string) {
+        if (!cache.has(href)) {
+          cache.set(href, fetch(href, { headers: { Accept: 'text/html' } }).then(async (r) => {
+            if (!r.ok) throw new Error(String(r.status));
+            const doc = new DOMParser().parseFromString(await r.text(), 'text/html');
+            const prose = doc.querySelector('[data-sheet-prose]')?.innerHTML ?? '';
+            const video = doc.querySelector<HTMLIFrameElement>('[data-sheet-video] iframe');
+            return { prose, video };
+          }));
+          cache.get(href)!.catch(() => cache.delete(href));
+        }
+        return cache.get(href)!;
+      }
+
+      function fillSheet(i: number) {
+        const cap = caps[i];
+        const num = numbers[i];
+        const href = cap.dataset.href || '/maxims/';
+        const src = imgs[i].getAttribute('src') || imgs[i].dataset.src || '';
+        sheetImg.src = src;
+        sheetImg.alt = imgs[i].alt;
+        sheetNumber.textContent = `AWJ No. ${String(num).padStart(2, '0')}`;
+        sheetPillar.textContent = pillarNames[cap.dataset.pillar || ''] || '';
+        sheetPillar.className = `nb-pill nb-pill--${cap.dataset.pillar}`;
+        sheetTitle.textContent = cap.dataset.title || '';
+        sheetLink.href = href;
+        sheetCounter.textContent = `${i + 1} / ${N}`;
+        sheetPrev.disabled = i <= 0;
+        sheetNext.disabled = i >= N - 1;
+        sheetVideo.hidden = true;
+        sheetVideo.replaceChildren();
+        sheetProse.setAttribute('aria-busy', 'true');
+        sheetProse.innerHTML = '<p>Turning to the page.</p>';
+        sheetScroll.scrollTop = 0;
+        const seq = ++loadSeq;
+        fetchMaxim(href).then(({ prose, video }) => {
+          if (seq !== loadSeq) return;
+          sheetProse.innerHTML = prose || '<p>The Maxim is being written. The page is in the journal; the thinking behind it follows.</p>';
+          sheetProse.setAttribute('aria-busy', 'false');
+          if (video) {
+            const frame = video.cloneNode(true) as HTMLIFrameElement;
+            frame.id = `sheet-video-${num}`;
+            frame.removeAttribute('loading');
+            sheetVideo.replaceChildren(frame);
+            sheetVideo.hidden = false;
+            (window as any).AWJYT?.attach?.(frame);
+          }
+        }).catch(() => {
+          if (seq !== loadSeq) return;
+          sheetProse.setAttribute('aria-busy', 'false');
+          sheetProse.innerHTML = `<p>The page would not load. <a href="${href}">Open the Maxim as its own page &rarr;</a></p>`;
+        });
+      }
+
+      function openSheet(i: number, how: 'push' | 'replace' | 'restore', source = 'journal') {
+        if (i < 0 || i >= N) return;
+        const wasOpen = sheetOpen();
+        sheetIndex = i;
+        fillSheet(i);
+        if (how === 'push') { sheetPushed = true; navigate(hashFor(i)); }
+        else if (how === 'replace') navigate(hashFor(i), { history: 'replace' });
+        if (!wasOpen) {
+          opener = document.activeElement as HTMLElement | null;
+          sheet.hidden = false;
+          document.documentElement.style.overflow = 'hidden';
+          hero.classList.add('has-sheet');
+          void panel.getBoundingClientRect();   // flush the closed state so the slide-in transitions
+          sheet.classList.add('is-open');
+          panel.focus({ preventScroll: true });
+        }
+        trackEvent('maxim_open', { awj_number: numbers[i], source, page_type: 'home' });
+      }
+
+      function closeSheet(how: 'button' | 'history') {
+        if (!sheetOpen()) return;
+        sheetIndex = -1;
+        sheet.classList.remove('is-open');
+        hero.classList.remove('has-sheet');
+        document.documentElement.style.overflow = '';
+        const done = () => { if (!sheetOpen()) sheet.hidden = true; };
+        if (reduce) done(); else panel.addEventListener('transitionend', done, { once: true });
+        setTimeout(done, 600);
+        if (how === 'button') {
+          if (sheetPushed) history.back();
+          else if (location.hash.startsWith('#maxim-')) history.replaceState(history.state, '', location.pathname + location.search);
+        }
+        sheetPushed = false;
+        opener?.focus({ preventScroll: true });
+        opener = null;
+      }
+
+      function stepSheet(delta: number) {
+        const i = sheetIndex + delta;
+        if (!sheetOpen() || i < 0 || i >= N) return;
+        openSheet(i, 'replace', 'sheet-step');
+        goTo(i + 1);
+      }
+
+      hero.querySelectorAll<HTMLAnchorElement>('[data-read]').forEach((a) => a.addEventListener('click', (e: MouseEvent) => {
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        const i = Number(a.dataset.read);
+        openSheet(i, 'push', a.classList.contains('nb-leaf__front') ? 'page' : 'caption');
+      }, { signal }));
+      sheet.querySelectorAll('[data-sheet-close]').forEach((b) => b.addEventListener('click', () => closeSheet('button'), { signal }));
+      sheetPrev.addEventListener('click', () => stepSheet(-1), { signal });
+      sheetNext.addEventListener('click', () => stepSheet(1), { signal });
+      // the back and forward buttons move the sheet with them; a #awj-NN link on this page turns to that page
+      addEventListener('popstate', () => {
+        const m = location.hash.match(/^#(awj|maxim)-(\d+)$/);
+        const i = m ? indexForNumber(Number(m[2])) : -1;
+        if (m && m[1] === 'awj') { if (sheetOpen()) closeSheet('history'); if (i >= 0) goTo(i + 1); return; }
+        if (i >= 0) { if (!sheetOpen()) { jumpTo(i + 1); openSheet(i, 'restore', 'history'); } else if (i !== sheetIndex) { fillSheet(i); sheetIndex = i; goTo(i + 1); } }
+        else if (sheetOpen()) closeSheet('history');
+      }, { signal });
 
       // static mode: reduced motion, or anything that makes the scrub pointless
       if (reduce) {
@@ -397,26 +666,65 @@ const n = pages.length;
         ticking = true;
         requestAnimationFrame(() => { render(progress()); ticking = false; });
         clearTimeout(settleTimer);
-        settleTimer = window.setTimeout(onSettle, 140);
+        settleTimer = window.setTimeout(() => { settle(); onLanded(); }, 160);
       };
       addEventListener('scroll', onScroll, { passive: true, signal });
-      addEventListener('resize', () => { measure(); render(progress()); }, { signal });
+      // phones resize on every address bar change; only a change of width means the layout moved
+      addEventListener('resize', () => {
+        if (!finePointer && innerWidth === lastWidth) return;
+        lastWidth = innerWidth;
+        measure(); render(progress());
+      }, { signal });
+
+      // deep links: #awj-NN turns to a page, #maxim-NN turns to it and opens the sheet
+      const deep = location.hash.match(/^#(awj|maxim)-(\d+)$/);
+      if (deep) {
+        const i = indexForNumber(Number(deep[2]));
+        if (i >= 0) { jumpTo(i + 1); if (deep[1] === 'maxim') openSheet(i, 'restore', 'deep-link'); }
+      }
 
       // controls
-      hero.querySelector('[data-next]')!.addEventListener('click', () => goTo(Math.round(p) + 1), { signal });
-      hero.querySelector('[data-prev]')!.addEventListener('click', () => goTo(Math.round(p) - 1), { signal });
+      hero.querySelector('[data-next]')!.addEventListener('click', () => goTo(base() + 1), { signal });
+      hero.querySelector('[data-prev]')!.addEventListener('click', () => goTo(base() - 1), { signal });
       rail.forEach((b, i) => b.addEventListener('click', () => goTo(i + 1), { signal }));
       cover.addEventListener('click', () => goTo(1), { signal });
 
-      // keyboard turns while the journal is pinned
+      // keyboard: turns while the journal is pinned, steps through Maxims while the sheet is open
       addEventListener('keydown', (e: KeyboardEvent) => {
         const t = e.target as HTMLElement;
         if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-        const pinned = p > -0.001 && p < SEGMENTS + 0.001 && stage.getBoundingClientRect().top <= headerH + 1 && track.getBoundingClientRect().bottom > innerHeight - 1;
-        if (!pinned) return;
-        if (['ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); goTo(Math.round(p) + 1); }
-        else if (['ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); goTo(Math.round(p) - 1); }
+        if (sheetOpen()) {
+          if (e.key === 'Escape') { e.preventDefault(); closeSheet('button'); }
+          else if (['ArrowRight', 'ArrowDown', 'PageDown'].includes(e.key)) { e.preventDefault(); stepSheet(1); }
+          else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); stepSheet(-1); }
+          return;
+        }
+        const isPinned = p > -0.001 && p < SEGMENTS + 0.001 && stage.getBoundingClientRect().top <= headerH + 16 && track.getBoundingClientRect().bottom > innerHeight - 1;
+        if (!isPinned) return;
+        if (['ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); goTo(base() + 1); }
+        else if (['ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); goTo(base() - 1); }
       }, { signal });
+
+      // the first time the closed journal sits in view, the cover lifts once to show what scrolling does
+      let peeked = false;
+      try { peeked = sessionStorage.getItem('awj-peek') === '1'; } catch {}
+      if (!peeked) {
+        let peekTimer = 0;
+        const armPeek = () => {
+          clearTimeout(peekTimer);
+          if (peeked || p > 0.001 || Math.abs(stage.getBoundingClientRect().top - headerH) > 4) return;
+          peekTimer = window.setTimeout(() => {
+            if (peeked || p > 0.001) return;
+            peeked = true;
+            try { sessionStorage.setItem('awj-peek', '1'); } catch {}
+            cover.classList.add('is-peek');
+            cover.addEventListener('animationend', () => cover.classList.remove('is-peek'), { once: true });
+            play('open');
+          }, 1600);
+        };
+        addEventListener('scroll', armPeek, { passive: true, signal });
+        armPeek();
+      }
 
       // tilt toward the pointer, and the custom cursor
       if (finePointer) {
